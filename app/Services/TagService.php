@@ -1,12 +1,8 @@
 <?php
 namespace App\Services;
-use App\Models\Ad;
-use App\Models\Article;
-use App\Models\Cate;
-use App\Models\Good;
-use App\Models\GoodCate;
-use App\Models\Huodong;
-use App\Models\Tuan;
+
+use App\Models\Common\Article;
+use App\Models\Common\Cate;
 
 class TagService
 {

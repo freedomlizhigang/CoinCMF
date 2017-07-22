@@ -3,8 +3,9 @@
 namespace App\Http\Controllers\Admin\Common;
 
 use App\Http\Controllers\Admin\BaseController;
-use App\Http\Controllers\Controller;
-use App\Models\Community;
+use App\Http\Requests\Common\CommunityRequest;
+use App\Models\Common\Community;
+use DB;
 use Illuminate\Http\Request;
 
 class CommunityController extends BaseController
@@ -35,7 +36,7 @@ class CommunityController extends BaseController
     	$title = '添加社区';
     	return view('admin.community.add',compact('title'));
     }
-    public function postAdd(AreaRequest $res)
+    public function postAdd(CommunityRequest $res)
     {
         // 开启事务
         DB::beginTransaction();
@@ -62,7 +63,7 @@ class CommunityController extends BaseController
         $info = Community::findOrFail($id);
         return view('admin.community.edit',compact('title','info'));
     }
-    public function postEdit(AreaRequest $res,$id = '')
+    public function postEdit(CommunityRequest $res,$id = '')
     {
         // 开启事务
         DB::beginTransaction();

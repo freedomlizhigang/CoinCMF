@@ -2,8 +2,7 @@
 
 namespace App\Http\Middleware;
 
-use App\Models\Log;
-use Auth;
+use App\Models\Console\Log;
 use Closure;
 
 class BetoAdmin

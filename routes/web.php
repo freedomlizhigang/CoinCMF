@@ -118,27 +118,27 @@ Route::group(['prefix'=>'console','middleware' => ['rbac'],'namespace' => 'Admin
     Route::get('log/index', 'LogController@getIndex');
     Route::get('log/del', 'LogController@getDel');
     // cate
-    Route::get('cate/index', 'CateController@getIndex');
-    Route::get('cate/cache', 'CateController@getCache');
-    Route::get('cate/add/{id?}', 'CateController@getAdd');
-    Route::post('cate/add/{id?}', 'CateController@postAdd');
-    Route::get('cate/edit/{id?}', 'CateController@getEdit');
-    Route::post('cate/edit/{id?}', 'CateController@postEdit');
-    Route::get('cate/del/{id?}', 'CateController@getDel');
+    Route::get('cate/index', 'Common\CateController@getIndex');
+    Route::get('cate/cache', 'Common\CateController@getCache');
+    Route::get('cate/add/{id?}', 'Common\CateController@getAdd');
+    Route::post('cate/add/{id?}', 'Common\CateController@postAdd');
+    Route::get('cate/edit/{id?}', 'Common\CateController@getEdit');
+    Route::post('cate/edit/{id?}', 'Common\CateController@postEdit');
+    Route::get('cate/del/{id?}', 'Common\CateController@getDel');
     // attr
-    Route::get('attr/index', 'AttrController@getIndex');
-    Route::get('attr/delfile/{id?}', 'AttrController@getDelfile');
-    Route::post('attr/uploadimg', 'AttrController@postUploadimg');
+    Route::get('attr/index', 'Common\AttrController@getIndex');
+    Route::get('attr/delfile/{id?}', 'Common\AttrController@getDelfile');
+    Route::post('attr/uploadimg', 'Common\AttrController@postUploadimg');
     // art
-    Route::get('art/index', 'ArtController@getIndex');
-    Route::get('art/add/{id?}', 'ArtController@getAdd');
-    Route::post('art/add/{id?}', 'ArtController@postAdd');
-    Route::get('art/edit/{id}', 'ArtController@getEdit');
-    Route::post('art/edit/{id}', 'ArtController@postEdit');
-    Route::get('art/del/{id}', 'ArtController@getDel');
-    Route::get('art/show/{id}', 'ArtController@getShow');
-    Route::post('art/alldel', 'ArtController@postAlldel');
-    Route::post('art/listorder', 'ArtController@postListorder');
+    Route::get('art/index', 'Common\ArtController@getIndex');
+    Route::get('art/add/{id?}', 'Common\ArtController@getAdd');
+    Route::post('art/add/{id?}', 'Common\ArtController@postAdd');
+    Route::get('art/edit/{id}', 'Common\ArtController@getEdit');
+    Route::post('art/edit/{id}', 'Common\ArtController@postEdit');
+    Route::get('art/del/{id}', 'Common\ArtController@getDel');
+    Route::get('art/show/{id}', 'Common\ArtController@getShow');
+    Route::post('art/alldel', 'Common\ArtController@postAlldel');
+    Route::post('art/listorder', 'Common\ArtController@postListorder');
     // database
     Route::get('database/export', 'DatabaseController@getExport');
     Route::post('database/export', 'DatabaseController@postExport');

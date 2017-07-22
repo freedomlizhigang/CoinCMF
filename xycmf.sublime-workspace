@@ -4,6 +4,10 @@
 		"selected_items":
 		[
 			[
+				"befo",
+				"before_request"
+			],
+			[
 				"GoodSpe",
 				"GoodSpecItem"
 			],
@@ -510,10 +514,6 @@
 			[
 				"is",
 				"is_null"
-			],
-			[
-				"goods_va",
-				"goods_value_ids"
 			]
 		]
 	},
@@ -746,19 +746,78 @@
 	"expanded_folders":
 	[
 		"/F/wwwroot/XYCMF",
-		"/F/wwwroot/XYCMF/public/statics/home/js",
-		"/F/wwwroot/XYCMF/public/upload"
+		"/F/wwwroot/XYCMF/app",
+		"/F/wwwroot/XYCMF/app/Http",
+		"/F/wwwroot/XYCMF/app/Http/Middleware"
 	],
 	"file_history":
 	[
-		"/F/wwwroot/XYCMF/storage/logs/laravel-2017-07-21.log",
-		"/F/wwwroot/XYCMF/routes/web.php",
-		"/F/wwwroot/XYCMF/resources/views/admin/member/index.blade.php",
+		"/F/wwwroot/XYCMF/public/statics/admin/js/com.js",
+		"/F/wwwroot/XYCMF/app/Services/TagService.php",
+		"/F/wwwroot/XYCMF/app/Services/ComService.php",
 		"/F/wwwroot/XYCMF/app/Http/Controllers/Admin/Common/AdController.php",
+		"/F/wwwroot/XYCMF/app/Http/Requests/Common/AdRequest.php",
+		"/F/wwwroot/XYCMF/app/Http/Requests/User/UserRequest.php",
+		"/F/wwwroot/XYCMF/app/Http/Controllers/Admin/Common/ArtController.php",
+		"/F/wwwroot/XYCMF/app/Http/Controllers/Admin/Common/AttrController.php",
+		"/F/wwwroot/XYCMF/app/Http/Controllers/Admin/Common/CateController.php",
+		"/F/wwwroot/XYCMF/app/Http/Controllers/Admin/Common/TypeController.php",
+		"/F/wwwroot/XYCMF/app/Http/Controllers/Admin/AdminController.php",
+		"/F/wwwroot/XYCMF/app/Http/Controllers/Admin/DatabaseController.php",
+		"/F/wwwroot/XYCMF/app/Http/Controllers/Admin/LogController.php",
+		"/F/wwwroot/XYCMF/app/Http/Controllers/Admin/MenuController.php",
+		"/F/wwwroot/XYCMF/app/Http/Controllers/Admin/PublicController.php",
+		"/F/wwwroot/XYCMF/app/Http/Controllers/Admin/RoleController.php",
+		"/F/wwwroot/XYCMF/app/Http/Controllers/Pay/AlipayController.php",
+		"/F/wwwroot/XYCMF/app/Http/Controllers/Pay/WxpayController.php",
+		"/F/wwwroot/XYCMF/app/Http/Controllers/Admin/User/UserController.php",
+		"/F/wwwroot/XYCMF/app/Http/Controllers/Admin/User/GroupController.php",
+		"/F/wwwroot/XYCMF/app/Http/Requests/User/GroupRequest.php",
+		"/F/wwwroot/XYCMF/resources/views/admin/art/index.blade.php",
+		"/F/wwwroot/XYCMF/routes/web.php",
+		"/F/wwwroot/XYCMF/resources/views/admin/role/index.blade.php",
+		"/F/wwwroot/XYCMF/app/Models/Common/Article.php",
+		"/F/wwwroot/XYCMF/app/Models/Common/Cate.php",
+		"/F/wwwroot/XYCMF/app/Models/Console/Admin.php",
+		"/F/wwwroot/XYCMF/app/Models/Console/Menu.php",
+		"/F/wwwroot/XYCMF/app/Models/Console/Role.php",
+		"/F/wwwroot/XYCMF/app/Models/Console/Section.php",
+		"/G/soft/FlashFXP4/Cache/~flashfxp/E7599F09_edit.tmp/Section.php",
+		"/F/wwwroot/XYCMF/app/Http/Controllers/Admin/SectionController.php",
+		"/F/wwwroot/XYCMF/app/Http/Controllers/Admin/IndexController.php",
+		"/F/wwwroot/XYCMF/app/Http/Controllers/Admin/Common/CommunityController.php",
+		"/F/wwwroot/XYCMF/app/Http/Requests/Common/CommunityRequest.php",
+		"/F/wwwroot/XYCMF/app/Http/Requests/Common/AreaRequest.php",
+		"/F/wwwroot/XYCMF/app/Http/Controllers/Admin/Common/AreaController.php",
+		"/F/wwwroot/XYCMF/app/Http/Controllers/Admin/Common/AdposController.php",
+		"/F/wwwroot/XYCMF/app/Http/Middleware/BetoAdmin.php",
+		"/F/wwwroot/XYCMF/app/Http/Middleware/Jwt.php",
+		"/F/wwwroot/XYCMF/app/Http/Controllers/Admin/ConfigController.php",
+		"/F/wwwroot/XYCMF/app/Http/Controllers/Api/UserController.php",
+		"/F/wwwroot/XYCMF/app/Http/Requests/Common/ArtRequest.php",
+		"/F/wwwroot/XYCMF/app/Http/Requests/Common/CateRequest.php",
+		"/F/wwwroot/XYCMF/app/Http/Requests/Common/TypeRequest.php",
+		"/F/wwwroot/XYCMF/app/Http/Requests/Common/AdposRequest.php",
+		"/F/wwwroot/XYCMF/app/Models/Common/Ad.php",
+		"/F/wwwroot/XYCMF/app/Models/Common/Adpos.php",
+		"/F/wwwroot/XYCMF/app/Models/Common/Area.php",
+		"/F/wwwroot/XYCMF/app/Models/Common/Attr.php",
+		"/F/wwwroot/XYCMF/app/Models/Common/Community.php",
+		"/F/wwwroot/XYCMF/app/Models/Common/Type.php",
+		"/F/wwwroot/XYCMF/app/Models/User/User.php",
+		"/F/wwwroot/XYCMF/app/Models/User/Group.php",
+		"/F/wwwroot/XYCMF/app/Models/Console/Config.php",
+		"/F/wwwroot/XYCMF/app/Models/Console/Log.php",
+		"/F/wwwroot/XYCMF/app/Models/Console/Priv.php",
+		"/F/wwwroot/XYCMF/app/Models/Console/RoleUser.php",
+		"/F/wwwroot/XYCMF/sftp-config.json",
+		"/F/wwwroot/XYCMF/config/app.php",
+		"/F/wwwroot/XYCMF/app/Providers/AuthServiceProvider.php",
+		"/F/wwwroot/XYCMF/storage/logs/laravel-2017-07-21.log",
+		"/F/wwwroot/XYCMF/resources/views/admin/member/index.blade.php",
 		"/F/wwwroot/XYCMF/resources/views/admin/index/main.blade.php",
 		"/F/wwwroot/XYCMF/config/excel.php",
 		"/F/wwwroot/XYCMF/resources/views/admin/常用标记.txt",
-		"/F/wwwroot/XYCMF/sftp-config.json",
 		"/F/wwwroot/XYCMF/public/statics/home/js/com.js",
 		"/F/wwwroot/XYCMF/resources/views/admin/index.blade.php",
 		"/F/wwwroot/XYCMF/resources/views/admin/ad/add.blade.php",
@@ -768,21 +827,9 @@
 		"/F/wwwroot/XYCMF/resources/views/admin/cate/add.blade.php",
 		"/F/wwwroot/XYCMF/resources/views/admin/cate/edit.blade.php",
 		"/F/wwwroot/XYCMF/resources/views/admin/role/edit.blade.php",
-		"/F/wwwroot/XYCMF/resources/views/admin/role/index.blade.php",
-		"/F/wwwroot/XYCMF/app/Http/Controllers/Admin/IndexController.php",
-		"/F/wwwroot/XYCMF/app/Http/Controllers/Admin/AdminController.php",
-		"/F/wwwroot/XYCMF/app/Http/Controllers/Admin/LogController.php",
-		"/F/wwwroot/XYCMF/app/Http/Controllers/Admin/PublicController.php",
-		"/F/wwwroot/XYCMF/app/Http/Middleware/BetoAdmin.php",
-		"/F/wwwroot/XYCMF/app/Services/ComService.php",
 		"/F/wwwroot/XYCMF/app/Models/Admin.php",
-		"/F/wwwroot/XYCMF/app/Providers/AuthServiceProvider.php",
 		"/F/wwwroot/XYCMF/app/Models/User.php",
 		"/F/wwwroot/XYCMF/app/Exceptions/Handler.php",
-		"/F/wwwroot/XYCMF/config/app.php",
-		"/F/wwwroot/XYCMF/app/Http/Controllers/Pay/AlipayController.php",
-		"/F/wwwroot/XYCMF/app/Http/Controllers/Admin/User/UserController.php",
-		"/F/wwwroot/XYCMF/app/Http/Controllers/Admin/User/GroupController.php",
 		"/F/wwwroot/XYCMF/.env",
 		"/F/wwwroot/XYCMF/resources/views/home/home.blade.php",
 		"/F/wwwroot/XYCMF/resources/views/home/layout.blade.php",
@@ -800,7 +847,6 @@
 		"/F/wwwroot/XYCMF/app/Http/Requests/User/AddressRequest.php",
 		"/F/wwwroot/XYCMF/app/Models/Ad.php",
 		"/F/wwwroot/XYCMF/app/Providers/ComServiceProvider.php",
-		"/F/wwwroot/XYCMF/app/Services/TagService.php",
 		"/F/wwwroot/XYCMF/resources/views/admin/alert.blade.php",
 		"/F/wwwroot/XYCMF/config/auth.php",
 		"/F/wwwroot/XYCMF/config/broadcasting.php",
@@ -833,52 +879,7 @@
 		"/F/wwwroot/jxf/resources/views/admin/good/nostore.blade.php",
 		"/F/wwwroot/jxf/app/Http/Controllers/Admin/OrderController.php",
 		"/F/wwwroot/jxf/public/statics/home/js/com.js",
-		"/F/wwwroot/jxf/database/migrations/2017_07_20_150149_edit_yhq_user_del.php",
-		"/F/wwwroot/jxf/resources/views/home/home.blade.php",
-		"/F/wwwroot/jxf/app/Http/Controllers/Good/AdController.php",
-		"/F/wwwroot/jxf/app/Http/Controllers/Good/CardController.php",
-		"/F/wwwroot/jxf/app/Http/Controllers/Good/ManzengController.php",
-		"/F/wwwroot/jxf/app/Http/Controllers/Good/RetrunGoodController.php",
-		"/F/wwwroot/jxf/app/Http/Controllers/Good/YouhuiquanController.php",
-		"/F/wwwroot/jxf/app/Http/Controllers/Good/ZitiController.php",
-		"/F/wwwroot/jxf/app/Services/TagService.php",
-		"/F/wwwroot/jxf/app/Http/Middleware/VerifyCsrfToken.php",
-		"/F/wwwroot/jxf/routes/web.php",
-		"/F/wwwroot/XYShopB2B/routes/web.php",
-		"/F/wwwroot/jxf/database/migrations/2017_07_20_143545_edit_ads_del.php",
-		"/F/wwwroot/jxf/database/migrations/2017_07_20_143622_edit_collect_del.php",
-		"/F/wwwroot/jxf/database/migrations/2017_07_20_143652_edit_good_comment_del.php",
-		"/F/wwwroot/jxf/database/migrations/2017_07_20_143727_edit_huodong_del.php",
-		"/F/wwwroot/jxf/database/migrations/2017_07_20_143748_edit_manzeng_del.php",
-		"/F/wwwroot/jxf/database/migrations/2017_07_20_143901_edit_return_good_del.php",
-		"/F/wwwroot/jxf/database/migrations/2017_07_20_143923_edit_tuan_del.php",
-		"/F/wwwroot/jxf/database/migrations/2017_07_20_143955_edit_youhuiquan_del.php",
-		"/F/wwwroot/jxf/database/migrations/2017_07_20_144019_edit_zitidian_del.php",
-		"/F/wwwroot/jxf/database/migrations/2017_07_20_143353_edit_address_del.php",
-		"/F/wwwroot/jxf/composer.json",
-		"/F/wwwroot/jxf/database/migrations/2017_06_06_163117_edit_goods_tags_isnew.php",
-		"/F/wwwroot/jxf/resources/views/default/foot.blade.php",
-		"/F/wwwroot/XYShopB2B/resources/views/admin/order/print.blade.php",
-		"/F/wwwroot/jxf/resources/views/admin/order/print.blade.php",
-		"/F/wwwroot/jxf/resources/views/admin/index/main.blade.php",
-		"/F/wwwroot/jxf/resources/views/default/order.blade.php",
-		"/F/wwwroot/jxf/app/Http/Controllers/YhqController.php",
-		"/F/wwwroot/jxf/app/Http/Controllers/ShopController.php",
-		"/F/wwwroot/jxf/app/Http/Controllers/Admin/IndexController.php",
-		"/F/wwwroot/jxf/resources/views/admin/good/add.blade.php",
-		"/F/wwwroot/jxf/resources/views/admin/goodspec/edit.blade.php",
-		"/F/wwwroot/tpshop/application/admin/controller/Goods.php",
-		"/D/志功网络/志功.txt",
-		"/F/wwwroot/jxf/app/Http/Controllers/VueController.php",
-		"/F/wwwroot/phpdoctor/phpdoctor.ini",
-		"/F/wwwroot/phpdoctor/phpdoc.php",
-		"/F/wwwroot/phpdoctor/examples/geshi.ini",
-		"/F/wwwroot/jxf/app/Http/Requests/AdminRequest.php",
-		"/F/wwwroot/jxf/app/Http/Controllers/Admin/UserController.php",
-		"/F/wwwroot/jxf/resources/views/admin/member/ranking.blade.php",
-		"/F/wwwroot/jxf/resources/views/admin/card/index.blade.php",
-		"/F/希夷/旭高/用户.txt",
-		"/G/soft/FlashFXP4/Cache/~flashfxp/F1951052_edit.tmp/system.php"
+		"/F/wwwroot/jxf/database/migrations/2017_07_20_150149_edit_yhq_user_del.php"
 	],
 	"find":
 	{
@@ -995,6 +996,14 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"Auth",
+			"ThrottlesLogins",
+			"APP::make('com')",
+			"App",
+			"App::make('com')",
+			"ArtController",
+			"AttrController",
+			"CateController",
 			"'del'",
 			"PHPExcel_Shared_Font",
 			"excel",
@@ -1114,15 +1123,7 @@
 			"ref",
 			"homeurl",
 			"ranking",
-			"good_spec_key",
-			"backurl",
-			"ref",
-			"addressid",
-			"points",
-			"ranking",
-			"->",
-			"starttime",
-			"order::"
+			"good_spec_key"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -1130,6 +1131,7 @@
 		"regex": false,
 		"replace_history":
 		[
+			"app('com')",
 			"'delflag'",
 			"session('console')",
 			"'console'",
@@ -1315,6 +1317,18 @@
 		"selected_items":
 		[
 			[
+				"com.js",
+				"public\\statics\\admin\\js\\com.js"
+			],
+			[
+				"art/index",
+				"resources\\views\\admin\\art\\index.blade.php"
+			],
+			[
+				"role/index",
+				"resources\\views\\admin\\role\\index.blade.php"
+			],
+			[
 				"goodlist",
 				"resources\\views\\home\\goodlist.blade.php"
 			],
@@ -1409,10 +1423,6 @@
 			[
 				"goodreque",
 				"app\\Http\\Requests\\GoodRequest.php"
-			],
-			[
-				"com.js",
-				"public\\statics\\admin\\js\\com.js"
 			],
 			[
 				"login.blade",
@@ -1723,10 +1733,6 @@
 				"app\\Models\\Order.php"
 			],
 			[
-				"art/index",
-				"resources\\views\\admin\\art\\index.blade.php"
-			],
-			[
 				"tuan.b",
 				"resources\\views\\admin\\tuan\\index.blade.php"
 			],
@@ -1821,10 +1827,6 @@
 			[
 				"default/or",
 				"resources\\views\\default\\order.blade.php"
-			],
-			[
-				"goodcate/in",
-				"resources\\views\\admin\\goodcate\\index.blade.php"
 			]
 		],
 		"width": 0.0
