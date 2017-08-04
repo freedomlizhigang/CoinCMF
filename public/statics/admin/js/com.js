@@ -18,6 +18,52 @@ $(function(){
 		return;
 	});
 });
+// 取品牌
+function get_brand(pid = '0',cid = '0',subid = 'brand_id',selectid = '0')
+{
+    // 取一级子分类
+    var goodcateurl = host + '/api/common/brand';
+    // 取子分类
+    $.post(goodcateurl, {pid: pid,cid:cid}, function(d) {
+        var ss = jQuery.parseJSON(d);
+        if (ss.code == 1) {
+            var str = '<option value="0">选择品牌</option>';
+            $.each(ss.msg, function(i,n) {
+                str += '<option value="' + n.id + '">' + n.name + '</option>';
+            });
+            $('#' + subid).html(str);
+		    (selectid > 0) && $('#' + subid).val(selectid);
+        }
+        else
+        {
+            // 失败的时候重置数量
+            console.log(ss.msg);
+        }
+    });
+}
+// 取地区
+function get_area(pid = '0',subid = 'brand_id',selectid = '0')
+{
+    // 取一级子分类
+    var goodcateurl = host + '/api/common/area';
+    // 取子分类
+    $.post(goodcateurl, {pid: pid}, function(d) {
+        var ss = jQuery.parseJSON(d);
+        if (ss.code == 1) {
+            var str = '<option value="">选择地区</option>';
+            $.each(ss.msg, function(i,n) {
+                str += '<option value="' + n.id + '">' + n.areaname + '</option>';
+            });
+            $('#' + subid).html(str);
+		    (selectid > 0) && $('#' + subid).val(selectid);
+        }
+        else
+        {
+            // 失败的时候重置数量
+            console.log(ss.msg);
+        }
+    });
+}
 //导航高亮
 function highlight_subnav(url){
     $('.left_list').find('a[href="'+url+'"]').addClass('active').closest('li').addClass('active');
@@ -36,10 +82,13 @@ function ajax_submit_form(form_id,submit_url)
 	if(before_request == 0)
     return false;
 	var data = $('#' + form_id).serializeArray();
-	if ($('#editor_id').length > 0) {
-		// console.log($('#editor_id').val());
-		data.push({name:'data[content]',value:$('#editor_id').val()});
-	}
+	// 如果有ueditor则同步内容
+	/*if ($('.data_content').length > 0) {
+		$('.data_content').each(function() {
+			var thisId = $(this).attr('id');
+			UE.getEditor(thisId).sync();
+		});
+	}*/
 	before_request = 0; // 标识ajax 请求已经发出
     $.ajax({
 		type: "POST",
@@ -47,15 +96,15 @@ function ajax_submit_form(form_id,submit_url)
 		data: data, // 你的formid                
 		error: function(v) {
 		    before_request = 1;
-			// console.log(v.responseText);
+			console.log(v.responseText);
 			// 提示信息转为json对象，并弹出提示
 		    var errors = $.parseJSON(v.responseText);
 		    $.each(errors, function(index, value) {
 		    	// 弹出提示
 				$('#error_alert').text(value).fadeIn('fast').delay(1000).fadeOut();
 				// 标识ajax 请求成功，可以再次发送
+	    		return false;
 		    });
-	    	return false;
 		},
 		success: function(v) {
 			before_request = 1; // 标识ajax 请求已经返回

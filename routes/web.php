@@ -128,7 +128,6 @@ Route::group(['prefix'=>'console','middleware' => ['rbac'],'namespace' => 'Admin
     // attr
     Route::get('attr/index', 'Common\AttrController@getIndex');
     Route::get('attr/delfile/{id?}', 'Common\AttrController@getDelfile');
-    Route::post('attr/uploadimg', 'Common\AttrController@postUploadimg');
     // art
     Route::get('art/index', 'Common\ArtController@getIndex');
     Route::get('art/add/{id?}', 'Common\ArtController@getAdd');

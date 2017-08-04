@@ -37,51 +37,55 @@
 <form action="{{ url('/console/art/alldel') }}" class="form-inline form_status" method="get">
 	{{ csrf_field() }}
 	<table class="table table-striped table-hover mt10">
-		<tr class="active">
-			<th width="30">
-				<input type="checkbox" class="checkall"></th>
-			<th width="60">排序</th>
-			<th width="50">ID</th>
-			<th>标题</th>
-			<th width="100">栏目</th>
-			<th width="80">状态</th>
-			<th width="180">修改时间</th>
-			<th width="100">操作</th>
-		</tr>
-		@foreach($list as $a)
-		<tr>
-			<td>
-				<input type="checkbox" name="sids[]" class="check_s" value="{{ $a->id }}"></td>
-			<td>
-				<input type="text" name="sort[{{ $a->id }}]" class="form-control input-xs" value="{{ $a->sort }}"></td>
-			<td>{{ $a->id }}</td>
-			<td>
-				<a href="{{ url('/console/art/show',$a->id) }}" target="_blank">{{ $a->title }}</a>
-				@if($a->thumb != '')
-				<span class="color_red">图</span>
-				@endif @if($a->ispos == 1)
-				<span class="text-success">荐</span>
-				@endif
-			</td>
-			<td>{{ $a->cate->name }}</td>
-			<td>
-				@if($a->status == 1)
-				<span class="color-secondary">发布</span>
-				@elseif($a->status == 0)
-				<span class="color-warning">删除</span>
-				@endif
-			</td>
-			<td>{{ $a->updated_at }}</td>
-			<td>
-				@if(App::make('com')->ifCan('art-edit'))
-				<a href="{{ url('/console/art/edit',$a->id) }}" class="btn btn-xs btn-info glyphicon glyphicon-edit"></a> 
-				@endif
-				@if(App::make('com')->ifCan('art-del'))
-				<a href="{{ url('/console/art/del',$a->id) }}" class="confirm btn btn-xs btn-danger glyphicon glyphicon-trash"></a>
-				@endif
-			</td>
-		</tr>
-		@endforeach
+		<thead>
+			<tr class="active">
+				<th width="30">
+					<input type="checkbox" class="checkall"></th>
+				<th width="60">排序</th>
+				<th width="50">ID</th>
+				<th>标题</th>
+				<th width="100">栏目</th>
+				<th width="80">状态</th>
+				<th width="180">修改时间</th>
+				<th width="100">操作</th>
+			</tr>
+		</thead>
+		<tbody>
+			@foreach($list as $a)
+			<tr>
+				<td>
+					<input type="checkbox" name="sids[]" class="check_s" value="{{ $a->id }}"></td>
+				<td>
+					<input type="text" name="sort[{{ $a->id }}]" class="form-control input-xs" value="{{ $a->sort }}"></td>
+				<td>{{ $a->id }}</td>
+				<td>
+					<a href="{{ url('/console/art/show',$a->id) }}" target="_blank">{{ $a->title }}</a>
+					@if($a->thumb != '')
+					<span class="color_red">图</span>
+					@endif @if($a->ispos == 1)
+					<span class="text-success">荐</span>
+					@endif
+				</td>
+				<td>{{ $a->cate->name }}</td>
+				<td>
+					@if($a->status == 1)
+					<span class="color-secondary">发布</span>
+					@elseif($a->status == 0)
+					<span class="color-warning">删除</span>
+					@endif
+				</td>
+				<td>{{ $a->updated_at }}</td>
+				<td>
+					@if(App::make('com')->ifCan('art-edit'))
+					<a href="{{ url('/console/art/edit',$a->id) }}" class="btn btn-xs btn-info glyphicon glyphicon-edit"></a> 
+					@endif
+					@if(App::make('com')->ifCan('art-del'))
+					<a href="{{ url('/console/art/del',$a->id) }}" class="confirm btn btn-xs btn-danger glyphicon glyphicon-trash"></a>
+					@endif
+				</td>
+			</tr>
+			@endforeach
+		</tbody>
 	</table>
 	<!-- 添加进专题功能 -->
 	<div class="special_div pull-left clearfix" data-toggle="buttons">

@@ -7,9 +7,10 @@ use Illuminate\Http\Request;
 
 class BaseController extends Controller
 {
-    public $theme = 'home';
-    public function __construct()
+    // ajax返回
+    public function ajaxReturn($code = '1',$msg = '')
     {
-        $this->theme = isset(cache('config')['theme']) && cache('config')['theme'] != null ? cache('config')['theme'] : 'home';
+        exit(json_encode(['code'=>$code,'msg'=>$msg]));
+        return;
     }
 }
