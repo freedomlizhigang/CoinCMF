@@ -16,6 +16,8 @@ class VerifyCsrfToken extends BaseVerifier
         /*'alipay/gateway',
         'alipay/return',
         'weixin/return',*/
+        // 微信的
+        'wx/*',
     	// 后台文件上传
         'console/attr/uploadimg',
         // 取规格

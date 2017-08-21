@@ -10,7 +10,8 @@
         "laravel/framework": "5.4.*",
         "laravel/tinker": "~1.0",
         "nwidart/db-exporter": "*",
-        "overtrue/laravel-pinyin": "~3.0"
+        "overtrue/laravel-pinyin": "~3.0",
+        "overtrue/laravel-wechat":"~3.0"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

@@ -748,11 +748,22 @@
 		"/F/wwwroot/XYCMF",
 		"/F/wwwroot/XYCMF/app",
 		"/F/wwwroot/XYCMF/app/Http",
-		"/F/wwwroot/XYCMF/app/Http/Middleware"
+		"/F/wwwroot/XYCMF/app/Http/Controllers",
+		"/F/wwwroot/XYCMF/public/statics",
+		"/F/wwwroot/XYCMF/public/statics/admin",
+		"/F/wwwroot/XYCMF/resources/views"
 	],
 	"file_history":
 	[
+		"/C/Users/Administrator/Downloads/footer.html",
+		"/C/Users/Administrator/Downloads/index.html",
+		"/F/wwwroot/XYCMF/routes/api.php",
+		"/F/wwwroot/XYCMF/routes/web.php",
 		"/F/wwwroot/XYCMF/public/statics/admin/js/com.js",
+		"/F/wwwroot/XYCMF/app/Http/Controllers/Common/BaseController.php",
+		"/F/wwwroot/XYShop/app/Http/Controllers/Common/Ueditor.php",
+		"/F/wwwroot/XYShop/app/Http/Controllers/Common/UploaderController.php",
+		"/F/wwwroot/XYCMF/app/Http/Controllers/Common/AjaxCommonController.php",
 		"/F/wwwroot/XYCMF/app/Services/TagService.php",
 		"/F/wwwroot/XYCMF/app/Services/ComService.php",
 		"/F/wwwroot/XYCMF/app/Http/Controllers/Admin/Common/AdController.php",
@@ -774,7 +785,6 @@
 		"/F/wwwroot/XYCMF/app/Http/Controllers/Admin/User/GroupController.php",
 		"/F/wwwroot/XYCMF/app/Http/Requests/User/GroupRequest.php",
 		"/F/wwwroot/XYCMF/resources/views/admin/art/index.blade.php",
-		"/F/wwwroot/XYCMF/routes/web.php",
 		"/F/wwwroot/XYCMF/resources/views/admin/role/index.blade.php",
 		"/F/wwwroot/XYCMF/app/Models/Common/Article.php",
 		"/F/wwwroot/XYCMF/app/Models/Common/Cate.php",
@@ -835,7 +845,6 @@
 		"/F/wwwroot/XYCMF/resources/views/home/layout.blade.php",
 		"/F/scss/bootstrap/index.html",
 		"/F/希夷/xi-yi(1).txt",
-		"/F/wwwroot/XYCMF/app/Http/Controllers/Common/BaseController.php",
 		"/F/wwwroot/XYCMF/app/Http/Controllers/Home/HomeController.php",
 		"/F/wwwroot/XYCMF/composer.json",
 		"/F/wwwroot/XYCMF/app/Http/Controllers/VueController.php",
@@ -851,7 +860,6 @@
 		"/F/wwwroot/XYCMF/config/auth.php",
 		"/F/wwwroot/XYCMF/config/broadcasting.php",
 		"/F/wwwroot/XYCMF/config/filesystems.php",
-		"/F/wwwroot/XYCMF/routes/api.php",
 		"/F/wwwroot/XYCMF/routes/console.php",
 		"/F/wwwroot/XYCMF/README.md",
 		"/F/wwwroot/XYB2B/readme.md",
@@ -874,12 +882,7 @@
 		"/F/wwwroot/jxf/app/Http/Controllers/Auth/WxController.php",
 		"/F/wwwroot/jxf/resources/views/admin/good/edit.blade.php",
 		"/F/wwwroot/jxf/app/Services/ComService.php",
-		"/F/wwwroot/jxf/app/Models/Good.php",
-		"/F/wwwroot/jxf/resources/views/admin/good/index.blade.php",
-		"/F/wwwroot/jxf/resources/views/admin/good/nostore.blade.php",
-		"/F/wwwroot/jxf/app/Http/Controllers/Admin/OrderController.php",
-		"/F/wwwroot/jxf/public/statics/home/js/com.js",
-		"/F/wwwroot/jxf/database/migrations/2017_07_20_150149_edit_yhq_user_del.php"
+		"/F/wwwroot/jxf/app/Models/Good.php"
 	],
 	"find":
 	{

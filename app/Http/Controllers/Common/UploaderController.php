@@ -12,7 +12,7 @@ class UploaderController extends Controller
     // webuploader
     public function postUploadimg(Request $res)
     {
-        return app('com')->upload($res,$ext = array('jpg','jpeg','gif','png','doc','docx','xls','xlsx','ppt','pptx','pdf','txt','rar','zip','swf','apk','mp4'),$allSize = 100);
+        return app('com')->upload($res,$ext = array('jpg','jpeg','gif','png','doc','docx','xls','xlsx','ppt','pptx','pdf','txt','rar','zip','swf','apk','mp4','mp3','avi'),$allSize = 100);
     }
     /**
      * 编辑器文件上传

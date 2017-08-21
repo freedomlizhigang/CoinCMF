@@ -7,6 +7,22 @@ use Storage;
 
 class ComService
 {
+    // 处理关键字
+    public function getKeyword($v)
+    {
+        // 替换特殊字符
+        $v = trim(str_replace('@','',str_replace('_', '', $v)));
+        $v = explode(PHP_EOL, $v);
+        $tmp = '';
+        foreach ($v as $k) {
+            if (trim($k) != '' ) {
+                $tmp .= '_'.trim($k);
+            }
+        }
+        $tmp .= '_';
+        // 处理为json
+        return $tmp;
+    }
     
     // 密码生成及判断
     public function makepwd($pwd = '',$crypt = '')

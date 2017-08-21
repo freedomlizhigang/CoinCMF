@@ -199,6 +199,9 @@ return [
         // 转拼音
         Overtrue\LaravelPinyin\ServiceProvider::class,
 
+        // 微信
+        Overtrue\LaravelWechat\ServiceProvider::class,
+
 
     ],
 
@@ -255,7 +258,9 @@ return [
         // 转拼音
         'Pinyin' => Overtrue\LaravelPinyin\Facades\Pinyin::class,
         
- 
+        // 微信
+        'EasyWeChat' => Overtrue\LaravelWechat\Facade::class,
+        
     ],
 
 ];

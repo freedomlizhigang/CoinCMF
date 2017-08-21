@@ -73,3 +73,7 @@ btn btn-xs btn-info glyphicon glyphicon-chevron-up
 设置
 
 btn btn-xs btn-primary glyphicon glyphicon-cog
+
+同步
+
+btn btn-xs btn-primary glyphicon glyphicon-refresh

@@ -1,6 +1,8 @@
 $(function(){
 	$(".confirm").click(function(){
-		if (!confirm("确实要进行此操作吗?")){
+		var msg = $(this).attr('data-msg');
+		msg = msg != undefined ? msg : '确实要进行此操作吗?';
+		if (!confirm(msg)){
 			return false;
 		}else{
 			return true;
