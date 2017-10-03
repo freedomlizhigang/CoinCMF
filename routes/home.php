@@ -13,8 +13,10 @@
 
 // Home PC版
 Route::group(['namespace' => 'Home'],function(){
-    Route::get('/','HomeController@index');
+    // 首页
+    Route::get('/','HomeController@getIndex');
     Route::get('/wxlogin','HomeController@wxlogin');
+    Route::get('/{all}','HomeController@getIndex')->where('all','.*');
 });
 
 Route::group(['prefix'=>'wx','namespace' => 'Wx'],function(){

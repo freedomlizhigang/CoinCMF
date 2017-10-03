@@ -10,9 +10,10 @@ return [
     | This value is the name of your application. This value is used when the
     | framework needs to place the application's name in a notification or
     | any other location as required by the application or its packages.
+    |
     */
 
-    'name' => env('APP_NAME', 'Xi-Yi-CMF'),
+    'name' => env('APP_NAME', 'Laravel'),
 
     /*
     |--------------------------------------------------------------------------
@@ -51,17 +52,9 @@ return [
     |
     */
 
-    'url' => env('APP_URL', 'http://www.xi-yi.ren'),
+    'url' => env('APP_URL', 'http://localhost'),
 
-
-    /*
-    |
-    |静态文件存放地址
-    |
-     */
-    
     'static' => '/statics/',
-
 
     /*
     |--------------------------------------------------------------------------
@@ -130,7 +123,7 @@ return [
     |
     */
 
-    'log' => env('APP_LOG', 'daily'),
+    'log' => env('APP_LOG', 'single'),
 
     'log_level' => env('APP_LOG_LEVEL', 'debug'),
 
@@ -150,7 +143,7 @@ return [
         /*
          * Laravel Framework Service Providers...
          */
-        // Illuminate\Auth\AuthServiceProvider::class,
+        Illuminate\Auth\AuthServiceProvider::class,
         Illuminate\Broadcasting\BroadcastServiceProvider::class,
         Illuminate\Bus\BusServiceProvider::class,
         Illuminate\Cache\CacheServiceProvider::class,
@@ -167,7 +160,7 @@ return [
         Illuminate\Pipeline\PipelineServiceProvider::class,
         Illuminate\Queue\QueueServiceProvider::class,
         Illuminate\Redis\RedisServiceProvider::class,
-        // Illuminate\Auth\Passwords\PasswordResetServiceProvider::class,
+        Illuminate\Auth\Passwords\PasswordResetServiceProvider::class,
         Illuminate\Session\SessionServiceProvider::class,
         Illuminate\Translation\TranslationServiceProvider::class,
         Illuminate\Validation\ValidationServiceProvider::class,
@@ -176,32 +169,15 @@ return [
         /*
          * Package Service Providers...
          */
-        Laravel\Tinker\TinkerServiceProvider::class,
 
         /*
          * Application Service Providers...
          */
         App\Providers\AppServiceProvider::class,
-        // App\Providers\AuthServiceProvider::class,
+        App\Providers\AuthServiceProvider::class,
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
-
-
-
-        // 一些公用服务
-        App\Providers\ComServiceProvider::class,
-
-
-        // 调试
-        Barryvdh\Debugbar\ServiceProvider::class,
-
-        // 转拼音
-        Overtrue\LaravelPinyin\ServiceProvider::class,
-
-        // 微信
-        Overtrue\LaravelWechat\ServiceProvider::class,
-
 
     ],
 
@@ -252,15 +228,6 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
 
-        // 调试
-        'Debugbar'  => Barryvdh\Debugbar\Facade::class,
-
-        // 转拼音
-        'Pinyin' => Overtrue\LaravelPinyin\Facades\Pinyin::class,
-        
-        // 微信
-        'EasyWeChat' => Overtrue\LaravelWechat\Facade::class,
-        
     ],
 
 ];

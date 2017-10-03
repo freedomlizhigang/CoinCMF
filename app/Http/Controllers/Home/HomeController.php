@@ -12,19 +12,10 @@ class HomeController extends BaseController
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function getIndex()
     {
-    	$wechat = app('wechat');
-    	/*$oauth = $wechat->oauth;
-    	// 未登录
-		if (!session()->has('wechat_user')) {
-			return $oauth->redirect();
-		}
-		// 已经登录过
-		$user = session('wechat_user');*/
-        // 分享
-        $js = $wechat->js;
-        return view($this->theme.'.home',compact('js'));
+      $user = json_encode(['id'=>1,'name'=>'Li']);
+      return view('home.layout',compact('user'));
     }
     // 微信授权页面
     public function wxlogin()

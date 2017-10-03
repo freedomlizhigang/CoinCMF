@@ -14,7 +14,7 @@ return [
     */
 
     'defaults' => [
-        'guard' => 'user',
+        'guard' => 'web',
         'passwords' => 'users',
     ],
 
@@ -36,14 +36,11 @@ return [
     */
 
     'guards' => [
-        'user' => [
+        'web' => [
             'driver' => 'session',
             'provider' => 'users',
         ],
-        'xycms' => [
-            'driver' => 'session',
-            'provider' => 'admins',
-        ],
+
         'api' => [
             'driver' => 'token',
             'provider' => 'users',
@@ -70,13 +67,13 @@ return [
     'providers' => [
         'users' => [
             'driver' => 'eloquent',
-            'model' => App\Models\User::class,
+            'model' => App\User::class,
         ],
 
-        'xycms' => [
-            'driver' => 'eloquent',
-            'model' => App\Models\Admin::class,
-        ],
+        // 'users' => [
+        //     'driver' => 'database',
+        //     'table' => 'users',
+        // ],
     ],
 
     /*
