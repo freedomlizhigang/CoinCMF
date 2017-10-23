@@ -544,9 +544,17 @@
 	"command_palette":
 	{
 		"height": 392.0,
-		"last_filter": "close",
+		"last_filter": "re",
 		"selected_items":
 		[
+			[
+				"re",
+				"File: Rename"
+			],
+			[
+				"rena",
+				"File: Rename"
+			],
 			[
 				"close",
 				"File: Close All"
@@ -558,10 +566,6 @@
 			[
 				"save",
 				"File: Save All"
-			],
-			[
-				"rena",
-				"File: Rename"
 			],
 			[
 				"install",
@@ -578,10 +582,6 @@
 			[
 				"move",
 				"File: Move"
-			],
-			[
-				"re",
-				"File: Rename"
 			],
 			[
 				"ren",
@@ -716,7 +716,7 @@
 				"phpfmt: toggle PHP 5.5 compatibility mode"
 			]
 		],
-		"width": 512.0
+		"width": 1261.0
 	},
 	"console":
 	{
@@ -745,10 +745,18 @@
 	},
 	"expanded_folders":
 	[
-		"/F/wwwroot/XYCMF"
+		"/D/wwwroot/XYCMF",
+		"/D/wwwroot/XYCMF/app"
 	],
 	"file_history":
 	[
+		"/D/wwwroot/XYCMF/config/filesystems.php",
+		"/D/wwwroot/XYCMF/routes/admin.php",
+		"/D/wwwroot/XYCMF/routes/webcommon.php",
+		"/D/wwwroot/XYCMF/app/Providers/RouteServiceProvider.php",
+		"/D/wwwroot/XYCMF/routes/store.php",
+		"/F/wwwroot/XYShop/package.json",
+		"/F/wwwroot/XYCMF/package.json",
 		"/F/wwwroot/XYCMF/xycmf.sublime-project",
 		"/F/wwwroot/XYCMF/resources/assets/js/app.js",
 		"/E/vuejs/v-one/src/main.js",
@@ -772,8 +780,6 @@
 		"/F/wwwroot/XYCMF/config/app.php",
 		"/F/wwwroot/XYCMF/resources/views/home/js.blade.php",
 		"/F/wwwroot/XYCMF/resources/views/home/home.blade.php",
-		"/F/wwwroot/XYCMF/package.json",
-		"/F/wwwroot/XYShop/package.json",
 		"/C/Windows/System32/drivers/etc/HOSTS",
 		"/F/wwwroot/laravel-5.5.0/server.php",
 		"/F/wwwroot/XYCMF/webpack.mix.js",
@@ -871,12 +877,7 @@
 		"/F/wwwroot/XYCMF/app/Providers/AuthServiceProvider.php",
 		"/F/wwwroot/XYCMF/storage/logs/laravel-2017-07-21.log",
 		"/F/wwwroot/XYCMF/resources/views/admin/member/index.blade.php",
-		"/F/wwwroot/XYCMF/resources/views/admin/index/main.blade.php",
-		"/F/wwwroot/XYCMF/config/excel.php",
-		"/F/wwwroot/XYCMF/resources/views/admin/常用标记.txt",
-		"/F/wwwroot/XYCMF/public/statics/home/js/com.js",
-		"/F/wwwroot/XYCMF/resources/views/admin/index.blade.php",
-		"/F/wwwroot/XYCMF/resources/views/admin/ad/add.blade.php"
+		"/F/wwwroot/XYCMF/resources/views/admin/index/main.blade.php"
 	],
 	"find":
 	{
