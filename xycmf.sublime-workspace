@@ -746,12 +746,24 @@
 	"expanded_folders":
 	[
 		"/D/wwwroot/XYCMF",
-		"/D/wwwroot/XYCMF/app"
+		"/D/wwwroot/XYCMF/app",
+		"/D/wwwroot/XYCMF/resources",
+		"/D/wwwroot/XYCMF/resources/views"
 	],
 	"file_history":
 	[
-		"/D/wwwroot/XYCMF/config/filesystems.php",
+		"/D/wwwroot/XYCMF/resources/views/admin/index.blade.php",
 		"/D/wwwroot/XYCMF/routes/admin.php",
+		"/D/wwwroot/XYCMF/app/Http/Controllers/Wx/WxController.php",
+		"/D/wwwroot/XYCMF/routes/api.php",
+		"/D/wwwroot/XYCMF/.env",
+		"/D/wwwroot/XYCMF/config/app.php",
+		"/D/wwwroot/XYCMF/composer.json",
+		"/D/wwwroot/XYCMF/config/debugbar.php",
+		"/D/wwwroot/XYCMF/config/wechat.php",
+		"/D/wwwroot/XYCMF/sftp-config.json",
+		"/C/Users/Administrator/Desktop/dsas.sql",
+		"/D/wwwroot/XYCMF/config/filesystems.php",
 		"/D/wwwroot/XYCMF/routes/webcommon.php",
 		"/D/wwwroot/XYCMF/app/Providers/RouteServiceProvider.php",
 		"/D/wwwroot/XYCMF/routes/store.php",
@@ -867,21 +879,11 @@
 		"/F/wwwroot/XYCMF/app/Models/Common/Area.php",
 		"/F/wwwroot/XYCMF/app/Models/Common/Attr.php",
 		"/F/wwwroot/XYCMF/app/Models/Common/Community.php",
-		"/F/wwwroot/XYCMF/app/Models/Common/Type.php",
-		"/F/wwwroot/XYCMF/app/Models/User/User.php",
-		"/F/wwwroot/XYCMF/app/Models/User/Group.php",
-		"/F/wwwroot/XYCMF/app/Models/Console/Config.php",
-		"/F/wwwroot/XYCMF/app/Models/Console/Log.php",
-		"/F/wwwroot/XYCMF/app/Models/Console/Priv.php",
-		"/F/wwwroot/XYCMF/app/Models/Console/RoleUser.php",
-		"/F/wwwroot/XYCMF/app/Providers/AuthServiceProvider.php",
-		"/F/wwwroot/XYCMF/storage/logs/laravel-2017-07-21.log",
-		"/F/wwwroot/XYCMF/resources/views/admin/member/index.blade.php",
-		"/F/wwwroot/XYCMF/resources/views/admin/index/main.blade.php"
+		"/F/wwwroot/XYCMF/app/Models/Common/Type.php"
 	],
 	"find":
 	{
-		"height": 26.0
+		"height": 41.0
 	},
 	"find_in_files":
 	{

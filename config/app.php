@@ -2,6 +2,7 @@
 
 return [
 
+
     /*
     |--------------------------------------------------------------------------
     | Application Name
@@ -10,10 +11,9 @@ return [
     | This value is the name of your application. This value is used when the
     | framework needs to place the application's name in a notification or
     | any other location as required by the application or its packages.
-    |
     */
 
-    'name' => env('APP_NAME', 'Laravel'),
+    'name' => env('APP_NAME', 'Xi-Yi-CMF'),
 
     /*
     |--------------------------------------------------------------------------
@@ -52,9 +52,17 @@ return [
     |
     */
 
-    'url' => env('APP_URL', 'http://localhost'),
+    'url' => env('APP_URL', 'http://www.xi-yi.ren'),
 
+
+    /*
+    |
+    |静态文件存放地址
+    |
+     */
+    
     'static' => '/statics/',
+
 
     /*
     |--------------------------------------------------------------------------
@@ -123,7 +131,7 @@ return [
     |
     */
 
-    'log' => env('APP_LOG', 'single'),
+    'log' => env('APP_LOG', 'daily'),
 
     'log_level' => env('APP_LOG_LEVEL', 'debug'),
 
@@ -178,6 +186,11 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
+        // 公用函数
+        App\Providers\ComServiceProvider::class,
+
+        // 调试
+        Barryvdh\Debugbar\ServiceProvider::class,
 
     ],
 
@@ -227,6 +240,8 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
+        // 调试
+        'Debugbar'  => Barryvdh\Debugbar\Facade::class,
 
     ],
 
