@@ -747,21 +747,44 @@
 	[
 		"/D/wwwroot/XYCMF",
 		"/D/wwwroot/XYCMF/app",
-		"/D/wwwroot/XYCMF/resources",
-		"/D/wwwroot/XYCMF/resources/views"
+		"/D/wwwroot/XYCMF/app/Console",
+		"/D/wwwroot/XYCMF/app/Http",
+		"/D/wwwroot/XYCMF/app/Http/Controllers",
+		"/D/wwwroot/XYCMF/app/Http/Controllers/Api",
+		"/D/wwwroot/XYCMF/app/Models",
+		"/D/wwwroot/XYCMF/app/Models/User"
 	],
 	"file_history":
 	[
+		"/D/wwwroot/XYCMF/resources/views/admin/art/index.blade.php",
+		"/D/wwwroot/XYCMF/sftp-config.json",
+		"/D/wwwroot/XYCMF/app/Http/Kernel.php",
+		"/D/wwwroot/account/app/Http/Kernel.php",
+		"/D/wwwroot/XYShop/app/Http/Kernel.php",
+		"/D/wwwroot/XYCMF/config/app.php",
+		"/D/wwwroot/laravel5.5/config/app.php",
+		"/D/wwwroot/XYCMF/vendor/laravel/framework/src/Illuminate/Pipeline/PipelineServiceProvider.php",
+		"/D/wwwroot/XYCMF/vendor/laravel/framework/src/Illuminate/Pipeline/Hub.php",
+		"/D/wwwroot/XYCMF/vendor/laravel/framework/src/Illuminate/Bus/BusServiceProvider.php",
+		"/D/wwwroot/laravel5.5/config/auth.php",
+		"/D/wwwroot/laravel5.5/.env",
+		"/D/wwwroot/lumen/bootstrap/app.php",
+		"/D/wwwroot/lumen/public/index.php",
+		"/D/wwwroot/lumen/.env",
+		"/D/wwwroot/XYCMF/public/index.php",
+		"/D/wwwroot/XYCMF/bootstrap/app.php",
+		"/D/wwwroot/XYCMF/vendor/laravel/framework/src/Illuminate/Container/Container.php",
+		"/D/wwwroot/XYCMF/vendor/laravel/framework/src/Illuminate/Foundation/Application.php",
+		"/D/wwwroot/XYCMF/xycmf.sublime-project",
+		"/D/wwwroot/XYCMF/app/Console/Kernel.php",
 		"/D/wwwroot/XYCMF/resources/views/admin/index.blade.php",
 		"/D/wwwroot/XYCMF/routes/admin.php",
 		"/D/wwwroot/XYCMF/app/Http/Controllers/Wx/WxController.php",
 		"/D/wwwroot/XYCMF/routes/api.php",
 		"/D/wwwroot/XYCMF/.env",
-		"/D/wwwroot/XYCMF/config/app.php",
 		"/D/wwwroot/XYCMF/composer.json",
 		"/D/wwwroot/XYCMF/config/debugbar.php",
 		"/D/wwwroot/XYCMF/config/wechat.php",
-		"/D/wwwroot/XYCMF/sftp-config.json",
 		"/C/Users/Administrator/Desktop/dsas.sql",
 		"/D/wwwroot/XYCMF/config/filesystems.php",
 		"/D/wwwroot/XYCMF/routes/webcommon.php",
@@ -860,30 +883,11 @@
 		"/F/wwwroot/XYCMF/app/Models/Console/Section.php",
 		"/G/soft/FlashFXP4/Cache/~flashfxp/E7599F09_edit.tmp/Section.php",
 		"/F/wwwroot/XYCMF/app/Http/Controllers/Admin/SectionController.php",
-		"/F/wwwroot/XYCMF/app/Http/Controllers/Admin/IndexController.php",
-		"/F/wwwroot/XYCMF/app/Http/Controllers/Admin/Common/CommunityController.php",
-		"/F/wwwroot/XYCMF/app/Http/Requests/Common/CommunityRequest.php",
-		"/F/wwwroot/XYCMF/app/Http/Requests/Common/AreaRequest.php",
-		"/F/wwwroot/XYCMF/app/Http/Controllers/Admin/Common/AreaController.php",
-		"/F/wwwroot/XYCMF/app/Http/Controllers/Admin/Common/AdposController.php",
-		"/F/wwwroot/XYCMF/app/Http/Middleware/BetoAdmin.php",
-		"/F/wwwroot/XYCMF/app/Http/Middleware/Jwt.php",
-		"/F/wwwroot/XYCMF/app/Http/Controllers/Admin/ConfigController.php",
-		"/F/wwwroot/XYCMF/app/Http/Controllers/Api/UserController.php",
-		"/F/wwwroot/XYCMF/app/Http/Requests/Common/ArtRequest.php",
-		"/F/wwwroot/XYCMF/app/Http/Requests/Common/CateRequest.php",
-		"/F/wwwroot/XYCMF/app/Http/Requests/Common/TypeRequest.php",
-		"/F/wwwroot/XYCMF/app/Http/Requests/Common/AdposRequest.php",
-		"/F/wwwroot/XYCMF/app/Models/Common/Ad.php",
-		"/F/wwwroot/XYCMF/app/Models/Common/Adpos.php",
-		"/F/wwwroot/XYCMF/app/Models/Common/Area.php",
-		"/F/wwwroot/XYCMF/app/Models/Common/Attr.php",
-		"/F/wwwroot/XYCMF/app/Models/Common/Community.php",
-		"/F/wwwroot/XYCMF/app/Models/Common/Type.php"
+		"/F/wwwroot/XYCMF/app/Http/Controllers/Admin/IndexController.php"
 	],
 	"find":
 	{
-		"height": 41.0
+		"height": 26.0
 	},
 	"find_in_files":
 	{
@@ -996,6 +1000,7 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"provider",
 			"Hello",
 			"Example",
 			"HOST",
@@ -1122,8 +1127,7 @@
 			"user(",
 			"overtrue/laravel-wechat",
 			"editor_id",
-			"data[content]",
-			"ref"
+			"data[content]"
 		],
 		"highlight": true,
 		"in_selection": false,
