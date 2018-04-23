@@ -84,7 +84,7 @@ class ArtController extends BaseController
         // 开启事务
         DB::beginTransaction();
         try {
-            $data['url'] = pinyin_permalink(trim($data['title']),'-');
+            $data['url'] = md5(time().str_random(15));
             $art = $this->art->create($data);
             // 没出错，提交事务
             DB::commit();
@@ -118,7 +118,6 @@ class ArtController extends BaseController
         // 开启事务
         DB::beginTransaction();
         try {
-            $data['url'] = pinyin_permalink(trim($data['title']),'-');
             $art = $this->art->where('id',$id)->update($data);
             // 没出错，提交事务
             DB::commit();

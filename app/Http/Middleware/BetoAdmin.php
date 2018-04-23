@@ -23,6 +23,9 @@ class BetoAdmin
 
         // 拼接权限名字，url的第二个跟第三个参数
         $toArr = explode('/',$request->path());
+        if ($toArr[0] != 'console') {
+            return back()->with('message','没有权限！');
+        }
         // 如果不写方法名，默认为index
         $toArr[2] = count($toArr) == 2 ? 'index' : $toArr[2];
         $priv = $toArr[1].'-'.$toArr[2];
@@ -32,10 +35,7 @@ class BetoAdmin
         if(in_array(1,$user->allRole) || in_array($priv,$user->allPriv))
         {
             // 日志记录，只记录post或者del操作(通过比较url来得出结果)
-            if ($request->isMethod('post') || substr_count($toArr[2],'del') > 0 || substr_count($toArr[2],'status') > 0) {
-                $url = $request->getRequestUri();
-                Log::create(['admin_id'=>$user->id,'url'=>$url,'user'=>$user->name,'created_at'=>date('Y-m-d H:i:s')]);
-            }
+            Log::create(['admin_id'=>$user->id,'method'=>$request->method(),'url'=>$request->fullUrl(),'user'=>$user->name,'data'=>json_encode($request->all()),'created_at'=>date('Y-m-d H:i:s')]);
             $respond = $next($request);
             return $respond;
         }

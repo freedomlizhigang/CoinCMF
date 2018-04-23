@@ -21,7 +21,7 @@ $(function(){
 	});
 });
 // 取品牌
-function get_brand(pid = '0',cid = '0',subid = 'brand_id',selectid = '0')
+function get_brand(pid,cid,subid,selectid)
 {
     // 取一级子分类
     var goodcateurl = host + '/api/common/brand';
@@ -44,7 +44,7 @@ function get_brand(pid = '0',cid = '0',subid = 'brand_id',selectid = '0')
     });
 }
 // 取地区
-function get_area(pid = '0',subid = 'brand_id',selectid = '0')
+function get_area(pid,subid,selectid)
 {
     // 取一级子分类
     var goodcateurl = host + '/api/common/area';
@@ -101,7 +101,7 @@ function ajax_submit_form(form_id,submit_url)
 			console.log(v.responseText);
 			// 提示信息转为json对象，并弹出提示
 		    var errors = $.parseJSON(v.responseText);
-		    $.each(errors, function(index, value) {
+		    $.each(errors.errors, function(index, value) {
 		    	// 弹出提示
 				$('#error_alert').text(value).fadeIn('fast').delay(1000).fadeOut();
 				// 标识ajax 请求成功，可以再次发送

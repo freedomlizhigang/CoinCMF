@@ -716,7 +716,7 @@
 				"phpfmt: toggle PHP 5.5 compatibility mode"
 			]
 		],
-		"width": 1261.0
+		"width": 500.0
 	},
 	"console":
 	{
@@ -747,17 +747,32 @@
 	[
 		"/D/wwwroot/XYCMF",
 		"/D/wwwroot/XYCMF/app",
-		"/D/wwwroot/XYCMF/app/Console",
 		"/D/wwwroot/XYCMF/app/Http",
-		"/D/wwwroot/XYCMF/app/Http/Controllers",
-		"/D/wwwroot/XYCMF/app/Http/Controllers/Api",
-		"/D/wwwroot/XYCMF/app/Models",
-		"/D/wwwroot/XYCMF/app/Models/User"
+		"/D/wwwroot/XYCMF/app/Http/Middleware",
+		"/D/wwwroot/XYCMF/sql"
 	],
 	"file_history":
 	[
-		"/D/wwwroot/XYCMF/resources/views/admin/art/index.blade.php",
+		"/D/wwwroot/XYCMF/app/Http/Middleware/TrustProxies.php",
+		"/D/wamp/bin/php/php72/php.ini",
+		"/D/wwwroot/XYCMF/composer.json",
+		"/D/wwwroot/XYCMF/sql/init.sql",
+		"/D/wwwroot/OA-workflow/composer.json",
+		"/D/wwwroot/XYCMF/routes/admin.php",
+		"/D/wwwroot/XYCMF/routes/webcommon.php",
+		"/D/wwwroot/XYCMF/app/Http/Controllers/Pay/AlipayController.php",
+		"/D/wwwroot/XYCMF/app/Http/Controllers/Pay/WxpayController.php",
+		"/D/wwwroot/XYCMF/app/Http/Controllers/Admin/Common/CateController.php",
+		"/D/wwwroot/XYCMF/app/Http/Controllers/Admin/Common/ArtController.php",
+		"/D/wwwroot/XYCMF/vendor/monolog/monolog/src/Monolog/Handler/RotatingFileHandler.php",
+		"/D/wwwroot/XYCMF/vendor/laravel/framework/src/Illuminate/Log/Writer.php",
+		"/D/wwwroot/XYCMF/.env",
+		"/D/wwwroot/XYCMF/config/database.php",
+		"/D/wwwroot/XYCMF/app/Http/Middleware/BetoAdmin.php",
 		"/D/wwwroot/XYCMF/sftp-config.json",
+		"/D/wwwroot/XYCMF/app/Http/Controllers/Admin/BaseController.php",
+		"/D/wwwroot/XYCMF/app/Http/Controllers/Controller.php",
+		"/D/wwwroot/XYCMF/resources/views/admin/art/index.blade.php",
 		"/D/wwwroot/XYCMF/app/Http/Kernel.php",
 		"/D/wwwroot/account/app/Http/Kernel.php",
 		"/D/wwwroot/XYShop/app/Http/Kernel.php",
@@ -778,16 +793,12 @@
 		"/D/wwwroot/XYCMF/xycmf.sublime-project",
 		"/D/wwwroot/XYCMF/app/Console/Kernel.php",
 		"/D/wwwroot/XYCMF/resources/views/admin/index.blade.php",
-		"/D/wwwroot/XYCMF/routes/admin.php",
 		"/D/wwwroot/XYCMF/app/Http/Controllers/Wx/WxController.php",
 		"/D/wwwroot/XYCMF/routes/api.php",
-		"/D/wwwroot/XYCMF/.env",
-		"/D/wwwroot/XYCMF/composer.json",
 		"/D/wwwroot/XYCMF/config/debugbar.php",
 		"/D/wwwroot/XYCMF/config/wechat.php",
 		"/C/Users/Administrator/Desktop/dsas.sql",
 		"/D/wwwroot/XYCMF/config/filesystems.php",
-		"/D/wwwroot/XYCMF/routes/webcommon.php",
 		"/D/wwwroot/XYCMF/app/Providers/RouteServiceProvider.php",
 		"/D/wwwroot/XYCMF/routes/store.php",
 		"/F/wwwroot/XYShop/package.json",
@@ -869,25 +880,11 @@
 		"/F/wwwroot/XYCMF/app/Http/Controllers/Admin/PublicController.php",
 		"/F/wwwroot/XYCMF/app/Http/Controllers/Admin/RoleController.php",
 		"/F/wwwroot/XYCMF/app/Http/Controllers/Pay/AlipayController.php",
-		"/F/wwwroot/XYCMF/app/Http/Controllers/Pay/WxpayController.php",
-		"/F/wwwroot/XYCMF/app/Http/Controllers/Admin/User/UserController.php",
-		"/F/wwwroot/XYCMF/app/Http/Controllers/Admin/User/GroupController.php",
-		"/F/wwwroot/XYCMF/app/Http/Requests/User/GroupRequest.php",
-		"/F/wwwroot/XYCMF/resources/views/admin/art/index.blade.php",
-		"/F/wwwroot/XYCMF/resources/views/admin/role/index.blade.php",
-		"/F/wwwroot/XYCMF/app/Models/Common/Article.php",
-		"/F/wwwroot/XYCMF/app/Models/Common/Cate.php",
-		"/F/wwwroot/XYCMF/app/Models/Console/Admin.php",
-		"/F/wwwroot/XYCMF/app/Models/Console/Menu.php",
-		"/F/wwwroot/XYCMF/app/Models/Console/Role.php",
-		"/F/wwwroot/XYCMF/app/Models/Console/Section.php",
-		"/G/soft/FlashFXP4/Cache/~flashfxp/E7599F09_edit.tmp/Section.php",
-		"/F/wwwroot/XYCMF/app/Http/Controllers/Admin/SectionController.php",
-		"/F/wwwroot/XYCMF/app/Http/Controllers/Admin/IndexController.php"
+		"/F/wwwroot/XYCMF/app/Http/Controllers/Pay/WxpayController.php"
 	],
 	"find":
 	{
-		"height": 26.0
+		"height": 41.0
 	},
 	"find_in_files":
 	{
@@ -1000,6 +997,12 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"php_",
+			"extension",
+			"extension=",
+			"wx/",
+			"wxuser",
+			"RotatingFileHandler",
 			"provider",
 			"Hello",
 			"Example",
@@ -1121,13 +1124,7 @@
 			"$this->request",
 			"getCode",
 			"EasyWeChat",
-			"\n        ",
-			"openplatform",
-			"wx0845c4b247acd58c",
-			"user(",
-			"overtrue/laravel-wechat",
-			"editor_id",
-			"data[content]"
+			"\n        "
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -1283,6 +1280,10 @@
 		]
 	},
 	"menu_visible": true,
+	"output.SublimeLinter":
+	{
+		"height": 0.0
+	},
 	"output.exec":
 	{
 		"height": 118.0
@@ -1320,6 +1321,14 @@
 		"last_filter": "",
 		"selected_items":
 		[
+			[
+				"rotatingfilehandler",
+				"vendor\\monolog\\monolog\\src\\Monolog\\Handler\\RotatingFileHandler.php"
+			],
+			[
+				"vendor/laravel/framework/src/illuminate/log/writer.php",
+				"vendor\\laravel\\framework\\src\\Illuminate\\Log\\Writer.php"
+			],
 			[
 				"com.js",
 				"public\\statics\\admin\\js\\com.js"
@@ -1823,14 +1832,6 @@
 			[
 				"default/cart",
 				"resources\\views\\default\\cart.blade.php"
-			],
-			[
-				"addform",
-				"resources\\views\\admin\\good\\addformat.blade.php"
-			],
-			[
-				"default/or",
-				"resources\\views\\default\\order.blade.php"
 			]
 		],
 		"width": 0.0

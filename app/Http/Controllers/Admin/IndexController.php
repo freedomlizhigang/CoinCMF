@@ -15,26 +15,13 @@ use Illuminate\Http\Request;
 
 class IndexController extends Controller
 {
-
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        // 主页里关闭调试
-        \Debugbar::disable();
-        $this->menu = new Menu;
-    }
-
     /**
      * 后台首页
      */
     public function getIndex()
     {
         $allUrl = $this->allPriv();
-        $main = $this->menu->where('parentid','=','0')->where('display','=','1')->orderBy('sort','asc')->orderBy('id','asc')->get()->toArray();
+        $main = Menu::where('parentid','=','0')->where('display','=','1')->orderBy('sort','asc')->orderBy('id','asc')->get()->toArray();
         if (in_array(1, session('console')->allRole))
         {
             $mainmenu = $main;
@@ -66,7 +53,7 @@ class IndexController extends Controller
         // 权限url
         $allUrl = $this->allPriv();
         // 二级菜单
-        $left = $this->menu->where('parentid','=',$pid)->where('display','=','1')->orderBy('sort','asc')->orderBy('id','asc')->get()->toArray();
+        $left = Menu::where('parentid','=',$pid)->where('display','=','1')->orderBy('sort','asc')->orderBy('id','asc')->get()->toArray();
         $leftmenu = array();
         // 判断权限
         if (!in_array(1, session('console')->allRole))
@@ -86,7 +73,7 @@ class IndexController extends Controller
         // 三级菜单
         foreach ($leftmenu as $k => $v) {
             // 取所有下级菜单
-            $res = $this->menu->where('parentid','=',$v['id'])->where('display','=','1')->orderBy('sort','asc')->orderBy('id','asc')->get()->toArray();
+            $res = Menu::where('parentid','=',$v['id'])->where('display','=','1')->orderBy('sort','asc')->orderBy('id','asc')->get()->toArray();
             // 进行权限判断
             if (!in_array(1, session('console')->allRole))
             {

@@ -78,7 +78,7 @@ class CateController extends BaseController
         DB::beginTransaction();
         try {
             $data = $res->input('data');
-            $data['url'] = pinyin_permalink(trim($data['name']),'-');
+            $data['url'] = md5(time().str_random(15));
             $resId = $this->cate->create($data);
             // 后台用户组权限
             app('com')->updateCache($this->cate,'cateCache');
@@ -113,7 +113,6 @@ class CateController extends BaseController
         DB::beginTransaction();
         try {
             $data = $res->input('data');
-            $data['url'] = pinyin_permalink(trim($data['name']),'-');
             $this->cate->where('id',$id)->update($data);
             // 更新缓存
             app('com')->updateCache($this->cate,'cateCache');
