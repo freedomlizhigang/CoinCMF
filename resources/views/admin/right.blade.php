@@ -9,7 +9,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <!-- 国产浏览器高速/微信开发不要用 -->
      <meta name="renderer" content="webkit">
-     
+
     <!-- 移动设备禁止缩放 -->
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 
@@ -30,8 +30,8 @@
     <script src="{{ $sites['static']}}admin/js/com.js"></script>
 </head>
 
-<body>
-    <div class="right_con">        
+<body class="pr">
+    <div class="right_con">
         <!-- 右侧标题 -->
         <div class="clearfix">
             <h2 class="main_title f-l">{{ $title }}</h2>

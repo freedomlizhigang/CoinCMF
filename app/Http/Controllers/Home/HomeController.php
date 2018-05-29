@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Home;
 
 use App\Http\Controllers\Common\BaseController;
+use App\Models\Common\Article;
 use Illuminate\Http\Request;
 
 class HomeController extends BaseController
@@ -12,10 +13,19 @@ class HomeController extends BaseController
      *
      * @return \Illuminate\Http\Response
      */
-    public function getIndex()
+    public function getIndex(Request $req)
     {
-      $user = json_encode(['id'=>1,'name'=>'Li']);
-      return view('home.layout',compact('user'));
+        // $all = Article::where('id',8)->update(['title'=>'就是要调试一下jieba分词好用']);
+        // Article::where('id',8)->searchable();
+        // // dump($all);
+        // $search = Article::search($req->key)->get()->toArray();
+        // dump($search);
+        // foreach ($all as $key => $value) {
+        //     dump($value->title);
+        // }
+        dd('xycmf');
+        // $user = json_encode(['id'=>1,'name'=>'Li']);
+        // return view('home.layout',compact('user'));
     }
     // 微信授权页面
     public function wxlogin()

@@ -4,6 +4,10 @@
 		"selected_items":
 		[
 			[
+				"se",
+				"search"
+			],
+			[
 				"befo",
 				"before_request"
 			],
@@ -510,10 +514,6 @@
 			[
 				"th",
 				"thisVal"
-			],
-			[
-				"is",
-				"is_null"
 			]
 		]
 	},
@@ -544,7 +544,7 @@
 	"command_palette":
 	{
 		"height": 392.0,
-		"last_filter": "re",
+		"last_filter": "",
 		"selected_items":
 		[
 			[
@@ -748,14 +748,51 @@
 		"/D/wwwroot/XYCMF",
 		"/D/wwwroot/XYCMF/app",
 		"/D/wwwroot/XYCMF/app/Http",
-		"/D/wwwroot/XYCMF/app/Http/Middleware",
-		"/D/wwwroot/XYCMF/sql"
+		"/D/wwwroot/XYCMF/app/Http/Controllers",
+		"/D/wwwroot/XYCMF/app/Http/Controllers/Home",
+		"/D/wwwroot/XYCMF/app/Models",
+		"/D/wwwroot/XYCMF/app/Models/Common",
+		"/D/wwwroot/XYCMF/storage",
+		"/D/wwwroot/XYCMF/storage/dicts"
 	],
 	"file_history":
 	[
+		"/D/wechat_mini/CarStop-work/app.js",
+		"/D/wechat_mini/CarStop-work/app.json",
+		"/D/wechat_mini/CarStop-work/project.config.json",
+		"/D/wechat_mini/CarStop-work/app.wxss",
+		"/D/wwwroot/XYCMF/app/Http/Controllers/Home/HomeController.php",
+		"/D/wwwroot/XYCMF/config/scout.php",
+		"/D/wwwroot/XYCMF/app/Models/Common/Article.php",
+		"/D/wwwroot/XYCMF/vendor/laravel/scout/src/Searchable.php",
+		"/D/wwwroot/XYCMF/storage/dicts/mydict.txt",
+		"/D/wwwroot/XYCMF/storage/dicts/dis.txt",
+		"/D/wwwroot/XYCMF/composer.json",
+		"/F/soft/FlashFXP4/Cache/~flashfxp/F5F14E5D_edit.tmp/articles_index.index",
+		"/D/wwwroot/XYCMF/app/Providers/AppServiceProvider.php",
+		"/D/wwwroot/XYCMF/.gitignore",
+		"/D/wwwroot/XYCMF/app/Engine/MysqlSearchEngine.php",
+		"/D/wwwroot/XYCMF/vendor/laravel/scout/src/Engines/AlgoliaEngine.php",
+		"/D/wwwroot/XYCMF/vendor/algolia/algoliasearch-client-php/src/AlgoliaSearch/Client.php",
+		"/D/wwwroot/XYCMF/vendor/algolia/algoliasearch-client-php/src/AlgoliaSearch/Index.php",
+		"/D/wwwroot/XYCMF/vendor/laravel/scout/src/Engines/Engine.php",
+		"/D/wwwroot/XYCMF/vendor/laravel/scout/src/Builder.php",
+		"/C/Users/Administrator/AppData/Roaming/Sublime Text 3/Packages/User/SFTP.errors.log",
+		"/D/wwwroot/XYCMF/app/Http/Controllers/Engine/MysqlSearchEngine.php",
+		"/D/wwwroot/XYCMF/app/Services/ComService.php",
+		"/D/wwwroot/XYCMF/resources/views/admin/right.blade.php",
+		"/D/希夷文件/服务器信息/xi-yi(1).txt",
+		"/C/Users/Administrator/Desktop/2018-05-25.ftp",
+		"/D/wwwroot/XYCMF/.env",
+		"/D/wwwroot/XYCMF/config/app.php",
+		"/D/wwwroot/XYCMF/vendor/monolog/monolog/src/Monolog/Handler/RotatingFileHandler.php",
+		"/D/wwwroot/XYCMF/vendor/laravel/framework/src/Illuminate/Log/LogManager.php",
+		"/D/wwwroot/XYCMF/README.md",
+		"/D/wwwroot/XYCMF/vendor/overtrue/wechat/src/Kernel/Log/LogManager.php",
+		"/D/wwwroot/XYCMF/vendor/composer/autoload_static.php",
+		"/D/wwwroot/XYCMF/vendor/composer/autoload_classmap.php",
 		"/D/wwwroot/XYCMF/app/Http/Middleware/TrustProxies.php",
 		"/D/wamp/bin/php/php72/php.ini",
-		"/D/wwwroot/XYCMF/composer.json",
 		"/D/wwwroot/XYCMF/sql/init.sql",
 		"/D/wwwroot/OA-workflow/composer.json",
 		"/D/wwwroot/XYCMF/routes/admin.php",
@@ -764,9 +801,7 @@
 		"/D/wwwroot/XYCMF/app/Http/Controllers/Pay/WxpayController.php",
 		"/D/wwwroot/XYCMF/app/Http/Controllers/Admin/Common/CateController.php",
 		"/D/wwwroot/XYCMF/app/Http/Controllers/Admin/Common/ArtController.php",
-		"/D/wwwroot/XYCMF/vendor/monolog/monolog/src/Monolog/Handler/RotatingFileHandler.php",
 		"/D/wwwroot/XYCMF/vendor/laravel/framework/src/Illuminate/Log/Writer.php",
-		"/D/wwwroot/XYCMF/.env",
 		"/D/wwwroot/XYCMF/config/database.php",
 		"/D/wwwroot/XYCMF/app/Http/Middleware/BetoAdmin.php",
 		"/D/wwwroot/XYCMF/sftp-config.json",
@@ -776,7 +811,6 @@
 		"/D/wwwroot/XYCMF/app/Http/Kernel.php",
 		"/D/wwwroot/account/app/Http/Kernel.php",
 		"/D/wwwroot/XYShop/app/Http/Kernel.php",
-		"/D/wwwroot/XYCMF/config/app.php",
 		"/D/wwwroot/laravel5.5/config/app.php",
 		"/D/wwwroot/XYCMF/vendor/laravel/framework/src/Illuminate/Pipeline/PipelineServiceProvider.php",
 		"/D/wwwroot/XYCMF/vendor/laravel/framework/src/Illuminate/Pipeline/Hub.php",
@@ -850,47 +884,19 @@
 		"/F/wwwroot/laravel-5.5.0/routes/web.php",
 		"/F/wwwroot/XYCMF/composer.json",
 		"/C/Users/Administrator/AppData/Local/Temp/HZ$D.332.150/HZ$D.332.151/laravel-5.5.0/composer.json",
-		"/F/wamp64/bin/apache/apache2.4.17/conf/extra/httpd-vhosts.conf",
-		"/C/Users/Administrator/AppData/Roaming/Sublime Text 3/Packages/User/SFTP.errors.log",
-		"/F/wwwroot/XYShop/public/.htaccess",
-		"/F/wwwroot/XYCMF/.env",
-		"/F/wwwroot/XYShop/resources/views/home_old/layout.blade.php",
-		"/F/wwwroot/XYShop/resources/views/vue/vue.blade.php",
-		"/C/Users/Administrator/Downloads/footer.html",
-		"/C/Users/Administrator/Downloads/index.html",
-		"/F/wwwroot/XYCMF/routes/api.php",
-		"/F/wwwroot/XYCMF/public/statics/admin/js/com.js",
-		"/F/wwwroot/XYCMF/app/Http/Controllers/Common/BaseController.php",
-		"/F/wwwroot/XYShop/app/Http/Controllers/Common/Ueditor.php",
-		"/F/wwwroot/XYShop/app/Http/Controllers/Common/UploaderController.php",
-		"/F/wwwroot/XYCMF/app/Http/Controllers/Common/AjaxCommonController.php",
-		"/F/wwwroot/XYCMF/app/Services/TagService.php",
-		"/F/wwwroot/XYCMF/app/Services/ComService.php",
-		"/F/wwwroot/XYCMF/app/Http/Controllers/Admin/Common/AdController.php",
-		"/F/wwwroot/XYCMF/app/Http/Requests/Common/AdRequest.php",
-		"/F/wwwroot/XYCMF/app/Http/Requests/User/UserRequest.php",
-		"/F/wwwroot/XYCMF/app/Http/Controllers/Admin/Common/ArtController.php",
-		"/F/wwwroot/XYCMF/app/Http/Controllers/Admin/Common/AttrController.php",
-		"/F/wwwroot/XYCMF/app/Http/Controllers/Admin/Common/CateController.php",
-		"/F/wwwroot/XYCMF/app/Http/Controllers/Admin/Common/TypeController.php",
-		"/F/wwwroot/XYCMF/app/Http/Controllers/Admin/AdminController.php",
-		"/F/wwwroot/XYCMF/app/Http/Controllers/Admin/DatabaseController.php",
-		"/F/wwwroot/XYCMF/app/Http/Controllers/Admin/LogController.php",
-		"/F/wwwroot/XYCMF/app/Http/Controllers/Admin/MenuController.php",
-		"/F/wwwroot/XYCMF/app/Http/Controllers/Admin/PublicController.php",
-		"/F/wwwroot/XYCMF/app/Http/Controllers/Admin/RoleController.php",
-		"/F/wwwroot/XYCMF/app/Http/Controllers/Pay/AlipayController.php",
-		"/F/wwwroot/XYCMF/app/Http/Controllers/Pay/WxpayController.php"
+		"/F/wamp64/bin/apache/apache2.4.17/conf/extra/httpd-vhosts.conf"
 	],
 	"find":
 	{
-		"height": 41.0
+		"height": 27.0
 	},
 	"find_in_files":
 	{
-		"height": 90.0,
+		"height": 105.0,
 		"where_history":
 		[
+			"D:\\wwwroot\\XYCMF\\vendor\\laravel\\framework\\src\\Illuminate\\Log",
+			"D:\\wwwroot\\XYCMF\\vendor",
 			"F:\\wwwroot\\XYCMF",
 			"F:\\wwwroot\\XYCMF\\bootstrap",
 			"F:\\wwwroot\\XYCMF\\app",
@@ -997,6 +1003,17 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"Searchable",
+			"TOKENIZER",
+			"title",
+			"Collection",
+			"usesSoftDelete",
+			"$this->algolia",
+			"performSearch",
+			"title",
+			"permission",
+			"$config['permission']",
+			"RotatingFileHandler",
 			"php_",
 			"extension",
 			"extension=",
@@ -1113,18 +1130,7 @@
 			"getTokenFields",
 			"Socialite",
 			"parseAccessToken",
-			"getAccessToken",
-			"getCode",
-			"stateless",
-			"isStateless",
-			"hasInvalidState",
-			"getAccessToken",
-			"getTokenFields",
-			"getAccessToken",
-			"$this->request",
-			"getCode",
-			"EasyWeChat",
-			"\n        "
+			"getAccessToken"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -1251,7 +1257,7 @@
 	],
 	"incremental_find":
 	{
-		"height": 26.0
+		"height": 27.0
 	},
 	"input":
 	{
@@ -1312,7 +1318,7 @@
 	"project": "xycmf.sublime-project",
 	"replace":
 	{
-		"height": 48.0
+		"height": 50.0
 	},
 	"save_all_on_build": false,
 	"select_file":
@@ -1321,6 +1327,18 @@
 		"last_filter": "",
 		"selected_items":
 		[
+			[
+				"Laravel\\Scout\\Engines\\AlgoliaEngine",
+				"vendor\\laravel\\scout\\src\\Engines\\AlgoliaEngine.php"
+			],
+			[
+				"Laravel\\Scout\\Builder",
+				"vendor\\laravel\\scout\\src\\Builder.php"
+			],
+			[
+				"RotatingFileHandler",
+				"vendor\\monolog\\monolog\\src\\Monolog\\Handler\\RotatingFileHandler.php"
+			],
 			[
 				"rotatingfilehandler",
 				"vendor\\monolog\\monolog\\src\\Monolog\\Handler\\RotatingFileHandler.php"
@@ -1820,18 +1838,6 @@
 			[
 				"user/center",
 				"resources\\views\\user\\usercenter.blade.php"
-			],
-			[
-				"wxpay.b",
-				"resources\\views\\default\\wxpay.blade.php"
-			],
-			[
-				"address.bl",
-				"resources\\views\\user\\address.blade.php"
-			],
-			[
-				"default/cart",
-				"resources\\views\\default\\cart.blade.php"
 			]
 		],
 		"width": 0.0

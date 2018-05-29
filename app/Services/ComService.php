@@ -7,6 +7,16 @@ use Storage;
 
 class ComService
 {
+    //uuid生成方法（可以指定前缀）
+    public function create_uuid($prefix = ""){
+        $str = md5(uniqid(mt_rand(), true));
+        $uuid  = substr($str,0,8) . '-';
+        $uuid .= substr($str,8,4) . '-';
+        $uuid .= substr($str,12,4) . '-';
+        $uuid .= substr($str,16,4) . '-';
+        $uuid .= substr($str,20,12);
+        return $prefix . $uuid;
+    }
     // 处理关键字
     public function getKeyword($v)
     {
@@ -23,7 +33,7 @@ class ComService
         // 处理为json
         return $tmp;
     }
-    
+
     // 密码生成及判断
     public function makepwd($pwd = '',$crypt = '')
     {
@@ -59,7 +69,7 @@ class ComService
         }
         return $hash;
     }
-    
+
     // 模板权限判断用，减少输出
     public function ifCan($priv = '')
     {
@@ -96,7 +106,7 @@ class ComService
             $str = '';
             if($level > 1)
             {
-                for ($i=2; $i < $level; $i++) { 
+                for ($i=2; $i < $level; $i++) {
                     $str .= '| ';
                 }
                 $str .= ' |—';
@@ -175,11 +185,11 @@ class ComService
                 // 以主键做为数组索引
                 $temparr[$c[$id]] = $c;
             }
-        } 
+        }
         return $temparr;
     }
     /**
-     * 
+     *
      * 获取父栏目ID列表
      * @param integer $id              栏目ID
      * @param array $arrparentid          父目录ID
@@ -200,7 +210,7 @@ class ComService
         return $arrparentid;
     }
     /**
-     * 
+     *
      * 获取子栏目ID列表
      * @param $id 栏目ID
      */
@@ -373,7 +383,7 @@ class ComService
         curl_setopt($ch, CURLOPT_MAXREDIRS, 3);
         curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);// 对认证证书来源的检查
         curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);// 从证书中检查SSL加密算
-        
+
         //3)设置提交方式
         switch($type){
             case "GET":
@@ -389,14 +399,14 @@ class ComService
                 curl_setopt($ch,CURLOPT_CUSTOMREQUEST,"DELETE");
                 break;
         }
-        
+
         //2)设备请求体
         if (count($body)>0 && $type == 'POST') {
             $body = $json ? json_encode($body) : $body;
             // dd($body);
             curl_setopt($ch, CURLOPT_POSTFIELDS, $body);//全部数据使用HTTP协议中的"POST"操作来发送。
         }
-        
+
         //3.抓取URL并把它传递给浏览器
         $res=curl_exec($ch);
         $result=json_decode($res,true);
@@ -406,6 +416,6 @@ class ComService
             return $res;
         else
             return $result;
-    
+
     }
 }

@@ -1,5 +1,13 @@
 <?php
-
+/*
+ * @package [App\Http\Controllers\Api]
+ * @author [李志刚]
+ * @createdate  [2018-05-02]
+ * @copyright [2018-2020 衡水希夷信息技术工作室]
+ * @version [1.0.0]
+ * @directions 用户 API
+ * 
+ */
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Api\BaseController;

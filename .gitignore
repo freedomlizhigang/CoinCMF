@@ -3,6 +3,7 @@
 /public/storage
 /public/upload
 /storage/*.key
+/storage/*.index
 /vendor
 /.idea
 /.vagrant
