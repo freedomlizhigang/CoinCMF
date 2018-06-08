@@ -6,7 +6,7 @@
  * @copyright [2018-2020 衡水希夷信息技术工作室]
  * @version [1.0.0]
  * @directions 用户 API
- * 
+ *
  */
 namespace App\Http\Controllers\Api;
 
@@ -55,7 +55,7 @@ class UserController extends BaseController
 		    	// 返回当前user信息
 		    	$user = User::findOrFail($user->id);
 		    	return $this->resJson(1,'登录成功！',$user);
-		    } catch (\Exception $e) {
+		    } catch (\Throwable $e) {
 		    	return $this->resJson(0,$e->getMessage());
 		    }
 	    }
@@ -100,7 +100,7 @@ class UserController extends BaseController
 	    	User::where('id',$user->id)->update(['token'=>$token]);
 	    	$user->token = $token;
 	    	return $this->resJson(1,'注册成功!',$user);
-    	} catch (\Exception $e) {
+    	} catch (\Throwable $e) {
     		return $this->resJson(0,$e->getMessage());
     	}
     }

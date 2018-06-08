@@ -42,7 +42,7 @@ class WxController extends Controller
                         case 'CLICK':
                             $msg = $this->menu($message->EventKey);
                             break;
-                        
+
                         default:
                             $msg = '您发送了一个事件消息！';
                             break;
@@ -140,7 +140,7 @@ class WxController extends Controller
                             ]);
                         }
                         break;
-                    
+
                     // 默认文本回复
                     default:
                         $res = $info->content;
@@ -148,7 +148,7 @@ class WxController extends Controller
                 }
                 return $res;
             }
-        } catch (\Exception $e) {
+        } catch (\Throwable $e) {
             Storage::disk('log')->prepend('wx.log',json_encode($e->getMessage()).date('Y-m-d H:i:s'));
             return '服务器有点小累，休息一下再来吧~';
         }
@@ -180,7 +180,7 @@ class WxController extends Controller
                 $transfer = '客服们都下班了，请直接按关键字查询，会有自动回复哦~~';
             }
             return $transfer;
-        } catch (\Exception $e) {
+        } catch (\Throwable $e) {
             Storage::disk('log')->prepend('wx.log',json_encode($e->getLine().$e->getMessage()).date('Y-m-d H:i:s'));
             return '客服有点忙，一会再聊吧~';
         }

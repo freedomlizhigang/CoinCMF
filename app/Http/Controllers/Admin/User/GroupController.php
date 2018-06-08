@@ -61,7 +61,7 @@ class GroupController extends BaseController
                 DB::commit();
                 $this->groupCache();
                 return back()->with('message', '删除用户组成功！');
-            } catch (Exception $e) {
+            } catch (\Throwable $e) {
                 // 出错回滚
                 DB::rollBack();
                 return back()->with('message','删除失败，请稍后再试！');

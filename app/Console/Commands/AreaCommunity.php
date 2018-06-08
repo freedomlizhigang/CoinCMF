@@ -77,7 +77,7 @@ class AreaCommunity extends Command
                 }
                 Community::insert($tmp);
                 $tmp = [];
-            } catch (\Exception $e) {
+            } catch (\Throwable $e) {
                 continue;
             }
         }

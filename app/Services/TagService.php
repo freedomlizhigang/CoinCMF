@@ -38,7 +38,7 @@ class TagService
                 $parentcate = Cate::where('id',$cate->parentid)->first();
                 echo "<li><a href='/cate/".$parentcate->url."'>".$parentcate->name."</a></li><li class='active'><a href='/cate/".$cate->url."'>".$cate->name."</a></li>";
             }
-        } catch (\Exception $e) {
+        } catch (\Throwable $e) {
             echo '';
         }
     }

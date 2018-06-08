@@ -17,7 +17,7 @@ class AjaxCommonController extends Controller
 		try {
 			$res = GoodCate::where('parentid',$req->pid)->select('id','name')->orderBy('sort','asc')->orderBy('id','asc')->get();
 			return $this->ajaxReturn('1',$res);
-		} catch (\Exception $e) {
+		} catch (\Throwable $e) {
 			return $this->ajaxReturn('0',$e->getMessage());
 		}
 	}
@@ -28,7 +28,7 @@ class AjaxCommonController extends Controller
 		try {
 			$res = Brand::where('goodcate_parentid',$req->pid)->where('goodcate_id',$req->cid)->select('id','name')->orderBy('id','asc')->get();
 			return $this->ajaxReturn('1',$res);
-		} catch (\Exception $e) {
+		} catch (\Throwable $e) {
 			return $this->ajaxReturn('0',$e->getMessage());
 		}
 	}
@@ -39,7 +39,7 @@ class AjaxCommonController extends Controller
     	try {
 			$res = Area::where('parentid',$req->pid)->where('is_show',1)->select('id','areaname')->orderBy('sort','asc')->orderBy('id','asc')->get();
 			return $this->ajaxReturn('1',$res);
-		} catch (\Exception $e) {
+		} catch (\Throwable $e) {
 			return $this->ajaxReturn('0',$e->getMessage());
 		}
     }
@@ -50,7 +50,7 @@ class AjaxCommonController extends Controller
     	try {
 			$res = Community::where('areaid1',$req->areaid1)->where('areaid2',$req->areaid2)->where('areaid3',$req->areaid3)->where('is_show',1)->select('id','areaname')->orderBy('sort','asc')->orderBy('id','asc')->get();
 			return $this->ajaxReturn('1',$res);
-		} catch (\Exception $e) {
+		} catch (\Throwable $e) {
 			return $this->ajaxReturn('0',$e->getMessage());
 		}
     }

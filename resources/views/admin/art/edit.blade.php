@@ -5,7 +5,7 @@
 	{{ csrf_field() }}
 	<!-- 提交返回用的url参数 -->
 	<input type="hidden" name="ref" value="{!! $ref !!}">
-	
+
 	<table class="table table-striped">
 	    <tr>
 	        <td class="td_left">选择栏目：</td>
@@ -25,7 +25,7 @@
 	            <p class="input-info"><span class="color_red">*</span>不超过255字符</p>
 	        </td>
 	    </tr>
-	    
+
 	    <tr>
 	        <td class="td_left">描述：</td>
 	        <td>
@@ -90,6 +90,6 @@
 </form>
 
 <script>
-	$('#catid option[value=' + {{ $info->catid }} + ']').prop('selected','selected');
+	$('#catid option[value="{{ $info->catid }}"]').prop('selected','selected');
 </script>
 @endsection

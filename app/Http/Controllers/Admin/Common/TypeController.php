@@ -41,7 +41,7 @@ class TypeController extends BaseController
             // 后台用户组权限
             app('com')->updateCache(new Type,'typeCache');
             return $this->ajaxReturn(1,'添加成功！');
-        } catch (Exception $e) {
+        } catch (\Throwable $e) {
             return $this->ajaxReturn(0,'添加失败，请稍后再试！');
         }
     }
@@ -67,7 +67,7 @@ class TypeController extends BaseController
             // 更新缓存
             app('com')->updateCache(new Type,'typeCache');
             return $this->ajaxReturn(1,'修改成功！');
-        } catch (Exception $e) {
+        } catch (\Throwable $e) {
             return $this->ajaxReturn(0,'修改失败，请稍后再试！');
         }
     }
@@ -80,7 +80,7 @@ class TypeController extends BaseController
         try {
             Type::destroy($childs);
             $message = '删除成功！';
-        } catch (Exception $e) {
+        } catch (\Throwable $e) {
             return back()->with('message','删除失败，请稍后再试！');
         }
         return back()->with('message', $message);

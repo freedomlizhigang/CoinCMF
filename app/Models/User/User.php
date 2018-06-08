@@ -38,11 +38,11 @@ class User extends Model
         try {
             $groups = collect(cache('group'))->sortByDesc('points');
             $groupname = $groups->where('points','<=',$points)->first()['name'];
-        } catch (\Exception $e) {
+        } catch (\Throwable $e) {
             $groupname = '普通用户';
         }
         return $groupname;
     }
 
-   
+
 }

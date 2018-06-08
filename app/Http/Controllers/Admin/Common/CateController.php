@@ -85,7 +85,7 @@ class CateController extends BaseController
             // 没出错，提交事务
             DB::commit();
             return $this->ajaxReturn(1,'添加成功',url('/console/cate/index'));
-        } catch (Exception $e) {
+        } catch (\Throwable $e) {
             // 出错回滚
             DB::rollBack();
             return $this->ajaxReturn(0,'添加失败，请稍后再试！');
@@ -119,7 +119,7 @@ class CateController extends BaseController
             // 没出错，提交事务
             DB::commit();
             return $this->ajaxReturn(1,'修改成功！',url('/console/cate/index'));
-        } catch (Exception $e) {
+        } catch (\Throwable $e) {
             // 出错回滚
             DB::rollBack();
             return $this->ajaxReturn(0,'修改失败，请稍后再试！');
@@ -145,7 +145,7 @@ class CateController extends BaseController
                 $message = '删除成功！';
                 // 没出错，提交事务
                 DB::commit();
-            } catch (Exception $e) {
+            } catch (\Throwable $e) {
                 // 出错回滚
                 DB::rollBack();
                 return back()->with('message','删除失败，请稍后再试！');

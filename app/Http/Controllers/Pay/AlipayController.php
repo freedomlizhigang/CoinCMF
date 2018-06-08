@@ -52,7 +52,7 @@ class AlipayController extends BaseController
                 Storage::prepend('alipay.log',json_encode($resData));
                 die('fail'); //The notify response
             }
-        } catch (Exception $e) {
+        } catch (\Throwable $e) {
             /**
              * Payment is not successful
              */

@@ -45,7 +45,7 @@ class WxpayController extends BaseController
                         </xml>
                         ";
             return $tpl;
-        } catch (\Exception $e) {
+        } catch (\Throwable $e) {
             Storage::prepend('wxpay.log',json_encode($e->getMessage()).date('Y-m-d H:i:s'));
         }
     }

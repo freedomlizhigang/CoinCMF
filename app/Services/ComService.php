@@ -350,7 +350,7 @@ class ComService
                 $return['url'] = $url;
             }
             return json_encode($return);
-        } catch (\Exception $e) {
+        } catch (\Throwable $e) {
             Storage::disk('log')->append('upload.log',json_encode($e).date('Y-m-d H:i:s'));
         }
     }

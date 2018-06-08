@@ -548,6 +548,14 @@
 		"selected_items":
 		[
 			[
+				"close",
+				"File: Close All"
+			],
+			[
+				"save",
+				"File: Save All"
+			],
+			[
 				"re",
 				"File: Rename"
 			],
@@ -556,15 +564,7 @@
 				"File: Rename"
 			],
 			[
-				"close",
-				"File: Close All"
-			],
-			[
 				"sav",
-				"File: Save All"
-			],
-			[
-				"save",
 				"File: Save All"
 			],
 			[
@@ -749,7 +749,6 @@
 		"/D/wwwroot/XYCMF/app",
 		"/D/wwwroot/XYCMF/app/Http",
 		"/D/wwwroot/XYCMF/app/Http/Controllers",
-		"/D/wwwroot/XYCMF/app/Http/Controllers/Home",
 		"/D/wwwroot/XYCMF/app/Models",
 		"/D/wwwroot/XYCMF/app/Models/Common",
 		"/D/wwwroot/XYCMF/storage",
@@ -757,6 +756,28 @@
 	],
 	"file_history":
 	[
+		"/D/wwwroot/XYCMF/app/Console/Commands/AreaCommunity.php",
+		"/D/wwwroot/XYCMF/app/Customize/Sign.php",
+		"/D/wwwroot/XYCMF/app/Http/Controllers/Api/UserController.php",
+		"/D/wwwroot/XYCMF/app/Http/Controllers/Common/AjaxCommonController.php",
+		"/D/wwwroot/XYCMF/app/Http/Controllers/Pay/WxpayController.php",
+		"/D/wwwroot/XYCMF/app/Http/Controllers/Wx/WxController.php",
+		"/D/wwwroot/XYCMF/app/Http/Middleware/Jwt.php",
+		"/D/wwwroot/XYCMF/app/Models/User/User.php",
+		"/D/wwwroot/XYCMF/app/Services/ComService.php",
+		"/D/wwwroot/XYCMF/app/Services/TagService.php",
+		"/D/wwwroot/XYCMF/app/Exceptions/Handler.php",
+		"/D/wwwroot/XYCMF/app/Http/Controllers/Admin/AdminController.php",
+		"/D/wwwroot/XYCMF/app/Http/Controllers/Admin/Common/AdposController.php",
+		"/D/wwwroot/XYCMF/app/Http/Controllers/Admin/Common/AreaController.php",
+		"/D/wwwroot/XYCMF/app/Http/Controllers/Admin/Common/ArtController.php",
+		"/D/wwwroot/XYCMF/app/Http/Controllers/Admin/Common/CateController.php",
+		"/D/wwwroot/XYCMF/app/Http/Controllers/Admin/Common/CommunityController.php",
+		"/D/wwwroot/XYCMF/app/Http/Controllers/Admin/Common/TypeController.php",
+		"/D/wwwroot/XYCMF/app/Http/Controllers/Admin/RoleController.php",
+		"/D/wwwroot/XYCMF/app/Http/Controllers/Admin/SectionController.php",
+		"/D/wwwroot/XYCMF/app/Http/Controllers/Admin/User/GroupController.php",
+		"/D/wwwroot/XYCMF/app/Http/Controllers/Pay/AlipayController.php",
 		"/D/wechat_mini/CarStop-work/app.js",
 		"/D/wechat_mini/CarStop-work/app.json",
 		"/D/wechat_mini/CarStop-work/project.config.json",
@@ -779,7 +800,6 @@
 		"/D/wwwroot/XYCMF/vendor/laravel/scout/src/Builder.php",
 		"/C/Users/Administrator/AppData/Roaming/Sublime Text 3/Packages/User/SFTP.errors.log",
 		"/D/wwwroot/XYCMF/app/Http/Controllers/Engine/MysqlSearchEngine.php",
-		"/D/wwwroot/XYCMF/app/Services/ComService.php",
 		"/D/wwwroot/XYCMF/resources/views/admin/right.blade.php",
 		"/D/希夷文件/服务器信息/xi-yi(1).txt",
 		"/C/Users/Administrator/Desktop/2018-05-25.ftp",
@@ -797,10 +817,6 @@
 		"/D/wwwroot/OA-workflow/composer.json",
 		"/D/wwwroot/XYCMF/routes/admin.php",
 		"/D/wwwroot/XYCMF/routes/webcommon.php",
-		"/D/wwwroot/XYCMF/app/Http/Controllers/Pay/AlipayController.php",
-		"/D/wwwroot/XYCMF/app/Http/Controllers/Pay/WxpayController.php",
-		"/D/wwwroot/XYCMF/app/Http/Controllers/Admin/Common/CateController.php",
-		"/D/wwwroot/XYCMF/app/Http/Controllers/Admin/Common/ArtController.php",
 		"/D/wwwroot/XYCMF/vendor/laravel/framework/src/Illuminate/Log/Writer.php",
 		"/D/wwwroot/XYCMF/config/database.php",
 		"/D/wwwroot/XYCMF/app/Http/Middleware/BetoAdmin.php",
@@ -827,7 +843,6 @@
 		"/D/wwwroot/XYCMF/xycmf.sublime-project",
 		"/D/wwwroot/XYCMF/app/Console/Kernel.php",
 		"/D/wwwroot/XYCMF/resources/views/admin/index.blade.php",
-		"/D/wwwroot/XYCMF/app/Http/Controllers/Wx/WxController.php",
 		"/D/wwwroot/XYCMF/routes/api.php",
 		"/D/wwwroot/XYCMF/config/debugbar.php",
 		"/D/wwwroot/XYCMF/config/wechat.php",
@@ -868,23 +883,7 @@
 		"/F/wwwroot/laravel-5.5.0/package.json",
 		"/F/wwwroot/XYShop/app/Http/Middleware/EncryptCookies.php",
 		"/F/wwwroot/XYShop/app/Http/Middleware/RedirectIfAuthenticated.php",
-		"/F/wwwroot/XYCMF/app/Http/Middleware/RedirectIfAuthenticated.php",
-		"/F/wwwroot/XYCMF/app/Http/Middleware/VerifyCsrfToken.php",
-		"/F/wwwroot/XYShop/app/Http/Middleware/VerifyCsrfToken.php",
-		"/F/wwwroot/XYCMF/app/Http/Kernel.php",
-		"/F/wwwroot/XYShop/app/Http/Kernel.php",
-		"/F/wwwroot/XYShop/app/Providers/AuthServiceProvider.php",
-		"/F/wwwroot/XYShop/app/Providers/AppServiceProvider.php",
-		"/F/wwwroot/XYCMF/app/Providers/RouteServiceProvider.php",
-		"/F/wwwroot/XYCMF/routes/web.php",
-		"/F/wwwroot/XYCMF/routes/home.php",
-		"/F/wwwroot/XYCMF/sftp-config.json",
-		"/F/wwwroot/XYCMF/app/Http/Controllers/Home/HomeController.php",
-		"/F/wwwroot/XYCMF/app/Providers/ComServiceProvider.php",
-		"/F/wwwroot/laravel-5.5.0/routes/web.php",
-		"/F/wwwroot/XYCMF/composer.json",
-		"/C/Users/Administrator/AppData/Local/Temp/HZ$D.332.150/HZ$D.332.151/laravel-5.5.0/composer.json",
-		"/F/wamp64/bin/apache/apache2.4.17/conf/extra/httpd-vhosts.conf"
+		"/F/wwwroot/XYCMF/app/Http/Middleware/RedirectIfAuthenticated.php"
 	],
 	"find":
 	{
@@ -895,6 +894,7 @@
 		"height": 105.0,
 		"where_history":
 		[
+			"D:\\wwwroot\\XYCMF\\app",
 			"D:\\wwwroot\\XYCMF\\vendor\\laravel\\framework\\src\\Illuminate\\Log",
 			"D:\\wwwroot\\XYCMF\\vendor",
 			"F:\\wwwroot\\XYCMF",
@@ -1003,6 +1003,9 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"Exception",
+			"(\\Exception",
+			"(Exception",
 			"Searchable",
 			"TOKENIZER",
 			"title",
@@ -1127,10 +1130,7 @@
 			"getCode",
 			"getAccessToken",
 			"parseAccessToken",
-			"getTokenFields",
-			"Socialite",
-			"parseAccessToken",
-			"getAccessToken"
+			"getTokenFields"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -1138,6 +1138,7 @@
 		"regex": false,
 		"replace_history":
 		[
+			"(\\Throwable",
 			"app('com')",
 			"'delflag'",
 			"session('console')",
@@ -1261,7 +1262,7 @@
 	},
 	"input":
 	{
-		"height": 39.0
+		"height": 40.0
 	},
 	"layout":
 	{
