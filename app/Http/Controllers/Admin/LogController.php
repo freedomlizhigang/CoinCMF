@@ -1,5 +1,13 @@
 <?php
-
+/*
+ * @package [App\Http\Controllers\Admin]
+ * @author [李志刚]
+ * @createdate  [2018-06-26]
+ * @copyright [2018-2020 衡水希夷信息技术工作室]
+ * @version [1.0.0]
+ * @directions 日志记录
+ *
+ */
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
@@ -19,18 +27,18 @@ class LogController extends Controller
     	if (session('console')->id === 1) {
     		$admin_id = $res->input('admin_id',0);
     		if ($admin_id != 0) {
-    			$list = Log::where('admin_id',$admin_id)->orderBy('id','desc')->paginate(15);
+    			$list = Log::where('admin_id',$admin_id)->orderBy('id','desc')->paginate(10);
     		}
     		else
     		{
-    			$list = Log::orderBy('id','desc')->paginate(15);
+    			$list = Log::orderBy('id','desc')->paginate(10);
     		}
     	}
     	else
     	{
-    		$list = Log::where('admin_id',Auth::guard('admin')->user()->id)->orderBy('id','desc')->paginate(15);
+    		$list = Log::where('admin_id',Auth::guard('admin')->user()->id)->orderBy('id','desc')->paginate(10);
     	}
-    	return view('admin.log.index',compact('title','list','admins'));
+    	return view('admin.console.log.index',compact('title','list','admins'));
     }
     // 清除7天前日志
     public function getDel()

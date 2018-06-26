@@ -1,14 +1,22 @@
 <?php
-
+/*
+ * @package [App\Http\Controllers\Admin\Common]
+ * @author [李志刚]
+ * @createdate  [2018-06-26]
+ * @copyright [2018-2020 衡水希夷信息技术工作室]
+ * @version [1.0.0]
+ * @directions 全国社区信息
+ *
+ */
 namespace App\Http\Controllers\Admin\Common;
 
-use App\Http\Controllers\Admin\BaseController;
+use App\Http\Controllers\Controller;
 use App\Http\Requests\Common\CommunityRequest;
 use App\Models\Common\Community;
 use DB;
 use Illuminate\Http\Request;
 
-class CommunityController extends BaseController
+class CommunityController extends Controller
 {
     /**
      * 社区列表
@@ -23,8 +31,8 @@ class CommunityController extends BaseController
             if ($q != '') {
                 $r->where('name','like','%$q%');
             }
-        })->orderBy('id','desc')->paginate(15);
-    	return view('admin.community.index',compact('title','list','q'));
+        })->orderBy('id','desc')->paginate(10);
+    	return view('admin.console.community.index',compact('title','list','q'));
     }
     /**
      * 添加社区
@@ -34,22 +42,22 @@ class CommunityController extends BaseController
     public function getAdd()
     {
     	$title = '添加社区';
-    	return view('admin.community.add',compact('title'));
+    	return view('admin.console.community.add',compact('title'));
     }
-    public function postAdd(CommunityRequest $res)
+    public function postAdd(CommunityRequest $req)
     {
         // 开启事务
         DB::beginTransaction();
         try {
-            $data = $res->input('data');
+            $data = $req->input('data');
             $resId = Community::create($data);
             // 没出错，提交事务
             DB::commit();
-            return $this->ajaxReturn(1, '添加成功！',url('console/community/index'));
+            return $this->adminJson(1, '添加成功！',url('console/community/index'));
         } catch (\Throwable $e) {
             // 出错回滚
             DB::rollBack();
-            return $this->ajaxReturn(0, '添加失败，请稍后再试！');
+            return $this->adminJson(0, '添加失败，请稍后再试！');
         }
     }
     /**
@@ -61,22 +69,22 @@ class CommunityController extends BaseController
     {
         $title = '修改社区';
         $info = Community::findOrFail($id);
-        return view('admin.community.edit',compact('title','info'));
+        return view('admin.console.community.edit',compact('title','info'));
     }
-    public function postEdit(CommunityRequest $res,$id = '')
+    public function postEdit(CommunityRequest $req,$id = '')
     {
         // 开启事务
         DB::beginTransaction();
         try {
-            $data = $res->input('data');
+            $data = $req->input('data');
             Community::where('id',$id)->update($data);
             // 没出错，提交事务
             DB::commit();
-            return $this->ajaxReturn(1, '修改成功！');
+            return $this->adminJson(1, '修改成功！');
         } catch (\Throwable $e) {
             // 出错回滚
             DB::rollBack();
-            return $this->ajaxReturn(1, '修改失败，请稍后再试！');
+            return $this->adminJson(1, '修改失败，请稍后再试！');
         }
     }
     public function getDel($id)

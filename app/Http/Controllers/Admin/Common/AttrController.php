@@ -1,5 +1,13 @@
 <?php
-
+/*
+ * @package [App\Http\Controllers\Admin\Common]
+ * @author [李志刚]
+ * @createdate  [2018-06-26]
+ * @copyright [2018-2020 衡水希夷信息技术工作室]
+ * @version [1.0.0]
+ * @directions 附件管理
+ *
+ */
 namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
@@ -9,10 +17,6 @@ use Storage;
 
 class AttrController extends Controller
 {
-    public function __construct()
-    {
-    	$this->attr = new Attr;
-    }
     public function getIndex(Request $res)
     {
         $title = '附件列表';
@@ -32,8 +36,8 @@ class AttrController extends Controller
                 if ($endtime != '') {
                     $q->where('created_at','<',$endtime);
                 }
-            })->paginate(15);
-        return view('admin.attr.index',compact('title','list','key','starttime','endtime'));
+            })->paginate(10);
+        return view('admin.console.attr.index',compact('title','list','key','starttime','endtime'));
     }
     // 删除文件
     public function getDelfile(Request $res,$id = '')
@@ -47,13 +51,5 @@ class AttrController extends Controller
             // Storage::delete($url);
         }
         return back()->with('message', '删除附件成功！');
-    }
-    /**
-     * 文件上传
-     * @param  Request $res [取文件用，资源]
-     */
-    public function postUploadimg(Request $res)
-    {
-        return app('com')->upload($res,$ext = array('jpg','jpeg','gif','png','doc','docx','xls','xlsx','ppt','pptx','pdf','txt','rar','zip','swf','apk','mp4'),$allSize = 100);
     }
 }

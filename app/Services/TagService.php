@@ -1,4 +1,13 @@
 <?php
+/*
+ * @package [App\Services]
+ * @author [李志刚]
+ * @createdate  [2018-06-26]
+ * @copyright [2018-2020 衡水希夷信息技术工作室]
+ * @version [1.0.0]
+ * @directions 模板取数据用的一些标签方法
+ *
+ */
 namespace App\Services;
 
 use App\Models\Common\Article;

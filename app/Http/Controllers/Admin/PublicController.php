@@ -1,7 +1,16 @@
 <?php
-
+/*
+ * @package [App\Http\Controllers\Admin]
+ * @author [李志刚]
+ * @createdate  [2018-06-26]
+ * @copyright [2018-2020 衡水希夷信息技术工作室]
+ * @version [1.0.0]
+ * @directions 管理后台用户登录
+ *
+ */
 namespace App\Http\Controllers\Admin;
 
+use App\Customize\Func;
 use App\Http\Controllers\Controller;
 use App\Models\Console\Admin;
 use App\Models\Console\Priv;
@@ -13,7 +22,7 @@ class PublicController extends Controller
     public function getLogin()
     {
         if(\Session::has('console')){return redirect('/console/index/index');}
-        return view('admin.login');
+        return view('admin.console.login');
     }
     /**
      * 登录提交数据验证功能，成功后跳转到后台首页
@@ -31,7 +40,7 @@ class PublicController extends Controller
         }
         else
         {
-            if ($user->password != app('com')->makepwd($pwd,$user->crypt)) {
+            if ($user->password != Func::makepwd($pwd,$user->crypt)) {
                 return back()->with('message','密码不正确！');
             }
             // 查出所有用户权限并存储下来

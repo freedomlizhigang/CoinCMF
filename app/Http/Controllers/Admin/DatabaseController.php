@@ -1,11 +1,19 @@
 <?php
-
+/*
+ * @package [App\Http\Controllers\Admin]
+ * @author [李志刚]
+ * @createdate  [2018-06-26]
+ * @copyright [2018-2020 衡水希夷信息技术工作室]
+ * @version [1.0.0]
+ * @directions 数据库备份，取自V9，一般也用不着~服务器自动备份
+ *
+ */
 namespace App\Http\Controllers\Admin;
 
-use Illuminate\Http\Request;
+use App\Customize\Func;
 use App\Http\Controllers\Controller;
 use DB;
-use App;
+use Illuminate\Http\Request;
 
 class DatabaseController extends Controller
 {
@@ -26,7 +34,7 @@ class DatabaseController extends Controller
 		$title = '备份数据表';
 		// 先把所有表列出来
 		$alltables = DB::select("SHOW TABLE STATUS FROM `".$this->dataname."`");
-		return view('admin.database.export',compact('title','alltables'));
+		return view('admin.console.database.export',compact('title','alltables'));
 	}
 	public function postExport(Request $req)
 	{
@@ -74,7 +82,7 @@ class DatabaseController extends Controller
 			}
 		}
 		$infos = collect($infos)->sortByDesc('maketime');
-		return view('admin.database.import',compact('title','infos'));
+		return view('admin.console.database.import',compact('title','infos'));
 	}
 	// 删除备份的文件
 	public function postDelfile(Request $req)
@@ -100,21 +108,21 @@ class DatabaseController extends Controller
 	 * @param unknown_type $sizelimit 卷大小
 	 * @param unknown_type $fileid 卷标
 	 * @param unknown_type $random 随机字段
-	 * @param unknown_type $tableid 
-	 * @param unknown_type $startfrom 
+	 * @param unknown_type $tableid
+	 * @param unknown_type $startfrom
 	 */
 	private function export_database($tables,$fileid,$random,$tableid,$startfrom) {
 		$limitsize = 104857600; // 100M分卷大小，104857600
 
 		$sqlcharset = 'utf8';
 
-		$fileid = ($fileid != '') ? $fileid : 1;		
+		$fileid = ($fileid != '') ? $fileid : 1;
 		if($fileid==1 && $tables) {
-			$random = app('com')->random(20, 'abcdefghigklmzopqrstuvwxyz0123456789');
+			$random = Func::random(20, 'abcdefghigklmzopqrstuvwxyz0123456789');
 		}
 
 		DB::select("SET SQL_MODE=''");
-		
+
 		$tabledump = '';
 		$tableid = ($tableid!= '') ? $tableid - 1 : 0;
 		$startfrom = ($startfrom != '') ? intval($startfrom) : 0;
@@ -127,7 +135,7 @@ class DatabaseController extends Controller
 				}
 				$createtable = DB::select("SHOW CREATE TABLE `$tables[$i]` ");
 				$tabledump .= ((array) $createtable[0])['Create Table'].";\n\n";
-				
+
 				$tabledump = preg_replace("/(DEFAULT)*\s*CHARSET=[a-zA-Z0-9]+/", "DEFAULT CHARSET=".$sqlcharset, $tabledump);
 
 				if($tables[$i]==$this->db_pre.'sessions') {
@@ -216,7 +224,7 @@ class DatabaseController extends Controller
 		}
 		return true;
 	}
-	
+
 
  	private function sql_split($sql) {
 		$sql = str_replace("\r", "\n", $sql);
@@ -235,5 +243,5 @@ class DatabaseController extends Controller
 			$num++;
 		}
 		return($ret);
-	}	
+	}
 }

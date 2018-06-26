@@ -749,13 +749,23 @@
 		"/D/wwwroot/XYCMF/app",
 		"/D/wwwroot/XYCMF/app/Http",
 		"/D/wwwroot/XYCMF/app/Http/Controllers",
+		"/D/wwwroot/XYCMF/app/Http/Controllers/Admin",
 		"/D/wwwroot/XYCMF/app/Models",
-		"/D/wwwroot/XYCMF/app/Models/Common",
+		"/D/wwwroot/XYCMF/app/Services",
+		"/D/wwwroot/XYCMF/public",
+		"/D/wwwroot/XYCMF/public/statics",
+		"/D/wwwroot/XYCMF/public/statics/admin",
+		"/D/wwwroot/XYCMF/public/statics/admin/css",
+		"/D/wwwroot/XYCMF/resources",
 		"/D/wwwroot/XYCMF/storage",
 		"/D/wwwroot/XYCMF/storage/dicts"
 	],
 	"file_history":
 	[
+		"/D/wwwroot/XYCMF/app/Http/Controllers/Admin/AdminController.php",
+		"/D/wwwroot/XYCMF/public/statics/admin/css/reset.scss",
+		"/D/wwwroot/XYCMF/public/statics/admin/css/reset.css",
+		"/D/wwwroot/XYCMF/app/Services/ComService.php",
 		"/D/wwwroot/XYCMF/app/Console/Commands/AreaCommunity.php",
 		"/D/wwwroot/XYCMF/app/Customize/Sign.php",
 		"/D/wwwroot/XYCMF/app/Http/Controllers/Api/UserController.php",
@@ -764,10 +774,8 @@
 		"/D/wwwroot/XYCMF/app/Http/Controllers/Wx/WxController.php",
 		"/D/wwwroot/XYCMF/app/Http/Middleware/Jwt.php",
 		"/D/wwwroot/XYCMF/app/Models/User/User.php",
-		"/D/wwwroot/XYCMF/app/Services/ComService.php",
 		"/D/wwwroot/XYCMF/app/Services/TagService.php",
 		"/D/wwwroot/XYCMF/app/Exceptions/Handler.php",
-		"/D/wwwroot/XYCMF/app/Http/Controllers/Admin/AdminController.php",
 		"/D/wwwroot/XYCMF/app/Http/Controllers/Admin/Common/AdposController.php",
 		"/D/wwwroot/XYCMF/app/Http/Controllers/Admin/Common/AreaController.php",
 		"/D/wwwroot/XYCMF/app/Http/Controllers/Admin/Common/ArtController.php",
@@ -881,9 +889,7 @@
 		"/F/wwwroot/laravel-5.5.0/webpack.mix.js",
 		"/F/wwwroot/XYCMF/app/Console/Kernel.php",
 		"/F/wwwroot/laravel-5.5.0/package.json",
-		"/F/wwwroot/XYShop/app/Http/Middleware/EncryptCookies.php",
-		"/F/wwwroot/XYShop/app/Http/Middleware/RedirectIfAuthenticated.php",
-		"/F/wwwroot/XYCMF/app/Http/Middleware/RedirectIfAuthenticated.php"
+		"/F/wwwroot/XYShop/app/Http/Middleware/EncryptCookies.php"
 	],
 	"find":
 	{

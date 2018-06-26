@@ -1,5 +1,13 @@
 <?php
-
+/*
+ * @package [App\Http\Requests\User]
+ * @author [李志刚]
+ * @createdate  [2018-06-26]
+ * @copyright [2018-2020 衡水希夷信息技术工作室]
+ * @version [1.0.0]
+ * @directions 会员请求验证
+ *
+ */
 namespace App\Http\Requests\User;
 
 use Illuminate\Foundation\Http\FormRequest;
@@ -31,7 +39,7 @@ class UserRequest extends FormRequest
             'data.email' => 'sometimes|required|email',
         ];
     }
-    
+
     public function attributes()
     {
         return [

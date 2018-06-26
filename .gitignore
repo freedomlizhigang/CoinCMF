@@ -2,8 +2,8 @@
 /public/hot
 /public/storage
 /public/upload
-/storage/*.key
-/storage/*.index
+/storage/
+/sql
 /vendor
 /.idea
 /.vagrant

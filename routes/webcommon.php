@@ -15,14 +15,13 @@
 Route::group(['namespace' => 'Home'],function(){
     // 首页
     Route::get('/','HomeController@getIndex');
-    Route::get('/wxlogin','HomeController@wxlogin');
-    Route::get('/{all}','HomeController@getIndex')->where('all','.*');
+    // 微信登陆
+    Route::get('/login','LoginController@getLogin');
+    // 微信登陆的回调
+    Route::get('/wxlogin','LoginController@getWxLogin');
+    // 所有没有的放这里
+    Route::get('/{all}','HomeController@getIndex');
 });
-
-Route::group(['prefix'=>'wx','namespace' => 'Wx'],function(){
-    Route::any('/index','WxController@index');
-});
-
 
 // 支付回调
 Route::group([],function(){

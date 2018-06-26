@@ -1,5 +1,13 @@
 <?php
-
+/*
+ * @package [App\Customize]
+ * @author [李志刚]
+ * @createdate  [2018-06-26]
+ * @copyright [2018-2020 衡水希夷信息技术工作室]
+ * @version [1.0.0]
+ * @directions 签名验证方式
+ *
+ */
 namespace App\Customize;
 
 class Sign

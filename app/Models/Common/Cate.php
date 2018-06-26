@@ -1,5 +1,13 @@
 <?php
-
+/*
+ * @package [App\Models\Common]
+ * @author [李志刚]
+ * @createdate  [2018-06-26]
+ * @copyright [2018-2020 衡水希夷信息技术工作室]
+ * @version [1.0.0]
+ * @directions 栏目
+ *
+ */
 namespace App\Models\Common;
 
 use Illuminate\Database\Eloquent\Model;
@@ -23,10 +31,17 @@ class Cate extends Model
     */
     protected $hidden = [];
 
+    /**
+     * 表明模型是否应该被打上时间戳
+     *
+     * @var bool
+     */
+    public $timestamps = true;
+
     // 关联articles表
     public function article()
     {
-        return $this->hasMany('\App\Models\Common\Article','catid','id');
+        return $this->hasMany('\App\Models\Common\Article','cate_id','id');
     }
 
 }

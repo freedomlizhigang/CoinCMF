@@ -2,7 +2,6 @@
 
 return [
 
-
     /*
     |--------------------------------------------------------------------------
     | Application Name
@@ -13,7 +12,7 @@ return [
     | any other location as required by the application or its packages.
     */
 
-    'name' => env('APP_NAME', 'Xi-Yi-CMF'),
+    'name' => env('APP_NAME', 'Xi-Yi-SHOP'),
 
     /*
     |--------------------------------------------------------------------------
@@ -52,7 +51,7 @@ return [
     |
     */
 
-    'url' => env('APP_URL', 'http://www.xi-yi.ren'),
+    'url' => env('APP_URL', 'http://shop.xi-yi.ren'),
 
 
     /*
@@ -60,7 +59,7 @@ return [
     |静态文件存放地址
     |
      */
-    
+
     'static' => '/statics/',
 
 
@@ -118,22 +117,6 @@ return [
 
     'cipher' => 'AES-256-CBC',
 
-    /*
-    |--------------------------------------------------------------------------
-    | Logging Configuration
-    |--------------------------------------------------------------------------
-    |
-    | Here you may configure the log settings for your application. Out of
-    | the box, Laravel uses the Monolog PHP logging library. This gives
-    | you a variety of powerful log handlers / formatters to utilize.
-    |
-    | Available Settings: "single", "daily", "syslog", "errorlog"
-    |
-    */
-
-    'log' => env('APP_LOG', 'daily'),
-
-    'log_level' => env('APP_LOG_LEVEL', 'debug'),
 
     /*
     |--------------------------------------------------------------------------
@@ -147,11 +130,10 @@ return [
     */
 
     'providers' => [
-
         /*
          * Laravel Framework Service Providers...
          */
-        Illuminate\Auth\AuthServiceProvider::class,
+        // Illuminate\Auth\AuthServiceProvider::class,
         Illuminate\Broadcasting\BroadcastServiceProvider::class,
         Illuminate\Bus\BusServiceProvider::class,
         Illuminate\Cache\CacheServiceProvider::class,
@@ -168,27 +150,26 @@ return [
         Illuminate\Pipeline\PipelineServiceProvider::class,
         Illuminate\Queue\QueueServiceProvider::class,
         Illuminate\Redis\RedisServiceProvider::class,
-        Illuminate\Auth\Passwords\PasswordResetServiceProvider::class,
+        // Illuminate\Auth\Passwords\PasswordResetServiceProvider::class,
         Illuminate\Session\SessionServiceProvider::class,
         Illuminate\Translation\TranslationServiceProvider::class,
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
-
         /*
          * Package Service Providers...
          */
+        Laravel\Tinker\TinkerServiceProvider::class,
 
         /*
          * Application Service Providers...
          */
         App\Providers\AppServiceProvider::class,
-        App\Providers\AuthServiceProvider::class,
+        // App\Providers\AuthServiceProvider::class,
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
-        // 公用函数
+        // 一些公用服务
         App\Providers\ComServiceProvider::class,
-
         // 调试
         Barryvdh\Debugbar\ServiceProvider::class,
 
@@ -209,7 +190,7 @@ return [
 
         'App' => Illuminate\Support\Facades\App::class,
         'Artisan' => Illuminate\Support\Facades\Artisan::class,
-        'Auth' => Illuminate\Support\Facades\Auth::class,
+        // 'Auth' => Illuminate\Support\Facades\Auth::class,
         'Blade' => Illuminate\Support\Facades\Blade::class,
         'Broadcast' => Illuminate\Support\Facades\Broadcast::class,
         'Bus' => Illuminate\Support\Facades\Bus::class,
@@ -242,7 +223,6 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
         // 调试
         'Debugbar'  => Barryvdh\Debugbar\Facade::class,
-
     ],
 
 ];

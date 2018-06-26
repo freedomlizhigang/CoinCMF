@@ -1,8 +1,16 @@
 <?php
-
+/*
+ * @package [App\Http\Controllers\Admin]
+ * @author [李志刚]
+ * @createdate  [2018-06-26]
+ * @copyright [2018-2020 衡水希夷信息技术工作室]
+ * @version [1.0.0]
+ * @directions 角色管理
+ *
+ */
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Admin\BaseController;
+use App\Http\Controllers\Controller;
 use App\Http\Requests\RoleRequest;
 use App\Models\Console\Menu;
 use App\Models\Console\Priv;
@@ -11,52 +19,42 @@ use App\Models\Console\RoleUser;
 use DB;
 use Illuminate\Http\Request;
 
-class RoleController extends BaseController
+class RoleController extends Controller
 {
-    /**
-     * 构造函数
-     */
-    public function __construct()
-    {
-    	$this->role = new Role;
-        $this->priv = new Priv;
-        $this->menu = new Menu;
-    }
-
-    public function getIndex(Request $res)
+    public function getIndex(Request $req)
     {
     	$title = '角色列表';
-        $list = $this->role->paginate(15);
+        $list = Role::paginate(10);
         // 保存一次性数据，url参数，供编辑完成后跳转用
-        $res->flash();
-        return view('admin.role.index',compact('list','title'));
+        $req->flash();
+        return view('admin.console.role.index',compact('list','title'));
     }
 
     // 添加角色
     public function getAdd()
     {
         $title = '添加角色';
-        return view('admin.role.add',compact('title'));
+        return view('admin.console.role.add',compact('title'));
     }
 
-    public function postAdd(RoleRequest $request)
+    public function postAdd(RoleRequest $req)
     {
-        $data = $request->input('data');
-        $this->role->create($data);
-        return $this->ajaxReturn(1,'添加角色成功！',url('/console/role/index'));
+        $data = $req->input('data');
+        Role::create($data);
+        return $this->adminJson(1,'添加角色成功！',url('/console/role/index'));
     }
     // 修改角色
     public function getEdit($rid)
     {
         $title = '修改角色';
         // 拼接返回用的url参数
-        $info = $this->role->findOrFail($rid);
-        return view('admin.role.edit',compact('title','info'));
+        $info = Role::findOrFail($rid);
+        return view('admin.console.role.edit',compact('title','info'));
     }
-    public function postEdit(RoleRequest $request,$rid)
+    public function postEdit(RoleRequest $req,$rid)
     {
-        $this->role->where('id',$rid)->update($request->input('data'));
-        return $this->ajaxReturn(1,'修改角色成功！');
+        Role::where('id',$rid)->update($req->input('data'));
+        return $this->adminJson(1,'修改角色成功！');
     }
     // 删除角色
     public function getDel($rid)
@@ -71,7 +69,7 @@ class RoleController extends BaseController
             DB::beginTransaction();
             try {
                 // 同时删除关联的用户关系
-                $this->role->destroy($rid);
+                Role::destroy($rid);
                 Priv::where('role_id',$rid)->delete();
                 // 没出错，提交事务
                 DB::commit();
@@ -92,7 +90,7 @@ class RoleController extends BaseController
     public function getPriv($rid)
     {
         $title = '更新权限';
-        $ishav = $this->priv->where('role_id',$rid)->get();
+        $ishav = Priv::where('role_id',$rid)->get();
         $rids = '';
         if($ishav->isEmpty() == false)
         {
@@ -102,10 +100,10 @@ class RoleController extends BaseController
             }
         }
         // dd($rids);
-        $all = $this->menu->get();
+        $all = Menu::get();
         $tree = app('com')->toTree($all,'0');
         $treePriv = $this->treePriv($tree);
-        return view('admin.role.priv',compact('title','rids','treePriv'));
+        return view('admin.console.role.priv',compact('title','rids','treePriv'));
     }
     public function postPriv(Request $res,$rid)
     {
@@ -115,14 +113,14 @@ class RoleController extends BaseController
         // 开启事务
         DB::beginTransaction();
         try {
-            $this->priv->where('role_id',$rid)->delete();
+            Priv::where('role_id',$rid)->delete();
             // 所有选中的菜单url，以此查找出所有url label
             $ids = $res->input('ids');
-            $all = $this->menu->whereIn('id',$ids)->get()->toArray();
+            $all = Menu::whereIn('id',$ids)->get()->toArray();
             // 将查出来的数据组成数组插入到role_privs表里
             foreach ($all as $v) {
                 $insertArr = array('menu_id'=>$v['id'],'role_id'=>$rid,'url'=>$v['url'],'label'=>$v['label']);
-                $this->priv->create($insertArr);
+                Priv::create($insertArr);
             }
             // 没出错，提交事务
             DB::commit();

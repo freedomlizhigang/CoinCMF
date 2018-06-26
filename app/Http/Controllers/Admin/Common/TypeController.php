@@ -1,15 +1,23 @@
 <?php
-
+/*
+ * @package [App\Http\Controllers\Admin\Common]
+ * @author [李志刚]
+ * @createdate  [2018-06-26]
+ * @copyright [2018-2020 衡水希夷信息技术工作室]
+ * @version [1.0.0]
+ * @directions 分类管理
+ *
+ */
 namespace App\Http\Controllers\Admin\Common;
 
-use App\Http\Controllers\Admin\BaseController;
+use App\Http\Controllers\Controller;
 use App\Http\Requests\Common\TypeRequest;
 use App\Models\Common\Type;
 use Carbon\Carbon;
 use DB;
 use Illuminate\Http\Request;
 
-class TypeController extends BaseController
+class TypeController extends Controller
 {
     /**
      * 分类列表
@@ -20,7 +28,7 @@ class TypeController extends BaseController
     	$title = '分类管理';
         // 超级管理员可查看所有部门下分类
         $list = Type::where('parentid',$pid)->orderBy('sort','asc')->get();
-    	return view('admin.type.index',compact('title','list','pid'));
+    	return view('admin.console.type.index',compact('title','list','pid'));
     }
     /**
      * 添加分类
@@ -30,19 +38,19 @@ class TypeController extends BaseController
     public function getAdd($pid = '0')
     {
     	$title = '添加分类';
-    	return view('admin.type.add',compact('title','pid'));
+    	return view('admin.console.type.add',compact('title','pid'));
     }
-    public function postAdd(TypeRequest $res,$pid = '0')
+    public function postAdd(TypeRequest $req,$pid = '0')
     {
         // 开启事务
         try {
-            $data = $res->input('data');
+            $data = $req->input('data');
             $resId = Type::create($data);
             // 后台用户组权限
-            app('com')->updateCache(new Type,'typeCache');
-            return $this->ajaxReturn(1,'添加成功！');
+            app('com')->updateCache(new Type(),'typeCache',1);
+            return $this->adminJson(1,'添加成功！');
         } catch (\Throwable $e) {
-            return $this->ajaxReturn(0,'添加失败，请稍后再试！');
+            return $this->adminJson(0,'添加失败，请稍后再试！');
         }
     }
     /**
@@ -57,18 +65,18 @@ class TypeController extends BaseController
         $all = Type::orderBy('sort','asc')->get();
         $tree = app('com')->toTree($all,'0');
         $treeHtml = app('com')->toTreeSelect($tree,$info->parentid);
-        return view('admin.type.edit',compact('title','info','treeHtml'));
+        return view('admin.console.type.edit',compact('title','info','treeHtml'));
     }
-    public function postEdit(TypeRequest $res,$id = '')
+    public function postEdit(TypeRequest $req,$id = '')
     {
         try {
-            $data = $res->input('data');
+            $data = $req->input('data');
             Type::where('id',$id)->update($data);
             // 更新缓存
-            app('com')->updateCache(new Type,'typeCache');
-            return $this->ajaxReturn(1,'修改成功！');
+            app('com')->updateCache(new Type(),'typeCache',1);
+            return $this->adminJson(1,'修改成功！');
         } catch (\Throwable $e) {
-            return $this->ajaxReturn(0,'修改失败，请稍后再试！');
+            return $this->adminJson(0,'修改失败，请稍后再试！');
         }
     }
     public function getDel($id)
@@ -80,6 +88,7 @@ class TypeController extends BaseController
         try {
             Type::destroy($childs);
             $message = '删除成功！';
+            app('com')->updateCache(new Type(),'typeCache',1);
         } catch (\Throwable $e) {
             return back()->with('message','删除失败，请稍后再试！');
         }

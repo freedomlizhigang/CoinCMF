@@ -21,9 +21,7 @@ class VerifyCsrfToken extends Middleware
         // 微信
         'wx/*',
         'oauth/*',
-        // 订单结算临时数据
-        'shop/orderinfo',
-      // 后台文件上传
+        // 后台文件上传
         'console/attr/uploadimg',
         // 取规格
         'console/good/goodspecinput',

@@ -1,10 +1,8 @@
-<!-- 完成的 -->
-
-1. 数据库字符集全改 utf8mb64
-
 ###完成的
 
 系统基于Laravel 5.4，认证使用了RBAC及系统Gate，RBAC主要产生后台菜单，Gate细化小菜单并进行更细的权限管理
+
+数据库字符集全改 utf8mb64
 
 样式表，bootstrap定制
 
@@ -21,3 +19,16 @@ rbac 中间件控制打开页面是否有权限，同时判断是否登陆，App
 用户功能，同时做了一套api的接口
 
 后台整体改ajax方式
+
+
+### 清空数据
+
+TRUNCATE li_ad_pos;
+TRUNCATE li_ads;
+TRUNCATE li_attrs;
+TRUNCATE li_articles;
+TRUNCATE li_categorys;
+TRUNCATE li_logs;
+TRUNCATE li_migrations;
+TRUNCATE li_role_privs;
+TRUNCATE li_types;

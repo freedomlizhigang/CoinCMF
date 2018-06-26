@@ -1,11 +1,26 @@
 <?php
-
+/*
+ * @package [App\Models\Console]
+ * @author [李志刚]
+ * @createdate  [2018-06-26]
+ * @copyright [2018-2020 衡水希夷信息技术工作室]
+ * @version [1.0.0]
+ * @directions 管理员
+ *
+ */
 namespace App\Models\Console;
 
-use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Database\Eloquent\Model;
 
-class Admin extends Authenticatable
+class Admin extends Model
 {
+    /**
+     * 关联到模型的数据表
+     *
+     * @var string
+     */
+    protected $table = 'admins';
+
     // 不可以批量赋值的字段，为空则表示都可以
     protected $guarded = [];
 
@@ -15,8 +30,15 @@ class Admin extends Authenticatable
      * @var array
      */
     protected $hidden = [
-        'password', 'remember_token',
+        'password', 'crypt',
     ];
+
+    /**
+     * 表明模型是否应该被打上时间戳
+     *
+     * @var bool
+     */
+    public $timestamps = true;
 
     /**
      * 用户组

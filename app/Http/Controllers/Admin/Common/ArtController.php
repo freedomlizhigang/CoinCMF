@@ -1,8 +1,17 @@
 <?php
-
+/*
+ * @package [App\Http\Controllers\Admin\Common]
+ * @author [李志刚]
+ * @createdate  [2018-06-26]
+ * @copyright [2018-2020 衡水希夷信息技术工作室]
+ * @version [1.0.0]
+ * @directions 文章管理
+ *
+ */
 namespace App\Http\Controllers\Admin\Common;
 
-use App\Http\Controllers\Admin\BaseController;
+use App\Customize\Func;
+use App\Http\Controllers\Controller;
 use App\Http\Requests\Common\ArtRequest;
 use App\Models\Common\Article;
 use App\Models\Common\Cate;
@@ -10,33 +19,27 @@ use Carbon\Carbon;
 use DB;
 use Illuminate\Http\Request;
 
-class ArtController extends BaseController
+class ArtController extends Controller
 {
-    public function __construct()
-    {
-    	$this->cate = new Cate;
-    	$this->art = new Article;
-    }
     /**
      * 文章列表
      * @return [type] [description]
      */
-    public function getIndex(Request $res)
+    public function getIndex(Request $req)
     {
     	$title = '文章列表';
-    	$catid = $res->input('catid');
+    	$catid = $req->input('catid');
         // 搜索关键字
-        $key = trim($res->input('q',''));
-        $starttime = $res->input('starttime');
-        $endtime = $res->input('endtime');
-        $status = $res->input('status');
+        $key = trim($req->input('q',''));
+        $starttime = $req->input('starttime');
+        $endtime = $req->input('endtime');
         // 超级管理员可以看所有的
-        $cats = $this->cate->get();
+        $cats = Cate::get();
     	$tree = app('com')->toTree($cats,'0');
     	$cate = app('com')->toTreeSelect($tree);
-		$list = $this->art->with('cate')->where(function($q) use($catid){
+		$list = Article::with('cate')->where(function($q) use($catid){
                 if ($catid != '') {
-                    $q->where('catid',$catid);
+                    $q->where('cate_id',$catid);
                 }
             })->where(function($q) use($key){
                 if ($key != '') {
@@ -50,14 +53,10 @@ class ArtController extends BaseController
                 if ($endtime != '') {
                     $q->where('created_at','<',$endtime);
                 }
-            })->where(function($q) use($status){
-                if ($status != '') {
-                    $q->where('status',$status);
-                }
-            })->orderBy('id','desc')->paginate(15);
+            })->orderBy('id','desc')->paginate(10);
         // 记录上次请求的url path，返回时用
-        session()->put('backurl',$res->fullUrl());
-    	return view('admin.art.index',compact('title','list','cate','catid','key','starttime','endtime','status'));
+        session()->put('backurl',$req->fullUrl());
+    	return view('admin.console.art.index',compact('title','list','cate','catid','key','starttime','endtime'));
     }
 
     /**
@@ -72,28 +71,28 @@ class ArtController extends BaseController
     	$cate = '';
     	if($catid == '0')
     	{
-    		$cats = $this->cate->get();
+    		$cats = Cate::get();
 	    	$tree = app('com')->toTree($cats,'0');
 	    	$cate = app('com')->toTreeSelect($tree);
     	}
-    	return view('admin.art.add',compact('title','catid','cate'));
+    	return view('admin.console.art.add',compact('title','catid','cate'));
     }
-    public function postAdd(ArtRequest $res)
+    public function postAdd(ArtRequest $req)
     {
-        $data = $res->input('data');
+        $data = $req->input('data');
         // 开启事务
         DB::beginTransaction();
         try {
-            $data['url'] = md5(time().str_random(15));
-            $art = $this->art->create($data);
+            $data['url'] = Func::createUuid();
+            $art = Article::create($data);
             // 没出错，提交事务
             DB::commit();
             // 跳转回添加的栏目列表
-            return $this->ajaxReturn(1,'添加文章成功！',url('/console/art/index?catid='.$res->input('data.catid')));
+            return $this->adminJson(1,'添加文章成功！',url('/console/art/index?catid='.$req->input('data.cate_id')));
         } catch (\Throwable $e) {
             // 出错回滚
             DB::rollBack();
-            return $this->ajaxReturn(0,'添加失败，请稍后再试！');
+            return $this->adminJson(0,'添加失败，请稍后再试！');
         }
     }
     /**
@@ -101,32 +100,34 @@ class ArtController extends BaseController
      * @param  string $id [文章ID]
      * @return [type]     [description]
      */
-    public function getEdit(Request $res,$id = '')
+    public function getEdit($id = '')
     {
         $title = '修改文章';
         // 拼接返回用的url参数
         $ref = session('backurl');
-        $info = $this->art->findOrFail($id);
-        $cats = $this->cate->get();
+        $info = Article::findOrFail($id);
+        $cats = Cate::get();
         $tree = app('com')->toTree($cats,'0');
         $cate = app('com')->toTreeSelect($tree);
-        return view('admin.art.edit',compact('title','cate','info','ref'));
+        return view('admin.console.art.edit',compact('title','cate','info','ref'));
     }
-    public function postEdit(ArtRequest $res,$id = '')
+    public function postEdit(ArtRequest $req,$id = '')
     {
-        $data = $res->input('data');
+        $data = $req->input('data');
         // 开启事务
         DB::beginTransaction();
         try {
-            $art = $this->art->where('id',$id)->update($data);
+            $art = Article::where('id',$id)->update($data);
+            // 全文搜索
+            Article::where('id',$id)->searchable();
             // 没出错，提交事务
             DB::commit();
             // 取得编辑前url参数，并跳转回去
-            return $this->ajaxReturn(1,'修改文章成功！',$res->input('ref'));
+            return $this->adminJson(1,'修改文章成功！',$req->input('ref'));
         } catch (\Throwable $e) {
             // 出错回滚
             DB::rollBack();
-            return $this->ajaxReturn(0,'修改失败，请稍后再试！');
+            return $this->adminJson(0,'修改失败，请稍后再试！');
         }
     }
     /**
@@ -139,7 +140,9 @@ class ArtController extends BaseController
         // 开启事务
         DB::beginTransaction();
         try {
-            $this->art->destroy($id);
+            Article::destroy($id);
+            // 全文搜索
+            Article::where('id',$id)->unsearchable();
             // 没出错，提交事务
             DB::commit();
             return back()->with('message', '删除文章成功！');
@@ -159,13 +162,13 @@ class ArtController extends BaseController
         $title = '查看文章详情';
         // 拼接返回用的url参数
         $ref = session('backurl');
-        $info = $this->art->findOrFail($id);
-        return view('admin.art.show',compact('title','info','ref'));
+        $info = Article::findOrFail($id);
+        return view('admin.console.art.show',compact('title','info','ref'));
     }
     // 批量删除
-    public function postAlldel(Request $res)
+    public function postAlldel(Request $req)
     {
-        $ids = $res->input('sids');
+        $ids = $req->input('sids');
         // 是数组更新数据，不是返回
         if(is_array($ids))
         {
@@ -173,6 +176,8 @@ class ArtController extends BaseController
             DB::beginTransaction();
             try {
                 Article::whereIn('id',$ids)->delete();
+                // 全文搜索
+                Article::whereIn('id',$ids)->unsearchable();
                 // 没出错，提交事务
                 DB::commit();
                 return back()->with('message', '批量删除完成！');
@@ -188,10 +193,10 @@ class ArtController extends BaseController
         }
     }
     // 批量排序
-    public function postsort(Request $res)
+    public function postsort(Request $req)
     {
-        $ids = $res->input('sids');
-        $sort = $res->input('sort');
+        $ids = $req->input('sids');
+        $sort = $req->input('sort');
         if (is_array($ids))
         {
             foreach ($ids as $v) {
@@ -203,18 +208,5 @@ class ArtController extends BaseController
         {
             return back()->with('message', '请先选择文章！');
         }
-    }
-    // 选择素材
-    public function getSelect(Request $res)
-    {
-        $title = '选择素材';
-        // 搜索关键字
-        $key = trim($res->input('q',''));
-        $list = Article::where(function($q) use($key){
-                if ($key != '') {
-                    $q->where('title','like','%'.$key.'%');
-                }
-            })->where('iswx',1)->orderBy('id','desc')->paginate(10);
-        return view('admin.art.select',compact('title','list','key'));
     }
 }

@@ -1,15 +1,23 @@
 <?php
-
+/*
+ * @package [App\Http\Controllers\Admin\Common]
+ * @author [李志刚]
+ * @createdate  [2018-06-26]
+ * @copyright [2018-2020 衡水希夷信息技术工作室]
+ * @version [1.0.0]
+ * @directions 省市县管理
+ *
+ */
 namespace App\Http\Controllers\Admin\Common;
 
-use App\Http\Controllers\Admin\BaseController;
+use App\Http\Controllers\Controller;
 use App\Http\Requests\Common\AreaRequest;
 use App\Models\Common\Area;
 use App\Models\Common\Community;
 use DB;
 use Illuminate\Http\Request;
 
-class AreaController extends BaseController
+class AreaController extends Controller
 {
     /**
      * 地区列表
@@ -20,7 +28,7 @@ class AreaController extends BaseController
     	$title = '地区管理';
         // 超级管理员可查看所有部门下地区
         $list = Area::where('parentid',$pid)->orderBy('sort','asc')->orderBy('id','asc')->get();
-    	return view('admin.area.index',compact('title','list','pid'));
+    	return view('admin.console.area.index',compact('title','list','pid'));
     }
     /**
      * 添加地区
@@ -30,22 +38,22 @@ class AreaController extends BaseController
     public function getAdd($pid = '')
     {
     	$title = '添加地区';
-    	return view('admin.area.add',compact('title','pid'));
+    	return view('admin.console.area.add',compact('title','pid'));
     }
-    public function postAdd(AreaRequest $res,$pid = '0')
+    public function postAdd(AreaRequest $req,$pid = '0')
     {
         // 开启事务
         DB::beginTransaction();
         try {
-            $data = $res->input('data');
+            $data = $req->input('data');
             $resId = Area::create($data);
             // 没出错，提交事务
             DB::commit();
-            return $this->ajaxReturn(1, '添加成功！',url('console/area/index/'.$data['parentid']));
+            return $this->adminJson(1, '添加成功！',url('console/area/index/'.$data['parentid']));
         } catch (\Throwable $e) {
             // 出错回滚
             DB::rollBack();
-            return $this->ajaxReturn(0, '添加失败，请稍后再试！');
+            return $this->adminJson(0, '添加失败，请稍后再试！');
         }
     }
     /**
@@ -57,22 +65,22 @@ class AreaController extends BaseController
     {
         $title = '修改地区';
         $info = Area::findOrFail($id);
-        return view('admin.area.edit',compact('title','info'));
+        return view('admin.console.area.edit',compact('title','info'));
     }
-    public function postEdit(AreaRequest $res,$id = '')
+    public function postEdit(AreaRequest $req,$id = '')
     {
         // 开启事务
         DB::beginTransaction();
         try {
-            $data = $res->input('data');
+            $data = $req->input('data');
             Area::where('id',$id)->update($data);
             // 没出错，提交事务
             DB::commit();
-            return $this->ajaxReturn(1, '修改成功！');
+            return $this->adminJson(1, '修改成功！');
         } catch (\Throwable $e) {
             // 出错回滚
             DB::rollBack();
-            return $this->ajaxReturn(1, '修改失败，请稍后再试！');
+            return $this->adminJson(1, '修改失败，请稍后再试！');
         }
     }
     public function getDel($id)

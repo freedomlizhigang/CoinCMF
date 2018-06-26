@@ -1,4 +1,4 @@
-/* 
+/*
     定义变量
 */
 /*作者(Author): 李潇喃    Website: www.muzisheji.com   QQ: 854378082*/
@@ -159,6 +159,9 @@ thead {font-weight: bold;}
 .file-item .progress { position: absolute; right: 4px; bottom: 4px; height: 3px; left: 4px; height: 4px; overflow: hidden; z-index: 15; margin:0; padding: 0;border-radius: 0; background: transparent;}
 .file-item .progress span { display: block; overflow: hidden; width: 0; height: 100%; background: #d14 url(../images/progress.png) repeat-x; -webit-transition: width 200ms linear; -moz-transition: width 200ms linear; -o-transition: width 200ms linear; -ms-transition: width 200ms linear; transition: width 200ms linear;
     -webkit-animation: progressmove 2s linear infinite; -moz-animation: progressmove 2s linear infinite; -o-animation: progressmove 2s linear infinite; -ms-animation: progressmove 2s linear infinite; animation: progressmove 2s linear infinite; -webkit-transform: translateZ(0);
+}
+.file-item .file-panel {
+    width:20px; height:20px;
 }
 .file-item .file-panel .cancel {position: absolute; bottom: 4px; right: 4px; height: 20px; width:20px; line-height: 20px; text-align:center; color: white; overflow: hidden; white-space: nowrap; text-overflow : ellipsis; font-size: 16px; z-index: 12; cursor: pointer;}
 @-webkit-keyframes progressmove {

@@ -1,8 +1,16 @@
 <?php
-
+/*
+ * @package [App\Http\Controllers\Common]
+ * @author [李志刚]
+ * @createdate  [2018-06-26]
+ * @copyright [2018-2020 衡水希夷信息技术工作室]
+ * @version [1.0.0]
+ * @directions 文件上传公用功能
+ *
+ */
 namespace App\Http\Controllers\Common;
 
-use App\Http\Controllers\Common\Ueditor;
+use App\Customize\Ueditor;
 use App\Http\Controllers\Controller;
 use App\Models\Common\Attr;
 use Illuminate\Http\Request;
@@ -31,7 +39,7 @@ class UploaderController extends Controller
             case 'config':
                 $result =  json_encode($CONFIG);
                 break;
-            
+
             /* 列出图片 */
             case 'listimage':
                 $result = $this->action_list($res,$CONFIG);

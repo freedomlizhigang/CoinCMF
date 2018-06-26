@@ -1,5 +1,13 @@
 <?php
-
+/*
+ * @package [App\Http\Requests\Common]
+ * @author [李志刚]
+ * @createdate  [2018-06-26]
+ * @copyright [2018-2020 衡水希夷信息技术工作室]
+ * @version [1.0.0]
+ * @directions 栏目请求验证
+ *
+ */
 namespace App\Http\Requests\Common;
 
 use App\Http\Requests\Request;
@@ -24,14 +32,14 @@ class CateRequest extends Request
     public function rules()
     {
         return [
-            'data.name' => 'required|unique:categorys,name,'.$this->segment('4'),
+            'data.name' => 'required|max:255',
             'data.title'  => 'required|max:255',
             'data.keyword'  => 'max:255',
             'data.describe'  => 'max:255',
             'data.sort'  => 'required|integer',
         ];
     }
-    
+
     public function attributes()
     {
         return [

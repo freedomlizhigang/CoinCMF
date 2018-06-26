@@ -32,7 +32,7 @@ class ComServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        
+
         $this->app->singleton('com',function($app){
             return new ComService();
         });

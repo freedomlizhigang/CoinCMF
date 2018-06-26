@@ -1,8 +1,17 @@
 <?php
-
+/*
+ * @package [App\Http\Controllers\Admin\Common]
+ * @author [李志刚]
+ * @createdate  [2018-06-26]
+ * @copyright [2018-2020 衡水希夷信息技术工作室]
+ * @version [1.0.0]
+ * @directions 栏目管理
+ *
+ */
 namespace App\Http\Controllers\Admin\Common;
 
-use App\Http\Controllers\Admin\BaseController;
+use App\Customize\Func;
+use App\Http\Controllers\Controller;
 use App\Http\Requests\Common\CateRequest;
 use App\Models\Common\Article;
 use App\Models\Common\Cate;
@@ -11,12 +20,8 @@ use Carbon\Carbon;
 use DB;
 use Illuminate\Http\Request;
 
-class CateController extends BaseController
+class CateController extends Controller
 {
-    public function __construct()
-    {
-    	$this->cate = new Cate;
-    }
     /**
      * 栏目列表
      * @return [type] [description]
@@ -25,10 +30,10 @@ class CateController extends BaseController
     {
     	$title = '栏目管理';
         // 超级管理员可查看所有部门下栏目
-        $all = $this->cate->orderBy('sort','asc')->get();
+        $all = Cate::orderBy('sort','asc')->get();
         $tree = app('com')->toTree($all,'0');
     	$treeHtml = $this->toTreeHtml($tree);
-    	return view('admin.cate.index',compact('title','treeHtml'));
+    	return view('admin.console.cate.index',compact('title','treeHtml'));
     }
     // 树形菜单 html
     private function toTreeHtml($tree)
@@ -58,7 +63,7 @@ class CateController extends BaseController
     // 更新缓存
     public function getCache()
     {
-        app('com')->updateCache($this->cate,'cateCache');
+        app('com')->updateCache(new Cate(),'cateCache',1);
         return redirect('/console/cate/index')->with('message', '更新栏目缓存成功！');
     }
     /**
@@ -70,7 +75,7 @@ class CateController extends BaseController
     {
     	$title = '添加栏目';
         $role = Role::where('status',1)->get();
-    	return view('admin.cate.add',compact('title','pid','role'));
+    	return view('admin.console.cate.add',compact('title','pid','role'));
     }
     public function postAdd(CateRequest $res,$pid = '0')
     {
@@ -78,17 +83,17 @@ class CateController extends BaseController
         DB::beginTransaction();
         try {
             $data = $res->input('data');
-            $data['url'] = md5(time().str_random(15));
-            $resId = $this->cate->create($data);
+            $data['url'] = Func::createUuid();
+            $resId = Cate::create($data);
             // 后台用户组权限
-            app('com')->updateCache($this->cate,'cateCache');
+            app('com')->updateCache(new Cate(),'cateCache',1);
             // 没出错，提交事务
             DB::commit();
-            return $this->ajaxReturn(1,'添加成功',url('/console/cate/index'));
+            return $this->adminJson(1,'添加成功',url('/console/cate/index'));
         } catch (\Throwable $e) {
             // 出错回滚
             DB::rollBack();
-            return $this->ajaxReturn(0,'添加失败，请稍后再试！');
+            return $this->adminJson(0,'添加失败，请稍后再试！');
         }
     }
     /**
@@ -99,13 +104,13 @@ class CateController extends BaseController
     public function getEdit($id = '')
     {
         $title = '修改栏目';
-        $info = $this->cate->findOrFail($id);
+        $info = Cate::findOrFail($id);
         // 超级管理员可查看所有部门下栏目
-        $all = $this->cate->orderBy('sort','asc')->get();
+        $all = Cate::orderBy('sort','asc')->get();
         $tree = app('com')->toTree($all,'0');
         $treeHtml = app('com')->toTreeSelect($tree,$info->parentid);
         $role = Role::where('status',1)->get();
-        return view('admin.cate.edit',compact('title','info','treeHtml','role'));
+        return view('admin.console.cate.edit',compact('title','info','treeHtml','role'));
     }
     public function postEdit(CateRequest $res,$id = '')
     {
@@ -113,22 +118,22 @@ class CateController extends BaseController
         DB::beginTransaction();
         try {
             $data = $res->input('data');
-            $this->cate->where('id',$id)->update($data);
+            Cate::where('id',$id)->update($data);
             // 更新缓存
-            app('com')->updateCache($this->cate,'cateCache');
+            app('com')->updateCache(new Cate(),'cateCache',1);
             // 没出错，提交事务
             DB::commit();
-            return $this->ajaxReturn(1,'修改成功！',url('/console/cate/index'));
+            return $this->adminJson(1,'修改成功！',url('/console/cate/index'));
         } catch (\Throwable $e) {
             // 出错回滚
             DB::rollBack();
-            return $this->ajaxReturn(0,'修改失败，请稍后再试！');
+            return $this->adminJson(0,'修改失败，请稍后再试！');
         }
     }
     public function getDel($id)
     {
         // 先找出所有子栏目，再判断子栏目中是否有文章，如果有文章，返回错误
-        $allChild = $this->cate->where('id',$id)->value('arrchildid');
+        $allChild = Cate::where('id',$id)->value('arrchildid');
         // 所有子栏目ID转换为集合，查看是否含有文章或者专题
         $childs = collect(explode(',',$allChild));
         $child = Article::whereIn('catid',$childs)->get()->count();
@@ -141,8 +146,10 @@ class CateController extends BaseController
             // 开启事务
             DB::beginTransaction();
             try {
-                $this->cate->destroy($childs);
+                Cate::destroy($childs);
                 $message = '删除成功！';
+                // 更新缓存
+                app('com')->updateCache(new Cate(),'cateCache',1);
                 // 没出错，提交事务
                 DB::commit();
             } catch (\Throwable $e) {

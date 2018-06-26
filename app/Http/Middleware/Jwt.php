@@ -1,5 +1,13 @@
 <?php
-
+/*
+ * @package [App\Http\Middleware]
+ * @author [李志刚]
+ * @createdate  [2018-06-26]
+ * @copyright [2018-2020 衡水希夷信息技术工作室]
+ * @version [1.0.0]
+ * @directions token验证方法
+ *
+ */
 namespace App\Http\Middleware;
 
 use App\Models\User\User;
@@ -16,34 +24,33 @@ class Jwt
      */
     public function handle($request, Closure $next)
     {
-        // 反向解析token
-        $token = $request->token;
         try {
-            $token_arr = explode('.', decrypt($token));
+            // 反向解析token
+            $token = $request->token;
+            // 查有没有这个用户，及用户状态
+            $hav = Redis::exists('token:'.$token);
+            if (!$hav) {
+                return response()->json(['code'=>401,'msg' => 'Token无效+1！']);
+            }
+            $token_info = Redis::get('token:'.$token);
+            $token_info = json_decode($token_info);
+            // $user = User::where('token',$token)->first();
+            // 先判断时间及key的正确性
+            if($token != md5(md5($token_info->uuid.config('jwt.jwt-key').$token_info->token_time)))
+            {
+                return response()->json(['code'=>401,'msg' => 'Token无效！'.$token]);
+            }
+            if($token_info->token_time <= time())
+            {
+                return response()->json(['code'=>401,'msg' => 'Token过期！']);
+            }
+            // if (!$user->status) {
+            //     return response()->json(['code'=>401,'msg' => '用户被禁用，请联系管理员！']);
+            // }
+            $request->uuid = $token_info->uuid;
+            return $next($request);
         } catch (\Throwable $e) {
-            return response()->json(['code'=>2,'msg' => 'Token解析错误！']);
+            return response()->json(['code'=>401,'msg' => '用户身份验证失败！']);
         }
-        $uid = $token_arr[0];
-        $jwtkey = $token_arr[1];
-        $overtime = $token_arr[2];
-        // 先判断时间及key的正确性
-        if($overtime <= time())
-        {
-            return response()->json(['code'=>0,'message' => 'Token过期！']);
-        }
-        if($jwtkey != config('jwt.jwt-key'))
-        {
-            return response()->json(['code'=>0,'message' => 'Key失效！']);
-        }
-        // 查有没有这个用户，及用户状态
-        $user = User::where('id',$uid)->where('status',1)->first();
-        if (is_null($user)) {
-            return response()->json(['code'=>0,'message' => '用户已经被删除或禁用，请联系管理员！']);
-        }
-        // 用户token跟这个token是否一样，单点登录
-        if ($user->token != $token) {
-            return response()->json(['code'=>0,'message' => '用户在其它手机上登录过！']);
-        }
-        return $next($request);
     }
 }

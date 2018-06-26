@@ -1,5 +1,13 @@
 <?php
-
+/*
+ * @package [App\Http\Requests\Common]
+ * @author [李志刚]
+ * @createdate  [2018-06-26]
+ * @copyright [2018-2020 衡水希夷信息技术工作室]
+ * @version [1.0.0]
+ * @directions 分类请求验证
+ *
+ */
 namespace App\Http\Requests\Common;
 
 use App\Http\Requests\Request;
@@ -28,7 +36,7 @@ class TypeRequest extends Request
             'data.sort'  => 'required|integer',
         ];
     }
-    
+
     public function attributes()
     {
         return [

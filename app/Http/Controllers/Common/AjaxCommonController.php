@@ -1,5 +1,13 @@
 <?php
-
+/*
+ * @package [App\Http\Controllers\Common]
+ * @author [李志刚]
+ * @createdate  [2018-06-26]
+ * @copyright [2018-2020 衡水希夷信息技术工作室]
+ * @version [1.0.0]
+ * @directions 后台的一些公用API请求
+ *
+ */
 namespace App\Http\Controllers\Common;
 
 use App\Http\Controllers\Controller;
@@ -16,9 +24,9 @@ class AjaxCommonController extends Controller
 	{
 		try {
 			$res = GoodCate::where('parentid',$req->pid)->select('id','name')->orderBy('sort','asc')->orderBy('id','asc')->get();
-			return $this->ajaxReturn('1',$res);
+			return $this->resJson('1',$res);
 		} catch (\Throwable $e) {
-			return $this->ajaxReturn('0',$e->getMessage());
+			return $this->resJson('0',$e->getMessage());
 		}
 	}
 
@@ -27,9 +35,9 @@ class AjaxCommonController extends Controller
 	{
 		try {
 			$res = Brand::where('goodcate_parentid',$req->pid)->where('goodcate_id',$req->cid)->select('id','name')->orderBy('id','asc')->get();
-			return $this->ajaxReturn('1',$res);
+			return $this->resJson('1',$res);
 		} catch (\Throwable $e) {
-			return $this->ajaxReturn('0',$e->getMessage());
+			return $this->resJson('0',$e->getMessage());
 		}
 	}
 
@@ -38,9 +46,9 @@ class AjaxCommonController extends Controller
     {
     	try {
 			$res = Area::where('parentid',$req->pid)->where('is_show',1)->select('id','areaname')->orderBy('sort','asc')->orderBy('id','asc')->get();
-			return $this->ajaxReturn('1',$res);
+			return $this->resJson('1',$res);
 		} catch (\Throwable $e) {
-			return $this->ajaxReturn('0',$e->getMessage());
+			return $this->resJson('0',$e->getMessage());
 		}
     }
 
@@ -49,16 +57,9 @@ class AjaxCommonController extends Controller
     {
     	try {
 			$res = Community::where('areaid1',$req->areaid1)->where('areaid2',$req->areaid2)->where('areaid3',$req->areaid3)->where('is_show',1)->select('id','areaname')->orderBy('sort','asc')->orderBy('id','asc')->get();
-			return $this->ajaxReturn('1',$res);
+			return $this->resJson('1',$res);
 		} catch (\Throwable $e) {
-			return $this->ajaxReturn('0',$e->getMessage());
+			return $this->resJson('0',$e->getMessage());
 		}
-    }
-
-    // ajax返回
-    public function ajaxReturn($code = '1',$msg = '')
-    {
-        exit(json_encode(['code'=>$code,'msg'=>$msg]));
-        return;
     }
 }

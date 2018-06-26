@@ -1,5 +1,13 @@
 <?php
-
+/*
+ * @package [App\Http\Requests\User]
+ * @author [李志刚]
+ * @createdate  [2018-06-26]
+ * @copyright [2018-2020 衡水希夷信息技术工作室]
+ * @version [1.0.0]
+ * @directions 会员组请求验证
+ *
+ */
 namespace App\Http\Requests\User;
 
 use Illuminate\Foundation\Http\FormRequest;
@@ -29,7 +37,7 @@ class GroupRequest extends FormRequest
             'data.discount' => 'required|integer',
         ];
     }
-    
+
     public function attributes()
     {
         return [

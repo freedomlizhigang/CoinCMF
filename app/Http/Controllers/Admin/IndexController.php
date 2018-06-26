@@ -1,5 +1,13 @@
 <?php
-
+/*
+ * @package [App\Http\Controllers\Admin]
+ * @author [李志刚]
+ * @createdate  [2018-06-26]
+ * @copyright [2018-2020 衡水希夷信息技术工作室]
+ * @version [1.0.0]
+ * @directions 首页
+ *
+ */
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
@@ -46,7 +54,7 @@ class IndexController extends Controller
     public function getMain(Request $req)
     {
         $title = '系统信息';
-        return view('admin.index.main',compact('title'));
+        return view('admin.console.index.main',compact('title'));
     }
     public function getLeft($pid)
     {
@@ -108,11 +116,11 @@ class IndexController extends Controller
         $config = Config::select('sitename','title','keyword','describe','theme','person','phone','email','address','content')->findOrFail(1)->toArray();
         Cache::forever('config',$config);
         echo "<p><small>更新系统缓存成功...</small></p>";
-        app('com')->updateCache(new Cate,'cateCache');
+        app('com')->updateCache(new Cate,'cateCache',1);
         echo "<p><small>更新栏目缓存成功...</small></p>";
-        app('com')->updateCache(new Menu,'menuCache');
+        app('com')->updateCache(new Menu,'menuCache',1);
         echo "<p><small>更新后台菜单缓存成功...</small></p>";
-        app('com')->updateCache(new Type,'typeCache');
+        app('com')->updateCache(new Type,'typeCache',1);
         echo "<p><small>更新分类缓存成功...</small></p>";
         $data = Group::where('status',1)->select('id','name','points','discount')->get()->keyBy('id')->toArray();
         Cache::forever('group',$data);

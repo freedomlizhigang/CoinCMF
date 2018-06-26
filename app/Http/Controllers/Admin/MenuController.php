@@ -1,28 +1,32 @@
 <?php
-
+/*
+ * @package [App\Http\Controllers\Admin]
+ * @author [李志刚]
+ * @createdate  [2018-06-26]
+ * @copyright [2018-2020 衡水希夷信息技术工作室]
+ * @version [1.0.0]
+ * @directions 菜单管理
+ *
+ */
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Admin\BaseController;
+use App\Http\Controllers\Controller;
 use App\Http\Requests\MenuRequest;
 use App\Models\Console\Menu;
 use Cache;
 use Illuminate\Http\Request;
 
-class MenuController extends BaseController
+class MenuController extends Controller
 {
-    public function __construct()
-    {
-        $this->menu = new Menu;
-    }
     public function getIndex()
     {
         $title = '菜单列表';
-        $list = $this->menu->orderBy('sort','asc')->orderBy('id','asc')->get();
+        $list = Menu::orderBy('sort','asc')->orderBy('id','asc')->get();
         $tree = app('com')->toTree($list,'0');
         $treeHtml = $this->toTreeHtml($tree);
-        return view('admin.menu.index',compact('treeHtml','title'));
+        return view('admin.console.menu.index',compact('treeHtml','title'));
     }
-    
+
     // 树形菜单 html
     private function toTreeHtml($tree)
     {
@@ -70,7 +74,7 @@ class MenuController extends BaseController
     public function getAdd(Request $request,$pid = 0)
     {
         $title = '添加菜单';
-    	return view('admin.menu.add',compact('pid','title'));
+    	return view('admin.console.menu.add',compact('pid','title'));
     }
     /**
      * 添加菜单提交数据
@@ -80,10 +84,9 @@ class MenuController extends BaseController
     public function postAdd(MenuRequest $request)
     {
     	$data = request('data');
-    	$this->menu->create($data);
-        app('com')->updateCache($this->menu,'menuCache');
-        return $this->ajaxReturn(1,'添加菜单成功',url('/console/menu/index'));
-    	// return redirect('')->with('message', '');
+    	Menu::create($data);
+        app('com')->updateCache(new Menu(),'menuCache');
+        return $this->adminJson(1,'添加菜单成功',url('/console/menu/index'));
     }
     /**
      * 修改菜单，当修改父级菜单的时候level要相应的进行修改
@@ -93,19 +96,18 @@ class MenuController extends BaseController
     public function getEdit($id = 0)
     {
         $title = '修改菜单';
-        $info = $this->menu->findOrFail($id);
-        $list = $this->menu->orderBy('sort','asc')->get();
+        $info = Menu::findOrFail($id);
+        $list = Menu::orderBy('sort','asc')->get();
         $tree = app('com')->toTree($list,'0');
         $treeSelect = app('com')->toTreeSelect($tree,$info->parentid);
-        return view('admin.menu.edit',compact('title','info','treeSelect'));
+        return view('admin.console.menu.edit',compact('title','info','treeSelect'));
     }
     public function postEdit(MenuRequest $res,$id)
     {
         $data = $res->input('data');
-        $this->menu->where('id',$id)->update($data);
-        app('com')->updateCache($this->menu,'menuCache');
-        return $this->ajaxReturn(1,'修改菜单成功',url('/console/menu/index'));
-        // return redirect('/console/menu/index')->with('message', '修改菜单成功！');
+        Menu::where('id',$id)->update($data);
+        app('com')->updateCache(new Menu(),'menuCache');
+        return $this->adminJson(1,'修改菜单成功',url('/console/menu/index'));
     }
     /**
      * 删除菜单及下属子菜单，取出当前菜单ID下边所有的子菜单ID（添加修改的时候会进行更新，包含最小是自身），然后转换成数组格式，指进行删除，然后更新菜单
@@ -114,10 +116,10 @@ class MenuController extends BaseController
      */
     public function getDel($id)
     {
-        $info = $this->menu->findOrFail($id);
+        $info = Menu::findOrFail($id);
         $arr = explode(',', $info->arrchildid);
-        $this->menu->destroy($arr);
-        app('com')->updateCache($this->menu,'menuCache');
+        Menu::destroy($arr);
+        app('com')->updateCache(new Menu(),'menuCache');
         return redirect('/console/menu/index')->with('message', '删除菜单成功！');
     }
 }
