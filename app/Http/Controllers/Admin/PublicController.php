@@ -22,7 +22,7 @@ class PublicController extends Controller
     public function getLogin()
     {
         if(\Session::has('console')){return redirect('/console/index/index');}
-        return view('admin.console.login');
+        return view('admin.login');
     }
     /**
      * 登录提交数据验证功能，成功后跳转到后台首页

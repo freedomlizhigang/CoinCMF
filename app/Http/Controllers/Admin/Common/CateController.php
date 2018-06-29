@@ -119,6 +119,7 @@ class CateController extends Controller
         try {
             $data = $res->input('data');
             Cate::where('id',$id)->update($data);
+            Article::where('cate_id',$id)->update(['tpl'=>$data['art_tpl']]);
             // 更新缓存
             app('com')->updateCache(new Cate(),'cateCache',1);
             // 没出错，提交事务

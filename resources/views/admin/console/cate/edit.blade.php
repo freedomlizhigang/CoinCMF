@@ -41,7 +41,7 @@
                 <input type="text" name="data[title]" class="form-control input-md" value="{{ $info->title }}">
             </td>
         </tr>
-        
+
         <tr>
             <td class="td_left">关键字：</td>
             <td>
@@ -73,10 +73,27 @@
         </tr>
 
         <tr>
-            <td class="td_left">模板：</td>
+            <td class="td_left">类型：</td>
             <td>
-                <input type="text" name="data[theme]" class="form-control input-sm" value="{{ $info->theme }}">
-                <p class="input-info">默认list</p>
+                <label class="radio-inline"><input type="radio" name="data[type]"@if ($info->type == 0) checked="checked"@endif class="input-radio" value="0">
+                    栏目</label>
+                <label class="radio-inline"><input type="radio" name="data[type]"@if ($info->type != 0) checked="checked"@endif class="input-radio" value="1">单页</label>
+            </td>
+        </tr>
+
+        <tr>
+            <td class="td_left">栏目模板：</td>
+            <td>
+                <input type="text" name="data[cate_tpl]" class="form-control input-sm" value="{{ $info->cate_tpl }}">
+                <p class="input-info">列表类list，单页类page</p>
+            </td>
+        </tr>
+
+        <tr>
+            <td class="td_left">内容模板：</td>
+            <td>
+                <input type="text" name="data[art_tpl]" class="form-control input-sm" value="{{ $info->art_tpl }}">
+                <p class="input-info">默认show</p>
             </td>
         </tr>
 
@@ -85,15 +102,6 @@
             <td>
                 <input type="text" name="data[sort]" value="{{ $info->sort }}" class="form-control input-xs">
                 <p class="input-info">数字越大越靠前</p>
-            </td>
-        </tr>
-
-        <tr>
-            <td class="td_left">类型：</td>
-            <td>
-                <label class="radio-inline"><input type="radio" name="data[type]"@if ($info->type == 0) checked="checked"@endif class="input-radio" value="0">
-                    栏目</label>
-                <label class="radio-inline"><input type="radio" name="data[type]"@if ($info->type != 0) checked="checked"@endif class="input-radio" value="1">单页</label>
             </td>
         </tr>
 
@@ -107,7 +115,7 @@
             </td>
         </tr>
     </table>
-			
+
 </form>
 
 @endsection

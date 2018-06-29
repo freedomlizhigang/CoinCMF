@@ -83,6 +83,13 @@
 	        </td>
 	    </tr>
 
+        <tr>
+            <td class="td_left">模板：</td>
+            <td>
+                <input type="text" name="data[tpl]" value="{{ old('data.tpl',$info->show) }}" class="form-control input-sm">
+            </td>
+        </tr>
+
 	    <tr>
 	        <td></td>
 	        <td>

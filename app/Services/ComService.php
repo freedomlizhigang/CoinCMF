@@ -12,9 +12,23 @@ namespace App\Services;
 
 use Cache;
 use Storage;
+use Agent;
 
 class ComService
 {
+    // 判断是不是移动端
+    public function isMoblie()
+    {
+        return (new Agent())->isMobile();
+    }
+    // 判断是不是微信浏览器
+    public function is_weixin()
+    {
+        if (strpos($_SERVER['HTTP_USER_AGENT'], 'MicroMessenger') !== false) {
+            return true;
+        }
+        return false;
+    }
     // 模板权限判断用，减少输出
     public function ifCan($priv = '')
     {
@@ -254,7 +268,7 @@ class ComService
                         $isTrue = imagepng($dstThumbPic, $outPath);
                         break;
                     default :
-                        $outPath = $dir.$filename.'.jpeg';
+                        $outPath = $dir.$filename.'.jpg';
                         // 新图像
                         $dstThumbPic = imagecreatetruecolor($thumbWidth, $thumbHeight);
                         // 原始图像
