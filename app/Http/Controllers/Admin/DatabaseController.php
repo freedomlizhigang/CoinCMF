@@ -31,75 +31,91 @@ class DatabaseController extends Controller
 	 * 数据库导出
 	 */
 	public function getExport() {
-		$title = '备份数据表';
-		// 先把所有表列出来
-		$alltables = DB::select("SHOW TABLE STATUS FROM `".$this->dataname."`");
-		return view('admin.console.database.export',compact('title','alltables'));
+		try {
+			$title = '备份数据表';
+			// 先把所有表列出来
+			$alltables = DB::select("SHOW TABLE STATUS FROM `".$this->dataname."`");
+			return view('admin.console.database.export',compact('title','alltables'));
+		} catch (\Throwable $e) {
+			return view('errors.500');
+		}
 	}
 	public function postExport(Request $req)
 	{
-		if (is_array($req->tables)) {
-			$res = $this->export_database($req->tables,$req->fileid,$req->random,$req->tableid,$req->startfrom,$req->tabletype);
-			if ($res) {
-				return redirect('console/database/import');
+		try {
+			if (is_array($req->tables)) {
+				$res = $this->export_database($req->tables,$req->fileid,$req->random,$req->tableid,$req->startfrom,$req->tabletype);
+				if ($res) {
+					return redirect('console/database/import');
+				}
+				else
+				{
+					return back()->with('message', '备份失败！');
+				}
 			}
 			else
 			{
-				return back()->with('message', '备份失败！');
+				return back()->with('message', '请先选择要备份的数据表！');
 			}
-		}
-		else
-		{
-			return back()->with('message', '请先选择要备份的数据表！');
+		} catch (\Throwable $e) {
+			return back()->with('message', '备份失败！');
 		}
 	}
 	// 数据库恢复
 	public function getImport(Request $req,$pre = '')
 	{
-		$title = '恢复数据库';
-		// 列出文件
-		$allfiles = glob(storage_path('backup/*.sql'));
-		if (is_array($allfiles)) {
-			asort($allfiles);
-			$prepre = '';
-			$info = $infos = array();
-			foreach($allfiles as $id=>$sqlfile) {
-				if(preg_match("/([0-9a-z]{20}_+[0-9]{8}_)([0-9]+)\.sql/i",basename($sqlfile),$num)) {
-					$info['filename'] = basename($sqlfile);
-					$info['filesize'] = filesize($sqlfile);
-					$info['maketime'] = date('Y-m-d H:i:s', filemtime($sqlfile));
-					$info['pre'] = $num[1];
-					$info['number'] = $num[2];
-					$prepre = $info['pre'];
-					$infos[] = $info;
+		try {
+			$title = '恢复数据库';
+			// 列出文件
+			$allfiles = glob(storage_path('backup/*.sql'));
+			if (is_array($allfiles)) {
+				asort($allfiles);
+				$prepre = '';
+				$info = $infos = array();
+				foreach($allfiles as $id=>$sqlfile) {
+					if(preg_match("/([0-9a-z]{20}_+[0-9]{8}_)([0-9]+)\.sql/i",basename($sqlfile),$num)) {
+						$info['filename'] = basename($sqlfile);
+						$info['filesize'] = filesize($sqlfile);
+						$info['maketime'] = date('Y-m-d H:i:s', filemtime($sqlfile));
+						$info['pre'] = $num[1];
+						$info['number'] = $num[2];
+						$prepre = $info['pre'];
+						$infos[] = $info;
+					}
 				}
 			}
-		}
-		if (!is_null($pre) && $pre != '') {
-			if($this->import_database($pre))
-			{
-				return back()->with('message','恢复成功！');
+			if (!is_null($pre) && $pre != '') {
+				if($this->import_database($pre))
+				{
+					return back()->with('message','恢复成功！');
+				}
 			}
+			$infos = collect($infos)->sortByDesc('maketime');
+			return view('admin.console.database.import',compact('title','infos'));
+		} catch (\Throwable $e) {
+			return view('errors.500');
 		}
-		$infos = collect($infos)->sortByDesc('maketime');
-		return view('admin.console.database.import',compact('title','infos'));
 	}
 	// 删除备份的文件
 	public function postDelfile(Request $req)
 	{
-		$filenames = $req->tables;
-		$bakfile_path = storage_path('backup/');
-		if($filenames) {
-			if(is_array($filenames)) {
-				foreach($filenames as $filename) {
-					if($this->fileext($filename)=='sql') {
-						@unlink($bakfile_path.$filename);
+		try{
+			$filenames = $req->tables;
+			$bakfile_path = storage_path('backup/');
+			if($filenames) {
+				if(is_array($filenames)) {
+					foreach($filenames as $filename) {
+						if($this->fileext($filename)=='sql') {
+							@unlink($bakfile_path.$filename);
+						}
 					}
+					return back()->with('message','删除成功！');
 				}
-				return back()->with('message','删除成功！');
+			} else {
+				return back()->with('message','请选择文件！');
 			}
-		} else {
-			return back()->with('message','请选择文件！');
+		} catch (\Throwable $e) {
+			return back()->with('message', '删除备份失败！');
 		}
 	}
 	/**

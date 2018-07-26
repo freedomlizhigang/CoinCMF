@@ -19,8 +19,9 @@
 			<td width="60">排序</td>
 			<td width="60">ID</td>
 			<td>菜单名称</td>
-			<td>类型</td>
-			<td>操作</td>
+			<td width="100">类型</td>
+			<td width="100">显示</td>
+			<td width="120">操作</td>
 		</tr>
 	</thead>
 	<tbody>

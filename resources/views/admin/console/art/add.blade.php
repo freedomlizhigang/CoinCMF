@@ -29,9 +29,18 @@
         </tr>
 
         <tr>
+            <td class="td_left">关键字：</td>
+            <td>
+                <input type="text" name="data[keywords]" value="{{ old('data.keywords') }}" class="form-control">
+                <p class="input-info">不超过255字符</p>
+            </td>
+        </tr>
+
+        <tr>
             <td class="td_left">描述：</td>
             <td>
                 <textarea name="data[describe]" class="form-control input-lg" rows="5">{{ old('data.describe') }}</textarea>
+                <p class="input-info">不超过255字符</p>
             </td>
         </tr>
 
@@ -64,9 +73,30 @@
         </tr>
 
         <tr>
+            <td class="td_left">推荐：</td>
+            <td>
+                <div class="btn-group" data-toggle="buttons">
+                    <label class="btn btn-xs btn-info">
+                        <input type="radio" name="data[push_flag]" autocomplete="off" value="1"> 是
+                    </label>
+                    <label class="btn btn-xs btn-info active">
+                        <input type="radio" name="data[push_flag]" autocomplete="off" checked value="0"> 否
+                    </label>
+                </div>
+            </td>
+        </tr>
+
+        <tr>
             <td class="td_left">来源：</td>
             <td>
                 <input type="text" name="data[source]" value="{{ old('data.source') }}" class="form-control input-sm">
+            </td>
+        </tr>
+
+        <tr>
+            <td class="td_left">点击量：</td>
+            <td>
+                <input type="text" name="data[hits]" value="{{ old('data.hits',99) }}" class="form-control input-xs">
             </td>
         </tr>
 
@@ -82,13 +112,6 @@
             <td>
                 <input type="text" name="data[sort]" value="{{ old('data.sort',0) }}" class="form-control input-xs">
                 <p class="input-info">数字越大越靠前</p>
-            </td>
-        </tr>
-
-        <tr>
-            <td class="td_left">模板：</td>
-            <td>
-                <input type="text" name="data[tpl]" value="{{ old('data.tpl','show') }}" class="form-control input-sm">
             </td>
         </tr>
 

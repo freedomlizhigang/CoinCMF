@@ -9,7 +9,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <!-- 国产浏览器高速/微信开发不要用 -->
      <meta name="renderer" content="webkit">
-     
+
     <!-- 移动设备禁止缩放 -->
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 
@@ -17,8 +17,8 @@
     <meta http-equiv="Cache-Control" content="no-siteapp" />
 
     <link rel="stylesheet" href="{{ $sites['static']}}admin/css/reset.css">
-    <script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
-    <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="{{ $sites['static']}}common/js/jquery.min.js"></script>
+    <script src="{{ $sites['static']}}common/js/bootstrap.min.js"></script>
     <script src="{{ $sites['static']}}admin/js/com.js"></script>
 </head>
 

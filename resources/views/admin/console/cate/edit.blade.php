@@ -73,11 +73,30 @@
         </tr>
 
         <tr>
+            <td class="td_left">显示：</td>
+            <td>
+                <div class="btn-group" data-toggle="buttons">
+                    <label class="btn btn-xs btn-info @if($info->display == 1) active @endif">
+                        <input type="radio" name="data[display]" autocomplete="off"@if($info->display == 1) checked @endif value="1"> 是
+                    </label>
+                    <label class="btn btn-xs btn-info @if($info->display == 0) active @endif">
+                        <input type="radio" name="data[display]" autocomplete="off"@if($info->display == 0) checked @endif value="0"> 否
+                    </label>
+                </div>
+            </td>
+        </tr>
+
+        <tr>
             <td class="td_left">类型：</td>
             <td>
-                <label class="radio-inline"><input type="radio" name="data[type]"@if ($info->type == 0) checked="checked"@endif class="input-radio" value="0">
-                    栏目</label>
-                <label class="radio-inline"><input type="radio" name="data[type]"@if ($info->type != 0) checked="checked"@endif class="input-radio" value="1">单页</label>
+                <div class="btn-group" data-toggle="buttons">
+                    <label class="btn btn-xs btn-info @if($info->type == 1) active @endif">
+                        <input type="radio" name="data[type]" autocomplete="off"@if($info->type == 1) checked @endif value="1"> 栏目
+                    </label>
+                    <label class="btn btn-xs btn-info @if($info->type == 0) active @endif">
+                        <input type="radio" name="data[type]" autocomplete="off"@if($info->type == 0) checked @endif value="0"> 单页
+                    </label>
+                </div>
             </td>
         </tr>
 

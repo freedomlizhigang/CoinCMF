@@ -19,10 +19,11 @@ class ComService
     // 判断是不是移动端
     public function isMoblie()
     {
-        return (new Agent())->isMobile();
+        $res = Agent::isMobile() || Agent::isPhone() || !Agent::isDesktop() || Agent::isAndroidOS() || Agent::isiOS();
+        return $res;
     }
     // 判断是不是微信浏览器
-    public function is_weixin()
+    public function isWeixin()
     {
         if (strpos($_SERVER['HTTP_USER_AGENT'], 'MicroMessenger') !== false) {
             return true;
@@ -32,11 +33,10 @@ class ComService
     // 模板权限判断用，减少输出
     public function ifCan($priv = '')
     {
-        // return Gate::forUser(session('console'))->allows($priv);
         $res = in_array($priv,session('console')->allPriv) || in_array(1,session('console')->allRole);
         return $res;
     }
-	// 转成树形菜单数组
+    // 转成树形菜单数组
     public function toTree($data,$pid)
     {
         $tree = [];
@@ -234,10 +234,10 @@ class ComService
                     Storage::makeDirectory('thumb/'.date('Ymd'));
                 }
                 // 缩略图
-                $thumbWidth = isset($res->thumbWidth) ? $res->thumbWidth : 200;
-                $thumbHeight = isset($res->thumbHeight) ? $res->thumbHeight : 160;
                 $srcWidth = getimagesize($res->file('imgFile'))[0];
                 $srcHeight = getimagesize($res->file('imgFile'))[1];
+                $thumbWidth = isset($res->thumbWidth) ? $res->thumbWidth : 200;
+                $thumbHeight = number_format(($thumbWidth/$srcWidth)*$srcHeight,2,'.','');
                 switch($ext) {
                     case 'gif' :
                         $outPath = $dir.$filename.'.gif';

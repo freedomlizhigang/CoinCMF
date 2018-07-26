@@ -12,6 +12,26 @@ namespace App\Customize;
 
 class Func
 {
+    // 随机二级数组顺序
+    public function array_shuffle($array)
+    {
+        //不是数组
+        if(!is_array($array)) {
+            return array();
+        }
+        //如果为空或者只有1项
+        if(($count=count($array))<=1){
+            return $array;
+        }
+        //得到打乱的键，array_rand(array,number)，第二个参数用来确定要选出几个元素。如果选出的元素不止一个，则返回包含随机键名的数组，否则返回该元素的键名。
+        $rand_keys = array_rand($array, count($array));
+        shuffle($rand_keys);
+        $newArr = array();
+        foreach($rand_keys as $v) {
+            $newArr[$v] = $array[$v];
+        }
+        return $newArr;
+    }
     // 密码生成及判断
     public static function makepwd($pwd = '',$crypt = '')
     {

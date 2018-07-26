@@ -12,6 +12,7 @@ namespace App\Http\Controllers\Admin\Common;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Common\AdposRequest;
+use App\Models\Common\Ad;
 use App\Models\Common\Adpos;
 use Illuminate\Http\Request;
 
@@ -23,22 +24,30 @@ class AdposController extends Controller
      */
     public function getIndex(Request $req)
     {
-    	$title = '广告位管理';
-        $q = $req->input('q','');
-        $list = Adpos::where(function($r)use($q){
-            if ($q != '') {
-                $r->where('name','like','%$q%');
-            }
-        })->orderBy('id','desc')->paginate(10);
-    	return view('admin.console.adpos.index',compact('title','list','q'));
+        try {
+        	$title = '广告位管理';
+            $q = $req->input('q','');
+            $list = Adpos::where(function($r)use($q){
+                if ($q != '') {
+                    $r->where('name','like','%$q%');
+                }
+            })->orderBy('id','desc')->paginate(10);
+        	return view('admin.console.adpos.index',compact('title','list','q'));
+        } catch (\Throwable $e) {
+            return view('errors.500');
+        }
     }
     /**
      * 添加广告位
      */
     public function getAdd()
     {
-    	$title = '添加广告位';
-    	return view('admin.console.adpos.add',compact('title'));
+        try {
+        	$title = '添加广告位';
+        	return view('admin.console.adpos.add',compact('title'));
+        } catch (\Throwable $e) {
+            return view('errors.500');
+        }
     }
     public function postAdd(AdposRequest $res)
     {
@@ -55,9 +64,13 @@ class AdposController extends Controller
      */
     public function getEdit($id = '')
     {
-        $title = '修改广告位';
-        $info = Adpos::findOrFail($id);
-        return view('admin.console.adpos.edit',compact('title','info'));
+        try {
+            $title = '修改广告位';
+            $info = Adpos::findOrFail($id);
+            return view('admin.console.adpos.edit',compact('title','info'));
+        } catch (\Throwable $e) {
+            return view('errors.500');
+        }
     }
     public function postEdit(AdposRequest $res,$id = '')
     {
@@ -71,8 +84,18 @@ class AdposController extends Controller
     }
     public function getDel($id)
     {
-    	// 先查广告位下有没有商品，没有直接删除
-        Adpos::where('id',$id)->delete();
-        return back()->with('message', '删除完成！');
+        try {
+        	// 先查广告位下有没有广告，没有直接删除
+            if (is_null(Ad::where('pos_id',$id)->first())) {
+                Adpos::where('id',$id)->delete();
+                return back()->with('message', '删除完成！');
+            }
+            else
+            {
+                return back()->with('message', '有广告，请先移除广告！');
+            }
+        } catch (\Throwable $e) {
+            return view('errors.500');
+        }
     }
 }

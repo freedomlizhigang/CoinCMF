@@ -17,7 +17,6 @@ use App\Models\Common\Type;
 use App\Models\Console\Config;
 use App\Models\Console\Menu;
 use App\Models\Console\Priv;
-use App\Models\User\Group;
 use Cache;
 use Illuminate\Http\Request;
 
@@ -28,24 +27,28 @@ class IndexController extends Controller
      */
     public function getIndex()
     {
-        $allUrl = $this->allPriv();
-        $main = Menu::where('parentid','=','0')->where('display','=','1')->orderBy('sort','asc')->orderBy('id','asc')->get()->toArray();
-        if (in_array(1, session('console')->allRole))
-        {
-            $mainmenu = $main;
-        }
-        else
-        {
-            $mainmenu = array();
-            foreach ($main as $k => $v) {
-                foreach ($allUrl as $url) {
-                    if ($v['url'] == $url) {
-                        $mainmenu[$k] = $v;
+        try {
+            $allUrl = $this->allPriv();
+            $main = Menu::where('parentid','=','0')->where('display','=','1')->orderBy('sort','asc')->orderBy('id','asc')->get()->toArray();
+            if (in_array(1, session('console')->allRole))
+            {
+                $mainmenu = $main;
+            }
+            else
+            {
+                $mainmenu = array();
+                foreach ($main as $k => $v) {
+                    foreach ($allUrl as $url) {
+                        if ($v['url'] == $url) {
+                            $mainmenu[$k] = $v;
+                        }
                     }
                 }
             }
+            return view('admin.index',compact('mainmenu'));
+        } catch (\Throwable $e) {
+            return view('errors.500');
         }
-        return view('admin.index',compact('mainmenu'));
     }
 
     /**
@@ -53,53 +56,61 @@ class IndexController extends Controller
      */
     public function getMain(Request $req)
     {
-        $title = '系统信息';
-        return view('admin.console.index.main',compact('title'));
+        try {
+            $title = '系统信息';
+            return view('admin.console.index.main',compact('title'));
+        } catch (\Throwable $e) {
+            return view('errors.500');
+        }
     }
     public function getLeft($pid)
     {
-        // 权限url
-        $allUrl = $this->allPriv();
-        // 二级菜单
-        $left = Menu::where('parentid','=',$pid)->where('display','=','1')->orderBy('sort','asc')->orderBy('id','asc')->get()->toArray();
-        $leftmenu = array();
-        // 判断权限
-        if (!in_array(1, session('console')->allRole))
-        {
-            foreach ($left as $k => $v) {
-                foreach ($allUrl as $url) {
-                    if ($v['url'] == $url) {
-                        $leftmenu[$k] = $v;
-                    }
-                }
-            }
-        }
-        else
-        {
-            $leftmenu = $left;
-        }
-        // 三级菜单
-        foreach ($leftmenu as $k => $v) {
-            // 取所有下级菜单
-            $res = Menu::where('parentid','=',$v['id'])->where('display','=','1')->orderBy('sort','asc')->orderBy('id','asc')->get()->toArray();
-            // 进行权限判断
+        try {
+            // 权限url
+            $allUrl = $this->allPriv();
+            // 二级菜单
+            $left = Menu::where('parentid','=',$pid)->where('display','=','1')->orderBy('sort','asc')->orderBy('id','asc')->get()->toArray();
+            $leftmenu = array();
+            // 判断权限
             if (!in_array(1, session('console')->allRole))
             {
-                foreach ($res as $s => $v) {
+                foreach ($left as $k => $v) {
                     foreach ($allUrl as $url) {
                         if ($v['url'] == $url) {
-                            $leftmenu[$k]['submenu'][$s] = $v;
+                            $leftmenu[$k] = $v;
                         }
                     }
                 }
             }
             else
             {
-                $leftmenu[$k]['submenu'] = $res;
+                $leftmenu = $left;
             }
+            // 三级菜单
+            foreach ($leftmenu as $k => $v) {
+                // 取所有下级菜单
+                $res = Menu::where('parentid','=',$v['id'])->where('display','=','1')->orderBy('sort','asc')->orderBy('id','asc')->get()->toArray();
+                // 进行权限判断
+                if (!in_array(1, session('console')->allRole))
+                {
+                    foreach ($res as $s => $v) {
+                        foreach ($allUrl as $url) {
+                            if ($v['url'] == $url) {
+                                $leftmenu[$k]['submenu'][$s] = $v;
+                            }
+                        }
+                    }
+                }
+                else
+                {
+                    $leftmenu[$k]['submenu'] = $res;
+                }
+            }
+            // dd($leftm enu);
+            return view('admin.left',compact('leftmenu'));
+        } catch (\Throwable $e) {
+            return view('errors.500');
         }
-        // dd($leftm enu);
-        return view('admin.left',compact('leftmenu'));
     }
     // 查出所有有权限的url
     private function allPriv()
@@ -113,21 +124,19 @@ class IndexController extends Controller
     // 更新缓存
     public function getCache()
     {
-        $config = Config::select('sitename','title','keyword','describe','theme','person','phone','email','address','content')->findOrFail(1)->toArray();
-        Cache::forever('config',$config);
-        echo "<p><small>更新系统缓存成功...</small></p>";
-        app('com')->updateCache(new Cate,'cateCache',1);
-        echo "<p><small>更新栏目缓存成功...</small></p>";
-        app('com')->updateCache(new Menu,'menuCache',1);
-        echo "<p><small>更新后台菜单缓存成功...</small></p>";
-        app('com')->updateCache(new Type,'typeCache',1);
-        echo "<p><small>更新分类缓存成功...</small></p>";
-        $data = Group::where('status',1)->select('id','name','points','discount')->get()->keyBy('id')->toArray();
-        Cache::forever('group',$data);
-        echo "<p><small>更新会员组缓存成功...</small></p>";
-        $area = Area::select('id','areaname')->get()->keyBy('id')->toArray();
-        Cache::forever('area',$area);
-        echo "<p><small>更新地区缓存成功...</small></p>";
-        echo "<p><small>更新缓存完成...</small></p>";
+        try {
+            $config = Config::select('sitename','title','keyword','describe','theme','person','phone','email','address','content')->findOrFail(1)->toArray();
+            Cache::forever('config',$config);
+            echo "<p><small>更新系统缓存成功...</small></p>";
+            app('com')->updateCache(new Cate,'cateCache',1);
+            echo "<p><small>更新栏目缓存成功...</small></p>";
+            app('com')->updateCache(new Menu,'menuCache',1);
+            echo "<p><small>更新后台菜单缓存成功...</small></p>";
+            app('com')->updateCache(new Type,'typeCache',1);
+            echo "<p><small>更新分类缓存成功...</small></p>";
+            echo "<p><small>更新缓存完成...</small></p>";
+        } catch (\Throwable $e) {
+            return view('errors.500');
+        }
     }
 }

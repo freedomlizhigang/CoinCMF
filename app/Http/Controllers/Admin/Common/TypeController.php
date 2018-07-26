@@ -13,8 +13,6 @@ namespace App\Http\Controllers\Admin\Common;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Common\TypeRequest;
 use App\Models\Common\Type;
-use Carbon\Carbon;
-use DB;
 use Illuminate\Http\Request;
 
 class TypeController extends Controller
@@ -25,10 +23,13 @@ class TypeController extends Controller
      */
     public function getIndex($pid = 0)
     {
-    	$title = '分类管理';
-        // 超级管理员可查看所有部门下分类
-        $list = Type::where('parentid',$pid)->orderBy('sort','asc')->get();
-    	return view('admin.console.type.index',compact('title','list','pid'));
+    	try {
+            $title = '分类管理';
+            $list = Type::where('parentid',$pid)->orderBy('sort','asc')->get();
+        	return view('admin.console.type.index',compact('title','list','pid'));
+        } catch (\Throwable $e) {
+            return view('errors.500');
+        }
     }
     /**
      * 添加分类
@@ -37,8 +38,12 @@ class TypeController extends Controller
      */
     public function getAdd($pid = '0')
     {
-    	$title = '添加分类';
-    	return view('admin.console.type.add',compact('title','pid'));
+        try {
+        	$title = '添加分类';
+        	return view('admin.console.type.add',compact('title','pid'));
+        } catch (\Throwable $e) {
+            return view('errors.500');
+        }
     }
     public function postAdd(TypeRequest $req,$pid = '0')
     {
@@ -60,12 +65,16 @@ class TypeController extends Controller
      */
     public function getEdit($id = '')
     {
-        $title = '修改分类';
-        $info = Type::findOrFail($id);
-        $all = Type::orderBy('sort','asc')->get();
-        $tree = app('com')->toTree($all,'0');
-        $treeHtml = app('com')->toTreeSelect($tree,$info->parentid);
-        return view('admin.console.type.edit',compact('title','info','treeHtml'));
+        try {
+            $title = '修改分类';
+            $info = Type::findOrFail($id);
+            $all = Type::orderBy('sort','asc')->get();
+            $tree = app('com')->toTree($all,'0');
+            $treeHtml = app('com')->toTreeSelect($tree,$info->parentid);
+            return view('admin.console.type.edit',compact('title','info','treeHtml'));
+        } catch (\Throwable $e) {
+            return view('errors.500');
+        }
     }
     public function postEdit(TypeRequest $req,$id = '')
     {
@@ -81,17 +90,16 @@ class TypeController extends Controller
     }
     public function getDel($id)
     {
-        // 先找出所有子分类，再判断子分类中是否有文章，如果有文章，返回错误
-        $allChild = Type::where('id',$id)->value('arrchildid');
-        // 所有子分类ID转换为集合，查看是否含有文章或者专题
-        $childs = collect(explode(',',$allChild));
         try {
+            // 先找出所有子分类
+            $allChild = Type::where('id',$id)->value('arrchildid');
+            // 所有子分类ID转换为集合，查看是否含有文章或者专题
+            $childs = collect(explode(',',$allChild));
             Type::destroy($childs);
-            $message = '删除成功！';
             app('com')->updateCache(new Type(),'typeCache',1);
+            return back()->with('message', '删除成功！');
         } catch (\Throwable $e) {
             return back()->with('message','删除失败，请稍后再试！');
         }
-        return back()->with('message', $message);
     }
 }

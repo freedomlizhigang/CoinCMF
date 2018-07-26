@@ -21,8 +21,12 @@ class PublicController extends Controller
 {
     public function getLogin()
     {
-        if(\Session::has('console')){return redirect('/console/index/index');}
-        return view('admin.login');
+        try {
+            if(\Session::has('console')){return redirect('/console/index/index');}
+            return view('admin.login');
+        } catch (\Throwable $e) {
+            return view('errors.500');
+        }
     }
     /**
      * 登录提交数据验证功能，成功后跳转到后台首页
@@ -30,26 +34,29 @@ class PublicController extends Controller
      */
     public function postLogin(Request $res)
     {
-        if(\Session::has('console')){return redirect('/console/index/index');}
-
-        $username = $res->input('name');
-        $pwd = $res->input('password');
-        $user = Admin::where('status',1)->where('name',$username)->first();
-        if (is_null($user)) {
-            return back()->with('message','用户不存在或已被禁用！');
-        }
-        else
-        {
-            if ($user->password != Func::makepwd($pwd,$user->crypt)) {
-                return back()->with('message','密码不正确！');
+        try {
+            if(\Session::has('console')){return redirect('/console/index/index');}
+            $username = $res->input('name');
+            $pwd = $res->input('password');
+            $user = Admin::where('status',1)->where('name',$username)->first();
+            if (is_null($user)) {
+                return back()->with('message','用户不存在或已被禁用！');
             }
-            // 查出所有用户权限并存储下来
-            $allRole = RoleUser::where('user_id',$user->id)->pluck('role_id')->toArray();
-            $user->allRole = $allRole;
-            $allPriv = Priv::whereIn('role_id',$allRole)->pluck('label');
-            $user->allPriv = $allPriv->unique()->toArray();
-            \Session::put('console',$user);
-            return redirect('/console/index/index');
+            else
+            {
+                if ($user->password != Func::makepwd($pwd,$user->crypt)) {
+                    return back()->with('message','密码不正确！');
+                }
+                // 查出所有用户权限并存储下来
+                $allRole = RoleUser::where('user_id',$user->id)->pluck('role_id')->toArray();
+                $user->allRole = $allRole;
+                $allPriv = Priv::whereIn('role_id',$allRole)->pluck('label');
+                $user->allPriv = $allPriv->unique()->toArray();
+                \Session::put('console',$user);
+                return redirect('/console/index/index');
+            }
+        } catch (\Throwable $e) {
+            return back()->with('message','登录失败！');
         }
     }
     /**
@@ -57,7 +64,11 @@ class PublicController extends Controller
      */
     public function getLogout()
     {
-        \Session::put('console',null);
-        return redirect('/console/login');
+        try {
+            \Session::put('console',null);
+            return redirect('/console/login');
+        } catch (\Throwable $e) {
+            return back()->with('message','退出登录失败！');
+        }
     }
 }

@@ -64,11 +64,30 @@
         </tr>
 
         <tr>
+            <td class="td_left">显示：</td>
+            <td>
+                <div class="btn-group" data-toggle="buttons">
+                    <label class="btn btn-xs btn-info active">
+                        <input type="radio" name="data[display]" autocomplete="off" checked value="1"> 是
+                    </label>
+                    <label class="btn btn-xs btn-info">
+                        <input type="radio" name="data[display]" autocomplete="off" value="0"> 否
+                    </label>
+                </div>
+            </td>
+        </tr>
+
+        <tr>
             <td class="td_left">类型：</td>
             <td>
-                <label class="radio-inline"><input type="radio" name="data[type]" checked="checked" class="input-radio" value="0">
-                    栏目</label>
-                <label class="radio-inline"><input type="radio" name="data[type]" class="input-radio" value="1">单页</label>
+                <div class="btn-group" data-toggle="buttons">
+                    <label class="btn btn-xs btn-info active">
+                        <input type="radio" name="data[type]" autocomplete="off" checked value="1"> 栏目
+                    </label>
+                    <label class="btn btn-xs btn-info">
+                        <input type="radio" name="data[type]" autocomplete="off" value="0"> 单页
+                    </label>
+                </div>
             </td>
         </tr>
 

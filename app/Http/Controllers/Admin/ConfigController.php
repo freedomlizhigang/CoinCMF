@@ -19,16 +19,24 @@ class ConfigController extends Controller
 {
     public function index(Request $req)
     {
-    	$title = '系统配置';
-    	$config = Config::findOrFail(1);
-    	return view('admin.console.config.index',compact('title','config'));
+        try {
+        	$title = '系统配置';
+        	$config = Config::findOrFail(1);
+        	return view('admin.console.config.index',compact('title','config'));
+        } catch (\Throwable $e) {
+            return view('errors.500');
+        }
     }
     public function postIndex(Request $req)
     {
-    	$data = $req->input('data');
-    	Config::where('id',1)->update($data);
-    	// 更新缓存
-    	Cache::forever('config',$data);
-    	return $this->adminJson(1,'更新成功');
+        try {
+        	$data = $req->input('data');
+        	Config::where('id',1)->update($data);
+        	// 更新缓存
+        	Cache::forever('config',$data);
+            return $this->adminJson(1,'更新成功!');
+        } catch (\Throwable $e) {
+        	return $this->adminJson(0,'更新失败！');
+        }
     }
 }

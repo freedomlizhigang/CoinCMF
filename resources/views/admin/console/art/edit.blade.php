@@ -26,10 +26,19 @@
 	        </td>
 	    </tr>
 
-	    <tr>
-	        <td class="td_left">描述：</td>
-	        <td>
-	            <textarea name="data[describe]" class="form-control input-lg" rows="5">{{ $info->describe }}</textarea>
+        <tr>
+            <td class="td_left">关键字：</td>
+            <td>
+                <input type="text" name="data[keywords]" value="{{ $info->keywords }}" class="form-control">
+                <p class="input-info">不超过255字符</p>
+            </td>
+        </tr>
+
+        <tr>
+            <td class="td_left">描述：</td>
+            <td>
+                <textarea name="data[describe]" class="form-control input-lg" rows="5">{{ $info->describe }}</textarea>
+                <p class="input-info">不超过255字符</p>
 	        </td>
 	    </tr>
 
@@ -61,12 +70,33 @@
 	        </td>
 	    </tr>
 
+        <tr>
+            <td class="td_left">推荐：</td>
+            <td>
+                <div class="btn-group" data-toggle="buttons">
+                    <label class="btn btn-xs btn-info @if($info->push_flag == 1) active @endif">
+                        <input type="radio" name="data[push_flag]" autocomplete="off" @if($info->push_flag == 1) checked @endif value="1"> 是
+                    </label>
+                    <label class="btn btn-xs btn-info @if($info->push_flag == 0) active @endif">
+                        <input type="radio" name="data[push_flag]" autocomplete="off" @if($info->push_flag == 0) checked @endif value="0"> 否
+                    </label>
+                </div>
+            </td>
+        </tr>
+
 	    <tr>
 	        <td class="td_left">来源：</td>
 	        <td>
 	            <input type="text" name="data[source]" value="{{ $info->source }}" class="form-control input-sm">
 	        </td>
 	    </tr>
+
+        <tr>
+            <td class="td_left">点击量：</td>
+            <td>
+                <input type="text" name="data[hits]" value="{{ $info->hits }}" class="form-control input-xs">
+            </td>
+        </tr>
 
 	    <tr>
             <td class="td_left">发布时间：</td>
@@ -82,13 +112,6 @@
 	            <p class="input-info">数字越大越靠前</p>
 	        </td>
 	    </tr>
-
-        <tr>
-            <td class="td_left">模板：</td>
-            <td>
-                <input type="text" name="data[tpl]" value="{{ old('data.tpl',$info->show) }}" class="form-control input-sm">
-            </td>
-        </tr>
 
 	    <tr>
 	        <td></td>

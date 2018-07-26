@@ -16,6 +16,11 @@
 			<option value="">请选择栏目</option>
 			{!! $cate !!}
 		</select>
+		<select name="push_flag" id="push_flag" class="form-control">
+			<option value="">是否推荐</option>
+			<option value="1"@if($push_flag == 1) selected="selected"@endif>推荐</option>
+			<option value="0"@if($push_flag == 0) selected="selected"@endif>普通</option>
+		</select>
 		开始时间：
 		<input type="text" name="starttime" class="form-control" value="{{ $starttime }}" id="laydate">
 		结束时间：
@@ -34,6 +39,7 @@
 			<th width="50">ID</th>
 			<th>标题</th>
 			<th width="100">栏目</th>
+			<th width="100">点击量</th>
 			<th width="180">发布时间</th>
 			<th width="100">操作</th>
 		</tr>
@@ -48,11 +54,13 @@
 				<a href="{{ url('/post',$a->url) }}" target="_blank">{{ $a->title }}</a>
 				@if($a->thumb != '')
 				<span class="color_red">图</span>
-				@endif @if($a->ispos == 1)
+				@endif
+				@if($a->push_flag == 1)
 				<span class="text-success">荐</span>
 				@endif
 			</td>
 			<td>{{ $a->cate->name }}</td>
+			<td>{{ $a->hits }}</td>
 			<td>{{ $a->publish_at }}</td>
 			<td>
 				@if(App::make('com')->ifCan('art-edit'))
@@ -80,8 +88,8 @@
 	</div>
 </form>
 <!-- 分页，appends是给分页添加参数 -->
-<div class="pages clearfix">
-	{!! $list->appends(['catid' =>$catid,'q'=>$key,'starttime'=>$starttime,'endtime'=>$endtime])->links() !!}
+<div class="pages clearfix pull-right">
+	{!! $list->appends(['catid' =>$catid,'q'=>$key,'push_flag'=>$push_flag,'starttime'=>$starttime,'endtime'=>$endtime])->links() !!}
 </div>
 <!-- 选中当前栏目 -->
 <script>

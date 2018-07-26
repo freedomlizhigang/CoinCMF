@@ -25,23 +25,31 @@ class AdminController extends Controller
 {
     public function getIndex(Request $req)
     {
-    	$title = '用户列表';
-        $key = isset($req->q) ? $req->q : 0;
-        $list = Admin::with(['section','role'])->where(function($q) use($key){
-                    if($key)
-                    {
-                        $q->where('name','like','%'.$key.'%')->orWhere('realname','like','%'.$key.'%');
-                    }
-                })->paginate(10);
-        return view('admin.console.admins.index',compact('list','title','key'));
+        try {
+        	$title = '用户列表';
+            $key = isset($req->q) ? $req->q : 0;
+            $list = Admin::with(['section','role'])->where(function($q) use($key){
+                        if($key)
+                        {
+                            $q->where('name','like','%'.$key.'%')->orWhere('realname','like','%'.$key.'%');
+                        }
+                    })->paginate(10);
+            return view('admin.console.admins.index',compact('list','title','key'));
+        } catch (\Throwable $e) {
+            return view('errors.500');
+        }
     }
     // 添加用户
     public function getAdd()
     {
-        $title = '添加用户';
-        $section = Section::where('status',1)->get();
-        $rolelist = Role::where('status',1)->get();
-        return view('admin.console.admins.add',compact('title','rolelist','section'));
+        try {
+            $title = '添加用户';
+            $section = Section::where('status',1)->get();
+            $rolelist = Role::where('status',1)->get();
+            return view('admin.console.admins.add',compact('title','rolelist','section'));
+        } catch (\Throwable $e) {
+            return view('errors.500');
+        }
     }
     public function postAdd(AdminRequest $req)
     {
@@ -77,22 +85,26 @@ class AdminController extends Controller
     // 修改资料
     public function getEdit($uid)
     {
-        $title = '修改资料';
-        $rolelist = Role::where('status',1)->get();
-        $section = Section::where('status',1)->get();
-        $info = Admin::with('role')->findOrFail($uid);
-        $rids = '';
-        foreach ($info->role as $r) {
-            $rids .= "'".$r->id."',";
+        try{
+            $title = '修改资料';
+            $rolelist = Role::where('status',1)->get();
+            $section = Section::where('status',1)->get();
+            $info = Admin::with('role')->findOrFail($uid);
+            $rids = '';
+            foreach ($info->role as $r) {
+                $rids .= "'".$r->id."',";
+            }
+            return view('admin.console.admins.edit',compact('title','info','rolelist','section','rids'));
+        } catch (\Throwable $e) {
+            return view('errors.500');
         }
-        return view('admin.console.admins.edit',compact('title','info','rolelist','section','rids'));
     }
     public function postEdit(AdminRequest $req,$uid)
     {
-        $data = $req->input('data');
         // 添加，事务
         DB::beginTransaction();
         try {
+            $data = $req->input('data');
             Admin::where('id',$uid)->update($data);
             $rids = $req->role_id;
             // 先删除再添加
@@ -116,64 +128,92 @@ class AdminController extends Controller
     // 修改密码
     public function getPwd($uid)
     {
-        $title = '修改密码';
-        // 拼接返回用的url参数
-        $info = Admin::findOrFail($uid);
-        return view('admin.console.admins.pwd',compact('title','info'));
+        try {
+            $title = '修改密码';
+            // 拼接返回用的url参数
+            $info = Admin::findOrFail($uid);
+            return view('admin.console.admins.pwd',compact('title','info'));
+        } catch (\Throwable $e) {
+            return view('errors.500');
+        }
     }
     public function postPwd(AdminRequest $req,$uid)
     {
-        $crypt = str_random(10);
-        $pwd = Func::makepwd($req->input('data.password'),$crypt);
-        Admin::where('id',$uid)->update(['password'=>$pwd,'crypt'=>$crypt]);
-        return $this->adminJson(1,'修改密码成功！');
+        try {
+            $crypt = str_random(10);
+            $pwd = Func::makepwd($req->input('data.password'),$crypt);
+            Admin::where('id',$uid)->update(['password'=>$pwd,'crypt'=>$crypt]);
+            return $this->adminJson(1,'修改密码成功！');
+        } catch (\Throwable $e) {
+            return $this->adminJson(0,'修改密码失败！');
+        }
     }
     // 删除用户
     public function getDel($uid)
     {
-        if($uid != 1)
-        {
-            Admin::destroy($uid);
-            RoleUser::where('user_id',$uid)->delete();
-            return back()->with('message', '删除用户成功！');
-        }
-        else
-        {
-            return back()->with('message', '超级管理员不能被删除！');
+        try {
+            if($uid != 1)
+            {
+                Admin::destroy($uid);
+                RoleUser::where('user_id',$uid)->delete();
+                return back()->with('message', '删除用户成功！');
+            }
+            else
+            {
+                return back()->with('message', '超级管理员不能被删除！');
+            }
+        } catch (\Throwable $e) {
+            return back()->with('message', '删除失败！');
         }
     }
 
     // 个人修改资料
     public function getMyedit()
     {
-        $title = '修改个人资料';
-        $info = Admin::with('role')->findOrFail(session('console')->id);
-        return view('admin.console.admins.myedit',compact('title','info'));
+        try {
+            $title = '修改个人资料';
+            $info = Admin::with('role')->findOrFail(session('console')->id);
+            return view('admin.console.admins.myedit',compact('title','info'));
+        } catch (\Throwable $e) {
+            return view('errors.500');
+        }
     }
     public function postMyedit(AdminRequest $request)
     {
-        $data = $request->input('datas');
-        Admin::where('id',session('console')->id)->update($data);
-        return $this->adminJson(1,'修改个人资料成功！');
+        try {
+            $data = $request->input('datas');
+            Admin::where('id',session('console')->id)->update($data);
+            return $this->adminJson(1,'修改个人资料成功！');
+        } catch (\Throwable $e) {
+            return $this->adminJson(0,'修改个人资料失败！');
+        }
     }
     // 修改密码
     public function getMypwd()
     {
-        $title = '修改密码';
-        $info = Admin::findOrFail(session('console')->id);
-        return view('admin.console.admins.mypwd',compact('title','info'));
+        try {
+            $title = '修改密码';
+            $info = Admin::findOrFail(session('console')->id);
+            return view('admin.console.admins.mypwd',compact('title','info'));
+        } catch (\Throwable $e) {
+            return view('errors.500');
+        }
     }
     public function postMypwd(AdminRequest $req)
     {
-        $crypt = str_random(10);
-        $pwd = Func::makepwd($req->input('data.password'),$crypt);
-        $res = Admin::where('id',session('console')->id)->update(['password'=>$pwd,'crypt'=>$crypt]);
-        if ($res) {
-            \Session::put('console',null);
-            return $this->adminJson(1,'修改密码成功，请登陆登录！',url('/console/login'));
-        }
-        else
-        {
+        try {
+            $crypt = str_random(10);
+            $pwd = Func::makepwd($req->input('data.password'),$crypt);
+            $res = Admin::where('id',session('console')->id)->update(['password'=>$pwd,'crypt'=>$crypt]);
+            if ($res) {
+                \Session::put('console',null);
+                return $this->adminJson(1,'修改密码成功，请登陆登录！',url('/console/login'));
+            }
+            else
+            {
+                return $this->adminJson(0,'修改密码失败！');
+            }
+        } catch (\Throwable $e) {
             return $this->adminJson(0,'修改密码失败！');
         }
     }
