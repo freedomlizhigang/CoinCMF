@@ -11,7 +11,7 @@
 	@foreach($leftmenu as $lm)
 		<ul class="left_list">
 			@foreach($lm['submenu'] as $slm)
-			<li class="sub_menu clearfix" id="left_menu{{ $slm['id'] }}"><a href="javascript:;" onclick="_LM({{ $slm['id'] }},'/console/{{ $slm['url'] }}')" class="sub_menu_a">{{ $slm['name'] }}</a></li>
+			<li class="sub_menu clearfix" id="left_menu{{ $slm['id'] }}"><a href="javascript:;" onclick="_LM({{ $slm['id'] }},'/console/{{ $slm['url'] }}')" class="sub_menu_a"><span class="left_list_icon {{ $lm['icon'] }}" aria-hidden="true"></span>{{ $slm['name'] }}</a></li>
 			@endforeach
 		</ul>
 	@endforeach

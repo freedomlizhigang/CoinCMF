@@ -10,9 +10,9 @@
     <link href="{{ $sites['static']}}home/css/bootstrap.min.css" rel="stylesheet">
     <link href="{{ $sites['static']}}home/css/home.css" rel="stylesheet">
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
+    <script src="{{ $sites['static']}}common/js/jquery.min.js"></script>
     <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
-    <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="{{ $sites['static']}}common/js/bootstrap.min.js"></script>
 </head>
 
 <body>

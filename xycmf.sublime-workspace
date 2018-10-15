@@ -752,11 +752,29 @@
 		"/D/wwwroot/XYCMF",
 		"/D/wwwroot/XYCMF/app",
 		"/D/wwwroot/XYCMF/app/Http",
-		"/D/wwwroot/XYCMF/app/Services",
-		"/D/wwwroot/XYCMF/resources"
+		"/D/wwwroot/XYCMF/public",
+		"/D/wwwroot/XYCMF/public/statics",
+		"/D/wwwroot/XYCMF/public/statics/admin",
+		"/D/wwwroot/XYCMF/public/statics/admin/css",
+		"/D/wwwroot/XYCMF/resources",
+		"/D/wwwroot/XYCMF/resources/views",
+		"/D/wwwroot/XYCMF/resources/views/admin"
 	],
 	"file_history":
 	[
+		"/D/wwwroot/XYCMF/resources/views/admin/left.blade.php",
+		"/D/wwwroot/XYCMF/resources/views/admin/index.blade.php",
+		"/D/wwwroot/XYCMF/public/statics/admin/css/reset.scss",
+		"/D/wwwroot/XYCMF/resources/views/admin/login.blade.php",
+		"/C/Windows/System32/drivers/etc/hosts",
+		"/D/wwwroot/juqi-kq/sql/2018-06-26-init.sql",
+		"/D/wwwroot/XYCMF/resources/views/home/layout.blade.php",
+		"/D/wwwroot/XYCMF/database/migrations/2018_07_25_110734_add_keywords_psuh_flag_del_flag_to_articles.php",
+		"/D/wwwroot/XYCMF/database/migrations/2018_07_25_105109_add_display_to_categorys.php",
+		"/D/wwwroot/XYCMF/app/Http/Controllers/Admin/Common/ArtController.php",
+		"/D/wwwroot/XYCMF/app/Http/Controllers/Admin/User/UserController.php",
+		"/D/wwwroot/XYCMF/app/Models/Console/Config.php",
+		"/D/wwwroot/XYCMF/app/Services/TagService.php",
 		"/D/wwwroot/XYCMF/app/Services/ComService.php",
 		"/D/wwwroot/XYCMF/app/Http/Controllers/Api/UserController.php",
 		"/D/wwwroot/XYCMF/routes/admin.php",
@@ -765,12 +783,10 @@
 		"/D/wwwroot/XYCMF/app/Models/Common/Community.php",
 		"/D/wwwroot/XYCMF/app/Models/Common/Adpos.php",
 		"/D/wwwroot/XYCMF/app/Http/Controllers/Admin/PublicController.php",
-		"/C/Windows/System32/drivers/etc/hosts",
 		"/D/wwwroot/XYCMF/composer.json",
 		"/D/wwwroot/xycms/sftp-config.json",
 		"/D/wwwroot/XYCMF/app/Http/Controllers/Home/HomeController.php",
 		"/D/wwwroot/XYCMF/storage/logs/laravel-2018-06-26.log",
-		"/D/wwwroot/XYCMF/app/Http/Controllers/Admin/Common/ArtController.php",
 		"/D/wwwroot/XYCMF/resources/views/admin/console/art/index.blade.php",
 		"/D/wwwroot/XYCMF/.gitignore",
 		"/D/wwwroot/XYCMF/sql/2018-06-26-init.sql",
@@ -791,7 +807,6 @@
 		"/D/wwwroot/XYCMF/app/Http/Controllers/Admin/Common/AttrController.php",
 		"/D/wwwroot/XYCMF/app/Http/Controllers/Admin/Common/TypeController.php",
 		"/D/wwwroot/XYCMF/app/Http/Controllers/Admin/Common/CommunityController.php",
-		"/D/wwwroot/XYCMF/app/Http/Controllers/Admin/User/UserController.php",
 		"/D/wwwroot/XYCMF/app/Http/Controllers/Admin/User/GroupController.php",
 		"/D/wwwroot/XYCMF/app/Http/Controllers/Admin/DatabaseController.php",
 		"/D/wwwroot/XYCMF/app/Http/Controllers/Admin/ConfigController.php",
@@ -842,7 +857,6 @@
 		"/D/wwwroot/XYCMF/app/Models/Console/Role.php",
 		"/D/wwwroot/XYCMF/app/Models/Console/RoleUser.php",
 		"/D/wwwroot/XYCMF/app/Models/Console/Section.php",
-		"/D/wwwroot/XYCMF/app/Models/Console/Config.php",
 		"/D/wwwroot/XYCMF/app/Customize/Sign.php",
 		"/D/wwwroot/XYCMF/app/Customize/Ueditor.php",
 		"/D/wwwroot/XYCMF/app/Models/Common/Attr.php",
@@ -850,7 +864,6 @@
 		"/D/wwwroot/XYCMF/app/Models/User/User.php",
 		"/D/wwwroot/XYCMF/app/Models/User/Group.php",
 		"/D/wwwroot/XYCMF/app/Models/Console/Admin.php",
-		"/D/wwwroot/XYCMF/app/Services/TagService.php",
 		"/D/wwwroot/XYCMF/app/Providers/ComServiceProvider.php",
 		"/D/wwwroot/XYCMF/app/Customize/MyCrypt.php",
 		"/D/wwwroot/guoshuhao/config/wechat.php",
@@ -873,28 +886,21 @@
 		"/D/wwwroot/guoshuhao/public/statics/home/js/MB_Default.js",
 		"/D/wwwroot/guoshuhao/public/statics/home/js/com.js",
 		"/D/wwwroot/XYCMF/resources/views/home/home.blade.php",
-		"/D/wwwroot/XYCMF/resources/views/home/layout.blade.php",
 		"/D/wwwroot/XYCMF/.env",
 		"/D/wwwroot/guoshuhao/.env",
 		"/D/wwwroot/XYCMF/sftp-config.json",
-		"/D/wwwroot/XYCMF/public/statics/admin/css/reset.scss",
-		"/D/wwwroot/XYCMF/public/statics/admin/css/reset.css",
-		"/D/wwwroot/XYCMF/app/Console/Commands/AreaCommunity.php",
-		"/D/wwwroot/XYCMF/app/Http/Controllers/Wx/WxController.php",
-		"/D/wwwroot/XYCMF/app/Exceptions/Handler.php",
-		"/D/wechat_mini/CarStop-work/app.js",
-		"/D/wechat_mini/CarStop-work/app.json",
-		"/D/wechat_mini/CarStop-work/project.config.json"
+		"/D/wwwroot/XYCMF/public/statics/admin/css/reset.css"
 	],
 	"find":
 	{
-		"height": 27.0
+		"height": 41.0
 	},
 	"find_in_files":
 	{
 		"height": 105.0,
 		"where_history":
 		[
+			"D:\\wwwroot\\XYCMF\\resources\\views",
 			"D:\\wwwroot\\XYCMF\\app\\Http\\Controllers\\Admin",
 			"D:\\wwwroot\\XYCMF\\app\\Http\\Controllers",
 			"D:\\wwwroot\\XYCMF\\app",
@@ -1006,6 +1012,13 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"3",
+			"70px",
+			"191D21",
+			"04a8c5",
+			"232930",
+			"has-success",
+			"https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js",
 			"res",
 			"cate_id",
 			"Art::",
@@ -1126,14 +1139,7 @@
 			"endtime",
 			"status",
 			"$v->price",
-			"price",
-			"exce;order",
-			"order",
-			"ul",
-			"1.1.",
-			"li",
-			" class=\"bul4\"",
-			" class=\"bul3\""
+			"price"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -1141,6 +1147,7 @@
 		"regex": false,
 		"replace_history":
 		[
+			"{{ $sites['static']}}common/js/jquery.min.js",
 			"paginate(10)",
 			"admin.console.",
 			"adminJson",

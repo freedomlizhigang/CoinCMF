@@ -15,28 +15,31 @@
   <meta http-equiv="Cache-Control" content="no-siteapp" />
   <link rel="stylesheet" href="{{ $sites['static']}}admin/css/reset.css"></head>
 
-<body>
-  <div class="login_bg">
-    <div class="login_box">
-      <img src="{{ $sites['static']}}admin/images/login_h.png" class="center-block" alt="希夷shop管理中心">
-      <form method="POST" action="{{ url('/console/login') }}" class="mt10">
-        {!! csrf_field() !!}
-        <div class="clearfix mt20">
-          <label for="username" class="login_form_left">用户名：</label>
-          <input type="text" name="name" value="{{ old('name') }}" class="form-control login_form_right">
+<body class="login-body">
+  <div class="login_box">
+    <img src="{{ $sites['static']}}admin/images/login_h.png" class="center-block" alt="希夷shop管理中心">
+    <form method="POST" action="{{ url('/console/login') }}" class="login-form">
+      {!! csrf_field() !!}
+      <div class="form-group has-feedback">
+        <div class="input-group">
+          <span class="input-group-addon"><img src="{{ $sites['static']}}admin/images/login-icon-user.png" alt=""></span>
+          <input type="text" name="name" value="{{ old('name') }}" class="form-control login_form_right" placeholder="请输入用户名">
         </div>
-        <div class="clearfix mt10">
-          <label for="password" class="login_form_left">密码：</label>
-          <input type="password" name="password" class="form-control login_form_right">
+      </div>
+
+      <div class="form-group has-feedback">
+        <div class="input-group">
+          <span class="input-group-addon"><img src="{{ $sites['static']}}admin/images/login-icon-pwd.png" alt=""></span>
+          <input type="password" name="password" value="{{ old('name') }}" class="form-control login_form_right" placeholder="请输入密码">
         </div>
-        @if(session('message'))
-        <span class="help-block text-center">{{ session('message') }}</span>
-        @endif
-        <div class="form-group mt10">
-          <input type="submit" value="登录" class="login_submit">
-        </div>
-      </form>
-    </div>
+      </div>
+      @if(session('message'))
+      <span class="help-block text-center">{{ session('message') }}</span>
+      @endif
+      <div class="form-group mt10">
+        <input type="submit" value="登录" class="login_submit">
+      </div>
+    </form>
   </div>
 </body>
 

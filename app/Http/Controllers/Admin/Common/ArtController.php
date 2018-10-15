@@ -62,6 +62,7 @@ class ArtController extends Controller
             session()->put('backurl',url()->full());
         	return view('admin.console.art.index',compact('title','list','cate','catid','key','starttime','endtime','push_flag'));
         } catch (\Throwable $e) {
+            // dd($e);
             return view('errors.500');
         }
     }
