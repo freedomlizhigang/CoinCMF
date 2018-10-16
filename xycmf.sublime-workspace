@@ -762,9 +762,9 @@
 	],
 	"file_history":
 	[
+		"/D/wwwroot/XYCMF/public/statics/admin/css/reset.scss",
 		"/D/wwwroot/XYCMF/resources/views/admin/left.blade.php",
 		"/D/wwwroot/XYCMF/resources/views/admin/index.blade.php",
-		"/D/wwwroot/XYCMF/public/statics/admin/css/reset.scss",
 		"/D/wwwroot/XYCMF/resources/views/admin/login.blade.php",
 		"/C/Windows/System32/drivers/etc/hosts",
 		"/D/wwwroot/juqi-kq/sql/2018-06-26-init.sql",
@@ -893,7 +893,7 @@
 	],
 	"find":
 	{
-		"height": 41.0
+		"height": 27.0
 	},
 	"find_in_files":
 	{

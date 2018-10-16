@@ -1,8 +1,3 @@
-/*
-    定义变量
-*/
-/*作者(Author): 李潇喃    Website: www.muzisheji.com   QQ: 854378082*/
-@import "../../common/css/bootstrap.min.css";
 /*作者(Author): 李潇喃    Website: www.muzisheji.com   QQ: 854378082*/
 *, *:before, *:after {box-sizing: border-box; -webkit-box-sizing: border-box; -moz-box-sizing: border-box;}
 html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, font, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, caption, article, aside, audio, canvas, details, figcaption, figure, footer, header, hgroup, mark, menu, meter, nav, output, progress, section, summary, time, video {border:0;background:transparent;margin:0;padding:0;}
@@ -45,7 +40,7 @@ $color_3:#333;
     background: #2b2f32 url('../images/login_bg.png') center center no-repeat; background-size: 726.3px 729.9px;
 }
 .login_box {
-    background: #FFF; width:345px; height:auto; margin:20% auto 0; padding: 50px 0 0; overflow: hidden; border-radius:5px;
+    background: #FFF; width:345px; height:auto; margin:15% auto 0; padding: 50px 0 0; overflow: hidden; border-radius:5px;
     .login-form {
         padding:30px 35px;
     }
@@ -77,18 +72,19 @@ body.box {overflow: hidden; padding: 0;}
 .left {width: 200px; float: left;margin-bottom: -10000px;padding-bottom: 10000px; padding-top:0px; position: fixed; color: #fff; overflow: hidden;}
 .left_tab_title {width:60px; overflow: hidden; text-align:center;background-color: #2b2f32;color:#FFF;margin-bottom: -10000px;padding-bottom: 10000px;
     .glyphicon {display: block; width:60px; font-size: 18px; padding-top: 13px;}
-    .left_h3 {height:65px; cursor: pointer; line-height: 2.4; font-weight: normal; margin:0;padding:0; margin-top: 0px; font-size: 12px; color:#FFFFFF;}
+    .left_h3 {padding:10px 0; cursor: pointer; line-height: 1.6; font-weight: normal; margin:0; margin-top: 0px; font-size: 12px; color:#FFFFFF;}
+    .left_h3 .iconfont {font-size: 20px; line-height: 1.2;}
     .left_h3.active {background:#00C1DE;}
 }
 .left_tab_content {
     width:140px; overflow: hidden;background-color: #D9DEE4;margin-bottom: -10000px;padding-bottom: 10000px; color:#555;
     .left_list {font-size:12px; margin: 0; text-indent:8px; padding:0;}
-    .left_list_icon {margin-right: 5px;}
+    .left_list_icon {font-size: 18px; float: left;}
     .left_list li {line-height: 40px; color:#555; line-height: 40px;}
     .left_list li:hover {background: #F4F6F8;}
     .left_list li.active {background: #ffffff; color: #333;}
     a {color:#555; padding-left: 0;}
-    .sub_menu_a {float: left; display: block; width:140px; color: #333;}
+    .sub_menu_a {display: block; width:140px; color: #333;}
     .left_list a.active { text-decoration: none; color: #333;}
 }
 /*end left start main*/

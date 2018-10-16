@@ -13,7 +13,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
   <!-- No Baidu Siteapp-->
   <meta http-equiv="Cache-Control" content="no-siteapp" />
-  <link rel="stylesheet" href="{{ $sites['static']}}admin/css/reset.css"></head>
+  <link rel="stylesheet" href="{{ $sites['static']}}common/css/bootstrap.min.css">
+  <link rel="stylesheet" href="{{ $sites['static']}}admin/css/reset.css">
 
 <body class="login-body">
   <div class="login_box">

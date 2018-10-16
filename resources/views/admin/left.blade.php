@@ -2,7 +2,7 @@
 	<div class="left_tab_title pull-left">
 	@foreach($leftmenu as $lm)
 		<h3 class="left_h3">
-			<span class="center-block {{ $lm['icon'] }}" aria-hidden="true"></span>
+			<span class="center-block iconfont {{ $lm['icon'] }}" aria-hidden="true"></span>
 			{{ mb_substr($lm['name'],0,2) }}
 		</h3>
 	@endforeach
@@ -11,7 +11,7 @@
 	@foreach($leftmenu as $lm)
 		<ul class="left_list">
 			@foreach($lm['submenu'] as $slm)
-			<li class="sub_menu clearfix" id="left_menu{{ $slm['id'] }}"><a href="javascript:;" onclick="_LM({{ $slm['id'] }},'/console/{{ $slm['url'] }}')" class="sub_menu_a"><span class="left_list_icon {{ $lm['icon'] }}" aria-hidden="true"></span>{{ $slm['name'] }}</a></li>
+			<li class="sub_menu clearfix" id="left_menu{{ $slm['id'] }}"><a href="javascript:;" onclick="_LM({{ $slm['id'] }},'/console/{{ $slm['url'] }}')" class="sub_menu_a"><span class="left_list_icon iconfont {{ $slm['icon'] }}" aria-hidden="true"></span>{{ $slm['name'] }}</a></li>
 			@endforeach
 		</ul>
 	@endforeach
