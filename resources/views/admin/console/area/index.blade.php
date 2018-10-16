@@ -3,7 +3,7 @@
 
 @section('rmenu')
 	@if(App::make('com')->ifCan('area-add'))
-	<div data-url="{{ url('/console/area/add',['pid'=>$pid]) }}" data-title="添加地区" data-toggle='modal' data-target='#myModal' class="btn btn-xs btn-default btn_modal"><span class="glyphicon glyphicon-plus"></span> 添加地区</div>
+	<div data-url="{{ url('/console/area/add',['pid'=>$pid]) }}" data-title="添加地区" data-toggle='modal' data-target='#myModal' class="btn btn-xs btn-default btn_modal"><span class="iconfont icon-add"></span> 添加地区</div>
 	@endif
 @endsection
 
@@ -36,13 +36,13 @@
 			</td>
 			<td>
 				@if(App::make('com')->ifCan('area-add'))
-				<div data-url="{{ url('/console/area/add',['pid'=>$l->id]) }}" data-title="添加地区" data-toggle='modal' data-target='#myModal' class="btn btn-xs btn-primary glyphicon glyphicon-plus btn_modal"></div>
+				<div data-url="{{ url('/console/area/add',['pid'=>$l->id]) }}" data-title="添加地区" data-toggle='modal' data-target='#myModal' class="btn btn-xs btn-primary iconfont icon-add btn_modal"></div>
 				@endif
 				@if(App::make('com')->ifCan('area-edit'))
-				<div data-url="{{ url('/console/area/edit',['id'=>$l->id]) }}" data-title="修改地区" data-toggle='modal' data-target='#myModal' class="btn btn-xs btn-info glyphicon glyphicon-edit btn_modal"></div>
+				<div data-url="{{ url('/console/area/edit',['id'=>$l->id]) }}" data-title="修改地区" data-toggle='modal' data-target='#myModal' class="btn btn-xs btn-info iconfont icon-translate btn_modal"></div>
 				@endif
 				@if(App::make('com')->ifCan('area-del'))
-				<a href="{{ url('/console/area/del',['id'=>$l->id]) }}" class="btn btn-xs btn-danger glyphicon glyphicon-trash confirm"></a>
+				<a href="{{ url('/console/area/del',['id'=>$l->id]) }}" class="btn btn-xs btn-danger iconfont icon-delete confirm"></a>
 				@endif
 			</td>
 		</tr>

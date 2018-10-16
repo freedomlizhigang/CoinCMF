@@ -108,7 +108,7 @@ form label {margin-bottom: 5px;}
 .input-xs {width:50px !important; float: left; margin-right: 10px;}
 .input-info {color:#999; span {margin-right: 5px;}}
 .help-block { font-weight: normal; display: block;color: red;}
-.add_submenu {margin-left: 10px;}
+.add_submenu {margin-left: 10px; display: inline-block; font-size: 14px;}
 .level-1 { font-size: 0;}
 .level-2 {padding-left: 1em;}
 .level-2:after { content:"├"; display:inline-block; margin-right: 5px;}

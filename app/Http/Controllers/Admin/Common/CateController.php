@@ -55,7 +55,7 @@ class CateController extends Controller
                         <td><span class='level-".$level."'></span>".$v['name']."</td>
                         <td>".$typename."</td>
                         <td>".$display."</td>
-                        <td><a href='/console/cate/add/".$v['id']."' class='btn btn-xs btn-primary glyphicon glyphicon-plus'></a> <a href='/console/cate/edit/".$v['id']."' class='btn btn-xs btn-info glyphicon glyphicon-edit'></a> <a href='/console/cate/del/".$v['id']."' class='btn btn-xs btn-danger glyphicon glyphicon-trash confirm'></a></td>
+                        <td><a href='/console/cate/add/".$v['id']."' class='btn btn-xs btn-primary icon icon-addbox'></a> <a href='/console/cate/edit/".$v['id']."' class='btn btn-xs btn-info iconfont icon-translate'></a> <a href='/console/cate/del/".$v['id']."' class='btn btn-xs btn-danger iconfont icon-delete confirm'></a></td>
                         </tr>";
                     if ($v['parentid'] != '')
                     {

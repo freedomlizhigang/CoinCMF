@@ -2,7 +2,7 @@
 
 @if(App::make('com')->ifCan('database-import'))
 @section('rmenu')
-<a href="{{ url('/console/database/import') }}" class="btn btn-xs btn-default btn_modal"><span class="glyphicon glyphicon-log-in"></span> 数据库恢复</a>
+<a href="{{ url('/console/database/import') }}" class="btn btn-xs btn-default btn_modal"><span class="iconfont icon-history"></span> 数据库恢复</a>
 @endsection
 @endif
 

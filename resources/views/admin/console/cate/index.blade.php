@@ -3,10 +3,10 @@
 
 @section('rmenu')
 	@if(App::make('com')->ifCan('cate-add'))
-	<a href="{{ url('/console/cate/add/0') }}" class="btn btn-xs btn-default"><span class="glyphicon glyphicon-plus"></span> 添加栏目</a>
+	<a href="{{ url('/console/cate/add/0') }}" class="btn btn-xs btn-default"><span class="iconfont icon-add"></span> 添加栏目</a>
 	@endif
 	@if(App::make('com')->ifCan('cate-cache'))
-	<a href="{{ url('/console/cate/cache') }}" class="btn btn-xs btn-default"><span class="glyphicon glyphicon-inbox"></span> 更新缓存</a>
+	<a href="{{ url('/console/cate/cache') }}" class="btn btn-xs btn-default"><span class="iconfont icon-undo"></span> 更新缓存</a>
 	@endif
 @endsection
 

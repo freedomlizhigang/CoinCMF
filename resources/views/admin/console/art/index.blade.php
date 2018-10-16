@@ -2,7 +2,7 @@
 
 @section('rmenu')
 @if(App::make('com')->ifCan('art-add'))
-<a href="{{ url('/console/art/add',$catid) }}" class="btn btn-xs btn-default"><span class="glyphicon glyphicon-plus"></span> 添加文章</a>
+<a href="{{ url('/console/art/add',$catid) }}" class="btn btn-xs btn-default"><span class="iconfont icon-add"></span> 添加文章</a>
 @endif
 
 @endsection
@@ -64,10 +64,10 @@
 			<td>{{ $a->publish_at }}</td>
 			<td>
 				@if(App::make('com')->ifCan('art-edit'))
-				<a href="{{ url('/console/art/edit',$a->id) }}" class="btn btn-xs btn-info glyphicon glyphicon-edit"></a>
+				<a href="{{ url('/console/art/edit',$a->id) }}" class="btn btn-xs btn-info iconfont icon-translate"></a>
 				@endif
 				@if(App::make('com')->ifCan('art-del'))
-				<a href="{{ url('/console/art/del',$a->id) }}" class="confirm btn btn-xs btn-danger glyphicon glyphicon-trash"></a>
+				<a href="{{ url('/console/art/del',$a->id) }}" class="confirm btn btn-xs btn-danger iconfont icon-delete"></a>
 				@endif
 			</td>
 		</tr>

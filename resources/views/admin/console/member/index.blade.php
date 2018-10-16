@@ -38,7 +38,7 @@
 		</td>
 		<td>
 			@if(App::make('com')->ifCan('user-edit'))
-			<div data-url="{{ url('/console/user/edit',$m->id) }}" data-title="改密码" title="改密码" data-toggle='modal' data-target='#myModal' class="btn btn-xs btn-danger glyphicon glyphicon-eye-close btn_modal"></div>
+			<div data-url="{{ url('/console/user/edit',$m->id) }}" data-title="改密码" title="改密码" data-toggle='modal' data-target='#myModal' class="btn btn-xs btn-danger iconfont icon-lockopen btn_modal"></div>
 			@endif
 		</td>
 	</tr>

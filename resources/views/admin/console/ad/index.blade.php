@@ -2,7 +2,7 @@
 
 @section('rmenu')
 @if(App::make('com')->ifCan('ad-add'))
-	<div data-url="{{ url('/console/ad/add') }}" data-title="添加广告" data-toggle='modal' data-target='#myModal' class="btn btn-xs btn-default btn_modal"><span class="glyphicon glyphicon-plus"></span> 添加广告</div>
+	<div data-url="{{ url('/console/ad/add') }}" data-title="添加广告" data-toggle='modal' data-target='#myModal' class="btn btn-xs btn-default btn_modal"><span class="iconfont icon-add"></span> 添加广告</div>
 @endif
 
 @endsection
@@ -62,10 +62,10 @@
 		</td>
 		<td>
 			@if(App::make('com')->ifCan('ad-edit'))
-			<div data-url="{{ url('/console/ad/edit',['id'=>$a->id]) }}" data-title="修改广告" data-toggle='modal' data-target='#myModal' class="btn btn-xs btn-info glyphicon glyphicon-edit btn_modal"></div>
+			<div data-url="{{ url('/console/ad/edit',['id'=>$a->id]) }}" data-title="修改广告" data-toggle='modal' data-target='#myModal' class="btn btn-xs btn-info iconfont icon-translate btn_modal"></div>
 			@endif
 			@if(App::make('com')->ifCan('ad-del'))
-			<a href="{{ url('/console/ad/del',$a->id) }}" class="confirm btn btn-xs btn-danger glyphicon glyphicon-trash"></a>
+			<a href="{{ url('/console/ad/del',$a->id) }}" class="confirm btn btn-xs btn-danger iconfont icon-delete"></a>
 			@endif
 		</td>
 	</tr>
@@ -77,7 +77,7 @@
 	<div class="btn-group">
 		<label class="btn btn-xs btn-primary"><input type="checkbox" autocomplete="off" class="checkall">全选</label>
 	</div>
-	
+
 	@if(App::make('com')->ifCan('ad-sort'))
 	<span class="btn btn-xs btn-warning btn_sort">排序</span>
 	@endif

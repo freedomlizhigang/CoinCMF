@@ -2,7 +2,7 @@
 
 @if(App::make('com')->ifCan('section-add'))
 @section('rmenu')
-	<div data-url="{{ url('/console/section/add') }}" data-title="添加部门" data-toggle='modal' data-target='#myModal' class="btn btn-xs btn-default btn_modal"><span class="glyphicon glyphicon-plus"></span> 添加部门</div>
+	<div data-url="{{ url('/console/section/add') }}" data-title="添加部门" data-toggle='modal' data-target='#myModal' class="btn btn-xs btn-default btn_modal"><span class="iconfont icon-add"></span> 添加部门</div>
 @endsection
 @endif
 
@@ -27,10 +27,10 @@
 		</td>
 		<td>
 			@if(App::make('com')->ifCan('section-edit'))
-			<div data-url="{{ url('/console/section/edit',$m->id) }}" data-title="修改" data-toggle='modal' data-target='#myModal' class="btn btn-xs btn-info glyphicon glyphicon-edit btn_modal"></div>
+			<div data-url="{{ url('/console/section/edit',$m->id) }}" data-title="修改" data-toggle='modal' data-target='#myModal' class="btn btn-xs btn-info iconfont icon-translate btn_modal"></div>
 			@endif
 			@if(App::make('com')->ifCan('section-del'))
-			<a href="{{ url('/console/section/del',$m->id) }}" class="btn btn-xs btn-danger glyphicon glyphicon-trash confirm"></a>
+			<a href="{{ url('/console/section/del',$m->id) }}" class="btn btn-xs btn-danger iconfont icon-delete confirm"></a>
 			@endif
 		</td>
 	</tr>

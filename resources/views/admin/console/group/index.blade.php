@@ -2,7 +2,7 @@
 
 @if(App::make('com')->ifCan('group-add'))
 @section('rmenu')
-	<div data-url="{{ url('/console/group/add') }}" data-title="添加用户组" data-toggle='modal' data-target='#myModal' class="btn btn-xs btn-default btn_modal"><span class="glyphicon glyphicon-plus"></span> 添加用户组</div>
+	<div data-url="{{ url('/console/group/add') }}" data-title="添加用户组" data-toggle='modal' data-target='#myModal' class="btn btn-xs btn-default btn_modal"><span class="iconfont icon-add"></span> 添加用户组</div>
 @endsection
 @endif
 
@@ -23,10 +23,10 @@
 		<td class="text-success">{{ $m->discount }}%</td>
 		<td>
 			@if(App::make('com')->ifCan('group-edit'))
-			<div data-url="{{ url('/console/group/edit',$m->id) }}" data-title="修改" data-toggle='modal' data-target='#myModal' class="btn btn-xs btn-info glyphicon glyphicon-edit btn_modal"></div>
+			<div data-url="{{ url('/console/group/edit',$m->id) }}" data-title="修改" data-toggle='modal' data-target='#myModal' class="btn btn-xs btn-info iconfont icon-translate btn_modal"></div>
 			@endif
 			@if(App::make('com')->ifCan('group-del'))
-			<a href="{{ url('/console/group/del',$m->id) }}" class="btn btn-xs btn-danger glyphicon glyphicon-trash confirm"></a>
+			<a href="{{ url('/console/group/del',$m->id) }}" class="btn btn-xs btn-danger iconfont icon-delete confirm"></a>
 			@endif
 		</td>
 	</tr>
