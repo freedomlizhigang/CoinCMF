@@ -4,6 +4,10 @@
 		"selected_items":
 		[
 			[
+				"ts",
+				"text-success \tBootstrap 3 Class"
+			],
+			[
 				"se",
 				"search"
 			],
@@ -510,10 +514,6 @@
 			[
 				"_",
 				"_blank"
-			],
-			[
-				"th",
-				"thisVal"
 			]
 		]
 	},
@@ -548,6 +548,10 @@
 		"selected_items":
 		[
 			[
+				"rena",
+				"File: Rename"
+			],
+			[
 				"cl",
 				"File: Close All"
 			],
@@ -569,10 +573,6 @@
 			],
 			[
 				"re",
-				"File: Rename"
-			],
-			[
-				"rena",
 				"File: Rename"
 			],
 			[
@@ -758,18 +758,32 @@
 		"/D/wwwroot/XYCMF/app/Http",
 		"/D/wwwroot/XYCMF/app/Http/Controllers",
 		"/D/wwwroot/XYCMF/app/Http/Controllers/Admin",
-		"/D/wwwroot/XYCMF/public",
-		"/D/wwwroot/XYCMF/public/statics",
-		"/D/wwwroot/XYCMF/public/statics/admin",
-		"/D/wwwroot/XYCMF/public/statics/admin/css",
-		"/D/wwwroot/XYCMF/public/statics/common",
-		"/D/wwwroot/XYCMF/public/statics/common/css",
+		"/D/wwwroot/XYCMF/app/Http/Controllers/Home",
 		"/D/wwwroot/XYCMF/resources",
 		"/D/wwwroot/XYCMF/resources/views",
-		"/D/wwwroot/XYCMF/resources/views/admin"
+		"/D/wwwroot/XYCMF/routes"
 	],
 	"file_history":
 	[
+		"/D/wwwroot/XYCMF/app/Http/Controllers/Admin/FieldController.php",
+		"/D/wwwroot/XYCMF/resources/views/admin/console/model/index.blade.php",
+		"/D/wwwroot/XYCMF/routes/admin.php",
+		"/D/wwwroot/XYCMF/app/Http/Controllers/Admin/ModelController.php",
+		"/D/wwwroot/XYCMF/database/migrations/2018_10_24_054742_create_models.php",
+		"/D/wwwroot/XYCMF/database/migrations/2018_10_24_054852_create_model_fields.php",
+		"/D/wwwroot/XYCMF/app/Models/Console/Model.php",
+		"/D/wwwroot/XYCMF/app/Models/Console/ModelField.php",
+		"/D/wwwroot/XYCMF/resources/views/admin/console/model/add.blade.php",
+		"/D/wwwroot/XYCMF/resources/views/admin/console/model/edit.blade.php",
+		"/D/wwwroot/XYCMF/app/Http/Requests/ModelRequest.php",
+		"/D/wwwroot/XYCMF/app/Http/Requests/MenuRequest.php",
+		"/D/wwwroot/XYCMF/app/Models/Console/ModelFiled.php",
+		"/D/wwwroot/XYCMF/config/app.php",
+		"/D/wwwroot/XYCMF/composer.json",
+		"/D/wwwroot/XYCMF/resources/views/home/form.blade.php",
+		"/D/wwwroot/XYCMF/app/Http/Controllers/Home/HomeController.php",
+		"/D/wwwroot/XYCMF/resources/views/vendor/form-builder/assets.blade.php",
+		"/D/wwwroot/XYCMF/routes/webcommon.php",
 		"/D/wwwroot/XYCMF/app/Http/Controllers/Admin/Common/CateController.php",
 		"/D/wwwroot/XYCMF/app/Http/Controllers/Admin/MenuController.php",
 		"/D/wwwroot/XYCMF/resources/views/admin/console/role/index.blade.php",
@@ -811,15 +825,12 @@
 		"/D/wwwroot/XYCMF/app/Services/TagService.php",
 		"/D/wwwroot/XYCMF/app/Services/ComService.php",
 		"/D/wwwroot/XYCMF/app/Http/Controllers/Api/UserController.php",
-		"/D/wwwroot/XYCMF/routes/admin.php",
 		"/D/wwwroot/XYCMF/app/Http/Middleware/Jwt.php",
 		"/D/wwwroot/XYCMF/app/Models/Common/Area.php",
 		"/D/wwwroot/XYCMF/app/Models/Common/Community.php",
 		"/D/wwwroot/XYCMF/app/Models/Common/Adpos.php",
 		"/D/wwwroot/XYCMF/app/Http/Controllers/Admin/PublicController.php",
-		"/D/wwwroot/XYCMF/composer.json",
 		"/D/wwwroot/xycms/sftp-config.json",
-		"/D/wwwroot/XYCMF/app/Http/Controllers/Home/HomeController.php",
 		"/D/wwwroot/XYCMF/storage/logs/laravel-2018-06-26.log",
 		"/D/wwwroot/XYCMF/sql/2018-06-26-init.sql",
 		"/D/wwwroot/XYCMF/README.md",
@@ -853,14 +864,12 @@
 		"/D/wwwroot/XYCMF/app/Http/Controllers/Admin/RoleController.php",
 		"/D/wwwroot/XYCMF/resources/views/admin/component/image.blade.php",
 		"/D/wwwroot/XYCMF/app/Models/Console/Menu.php",
-		"/D/wwwroot/XYCMF/config/app.php",
 		"/D/wwwroot/XYCMF/app/Http/Controllers/Admin/BaseController.php",
 		"/D/wwwroot/XYCMF/app/Http/Controllers/Common/UploaderController.php",
 		"/D/wwwroot/XYCMF/app/Http/Controllers/Common/AjaxCommonController.php",
 		"/D/wwwroot/XYCMF/app/Http/Controllers/Controller.php",
 		"/D/wwwroot/XYCMF/app/Http/Controllers/Common/Ueditor.php",
 		"/D/wwwroot/XYCMF/app/Http/Controllers/Home/LoginController.php",
-		"/D/wwwroot/XYCMF/routes/webcommon.php",
 		"/D/wwwroot/guoshuhao/app/Http/Controllers/Home/LoginController.php",
 		"/D/wwwroot/XYCMF/app/Http/Controllers/Pay/WxpayController.php",
 		"/D/wwwroot/XYCMF/app/Http/Controllers/Pay/AlipayController.php",
@@ -874,7 +883,6 @@
 		"/D/wwwroot/XYCMF/app/Http/Middleware/VerifyCsrfToken.php",
 		"/D/wwwroot/XYCMF/app/Http/Requests/Common/AdRequest.php",
 		"/D/wwwroot/XYCMF/app/Http/Requests/Common/AdposRequest.php",
-		"/D/wwwroot/XYCMF/app/Http/Requests/MenuRequest.php",
 		"/D/wwwroot/XYCMF/app/Http/Requests/RoleRequest.php",
 		"/D/wwwroot/XYCMF/app/Http/Requests/SectionRequest.php",
 		"/D/wwwroot/guoshuhao/app/Http/Controllers/Controller.php",
@@ -884,28 +892,15 @@
 		"/D/wwwroot/XYCMF/app/Models/Console/Priv.php",
 		"/D/wwwroot/XYCMF/app/Models/Console/Role.php",
 		"/D/wwwroot/XYCMF/app/Models/Console/RoleUser.php",
-		"/D/wwwroot/XYCMF/app/Models/Console/Section.php",
-		"/D/wwwroot/XYCMF/app/Customize/Sign.php",
-		"/D/wwwroot/XYCMF/app/Customize/Ueditor.php",
-		"/D/wwwroot/XYCMF/app/Models/Common/Attr.php",
-		"/D/wwwroot/XYCMF/app/Models/Common/Ad.php",
-		"/D/wwwroot/XYCMF/app/Models/User/User.php",
-		"/D/wwwroot/XYCMF/app/Models/User/Group.php",
-		"/D/wwwroot/XYCMF/app/Models/Console/Admin.php",
-		"/D/wwwroot/XYCMF/app/Providers/ComServiceProvider.php",
-		"/D/wwwroot/XYCMF/app/Customize/MyCrypt.php",
-		"/D/wwwroot/guoshuhao/config/wechat.php",
-		"/D/wwwroot/guoshuhao/config/view.php",
-		"/D/wwwroot/guoshuhao/config/session.php",
-		"/D/wwwroot/guoshuhao/config/services.php"
+		"/D/wwwroot/XYCMF/app/Models/Console/Section.php"
 	],
 	"find":
 	{
-		"height": 41.0
+		"height": 28.0
 	},
 	"find_in_files":
 	{
-		"height": 105.0,
+		"height": 133.0,
 		"where_history":
 		[
 			"D:\\wwwroot\\XYCMF\\app",
@@ -1025,6 +1020,22 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"模型",
+			"ModelController",
+			"model/",
+			"model",
+			"uid",
+			"Blueprint",
+			"describe",
+			"title",
+			"name",
+			"添加用户",
+			"Common\\Adpos",
+			"adpos/",
+			"section",
+			"添加部门",
+			"section",
+			"模型管理",
 			"glyphicon",
 			"iconfont",
 			"glyphicon glyphicon-",
@@ -1136,23 +1147,7 @@
 			"$v",
 			"$this->store",
 			"[$item_key]",
-			"$item_key",
-			"'del'",
-			"deflag",
-			"where('orderstatus','>',0)",
-			"orderstatus",
-			"spec",
-			"GoosSpecPrice",
-			"this->store",
-			"库存",
-			"->",
-			"xugaotech.xi-yi.ren",
-			"getdel",
-			"over",
-			" class=\"mt10\"",
-			"Chong",
-			"money",
-			"user_money"
+			"$item_key"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -1287,11 +1282,11 @@
 	],
 	"incremental_find":
 	{
-		"height": 27.0
+		"height": 28.0
 	},
 	"input":
 	{
-		"height": 40.0
+		"height": 60.0
 	},
 	"layout":
 	{
@@ -1348,7 +1343,7 @@
 	"project": "xycmf.sublime-project",
 	"replace":
 	{
-		"height": 73.0
+		"height": 52.0
 	},
 	"save_all_on_build": false,
 	"select_file":
@@ -1357,6 +1352,10 @@
 		"last_filter": "",
 		"selected_items":
 		[
+			[
+				"model/inde",
+				"resources\\views\\admin\\console\\model\\index.blade.php"
+			],
 			[
 				"Laravel\\Scout\\Engines\\AlgoliaEngine",
 				"vendor\\laravel\\scout\\src\\Engines\\AlgoliaEngine.php"
@@ -1864,10 +1863,6 @@
 			[
 				"layu",
 				"resources\\views\\default\\layout.blade.php"
-			],
-			[
-				"user/center",
-				"resources\\views\\user\\usercenter.blade.php"
 			]
 		],
 		"width": 0.0

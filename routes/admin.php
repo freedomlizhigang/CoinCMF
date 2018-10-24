@@ -100,6 +100,20 @@ Route::group(['prefix'=>'console','middleware' => ['rbac'],'namespace' => 'Admin
     // log
     Route::get('log/index', 'LogController@getIndex');
     Route::get('log/del', 'LogController@getDel');
+    // 字段
+    Route::get('field/index/{id}', 'FieldController@getIndex');
+    Route::get('field/add/{id}', 'FieldController@getAdd');
+    Route::post('field/add/{id}', 'FieldController@postAdd');
+    Route::get('field/edit/{id}', 'FieldController@getEdit');
+    Route::post('field/edit/{id}', 'FieldController@postEdit');
+    Route::get('field/del/{id}', 'FieldController@getDel');
+    // 模型
+    Route::get('model/index', 'ModelController@getIndex');
+    Route::get('model/add', 'ModelController@getAdd');
+    Route::post('model/add', 'ModelController@postAdd');
+    Route::get('model/edit/{id}', 'ModelController@getEdit');
+    Route::post('model/edit/{id}', 'ModelController@postEdit');
+    Route::get('model/del/{id}', 'ModelController@getDel');
     // cate
     Route::get('cate/index', 'Common\CateController@getIndex');
     Route::get('cate/cache', 'Common\CateController@getCache');

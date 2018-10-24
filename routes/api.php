@@ -29,6 +29,8 @@ Route::group(['prefix'=>'user','middleware' => ['jwt']],function(){
 
 // 通用功能
 Route::group(['prefix'=>'common','namespace'=>'Common'],function(){
+    // 模型字段配置荐
+    Route::post('option/{type}','AjaxCommonController@getOption');
     // 取下级地区
     Route::post('area','AjaxCommonController@postArea');
     // 取社区

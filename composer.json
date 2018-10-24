@@ -10,14 +10,14 @@
         "doctrine/dbal": "^2.7",
         "fideloper/proxy": "^4.0",
         "fukuball/jieba-php": "^0.33.0",
+        "jenssegers/agent": "^2.6",
         "laravel/framework": "5.6.*",
         "laravel/scout": "^4.0",
         "laravel/tinker": "^1.0",
         "nwidart/db-exporter": "*",
         "overtrue/laravel-wechat": "~4.0",
         "predis/predis": "^1.1",
-        "jenssegers/agent": "^2.6",
-        "vanry/laravel-scout-tntsearch":"^1.3"
+        "vanry/laravel-scout-tntsearch": "^1.3"
     },
     "require-dev": {
         "filp/whoops": "^2.0",

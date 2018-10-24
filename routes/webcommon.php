@@ -13,6 +13,8 @@
 
 // Home PC版
 Route::group(['namespace' => 'Home'],function(){
+    // Test
+    Route::get('/test','HomeController@test');
     // 首页
     Route::get('/','HomeController@getIndex');
     // 微信登陆

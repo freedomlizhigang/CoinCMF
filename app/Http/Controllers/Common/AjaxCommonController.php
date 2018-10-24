@@ -19,6 +19,17 @@ use Illuminate\Http\Request;
 
 class AjaxCommonController extends Controller
 {
+    // 返回模型字段配置项的内容
+    public function getOption($type = 'text')
+    {
+        if (view()->exists('admin.console.field.'.$type)) {
+            return view('admin.console.field.'.$type);
+        }
+        else
+        {
+            return '';
+        }
+    }
 	// 取栏目下子栏目
 	public function postGoodCate(Request $req)
 	{
