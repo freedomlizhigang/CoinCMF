@@ -53,9 +53,9 @@ class ModelController extends Controller
             if (!Schema::hasTable($data['tablename'])) {
                 // 对应的字段表里建数据
                 $d = date('Y-m-d H:i:s');
-                $fields[] = ['model_id'=>$model->id,'type'=>'id','field_name'=>'id','title'=>'ID','sort'=>0,'created_at'=>$d,'updated_at'=>$d];
-                $fields[] = ['model_id'=>$model->id,'type'=>'datetime','field_name'=>'created_at','title'=>'创建时间','sort'=>999,'created_at'=>$d,'updated_at'=>$d];
-                $fields[] = ['model_id'=>$model->id,'type'=>'datetime','field_name'=>'updated_at','title'=>'修改时间','sort'=>999,'created_at'=>$d,'updated_at'=>$d];
+                $fields[] = ['model_id'=>$model->id,'type'=>'id','field_name'=>'id','title'=>'ID','display_flag'=>0,'sort'=>0,'created_at'=>$d,'updated_at'=>$d];
+                $fields[] = ['model_id'=>$model->id,'type'=>'datetime','field_name'=>'created_at','title'=>'创建时间','display_flag'=>0,'sort'=>999,'created_at'=>$d,'updated_at'=>$d];
+                $fields[] = ['model_id'=>$model->id,'type'=>'datetime','field_name'=>'updated_at','title'=>'修改时间','display_flag'=>0,'sort'=>999,'created_at'=>$d,'updated_at'=>$d];
                 ModelField::insert($fields);
                 Schema::create($data['tablename'], function (Blueprint $table) {
                     $table->increments('id');
@@ -112,6 +112,19 @@ class ModelController extends Controller
         } catch (\Throwable $e) {
             DB::rollback();
             return back()->with('message', '删除失败！');
+        }
+    }
+    // 预览
+    public function getView($id)
+    {
+        try {
+            $title = '预览模型';
+            $info = Model::with(['fields'=>function($q){
+                        $q->where('display_flag',1)->orderBy('sort','asc')->orderBy('id','asc');
+                    }])->findOrFail($id);
+            return view('admin.console.model.view',compact('title','info'));
+        } catch (\Throwable $e) {
+            return view('errors.500');
         }
     }
 }

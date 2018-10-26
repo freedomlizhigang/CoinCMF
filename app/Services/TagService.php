@@ -14,6 +14,7 @@ use App\Models\Common\Ad;
 use App\Models\Common\Article;
 use App\Models\Common\Cate;
 use App\Models\Common\Link;
+use App\Models\Common\Type;
 
 class TagService
 {
@@ -119,5 +120,14 @@ class TagService
             echo '';
         }
     }
-
+    // 取分类下的内容
+    public function type($id = 0)
+    {
+        try {
+            $list = Type::select('id','name','sort')->where('parentid',$id)->orderBy('sort','asc')->orderBy('id','asc')->get();
+            return $list;
+        } catch (\Throwable $e) {
+            return [];
+        }
+    }
 }

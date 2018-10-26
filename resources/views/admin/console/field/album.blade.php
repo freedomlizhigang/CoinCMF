@@ -30,7 +30,7 @@
     <tr>
         <td>压缩高度：</td>
         <td>
-            <input type="number" step="1" name="option[sizes]" class="form-control input-sm" value="0">
+            <input type="number" step="1" name="option[height]" class="form-control input-sm" value="0">
             <p class="input-info">图片高度，默认为 0 不修改</p>
         </td>
     </tr>

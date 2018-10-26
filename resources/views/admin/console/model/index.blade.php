@@ -13,7 +13,7 @@
 		<th width="150">模型名称</th>
 		<th>数据表</th>
 		<th width="80">状态</th>
-		<th width="120">操作</th>
+		<th width="160">操作</th>
 	</tr>
 	@foreach($list as $m)
 	<tr>
@@ -31,6 +31,9 @@
 			@endif
 		</td>
 		<td>
+			@if(App::make('com')->ifCan('model-view'))
+			<a href="{{ url('/console/model/view',$m->id) }}" title="预览模型" class="btn btn-xs btn-success iconfont icon-drivevideo"></a>
+			@endif
 			@if(App::make('com')->ifCan('field-index'))
 			<a href="{{ url('/console/field/index',$m->id) }}" title="字段管理" class="btn btn-xs btn-primary iconfont icon-list"></a>
 			@endif

@@ -83,7 +83,7 @@ class FieldController extends Controller
 
                     case 'number':
                         // 判断是整数还是小数，是否可以为负值
-                        $table->integer($data['field_name'],1000)->nullable()->after($before->field_name)->comment($data['title']);
+                        $table->integer($data['field_name'])->nullable()->after($before->field_name)->comment($data['title']);
                         break;
 
                     case 'ueditor':
@@ -141,30 +141,71 @@ class FieldController extends Controller
     {
         try{
             $title = '修改字段';
-            $info = Model::findOrFail($id);
-            return view('admin.console.model.edit',compact('title','info'));
+            $info = ModelField::findOrFail($id);
+            return view('admin.console.field.edit',compact('title','info'));
         } catch (\Throwable $e) {
             return view('errors.500');
         }
     }
-    public function postEdit(ModelRequest $req,$id)
+    public function postEdit(FieldRequest $req,$id)
     {
+        // 添加，事务
+        DB::beginTransaction();
         try {
+            $info = ModelField::findOrFail($id);
             $data = $req->input('data');
-            Model::where('id',$id)->update($data);
+            // 字段配置信息
+            $option = $req->input('option',null);
+            // 处理选项下的值们
+            if ($info->type == 'box') {
+                //  = Func::processKeyword($option['values'])
+                $values = $option['values'];
+                // 替换特殊字符
+                $values = trim(str_replace('@','',str_replace('_', '', $values)));
+                $values = explode(PHP_EOL, $values);
+                $tmp = [];
+                foreach ($values as $k) {
+                    if (trim($k) != '' ) {
+                        $kk = explode('|',$k);
+                        $tmp[][$kk[0]] = $kk[1];
+                    }
+                }
+                if (count($tmp) === 0) {
+                    // 出错回滚
+                    DB::rollBack();
+                    return $this->adminJson(0,'选项列表不能为空！');
+                }
+                // 处理为json
+                $option['values'] = $tmp;
+            }
+            $data['option'] = json_encode($option);
+            // 记录到数据库里
+            ModelField::where('id',$id)->update($data);
+            DB::commit();
             return $this->adminJson(1,'修改成功！');
         } catch (\Throwable $e) {
+            // 出错回滚
+            DB::rollBack();
+            return $this->adminJson(0,$e->getMessage());
             return $this->adminJson(0,'修改失败，请稍后再试！');
         }
     }
     // 删除
     public function getDel($id)
     {
+        DB::beginTransaction();
         try {
+            $info = ModelField::findOrFail($id);
             // 正常情况下，要先判断字段下是否有对应的内容
-            Model::where('id',$id)->update(['del_flag'=>1]);
+            ModelField::where('id',$id)->delete();
+            // 注入字段
+            Schema::table($info->model->tablename, function (Blueprint $table) use($info) {
+                $table->dropColumn($info->field_name);
+            });
+            DB::commit();
             return back()->with('message', '删除成功！');
         } catch (\Throwable $e) {
+            DB::rollback();
             return back()->with('message', '删除失败！');
         }
     }

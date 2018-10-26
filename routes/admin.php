@@ -114,6 +114,7 @@ Route::group(['prefix'=>'console','middleware' => ['rbac'],'namespace' => 'Admin
     Route::get('model/edit/{id}', 'ModelController@getEdit');
     Route::post('model/edit/{id}', 'ModelController@postEdit');
     Route::get('model/del/{id}', 'ModelController@getDel');
+    Route::get('model/view/{id}', 'ModelController@getView');
     // cate
     Route::get('cate/index', 'Common\CateController@getIndex');
     Route::get('cate/cache', 'Common\CateController@getCache');

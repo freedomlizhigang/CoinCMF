@@ -3,7 +3,7 @@
         <td>日期格式：</td>
         <td>
             <input type="text" step="1" name="option[format]" class="form-control input-sm" value="Y-m-d H:i:s">
-            <p class="input-info">PHP中支持的日期时间格式</p>
+            <p class="input-info">Laydate支持的格式，<a href="https://www.layui.com/laydate/" target="_blank">查看</a></p>
         </td>
     </tr>
     <tr>

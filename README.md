@@ -1,3 +1,11 @@
+### 计划
+
+字段类型，text单行文本，textarea多行文本，ueditor富文本，number数字，password密码，thumb单图，album多图，datetime时间，box选项（radio单选，checkbox多选，select下拉框，multiple多选列表框），files文件，linkage联动菜单（分类，radio单选，checkbox多选，select下拉框，multiple多选列表框）
+
+模型生成的表单页面，预览效果
+
+模型数据的保存与修改、查找，暂时考虑用DB::table()方法处理
+
 ###完成的
 
 系统基于Laravel 5.4，认证使用了RBAC及系统Gate，RBAC主要产生后台菜单，Gate细化小菜单并进行更细的权限管理

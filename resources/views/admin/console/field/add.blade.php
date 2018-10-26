@@ -61,6 +61,14 @@
             </td>
         </tr>
         <tr>
+            <td class="td_left">必填：</td>
+            <td>
+                <label class="radio-inline"><input type="radio" name="data[required_flag]" class="input-radio" value="1">
+                    是</label>
+                <label class="radio-inline"><input type="radio" name="data[required_flag]" checked="checked" class="input-radio" value="0">否</label>
+            </td>
+        </tr>
+        <tr>
             <td class="td_left">排序：</td>
             <td>
                 <input type="number" name="data[sort]" class="form-control input-xs" value="{{ old('data.sort',0) }}">
