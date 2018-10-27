@@ -4,7 +4,7 @@
         <!-- 缩略图 -->
         <div id="album_img" class="wu-example">
             <!--用来存放文件信息-->
-            <div id="album_list" class="uploader-list">
+            <div id="album_list_{{ $field }}" class="uploader-list">
                 @if(isset($slot) && $slot != '')
                 @foreach(explode(',',$slot) as $s)
                 <div class="file-item">
@@ -16,16 +16,15 @@
                 @endif
             </div>
             <div class="clearfix">
-                <div id="album_btn" class="btn btn-sm btn-success">上传图片</div>
-                <!-- <div id="album_clt" class="btn btn-sm btn-warning">删除一张</div> -->
+                <div id="album_btn_{{ $field }}" class="btn btn-sm btn-success">上传图片</div>
             </div>
         </div>
-        <p class="input-info">图片类型jpg/jpeg/gif/png，长宽750*635px，单个大小不超过2M，最多10张</p>
-        <textarea class="hidden" id="album" name="data[{{ $field }}]" >{{ isset($slot) ? $slot : '' }}</textarea>
+        <p class="input-info">图片类型jpg/jpeg/gif/png，宽{{ optional($option)->width }}*高{{ optional($option)->height }}px，单个大小不超过{{ optional($option)->sizes }}M，最多{{ optional($option)->nums }}张</p>
+        <textarea class="hidden" id="album_{{ $field }}" name="data[{{ $field }}]" >{{ isset($slot) ? $slot : '' }}</textarea>
         <script>
             // 缩略图
-            var $list_album = $("#album_list");
-            var album_src = [
+            var $list_album_{{ $field }} = $("#album_list_{{ $field }}");
+            var album_src_{{ $field }} = [
                 @if(isset($slot) && $slot != '')
                 @foreach(explode(',',$slot) as $s)
                     '{{ $s }}'
@@ -35,15 +34,15 @@
                 @endforeach
                 @endif
             ];
-            var album = WebUploader.create({
+            var album_{{ $field }} = WebUploader.create({
                 // 自动上传
                 auto: true,
                 // 控制数量
-                fileNumLimit:10,
+                fileNumLimit:"{{ optional($option)->nums }}",
                 // 文件接收服务端。
                 server : "{{ url('api/common/upload') }}",
                 // 选择文件的按钮。可选。
-                pick: '#album_btn',
+                pick: '#album_btn_{{ $field }}',
                 // 不压缩image, 默认如果是jpeg，文件上传前会压缩一把再上传！
                 // resize: false,
                 compress: false,
@@ -56,11 +55,11 @@
                    mimeTypes: 'image/*'
                 },
                 // 开起分片上传。
-                // chunked: true,
+                chunked: true,
                 formData:{
                     thumb : 1,
-                    thumbWidth:750,
-                    thumbHeight:635
+                    thumbWidth:"{{ optional($option)->width }}",
+                    thumbHeight:"{{ optional($option)->height }}"
                 },
                 thumb: {
                     width: 108,
@@ -77,24 +76,24 @@
                 }
             });
             // 成功以后加入input中
-            album.on('uploadSuccess',function(file,req){
+            album_{{ $field }}.on('uploadSuccess',function(file,req){
                 // console.log(req);
-                album_src.push(req.url);
-                console.log(album_src);
-                $('#album').text(album_src);
+                album_src_{{ $field }}.push(req.url);
+                console.log(album_src_{{ $field }});
+                $('#album_{{ $field }}').text(album_src_{{ $field }});
             });
-            $('#album_list').delegate('.file-panel', 'click', function() {
+            $('#album_list_{{ $field }}').delegate('.file-panel', 'click', function() {
                 // 找出来索引
                 var thisIndex = $(this).parent('.file-item').index();
                 // 删除src
-                album_src.splice(thisIndex, 1);
-                $('#album').text(album_src);
+                album_src_{{ $field }}.splice(thisIndex, 1);
+                $('#album_{{ $field }}').text(album_src_{{ $field }});
                 // 从预览里删除
-                $("#album_list > .file-item").eq(thisIndex).remove();
-                // console.log(album_src);
+                $("#album_list_{{ $field }} > .file-item").eq(thisIndex).remove();
+                // console.log(album_src_{{ $field }});
             })
             // 当有文件被添加进队列的时候
-            album.on( 'fileQueued', function( file ) {
+            album_{{ $field }}.on( 'fileQueued', function( file ) {
                 var $li = $(
                         '<div id="' + file.id + '" class="file-item">' +
                             '<img>' +
@@ -103,29 +102,28 @@
                         ),
                     $btns = $('<div class="file-panel"><span class="cancel">×</span></div>').appendTo( $li ),
                     $img = $li.find('img');
-                // $list_album为容器jQuery实例
-                $list_album.append( $li );
+                // $list_album_{{ $field }}为容器jQuery实例
+                $list_album_{{ $field }}.append( $li );
                 // 绑定删除
                 $li.delegate('.cancel', 'click', function() {
                     // 找出来索引
                     var thisIndex = file.id.substr(8);
                     // 删除src
-                    album_src.splice(thisIndex, 1);
-                    $('#album').text(album_src);
+                    album_src_{{ $field }}.splice(thisIndex, 1);
+                    $('#album_{{ $field }}').text(album_src_{{ $field }});
                     // 从预览里删除
                     $("#" + file.id).remove();
                     // console.log(thisIndex);
-                    album.removeFile(file);
+                    album_{{ $field }}.removeFile(file);
                 })
                 // 创建缩略图
                 // 如果为非图片文件，可以不用调用此方法。
                 // thumbnailWidth x thumbnailHeight 为 100 x 100
-                album.makeThumb( file, function( error, src ) {
+                album_{{ $field }}.makeThumb( file, function( error, src ) {
                     if ( error ) {
                         $img.replaceWith('<span>不能预览</span>');
                         return;
                     }
-
                     $img.attr( 'src', src );
                 }, '', '' );
             });

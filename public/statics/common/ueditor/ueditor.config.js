@@ -47,7 +47,7 @@
                 'inserttable', 'deletetable', 'insertparagraphbeforetable', 'insertrow', 'deleterow', 'insertcol', 'deletecol', 'mergecells', 'mergeright', 'mergedown', 'splittocells', 'splittorows', 'splittocols', 'charts', '|',
                 'print', 'preview', 'searchreplace', 'drafts', 'help'
             ]*/
-            ["source","bold","italic","underline","forecolor","shadowcolor","backcolor","|","justifyleft","justifycenter","justifyright",'justifyjustify', "indent","rowspacingtop",'rowspacingbottom',"lineheight",'letterspacing',"|","removeformat",'cleardoc',"fontfamily","fontsize","inserttable",'background','wordimage',"uploadword",'simpleupload',"insertimage",'insertvideo',"horizontal","|","more",'formatmatch',"autotypeset",'remotecontent', 'spechars','emotion','link','superscript', 'subscript','insertorderedlist', 'insertunorderedlist',"|","undo","redo",'directionalityltr', 'directionalityrtl','searchreplace','fullscreen', 'help','message','imgstyle']
+            ["source","bold","italic","underline","forecolor","shadowcolor","backcolor","|","justifyleft","justifycenter","justifyright",'justifyjustify', "indent","rowspacingtop",'rowspacingbottom',"lineheight",'letterspacing',"|","removeformat",'cleardoc',"fontfamily","fontsize","inserttable",'background','wordimage',"uploadword",'simpleupload',"insertimage",'attachment','insertvideo',"horizontal","|","more",'formatmatch',"autotypeset",'remotecontent', 'spechars','emotion','link','superscript', 'subscript','insertorderedlist', 'insertunorderedlist',"|","undo","redo",'directionalityltr', 'directionalityrtl','searchreplace','fullscreen', 'help','message','imgstyle']
         ]
         //当鼠标放在工具栏上时显示的tooltip提示,留空支持自动多语言配置，否则以配置值为准
         //,labelMap:{
@@ -167,10 +167,10 @@
 
         //insertunorderedlist
         //无序列表的下拉配置，值留空时支持多语言自动识别，若配置值，则以此值为准
-        ,insertunorderedlist : { 
+        ,insertunorderedlist : {
             //自定的样式
             //'dash' :'— 破折号', //-破折号
-            //'dot':' 。 小圆圈', 
+            //'dot':' 。 小圆圈',
             //系统自带
             'circle' : '',  // '○ 小圆圈'
             'disc' : '',    // '● 小圆点'
@@ -194,11 +194,11 @@
             //{ label:'文泉驿等宽微米黑',name:'',val:'文泉驿等宽微米黑'},
             { label:'站酷高端黑',name:'',val:'站酷高端黑'},
             { label:'站酷快乐体',name:'',val:'HappyZcool'},
-            
+
             { label:'仿宋',name:'',val:'仿宋'},
             //{ label:'思源粗体',name:'',val:'Source Han Sans K Heavy'},
             //{ label:'思源极细',name:'',val:'Source Han Sans K ExtraLight'},
-            
+
             { label:'',name:'arial',val:'arial,helvetica,sans-serif'}
         ]
 
@@ -319,7 +319,7 @@
             mergeEmptyline: true,           //合并空行
             removeClass: false,              //去掉冗余的class
             removeEmptyline: false,         //去掉空行
-            textAlign:false, 
+            textAlign:false,
             //textAlign:"left",               //段落的排版方式，可以是 left,right,center,justify 去掉这个属性表示不执行排版
             imageBlockLine: false,       //图片的浮动方式，独占一行剧中,左右浮动，默认: center,left,right,none 去掉这个属性表示不执行排版
             pasteFilter: false,             //根据规则过滤没事粘贴进来的内容
