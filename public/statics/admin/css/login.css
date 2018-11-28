@@ -1,0 +1,162 @@
+/*作者(Author): 李潇喃    Website: www.shanmuzhi.com   QQ: 854378082*/
+*, *:before, *:after {
+    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+}
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, font, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, caption, article, aside, audio, canvas, details, figcaption, figure, footer, header, hgroup, mark, menu, meter, nav, output, progress, section, summary, time, video {
+    background:transparent;
+    border:0;
+    margin:0;
+    padding:0;
+}
+article, aside, dialog, figure, footer, header, hgroup, nav, section, blockquote {display:block;}
+table, tbody, tfoot, thead, tr, th,td {
+    background:transparent;
+    margin:0;
+    padding:0;
+}
+nav ,ul {list-style:none;}
+ol {list-style:decimal;}
+blockquote:before, blockquote:after, q:before, q:after {content:none;}
+table {
+    border-collapse:collapse;
+    border-spacing:0;
+}
+hr {
+    display:block;
+    height:0px;
+    border:0;
+    border-top:1px solid #ccc;
+    overflow:hidden;
+    line-height:0px;
+}
+input ,select ,a img {
+    vertical-align:middle;
+    outline: none;
+}
+input[type="text"] ,input[type=button],input[type=submit],input[type=reset]{
+    -webkit-appearance:none;
+    outline:none;
+}
+em,i {font-style: normal;}
+a {
+    color: #313131;
+    text-decoration: none;
+}
+a:hover ,a:active ,a:link {text-decoration: none;}
+img {
+    max-width:100%;
+    height:auto;
+}
+html {
+    width: 100%;
+    height: 100%;
+    overflow-x: hidden;
+}
+body {
+    height: 100%;
+    background: #F4F4F2;
+    font-family:"Helvetica Neue", Helvetica, Arial, "PingFang SC", "Hiragino Sans GB", "Heiti SC", "Microsoft YaHei", sans-serif;
+    overflow-x: hidden; font-size: 14px; line-height: 1.6;
+}
+// 定位
+.ps {position: absolute;}
+.pr {position: relative;}
+.clearfix:after {content: ""; clear: both; height: 0px; overflow: hidden; display:block; visibility: hidden;}
+.clearfix {*zoom:1;}
+.f-l {float: left;}
+.f-r{float: right;}
+// 内边距
+.pd5 {padding:5px;}
+.pd10 {padding:10px;}
+.pd15 {padding:15px;}
+.pd20 {padding:20px;}
+.pt5 {padding-top: 5px;}
+.pt10 {padding-top: 10px;}
+.pt15 {padding-top: 15px;}
+.pt20 {padding-top: 20px;}
+.pb5 {padding-bottom: 5px;}
+.pb10 {padding-bottom: 10px;}
+.pb15 {padding-bottom: 15px;}
+.pb20 {padding-bottom: 20px;}
+.pl5 {padding-left: 5px;}
+.pl10 {padding-left: 10px;}
+.pl15 {padding-left: 15px;}
+.pl20 {padding-left: 20px;}
+.pr5 {padding-right: 5px;}
+.pr10 {padding-right: 10px;}
+.pr15 {padding-right: 15px;}
+.pr20 {padding-right: 20px;}
+// 外边距
+.mg5 {margin:5px;}
+.mg10 {margin:10px;}
+.mg15 {margin:15px;}
+.mg20 {margin:20px;}
+.mt5 {margin-top: 5px;}
+.mt10 {margin-top: 10px;}
+.mt15 {margin-top: 15px;}
+.mt20 {margin-top: 20px;}
+.mb5 {margin-bottom: 5px;}
+.mb10 {margin-bottom: 10px;}
+.mb15 {margin-bottom: 15px;}
+.mb20 {margin-bottom: 20px;}
+.ml5 {margin-left: 5px;}
+.ml10 {margin-left: 10px;}
+.ml15 {margin-left: 15px;}
+.ml20 {margin-left: 20px;}
+.mr5 {margin-right: 5px;}
+.mr10 {margin-right: 10px;}
+.mr15 {margin-right: 15px;}
+.mr20 {margin-right: 20px;}
+/** layuiAdmin.pro-v1.2.1 LPPL License By http://www.layui.com/admin/ */
+#LAY_app{ position:relative; top: 40%; left:0; margin:-212px auto 0; }
+.layadmin-user-login {
+	position: relative;
+	left: 0;
+	top: 0;
+	min-height: 100%;
+	box-sizing: border-box
+}
+.layadmin-user-login-main {
+	width: 375px;
+	margin: 0 auto;
+}
+.layadmin-user-login-box {
+	padding: 20px 0px 10px 0px;
+}
+
+.layadmin-user-login-header {
+	text-align: center
+}
+.layadmin-user-login-header h2 {
+	font-weight: normal;
+	font-size: 30px;
+	line-height: 1;
+	color: #000
+}
+
+.layadmin-user-login-icon {
+	position: absolute;
+	left: 1px;
+	top: 1px;
+	width: 38px;
+	line-height: 36px;
+	text-align: center;
+	color: #d2d2d2
+}
+
+.layadmin-user-login-body .layui-form-item .layui-input {
+	padding-left: 38px
+}
+@media screen and (max-width:768px) {
+	.layadmin-user-login {
+		padding-top: 60px
+	}
+	.layadmin-user-login-main {
+		width: 350px
+	}
+	.layadmin-user-login-box {
+		padding: 10px
+	}
+}

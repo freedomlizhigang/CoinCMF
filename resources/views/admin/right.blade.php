@@ -17,63 +17,55 @@
     <meta http-equiv="Cache-Control" content="no-siteapp" />
 
     <!-- 上传用的 css -->
-    <link rel="stylesheet" href="{{ $sites['static']}}common/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{{ $sites['static']}}layui/css/layui.css">
     <link rel="stylesheet" href="{{ $sites['static']}}common/css/iconfont.css">
-    <link rel="stylesheet" href="{{ $sites['static']}}admin/css/reset.css">
-    <script src="{{ $sites['static']}}common/js/jquery.min.js"></script>
-    <script src="{{ $sites['static']}}common/js/bootstrap.min.js"></script>
-    <!-- 上传用的 js -->
-    <script src="{{ $sites['static']}}common/webuploader/webuploader.js"></script>
-    <script src="{{ $sites['static']}}common/laydate/laydate.js"></script>
+    <link rel="stylesheet" href="{{ $sites['static']}}admin/css/admin.css">
     <!-- 配置文件 -->
+    <script type="text/javascript" src="{{ $sites['static']}}common/js/jquery.min.js"></script>
     <script type="text/javascript" src="{{ $sites['static']}}common/ueditor/ueditor.config.js"></script>
     <!-- 编辑器源码文件 -->
     <script type="text/javascript" src="{{ $sites['static']}}common/ueditor/ueditor.all.js"></script>
-    <script src="{{ $sites['static']}}admin/js/com.js"></script>
+    <!-- 放最下边，大坑一个 -->
+    <script>
+        var host = "{{ config('app.url') }}";
+    </script>
+
 </head>
 
-<body class="pr">
-    <div class="right_con">
+<body>
+    <section class="right_con">
         <!-- 右侧标题 -->
-        <div class="clearfix">
+        <header class="clearfix right-header">
             <h2 class="main_title f-l">{{ $title }}</h2>
-            <div class="btn-group main_btn f-l">
+            <div class="layui-btn-group f-r">
                 @yield('rmenu')
             </div>
-        </div>
-        <hr>
-        <div class="right-main mt10">
-            @yield('content')
-        </div>
-    </div>
-    <!-- 弹出层 -->
-    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-      <div class="modal-dialog modal-lg" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title" id="myModalLabel_right"></h4>
-                </div>
-                <div class="modal-body" id="modal_right">
+        </header>
+        <!-- 主内容区 -->
+        <div class="layui-fluid">
+            <div class="layui-row layui-col-space15">
+                <div class="layui-col-md12">
+                    <div class="layui-card">
+                        <div class="layui-card-body">
+                            @yield('content')
+                        </div>
+                    </div>
                 </div>
             </div>
-      </div>
-    </div>
-    <!-- 提示层 -->
-    <div class="alert alert-success dn" id="success_alert" role="alert"></div>
-    <div class="alert alert-danger dn" id="error_alert" role="alert"></div>
-
+        </div>
+    </section>
+    <script type="text/javascript" src="{{ $sites['static']}}layui/layui.all.js"></script>
+    <script type="text/javascript" src="{{ $sites['static']}}admin/js/public.js"></script>
+    <!-- 错误提示 -->
     @if(session('message'))
-    <div class="alert_top alert alert-success">
-        {{ session('message') }}
-    </div>
-    @endif
-    <script type="text/javascript">
-        var host = "{{ config('app.url') }}";
-        $(function(){
-            $('div.alert_top').delay(1500).slideUp(300);
-        })
+    <script>
+        ;!function(){
+          var $ = layui.jquery,layer = layui.layer,form = layui.form;
+          layer.msg("{{ session('message') }}",{icon:2,offset:'auto'});
+        }();
     </script>
+    @endif
+
 </body>
 
 </html>

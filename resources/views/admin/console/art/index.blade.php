@@ -1,32 +1,44 @@
 @extends('admin.right')
 
 @section('rmenu')
-@if(App::make('com')->ifCan('art-add'))
-<a href="{{ url('/console/art/add',$catid) }}" class="btn btn-xs btn-default"><span class="iconfont icon-add"></span> 添加文章</a>
-@endif
-
+	@if(App::make('com')->ifCan('art-add'))
+	<a href="{{ url('/console/art/add',$catid) }}" class="layui-btn layui-btn-xs layui-btn-primary"><i class="layui-icon">&#xe654;</i>添加文章</a>
+	@endif
 @endsection
-
 
 @section('content')
 <!-- 选出栏目 -->
 <div class="clearfix">
-	<form action="" class="form-inline" method="get">
-		<select name="catid" id="catid" class="form-control">
-			<option value="">请选择栏目</option>
-			{!! $cate !!}
-		</select>
-		<select name="push_flag" id="push_flag" class="form-control">
-			<option value="">是否推荐</option>
-			<option value="1"@if($push_flag == 1) selected="selected"@endif>推荐</option>
-			<option value="0"@if($push_flag == 0) selected="selected"@endif>普通</option>
-		</select>
-		开始时间：
-		<input type="text" name="starttime" class="form-control" value="{{ $starttime }}" id="laydate">
-		结束时间：
-		<input type="text" name="endtime" class="form-control" value="{{ $endtime }}" value="" id="laydate2">
-		<input type="text" name="q" value="{{ $key }}" class="form-control" placeholder="请输入文章标题关键字..">
-		<button class="btn btn-xs btn-info">查找</button>
+	<form action="" class="layui-form" method="get">
+		<div class="layui-inline">
+			<select name="catid" id="catid">
+				<option value="">请选择栏目</option>
+				{!! $cate !!}
+			</select>
+		</div>
+		<div class="layui-inline">
+			<select name="push_flag" id="push_flag">
+				<option value="">是否推荐</option>
+				<option value="1"@if($push_flag == 1) selected="selected"@endif>推荐</option>
+				<option value="0"@if($push_flag == 0) selected="selected"@endif>普通</option>
+			</select>
+		</div>
+		<div class="layui-inline">
+			<label class="layui-form-label">开始时间：</label>
+			<div class="layui-input-inline">
+				<input type="text" name="starttime" value="{{ $starttime }}" id="laydate" class="layui-input">
+			</div>
+		</div>
+		<div class="layui-inline">
+			<label class="layui-form-label">结束时间：</label>
+			<div class="layui-input-inline">
+				<input type="text" name="endtime" value="{{ $endtime }}" value="" id="laydate2" class="layui-input">
+			</div>
+		</div>
+		<div class="layui-inline">
+			<input type="text" name="q" value="{{ $key }}" placeholder="请输入文章标题关键字.." class="layui-input">
+		</div>
+		<button class="layui-btn layui-btn-normal">查找</button>
 	</form>
 </div>
 <form action="{{ url('/console/art/alldel') }}" class="form-inline form_status" method="get">
@@ -94,41 +106,7 @@
 <!-- 选中当前栏目 -->
 <script>
 	$(function(){
-		$('.btn_listrorder').click(function(){
-			$('.form_status').attr({'action':"{{ url('console/art/sort') }}",'method':'post'}).submit();
-		});
-		$('.btn_del').click(function(){
-			if (!confirm("确实要删除吗?")){
-				return false;
-			}else{
-				$('.form_status').attr({'action':"{{ url('console/art/alldel') }}",'method':'post'}).submit();
-			}
-		});
-		$(".checkall").bind('change',function(){
-			if($(this).is(":checked"))
-			{
-				$(".check_s").each(function(s){
-					$(".check_s").eq(s).prop("checked",true);
-				});
-			}
-			else
-			{
-				$(".check_s").each(function(s){
-					$(".check_s").eq(s).prop("checked",false);
-				});
-			}
-		});
 		$('#catid option[value=' + {{ $catid }} + ']').prop('selected','selected');
-	})
-	laydate({
-        elem: '#laydate',
-        format: 'YYYY-MM-DD hh:mm:ss', // 分隔符可以任意定义，该例子表示只显示年月
-        istime: true,
-    });
-    laydate({
-        elem: '#laydate2',
-        format: 'YYYY-MM-DD hh:mm:ss', // 分隔符可以任意定义，该例子表示只显示年月
-        istime: true,
-    });
+	});
 </script>
 @endsection

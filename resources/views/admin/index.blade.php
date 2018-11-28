@@ -4,86 +4,90 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
     <title>{{ cache('config')['sitename'] }}管理中心</title>
-    <meta name="author" content="李潇喃：www.www.xi-yi.ren" />
+    <meta name="author" content="李潇喃：www.shanmuzhi.com" />
     <!-- IE最新兼容 -->
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <!-- 国产浏览器高速/微信开发不要用 -->
-     <meta name="renderer" content="webkit">
-
+    <meta name="renderer" content="webkit">
     <!-- 移动设备禁止缩放 -->
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-
     <!-- No Baidu Siteapp-->
     <meta http-equiv="Cache-Control" content="no-siteapp" />
-
-    <link rel="stylesheet" href="{{ $sites['static']}}common/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{{ $sites['static']}}layui/css/layui.css">
     <link rel="stylesheet" href="{{ $sites['static']}}common/css/iconfont.css">
-    <link rel="stylesheet" href="{{ $sites['static']}}admin/css/reset.css">
-    <script src="{{ $sites['static']}}common/js/jquery.min.js"></script>
-    <script src="{{ $sites['static']}}common/js/bootstrap.min.js"></script>
-    <script src="{{ $sites['static']}}admin/js/com.js"></script>
+    <link rel="stylesheet" href="{{ $sites['static']}}admin/css/admin.css">
 </head>
 
-<body class="box">
-    <div class="mainbox">
-        <header class="top clearfix overh">
-            <h1 class="logo overh"><img src="{{ $sites['static']}}admin/images/logo.png" width="200" height="50" alt="{{ cache('config')['sitename'] }}"></h1>
-            <nav class="menu clearfix overh">
-                <ul id="mainmenu" class="clearfix">
-                @foreach($mainmenu as $mm)
-                    <li><a href="javascript:;" data-menuid="{{ $mm['id'] }}"@if($mm['id'] == 2) class="active"@endif>{{ $mm['name'] }}</a></li>
-                @endforeach
+<body class="layui-layout-body">
+    <section id="LAY_app" class="layadmin-tabspage-none">
+        <div class="layui-layout layui-layout-admin">
+            <header class="layui-header">
+                <!-- 头部区域 -->
+                <ul class="layui-nav layui-layout-left">
+                    <li class="layui-nav-item layadmin-flexible">
+                        <a href="javascript:;" layadmin-event="flexible" title="侧边伸缩">
+                            <i class="layui-icon layui-icon-shrink-right" id="LAY_app_flexible"></i>
+                        </a>
+                    </li>
                 </ul>
-            </nav>
-            <span class="userinfo">
-                <a href="/" target="_blank">网站首页，</a>
-                欢迎回来：{{ session('console')->name }} |
-                <a href="{{ url('/console/logout') }}">退出</a>
-            </span>
-        </header>
-        <div class="leftbg"></div>
-        <!-- 左侧菜单 -->
-        <aside class="left overh" id="subnav">
-        </aside>
-        <section class="right overh">
-            <iframe name="right" id="rightMain" src="{{ url('/console/index/main') }}" frameborder="false" scrolling="auto" style="border:none; margin-bottom:30px" width="100%" height="auto" allowtransparency="true"></iframe>
-        </section>
-        <footer class="copyright clearfix">
-            @ <a href="http://www.xi-yi.ren/" target="_blank" class="color_f60">console</a>&<a href="https://github.com/laravel/laravel" target="_blank">Laravel</a>
-        </footer>
-    </div>
+                <ul class="layui-nav layui-layout-right" lay-filter="layadmin-layout-right">
+                    <li class="layui-nav-item mr10">
+                        <a href="/" target="_blank">网站首页</a>
+                    </li>
+                    <li class="layui-nav-item mr10">
+                        <a href="javascript:;"><cite>{{ session('console')->name }}</cite> <span class="layui-nav-more"></span></a>
+                        <dl class="layui-nav-child">
+                            <dd><a href="{{ url('/console/logout') }}">退出</a></dd>
+                        </dl>
+                    </li>
+                </ul>
+            </header>
+            <!-- 侧边菜单 -->
+            <aside class="layui-side layui-side-menu">
+                <div class="layui-side-scroll">
+                    <!-- logo -->
+                    <div class="layui-logo" lay-href="{{ url('/console/index/main') }}">
+                        <span></span>
+                    </div>
+                    <!-- 侧栏 -->
+                    <ul class="layui-nav layui-nav-tree leftmenu" lay-filter="layadmin-system-side-menu">
+                        @foreach($leftmenu as $l)
+                        <li data-name="home" class="layui-nav-item @if($loop->first) layui-nav-itemed @endif">
+                            <a href="javascript:;">
+                                <i class="layui-icon iconfont {{ $l['icon'] }}"></i>
+                                <cite>{{ $l['name'] }}</cite>
+                                <span class="layui-nav-more"></span>
+                            </a>
+                            <dl class="layui-nav-child">
+                                @foreach($l['submenu'] as $ls)
+                                <dd>
+                                    <a lay-href="{{ '/console/'.$ls['url'] }}">{{ $ls['name'] }}
+                                    </a>
+                                </dd>
+                                @endforeach
+                            </dl>
+                        </li>
+                        @endforeach
+                    </ul>
+                </div>
+            </aside>
+            <!-- 主体内容 -->
+            <section class="layui-body" id="LAY_app_body">
+                <div class="layadmin-tabsbody-item layui-show">
+                    <iframe src="{{ url('/console/index/main') }}" frameborder="0" class="layadmin-iframe"></iframe>
+                </div>
+            </section>
+            <!-- 隐藏的内容 -->
+            <div class="layadmin-body-shade" layadmin-event="shade"></div>
+        </div>
+    </section>
+    <!-- 放最下边，大坑一个 -->
     <script>
         var host = "{{ config('app.url') }}";
-        $(function(){
-            // 加载默认左侧菜单
-            $("#subnav").load('/console/index/left/2');
-            // 点击切换左侧菜单列表
-            $(".logo").click(function(){
-                $("#rightMain").attr('src','/console/index/main');
-            });
-            $("#mainmenu li a").click(function(){
-                var mid = $(this).attr('data-menuid');
-                $("#subnav").load("/console/index/left/"+mid);
-                $(this).addClass('active').parent('li').siblings('li').children('a').removeClass('active');
-            });
-            // 右侧高度
-            var RHeight = $('body').height() - 55;
-            $('#rightMain').height(RHeight);
-            $(window).resize(function() {
-                RHeight = $('body').height() - 55;
-                $('#rightMain').height(RHeight);
-            });
-        })
-        // 左侧菜单点击添加效果
-        function _LM(menuid,targetUrl)
-        {
-            // 添加样式
-            $('.sub_menu_a ,.sub_menu').removeClass('active');
-            $('#left_menu'+menuid+' ,#left_menu'+menuid+' a').addClass('active');
-            // 改变右侧内容区域
-            $("#rightMain").attr('src',targetUrl);
-        }
     </script>
+    <script type="text/javascript" src="{{ $sites['static']}}common/js/jquery.min.js"></script>
+    <script type="text/javascript" src="{{ $sites['static']}}layui/layui.all.js"></script>
+    <script type="text/javascript" src="{{ $sites['static']}}admin/js/public.js"></script>
 </body>
 
 </html>

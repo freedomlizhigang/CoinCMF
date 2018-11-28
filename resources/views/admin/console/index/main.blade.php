@@ -3,6 +3,6 @@
 
 @section('content')
 
-<p class="text-info">Laravel XYCMF</p>
+<h2>CoinsCMF</h2>
 
 @endsection
