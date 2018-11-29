@@ -25,5 +25,7 @@ class VerifyCsrfToken extends Middleware
         'console/attr/uploadimg',
         // 取规格
         'console/good/goodspecinput',
+        // 后台API
+        'console/api/*',
     ];
 }

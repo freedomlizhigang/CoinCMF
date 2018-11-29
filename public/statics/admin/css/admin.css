@@ -109,6 +109,7 @@ body {
 /* 右侧内容 */
 .layui-layout-admin .layui-body {
 	top: 50px;
+    bottom: 0px;
 }
 .right-header {
 	background-color: #fff; font-size: 14px;
