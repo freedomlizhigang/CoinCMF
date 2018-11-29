@@ -11,6 +11,11 @@
 |
 */
 
+Route::group(['prefix'=>'console','namespace' => 'Admin'],function(){
+    // 广告位
+    Route::get('art/table', 'Common\ArtController@getTable');
+});
+
 // Home PC版
 Route::group(['namespace' => 'Home'],function(){
     // Test

@@ -55,18 +55,4 @@
 		$(this).find("dl").removeClass("layui-show");
 	});
 
-	//监听提交
-	form.on('submit(formDemo)', function(data){
-		layer.msg(JSON.stringify(data.field));
-		return false;
-	});
-
-	// 文章列表页面用的
-	laydate.render({
-		elem: '#laydate' //指定元素
-	});
-	laydate.render({
-		elem: '#laydate2' //指定元素
-	});
-
 }();

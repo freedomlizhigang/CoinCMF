@@ -27,7 +27,27 @@ class ArtController extends Controller
     {
     	try {
             $title = '文章列表';
-        	$catid = $req->input('catid');
+            // 超级管理员可以看所有的
+            $cats = Cate::get();
+        	$tree = app('com')->toTree($cats,'0');
+        	$cate = app('com')->toTreeSelect($tree);
+            // 记录上次请求的url path，返回时用
+            session()->put('backurl',url()->full());
+        	return view('admin.console.art.index',compact('title','cate'));
+        } catch (\Throwable $e) {
+            // dd($e);
+            return view('errors.500');
+        }
+    }
+
+    /**
+     * 文章列表
+     * @return [type] [description]
+     */
+    public function getTable(Request $req)
+    {
+        try {
+            $catid = $req->input('catid');
             // 搜索关键字
             $key = $req->input('q','');
             $push_flag = $req->input('push_flag');
@@ -35,9 +55,11 @@ class ArtController extends Controller
             $endtime = $req->input('endtime');
             // 超级管理员可以看所有的
             $cats = Cate::get();
-        	$tree = app('com')->toTree($cats,'0');
-        	$cate = app('com')->toTreeSelect($tree);
-    		$list = Article::with('cate')->where(function($q) use($catid){
+            $tree = app('com')->toTree($cats,'0');
+            $cate = app('com')->toTreeSelect($tree);
+            $list = Article::with(['cate'=>function($q){
+                    $q->select('id','name');
+                }])->where(function($q) use($catid){
                     if ($catid != '') {
                         $q->where('cate_id',$catid);
                     }
@@ -57,10 +79,13 @@ class ArtController extends Controller
                     if ($endtime != '') {
                         $q->where('created_at','<',$endtime);
                     }
-                })->where('del_flag',0)->orderBy('id','desc')->paginate(10);
-            // 记录上次请求的url path，返回时用
-            session()->put('backurl',url()->full());
-        	return view('admin.console.art.index',compact('title','list','cate','catid','key','starttime','endtime','push_flag'));
+                })->select('id','title','cate_id','hits','publish_at')->where('del_flag',0)->orderBy('id','desc')->get();
+            $reslist = [];
+            foreach ($list as $v) {
+                $reslist[] = ['id'=>$v->id,'title'=>$v->title,'hits'=>$v->hits,'publish_at'=>$v->publish_at,'catename'=>$v->cate->name];
+            }
+            $res = ['code'=>0,'msg'=>'0','count'=>$list->count(),'data'=>$reslist];
+            return $res;
         } catch (\Throwable $e) {
             // dd($e);
             return view('errors.500');

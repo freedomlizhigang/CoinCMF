@@ -29,7 +29,6 @@
     <script>
         var host = "{{ config('app.url') }}";
     </script>
-
 </head>
 
 <body>
@@ -54,18 +53,14 @@
             </div>
         </div>
     </section>
-    <script type="text/javascript" src="{{ $sites['static']}}layui/layui.all.js"></script>
-    <script type="text/javascript" src="{{ $sites['static']}}admin/js/public.js"></script>
     <!-- 错误提示 -->
     @if(session('message'))
     <script>
         ;!function(){
-          var $ = layui.jquery,layer = layui.layer,form = layui.form;
           layer.msg("{{ session('message') }}",{icon:2,offset:'auto'});
         }();
     </script>
     @endif
-
 </body>
 
 </html>

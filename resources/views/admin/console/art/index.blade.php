@@ -1,112 +1,117 @@
 @extends('admin.right')
 
 @section('rmenu')
-	@if(App::make('com')->ifCan('art-add'))
-	<a href="{{ url('/console/art/add',$catid) }}" class="layui-btn layui-btn-xs layui-btn-primary"><i class="layui-icon">&#xe654;</i>添加文章</a>
-	@endif
+    @if(App::make('com')->ifCan('art-add'))
+    <a href="{{ url('/console/art/add') }}" class="layui-btn layui-btn-xs layui-btn-primary"><i class="layui-icon">&#xe654;</i>添加文章</a>
+    @endif
 @endsection
 
 @section('content')
 <!-- 选出栏目 -->
 <div class="clearfix">
-	<form action="" class="layui-form" method="get">
-		<div class="layui-inline">
-			<select name="catid" id="catid">
-				<option value="">请选择栏目</option>
-				{!! $cate !!}
-			</select>
-		</div>
-		<div class="layui-inline">
-			<select name="push_flag" id="push_flag">
-				<option value="">是否推荐</option>
-				<option value="1"@if($push_flag == 1) selected="selected"@endif>推荐</option>
-				<option value="0"@if($push_flag == 0) selected="selected"@endif>普通</option>
-			</select>
-		</div>
-		<div class="layui-inline">
-			<label class="layui-form-label">开始时间：</label>
-			<div class="layui-input-inline">
-				<input type="text" name="starttime" value="{{ $starttime }}" id="laydate" class="layui-input">
-			</div>
-		</div>
-		<div class="layui-inline">
-			<label class="layui-form-label">结束时间：</label>
-			<div class="layui-input-inline">
-				<input type="text" name="endtime" value="{{ $endtime }}" value="" id="laydate2" class="layui-input">
-			</div>
-		</div>
-		<div class="layui-inline">
-			<input type="text" name="q" value="{{ $key }}" placeholder="请输入文章标题关键字.." class="layui-input">
-		</div>
-		<button class="layui-btn layui-btn-normal">查找</button>
-	</form>
+    <form action="" class="layui-form layui-row layui-col-space10" method="get">
+        <div class="layui-inline">
+            <select name="catid" id="catid">
+                <option value="">请选择栏目</option>
+                {!! $cate !!}
+            </select>
+        </div>
+        <div class="layui-inline">
+            <select name="push_flag" id="push_flag">
+                <option value="">是否推荐</option>
+                <option value="1">推荐</option>
+                <option value="0">普通</option>
+            </select>
+        </div>
+        <div class="layui-inline">
+            <div class="layui-input-inline">
+                <input type="text" name="starttime" value="" id="laydate" class="layui-input starttime" placeholder="开始时间">
+            </div>
+        </div>
+        <div class="layui-inline">
+            <div class="layui-input-inline">
+                <input type="text" name="endtime" value="" value="" id="laydate2" class="layui-input endtime" placeholder="结束时间">
+            </div>
+        </div>
+        <div class="layui-inline">
+            <input type="text" name="q" value="" placeholder="请输入文章标题关键字.." class="layui-input key">
+        </div>
+        <div class="layui-btn layui-btn-normal btn-search">查找</div>
+    </form>
 </div>
-<form action="{{ url('/console/art/alldel') }}" class="form-inline form_status" method="get">
-	{{ csrf_field() }}
-	<table class="table table-striped table-hover mt10">
-		<tr class="active">
-			<th width="30">
-				<input type="checkbox" class="checkall"></th>
-			<th width="60">排序</th>
-			<th width="50">ID</th>
-			<th>标题</th>
-			<th width="100">栏目</th>
-			<th width="100">点击量</th>
-			<th width="180">发布时间</th>
-			<th width="100">操作</th>
-		</tr>
-		@foreach($list as $a)
-		<tr>
-			<td>
-				<input type="checkbox" name="sids[]" class="check_s" value="{{ $a->id }}"></td>
-			<td>
-				<input type="text" name="sort[{{ $a->id }}]" class="form-control input-xs" value="{{ $a->sort }}"></td>
-			<td>{{ $a->id }}</td>
-			<td>
-				<a href="{{ url('/post',$a->url) }}" target="_blank">{{ $a->title }}</a>
-				@if($a->thumb != '')
-				<span class="color_red">图</span>
-				@endif
-				@if($a->push_flag == 1)
-				<span class="text-success">荐</span>
-				@endif
-			</td>
-			<td>{{ $a->cate->name }}</td>
-			<td>{{ $a->hits }}</td>
-			<td>{{ $a->publish_at }}</td>
-			<td>
-				@if(App::make('com')->ifCan('art-edit'))
-				<a href="{{ url('/console/art/edit',$a->id) }}" class="btn btn-xs btn-info iconfont icon-translate"></a>
-				@endif
-				@if(App::make('com')->ifCan('art-del'))
-				<a href="{{ url('/console/art/del',$a->id) }}" class="confirm btn btn-xs btn-danger iconfont icon-delete"></a>
-				@endif
-			</td>
-		</tr>
-		@endforeach
-	</table>
-	<!-- 添加进专题功能 -->
-	<div class="special_div pull-left clearfix" data-toggle="buttons">
-		<div class="btn-group">
-			<label class="btn btn-xs btn-primary"><input type="checkbox" autocomplete="off" class="checkall">全选</label>
-		</div>
-		@if(App::make('com')->ifCan('art-sort'))
-		<button type="submit" name="dosubmit" class="btn btn-xs btn-warning btn_listrorder" data-status="0">排序</button>
-		@endif
-
-		@if(App::make('com')->ifCan('art-alldel'))
-		<span class="btn btn-xs btn-danger btn_del">批量删除</span>
-		@endif
-	</div>
-</form>
-<!-- 分页，appends是给分页添加参数 -->
-<div class="pages clearfix pull-right">
-	{!! $list->appends(['catid' =>$catid,'q'=>$key,'push_flag'=>$push_flag,'starttime'=>$starttime,'endtime'=>$endtime])->links() !!}
-</div>
-<!-- 选中当前栏目 -->
-<script>
-	$(function(){
-		$('#catid option[value=' + {{ $catid }} + ']').prop('selected','selected');
-	});
+<table class="layui-table" id="tablelist" lay-filter="tablelist"></table>
+<!-- 操作 -->
+<script type="text/html" id="barDemo">
+    <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
 </script>
+
+@include('admin.component.layui')
+<script>
+    ;!function(){
+        // 文章列表页面用的
+        laydate.render({
+            elem: '#laydate' //指定元素
+        });
+        laydate.render({
+            elem: '#laydate2' //指定元素
+        });
+        // 请求参数
+        var push_flag = $("#push_flag").val();
+        var catid = $("#catid").val();
+        var starttime = $(".starttime").val();
+        var endtime = $(".endtime").val();
+        var key = $(".key").val();
+        // 获取数据
+        var listTable = table.render({
+            elem: '#tablelist',
+            url:'/console/art/table',    // 测试数据，项目中改为真是数据接口
+            title: '用户数据表',
+            //设定异步数据接口的额外参数，任意设
+            where: {
+                catid: catid,
+                push_flag: push_flag,
+                starttime: starttime,
+                endtime: endtime,
+                key: key
+            },
+            cols: [[
+                {type: 'checkbox', fixed: 'left', unresize: true}
+                ,{field:'id', title:'ID', width:80, fixed: 'left', unresize: true}
+                ,{field:'title', title:'标题', edit: 'text', unresize: true}
+                ,{field:'catename', title:'栏目', width:150, edit: 'text', unresize: true}
+                ,{field:'hits', title:'点击量', width:80, edit: 'text', unresize: true, sort: true}
+                ,{field:'publish_at', title:'发布时间', width:180, unresize: true}
+                ,{fixed: 'right', title:'操作', toolbar: '#barDemo', width:120, unresize: true}
+            ]],
+            page: true
+        });
+
+        //监听行操作事件
+        table.on('tool(tablelist)', function(obj){
+            alert('fdsa');
+        });
+
+        // 搜索
+        $(".btn-search").click(function(){
+            // 获取数据
+            push_flag = $("#push_flag").val();
+            // 表格重构
+            listTable.reload({
+                //设定异步数据接口的额外参数，任意设
+                where: {
+                    catid: catid,
+                    push_flag: push_flag,
+                    starttime: starttime,
+                    endtime: endtime,
+                    key: key
+                },
+                page: {
+                    curr: 1 //重新从第 1 页开始
+                }
+            });
+        })
+    }();
+</script>
+
 @endsection
