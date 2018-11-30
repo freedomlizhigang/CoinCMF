@@ -25,9 +25,14 @@
     <script type="text/javascript" src="{{ $sites['static']}}common/ueditor/ueditor.config.js"></script>
     <!-- 编辑器源码文件 -->
     <script type="text/javascript" src="{{ $sites['static']}}common/ueditor/ueditor.all.js"></script>
+    <script type="text/javascript" src="{{ $sites['static']}}layui/layui.js"></script>
+    <script>
+        layui.use(['element']);
+    </script>
     <!-- 放最下边，大坑一个 -->
     <script>
         var host = "{{ config('app.url') }}";
+        var apihost = '/c-api/';
     </script>
 </head>
 
@@ -35,7 +40,7 @@
     <section class="right_con">
         <!-- 右侧标题 -->
         <header class="clearfix right-header">
-            <h2 class="main_title f-l">{{ $title }}</h2>
+            <h2 class="main_title f-l layui-breadcrumb">{!! $title !!}</h2>
             <div class="layui-btn-group f-r">
                 @yield('rmenu')
             </div>
@@ -46,6 +51,7 @@
                 <div class="layui-col-md12">
                     <div class="layui-card">
                         <div class="layui-card-body">
+                            <!-- 真正的内容 -->
                             @yield('content')
                         </div>
                     </div>
@@ -56,9 +62,9 @@
     <!-- 错误提示 -->
     @if(session('message'))
     <script>
-        ;!function(){
+        layui.use(['layer'],function(){
           layer.msg("{{ session('message') }}",{icon:2,offset:'auto'});
-        }();
+        });
     </script>
     @endif
 </body>

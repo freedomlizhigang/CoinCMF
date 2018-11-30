@@ -86,7 +86,7 @@
         var host = "{{ config('app.url') }}";
     </script>
     <script type="text/javascript" src="{{ $sites['static']}}common/js/jquery.min.js"></script>
-    <script type="text/javascript" src="{{ $sites['static']}}layui/layui.all.js"></script>
+    <script type="text/javascript" src="{{ $sites['static']}}layui/layui.js"></script>
     <script type="text/javascript" src="{{ $sites['static']}}admin/js/public.js"></script>
 </body>
 

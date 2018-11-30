@@ -1,8 +1,7 @@
 // lay里的jquery
-;!function(){
+layui.use(['layer', 'form','element'],function(){
 	var layer = layui.layer,form = layui.form;
 	var element = layui.element;
-	var laydate = layui.laydate;
 	// 获取窗口宽度
 	var window_w = $("html").width();
 	window.onload = window.onresize = function(){
@@ -55,4 +54,4 @@
 		$(this).find("dl").removeClass("layui-show");
 	});
 
-}();
+});

@@ -13,7 +13,6 @@
         <div class="layui-inline">
             <select name="catid" id="catid">
                 <option value="">请选择栏目</option>
-                {!! $cate !!}
             </select>
         </div>
         <div class="layui-inline">
@@ -54,15 +53,33 @@
 </script>
 
 
-@include('admin.component.layui')
 <script>
-    ;!function(){
-        // 文章列表页面用的
+    layui.use(['layer','table','form','laydate'],function(){
+        var layer = layui.layer,form = layui.form;
+        var table = layui.table;
+        var laydate = layui.laydate;
+        // 下拉框
+        $.get(apihost + 'cate/select', function(res) {
+            if (res.code == 200) {
+                $('#catid').append(res.data);
+                // 重新渲染select，真是各种坑
+                form.render('select');
+            }
+            else
+            {
+                layer.msg(res.msg,{icon:2,offset:'auto'})
+            }
+        }).error(function(e) {
+            layer.msg('获取栏目数据失败，请稍后再试！',{icon:2,offset:'auto'})
+        });
+        // 时间
         laydate.render({
-            elem: '#laydate' //指定元素
+            elem: '#laydate', //指定元素
+            type: 'datetime',
         });
         laydate.render({
-            elem: '#laydate2' //指定元素
+            elem: '#laydate2', //指定元素
+            type: 'datetime',
         });
         // 请求参数
         var push_flag = $("#push_flag").val();
@@ -73,7 +90,7 @@
         // 获取数据
         var listTable = table.render({
             elem: '#tablelist',
-            url:'/console/api/article/list',    // 测试数据，项目中改为真是数据接口
+            url:apihost + 'article/list',    // 测试数据，项目中改为真是数据接口
             title: '用户数据表',
             toolbar: '#toolbar',
             //设定异步数据接口的额外参数，任意设
@@ -112,7 +129,7 @@
                     });
                     layer.confirm('确定删除选中数据吗？', function(index){
                         // 请求删除操作
-                        $.post('/console/api/article/deleteall', {ids: ids}, function(data) {
+                        $.post(apihost + 'article/deleteall', {ids: ids}, function(data) {
                             if (data.code == 200) {
                                 layer.msg(data.msg,{icon:1,offset:'auto'})
                                 // 表格重构
@@ -149,7 +166,7 @@
             ,data = obj.data //得到所在行所有键值
             ,field = obj.field; //得到字段
             // 排序
-            $.post('/console/api/article/sort', {id: data.id,sort:value}, function(data) {
+            $.post(apihost + 'article/sort', {id: data.id,sort:value}, function(data) {
                 if (data.code == 200) {
                     layer.msg(data.msg,{icon:1,offset:'auto'})
                 }
@@ -173,7 +190,7 @@
             if(obj.event === 'del'){
                 layer.confirm('确定删除吗？', function(index){
                     // 请求删除操作
-                    $.post('/console/api/article/delete', {id: data.id}, function(data) {
+                    $.post(apihost + 'article/delete', {id: data.id}, function(data) {
                         if (data.code == 200) {
                             layer.msg(data.msg,{icon:1,offset:'auto'})
                             obj.del();
@@ -195,6 +212,10 @@
         $(".btn-search").click(function(){
             // 获取数据
             push_flag = $("#push_flag").val();
+            catid = $("#catid").val();
+            starttime = $(".starttime").val();
+            endtime = $(".endtime").val();
+            key = $(".key").val();
             // 表格重构
             listTable.reload({
                 //设定异步数据接口的额外参数，任意设
@@ -210,7 +231,7 @@
                 }
             });
         })
-    }();
+    });
 </script>
 
 @endsection

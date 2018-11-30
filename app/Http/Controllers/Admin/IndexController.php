@@ -80,9 +80,58 @@ class IndexController extends Controller
     {
         try {
             $title = '系统信息';
-            return view('admin.console.index.main',compact('title'));
+            return view('admin.index.main',compact('title'));
         } catch (\Throwable $e) {
             return view('errors.500');
+        }
+    }
+    // 所有路由页面放这里
+    public function getAll(Request $req)
+    {
+        try {
+            // 拼接权限名字，url的第二个跟第三个参数
+            $toArr = explode('/',$req->path());
+            if ($toArr[0] != 'console') {
+                return back()->with('message','请求地址错误！');
+            }
+            // 如果不写方法名，默认为index
+            $toArr[2] = count($toArr) == 2 ? 'index' : $toArr[2];
+            $path = 'admin.'.$toArr[1].'.'.$toArr[2];
+            // 面包屑导航
+            $title = $this->catpos($toArr[1].'/'.$toArr[2]);
+            // 请求的参数
+            $data = $req->input();
+            if (view()->exists($path)) {
+                return view($path,compact('title','data'));
+            }
+            return view('errors.500');
+        } catch (\Throwable $e) {
+            return view('errors.500');
+        }
+    }
+    // 面包屑导航
+    public function catpos($path = '')
+    {
+        try {
+            $self = Menu::where('url',$path)->select('id','arrparentid','name','url')->first();
+            $menuids = explode(',',$self->arrparentid);
+            unset($menuids[0]);
+            // 取所有父栏目出来
+            $all = Menu::whereIn('id',$menuids)->select('id','parentid','url','name')->get();
+            $str = "";
+            foreach ($all as $v) {
+                if ($v->parentid == 0) {
+                    $str .= "<a href='javascript:;'>".$v->name."</a>";
+                }
+                else
+                {
+                    $str .= "<a href='/console/".$v->url."'>".$v->name."</a>";
+                }
+            }
+            $str .= "<a href='/console/".$self->url."'>".$self->name."</a>";
+            return $str;
+        } catch (\Throwable $e) {
+            return '';
         }
     }
     public function getLeft($pid)

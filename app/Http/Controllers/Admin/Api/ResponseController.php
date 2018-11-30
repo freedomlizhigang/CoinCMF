@@ -17,4 +17,9 @@ class ResponseController extends Controller
     {
         return ['code'=>$code,'msg'=>$msg,'data'=>$data];
     }
+    // 所有错误的返回
+    public function anyErrors()
+    {
+        return response()->json(['code'=>500,'msg'=>'请求地址有误！']);
+    }
 }

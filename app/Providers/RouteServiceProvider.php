@@ -35,16 +35,12 @@ class RouteServiceProvider extends ServiceProvider
      */
     public function map()
     {
+        // Api用的
         $this->mapApiRoutes();
-
+        // 后台用的
         $this->mapAdminRoutes();
-
-        $this->mapAdminApiRoutes();
-
+        // 前台页面
         $this->mapWebCommonRoutes();
-
-
-        //
     }
 
     /**
@@ -73,20 +69,6 @@ class RouteServiceProvider extends ServiceProvider
         Route::middleware('web')
              ->namespace($this->namespace)
              ->group(base_path('routes/admin.php'));
-    }
-
-    /**
-     * Define the "web" routes for the application.
-     *
-     * These routes all receive session state, CSRF protection, etc.
-     *
-     * @return void
-     */
-    protected function mapAdminApiRoutes()
-    {
-        Route::middleware('web')
-             ->namespace($this->namespace)
-             ->group(base_path('routes/adminapi.php'));
     }
 
     /**

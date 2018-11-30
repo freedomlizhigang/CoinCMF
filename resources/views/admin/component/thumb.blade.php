@@ -1,103 +1,44 @@
-<!-- 缩略图 -->
-<div id="uploader" class="wu-example">
-    <!--用来存放文件信息-->
-    <div id="thelist" class="uploader-list">
-    	@if($slot != '')
-    	<div class="file-item">
-			<img src="{{ $slot }}" width="110" height="110" alt="">
-		</div>
-    	@endif
-    </div>
-    <div class="clearfix">
-        <div id="thumb_btn" class="btn btn-sm btn-success">选择文件</div>
-        <div id="ctlBtn" class="btn btn-sm btn-warning">取消文件</div>
-    </div>
-</div>
-<p class="input-info">图片类型jpg/jpeg/gif/png，大小不超过2M</p>
-<input type="hidden" id="thumb" value="{{ $slot }}" name="data[{{ $filed_name }}]" >
+<button type="button" class="layui-btn" id="test1">
+    <i class="layui-icon">&#xe67c;</i>上传图片
+</button>
+<p id="demoText"><img src="{{ $slot }}" width="120px" height="90px" alt=""></p>
+<style>
+    #demoText {
+        overflow: hidden;
+        width: 120px;
+        height: 90px;
+        border: #f0f0f0 solid 1px;
+        margin-top: 10px;
+    }
+</style>
 <script>
-    $(function(){
-        // 兼容弹出框
-        $("#thumb_btn").mouseenter(function(){
-            thumb_uploader.refresh();
-        });
-    });
-    // 缩略图
-    var $list_thumb = $("#thelist");
-    var $btn_ctl = $('#ctlBtn');
-    var thumb_uploader = WebUploader.create({
-        // 自动上传
-        auto: true,
-        // 控制数量
-        fileNumLimit:1,
-        // 文件接收服务端。
-        server : "{{ url('api/common/upload') }}",
-        // 选择文件的按钮。可选。
-        pick: '#thumb_btn',
-        // inputime 字段名，检查上传字段用的，十分重要
-        fileVal:'imgFile',
-        // 只允许选择图片文件。
-        accept: {
-           title: 'Images',
-           extensions: 'gif,jpg,jpeg,bmp,png',
-           mimeTypes: 'image/*'
-        },
-        // 开起分片上传。
-        // chunked: true,
-        formData:{
-            // thumb : 1,
-            // thumbWidth:300,
-            // thumbHeight:240
-        },
-        thumb: {
-            width: 110,
-            height: 110,
-            quality: 70,
-            allowMagnify: true,
-            crop: true,
-            preserveHeaders: false,
-            // 为空的话则保留原有图片格式。
-            // 否则强制转换成指定的类型。
-            // IE 8下面 base64 大小不能超过 32K 否则预览失败，而非 jpeg 编码的图片很可
-            // 能会超过 32k, 所以这里设置成预览的时候都是 image/jpeg
-            type: ''
-        }
-    });
-    // 重新上传
-    $btn_ctl.on( 'click', function() {
-        var allFiles = thumb_uploader.getFiles();
-        if (allFiles.length != 0) {
-            thumb_uploader.removeFile(allFiles);
-        }
-        $list_thumb.empty();
-        $('#thumb').val('');
-    });
-    // 成功以后加入input中
-    thumb_uploader.on('uploadSuccess',function(file,req){
-        // console.log(req);
-        $('#thumb').val(req.url);
-    });
-    // 当有文件被添加进队列的时候
-    thumb_uploader.on( 'fileQueued', function( file ) {
-        var $li = $(
-                '<div id="' + file.id + '" class="file-item">' +
-                    '<img>' +
-                    '<div class="info">' + file.name + '</div>' +
-                '</div>'
-                ),
-            $img = $li.find('img');
-        // $list_thumb为容器jQuery实例
-        $list_thumb.append( $li );
-        // 创建缩略图
-        // 如果为非图片文件，可以不用调用此方法。
-        // thumbnailWidth x thumbnailHeight 为 100 x 100
-        thumb_uploader.makeThumb( file, function( error, src ) {
-            if ( error ) {
-                $img.replaceWith('<span>不能预览</span>');
-                return;
-            }
+layui.use(['layer','upload'],function(){
+  var upload = layui.upload;
+  var layer = layui.layer;
 
-            $img.attr( 'src', src );
-        }, '', '' );
-    });
+  //执行实例
+  var uploadInst = upload.render({
+    elem: '#test1' //绑定元素
+    ,url: "{{ url('api/common/upload') }}" //上传接口
+    ,accept: 'images' //允许上传的文件类型
+    ,exts: 'jpg|png|gif|bmp|jpeg' //允许上传的文件类型
+    ,field: 'imgFile' //设定文件域的字段名
+    ,size: 2048 //最大允许上传的文件大小
+    ,multiple: false //是否允许多文件上传
+    ,number: 1 //设置同时可上传的文件数量
+    ,data:{
+        "thumb":1,
+        "thumbWidth":120,
+        "thumbHeight":120
+    }
+    ,done: function(res){
+        // console.log(res)
+        $('#demoText').html("<img src='" + res.url + "' width='120px' height='90px' />");
+        layer.msg('图片上传成功！',{icon:1,offset:'auto'})
+    }
+    ,error: function(){
+        layer.msg('图片上传失败！',{icon:2,offset:'auto'})
+    }
+  });
+});
 </script>

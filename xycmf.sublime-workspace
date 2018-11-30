@@ -761,8 +761,6 @@
 		"/D/wwwroot/XYCMF/app",
 		"/D/wwwroot/XYCMF/app/Http",
 		"/D/wwwroot/XYCMF/app/Http/Controllers",
-		"/D/wwwroot/XYCMF/app/Http/Controllers/Admin",
-		"/D/wwwroot/XYCMF/app/Http/Controllers/Admin/Api",
 		"/D/wwwroot/XYCMF/public",
 		"/D/wwwroot/XYCMF/public/statics",
 		"/D/wwwroot/XYCMF/public/statics/admin",
@@ -907,7 +905,7 @@
 	],
 	"find":
 	{
-		"height": 41.0
+		"height": 27.0
 	},
 	"find_in_files":
 	{

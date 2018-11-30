@@ -26,6 +26,6 @@ class VerifyCsrfToken extends Middleware
         // 取规格
         'console/good/goodspecinput',
         // 后台API
-        'console/api/*',
+        'c-api/*',
     ];
 }

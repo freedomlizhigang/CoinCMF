@@ -1,5 +1,5 @@
 <!-- 加载编辑器的容器 -->
-<script id="{{ $id }}" name="data[{{ $filed_name }}]" class="data_content" type="text/plain">
+<script id="{{ $id }}" name="{{ $filed_name }}" class="data_content" type="text/plain">
     {{ $slot }}
 </script>
 <script>

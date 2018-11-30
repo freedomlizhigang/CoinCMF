@@ -11,11 +11,6 @@
 |
 */
 
-Route::group(['prefix'=>'console','namespace' => 'Admin'],function(){
-    // 广告位
-    Route::get('art/table', 'Common\ArtController@getTable');
-});
-
 // Home PC版
 Route::group(['namespace' => 'Home'],function(){
     // Test
@@ -27,7 +22,8 @@ Route::group(['namespace' => 'Home'],function(){
     // 微信登陆的回调
     Route::get('/wxlogin','LoginController@getWxLogin');
     // 所有没有的放这里
-    Route::get('/{all}','HomeController@getIndex');
+    Route::pattern('path','.+');
+    Route::any('{path}','HomeController@getIndex');
 });
 
 // 支付回调
