@@ -9,15 +9,15 @@ require('./bootstrap');
 // 引入基础类
 import Vue from 'vue'
 import router from './router'
-import VueResource from 'vue-resource'
+import axios from 'axios'
+import VueAxios from 'vue-axios'
 import iView from 'iview';
 import 'iview/dist/styles/iview.css';
 // 首页模板
-import App from './components/App.vue'
+import App from './components/console/App.vue'
 
 import store from './vuex/store'
 
-Vue.use(VueResource)
 Vue.use(iView);
 Vue.config.productionTip = false
 

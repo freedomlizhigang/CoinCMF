@@ -28,46 +28,7 @@ class IndexController extends Controller
     public function getIndex()
     {
         try {
-            $allUrl = $this->allPriv();
-            // 一级菜单
-            $left = Menu::where('parentid','=',0)->where('display','=','1')->orderBy('sort','asc')->orderBy('id','asc')->get()->toArray();
-            $leftmenu = array();
-            // 判断权限
-            if (!in_array(1, session('console')->allRole))
-            {
-                foreach ($left as $k => $v) {
-                    foreach ($allUrl as $url) {
-                        if ($v['url'] == $url) {
-                            $leftmenu[$k] = $v;
-                        }
-                    }
-                }
-            }
-            else
-            {
-                $leftmenu = $left;
-            }
-            // 二级菜单
-            foreach ($leftmenu as $k => $v) {
-                // 取所有下级菜单
-                $res = Menu::where('parentid','=',$v['id'])->where('display','=','1')->orderBy('sort','asc')->orderBy('id','asc')->get()->toArray();
-                // 进行权限判断
-                if (!in_array(1, session('console')->allRole))
-                {
-                    foreach ($res as $s => $v) {
-                        foreach ($allUrl as $url) {
-                            if ($v['url'] == $url) {
-                                $leftmenu[$k]['submenu'][$s] = $v;
-                            }
-                        }
-                    }
-                }
-                else
-                {
-                    $leftmenu[$k]['submenu'] = $res;
-                }
-            }
-            return view('admin.index',compact('leftmenu'));
+            return view('admin.index');
         } catch (\Throwable $e) {
             return view('errors.500');
         }

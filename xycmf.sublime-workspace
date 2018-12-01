@@ -4,8 +4,28 @@
 		"selected_items":
 		[
 			[
+				"cate",
+				"cateid"
+			],
+			[
+				"console",
+				"console.log"
+			],
+			[
 				"consol",
-				"console.log\t(index.blade.php)"
+				"console.log"
+			],
+			[
+				"conso",
+				"console.log"
+			],
+			[
+				"datet",
+				"datetime"
+			],
+			[
+				"delete",
+				"deleteData"
 			],
 			[
 				"menu",
@@ -494,26 +514,6 @@
 			[
 				"po",
 				"pos:f\tposition:fixed"
-			],
-			[
-				"exp",
-				"explode"
-			],
-			[
-				"attr",
-				"attr_ids"
-			],
-			[
-				"tem",
-				"temp_attr"
-			],
-			[
-				"str_re",
-				"str_replace"
-			],
-			[
-				"temp",
-				"temp_arrt_url_arr"
 			]
 		]
 	},
@@ -547,6 +547,10 @@
 		"last_filter": "",
 		"selected_items":
 		[
+			[
+				"instal",
+				"Package Control: Install Package"
+			],
 			[
 				"re",
 				"File: Rename"
@@ -759,51 +763,94 @@
 	[
 		"/D/wwwroot/XYCMF",
 		"/D/wwwroot/XYCMF/app",
+		"/D/wwwroot/XYCMF/app/Http",
+		"/D/wwwroot/XYCMF/app/Http/Controllers",
+		"/D/wwwroot/XYCMF/app/Http/Controllers/Admin",
+		"/D/wwwroot/XYCMF/app/Http/Controllers/Admin/Api",
+		"/D/wwwroot/XYCMF/resources",
+		"/D/wwwroot/XYCMF/resources/assets",
+		"/D/wwwroot/XYCMF/resources/assets/js",
+		"/D/wwwroot/XYCMF/resources/assets/js/components",
+		"/D/wwwroot/XYCMF/resources/assets/js/components/console",
+		"/D/wwwroot/XYCMF/resources/assets/js/components/console/article",
 		"/D/wwwroot/XYCMF/routes"
 	],
 	"file_history":
 	[
+		"/D/wwwroot/XYCMF/resources/assets/js/components/console/article/ArticleList.vue",
+		"/D/wwwroot/XYCMF/app/Http/Controllers/Admin/Api/CateController.php",
+		"/D/wwwroot/XYCMF/app/Services/ComService.php",
+		"/D/wwwroot/XYCMF/app/Http/Controllers/Admin/Api/ArticleController.php",
+		"/D/wwwroot/XYCMF/resources/assets/js/components/console/App.vue",
 		"/D/wwwroot/XYCMF/resources/assets/js/app.js",
+		"/D/wwwroot/XYCMF/package.json",
+		"/D/wwwroot/XYCMF/app/Http/Kernel.php",
+		"/D/wwwroot/XYCMF/resources/assets/js/router/index.js",
+		"/D/wwwroot/XYCMF/routes/admin.php",
+		"/D/wwwroot/XYCMF/resources/views/admin/index.blade.php",
+		"/D/wwwroot/XYCMF/resources/assets/js/components/console/index/Main.vue",
+		"/D/wwwroot/XYCMF/resources/assets/js/components/Logo.vue",
+		"/D/wwwroot/XYCMF/app/Http/Controllers/Admin/IndexController.php",
+		"/D/wwwroot/XYCMF/routes/webcommon.php",
+		"/D/wwwroot/XYCMF/app/Http/Controllers/Home/HomeController.php",
+		"/D/wwwroot/XYCMF/resources/views/vue.blade.php",
+		"/D/希夷/局气/客情push时间.txt",
+		"/D/胡群亮/衡水宁源橡胶制品厂.txt",
+		"/D/希夷/局气/服务器信息.txt",
+		"/D/胡群亮/hsshizhong.conf",
+		"/D/希夷/局气/点餐系统/用户.txt",
+		"/C/Users/Administrator/Desktop/客情push时间.txt",
+		"/D/希夷/局气/文件共享.txt",
+		"/D/希夷/局气/账号.txt",
+		"/D/希夷/局气/客情需求表格/09-27.txt",
+		"/D/希夷/局气/督导需求表格/督导.txt",
+		"/D/wwwroot/XYCMF/sql/2018-12-01-init.sql",
+		"/F/soft/FlashFXP4/Cache/~flashfxp/F2CCDCE1_edit.tmp/composer.json",
+		"/F/soft/FlashFXP4/Cache/~flashfxp/DA4FA022.tmp/index.html",
+		"/F/soft/FlashFXP4/Cache/~flashfxp/F2CCDCE1_edit.tmp/.env",
+		"/F/soft/FlashFXP4/Cache/~flashfxp/DA4FA022_edit.tmp/index.php",
+		"/D/wwwroot/XYCMF/resources/assets/js/components/App.vue",
+		"/D/wwwroot/XYCMF/resources/assets/js/components/CustomBreadCrumb.vue",
+		"/C/Users/Administrator/Desktop/iview-admin-master/src/view/i18n/i18n-page.vue",
+		"/C/Users/Administrator/Desktop/iview-admin-master/src/router/before-close.js",
+		"/C/Users/Administrator/Desktop/iview-admin-master/src/router/routers.js",
+		"/C/Users/Administrator/Desktop/iview-admin-master/src/router/index.js",
+		"/C/Users/Administrator/Desktop/iview-admin-master/src/plugin/index.js",
+		"/C/Users/Administrator/Desktop/iview-admin-master/src/main.js",
+		"/C/Users/Administrator/Desktop/iview-admin-master/src/App.vue",
+		"/D/wwwroot/XYCMF/app/Http/Controllers/Admin/Api/MenuController.php",
+		"/D/wwwroot/XYCMF/resources/assets/js/components/Hello.vue",
+		"/D/wwwroot/XYCMF/resources/assets/js/components/Example.vue",
+		"/D/wwwroot/XYCMF/.gitignore",
 		"/D/wwwroot/XYCMF/app/Http/Middleware/VerifyCsrfToken.php",
 		"/D/wwwroot/XYCMF/resources/views/admin/art/add.blade.php",
 		"/D/wwwroot/XYCMF/resources/views/admin/component/thumb.blade.php",
 		"/D/wwwroot/XYCMF/resources/views/admin/right.blade.php",
 		"/D/wwwroot/XYCMF/resources/views/admin/art/index.blade.php",
 		"/D/wwwroot/XYCMF/resources/views/admin/component/layui.blade.php",
-		"/D/wwwroot/XYCMF/resources/views/admin/index.blade.php",
 		"/D/wwwroot/XYCMF/public/statics/admin/js/public.js",
-		"/D/wwwroot/XYCMF/routes/admin.php",
 		"/D/wwwroot/XYCMF/app/Http/Controllers/Admin/Api/ResponseController.php",
 		"/D/wwwroot/XYCMF/resources/views/admin/component/ueditor.blade.php",
-		"/D/wwwroot/XYCMF/app/Services/ComService.php",
-		"/D/wwwroot/XYCMF/app/Http/Controllers/Admin/IndexController.php",
-		"/D/wwwroot/XYCMF/app/Http/Controllers/Admin/Api/CateController.php",
 		"/D/wwwroot/XYCMF/public/statics/layui/lay/modules/tree.js",
 		"/D/wwwroot/XYCMF/public/statics/layui/layui.all.js",
-		"/D/wwwroot/XYCMF/app/Http/Controllers/Admin/Api/ArticleController.php",
 		"/D/wwwroot/XYCMF/app/Providers/RouteServiceProvider.php",
 		"/D/wwwroot/XYCMF/resources/views/admin/index/index.blade.php",
 		"/D/wwwroot/XYCMF/routes/adminapi.php",
-		"/D/wwwroot/XYCMF/routes/webcommon.php",
 		"/D/wwwroot/XYCMF/resources/views/admin/console/art/index.blade.php",
 		"/D/wwwroot/XYCMF/public/statics/admin/css/admin.css",
 		"/D/wwwroot/XYCMF/app/Http/Middleware/ConsoleApi.php",
 		"/D/wwwroot/XYCMF/app/Providers/AppServiceProvider.php",
-		"/D/wwwroot/XYCMF/app/Http/Kernel.php",
 		"/D/wwwroot/XYCMF/routes/api.php",
 		"/D/wwwroot/XYCMF/routes/admin_api.php",
 		"/D/wwwroot/XYCMF/routes/console.php",
 		"/D/wwwroot/XYCMF/app/Http/Controllers/Admin/Common/ArtController.php",
 		"/C/Users/Administrator/Desktop/table.html",
-		"/D/希夷/局气/服务器信息.txt",
 		"/D/wwwroot/XYCMF/public/statics/common/css/fixedtable.css",
 		"/D/wwwroot/XYCMF/public/statics/common/js/jquery.fixedtableheader.min.js",
 		"/C/Users/Administrator/AppData/Local/Temp/7zO8559B657/right.blade.php",
 		"/C/Users/Administrator/AppData/Local/Temp/7zO855F88A7/index.blade.php",
 		"/D/wwwroot/XYCMF/.env",
 		"/D/wwwroot/XYCMF/resources/views/admin/console/cate/index.blade.php",
-		"/D/希夷/局气/账号.txt",
-		"/D/希夷/局气/点餐系统/用户.txt",
 		"/C/Users/Administrator/Desktop/coins/css/admin.css",
 		"/D/wwwroot/XYCMF/public/statics/common/js/jquery.min.js",
 		"/D/wwwroot/XYCMF/resources/views/admin/console/index/main.blade.php",
@@ -857,50 +904,18 @@
 		"/D/wwwroot/XYCMF/app/Models/Console/Model.php",
 		"/D/wwwroot/XYCMF/app/Models/Console/ModelField.php",
 		"/D/wwwroot/XYShop/database/migrations/2018_03_05_150126_add_lasttime_lowertime_to_goods.php",
-		"/D/wwwroot/XYCMF/app/Customize/Func.php",
-		"/D/wwwroot/XYCMF/resources/views/admin/console/field/linkage.blade.php",
-		"/D/wwwroot/XYCMF/resources/views/admin/console/field/files.blade.php",
-		"/D/wwwroot/XYCMF/resources/views/admin/console/field/thumb.blade.php",
-		"/D/wwwroot/XYCMF/resources/views/admin/console/field/number.blade.php",
-		"/D/wwwroot/XYCMF/app/Http/Controllers/Common/AjaxCommonController.php",
-		"/D/wwwroot/XYCMF/database/migrations/2018_10_24_054852_create_model_fields.php",
-		"/D/希夷文件/服务器信息/山木枝.txt",
-		"/D/wwwroot/XYCMF/database/migrations/2018_10_24_054742_create_models.php",
-		"/D/wwwroot/XYCMF/resources/views/admin/console/model/add.blade.php",
-		"/D/wwwroot/XYCMF/resources/views/admin/console/model/edit.blade.php",
-		"/D/wwwroot/XYCMF/app/Http/Requests/ModelRequest.php",
-		"/D/wwwroot/XYCMF/app/Http/Requests/MenuRequest.php",
-		"/D/wwwroot/XYCMF/app/Models/Console/ModelFiled.php",
-		"/D/wwwroot/XYCMF/config/app.php",
-		"/D/wwwroot/XYCMF/composer.json",
-		"/D/wwwroot/XYCMF/resources/views/home/form.blade.php",
-		"/D/wwwroot/XYCMF/app/Http/Controllers/Home/HomeController.php",
-		"/D/wwwroot/XYCMF/resources/views/vendor/form-builder/assets.blade.php",
-		"/D/wwwroot/XYCMF/app/Http/Controllers/Admin/Common/CateController.php",
-		"/D/wwwroot/XYCMF/app/Http/Controllers/Admin/MenuController.php",
-		"/D/wwwroot/XYCMF/resources/views/admin/console/role/index.blade.php",
-		"/D/wwwroot/XYCMF/resources/views/admin/console/member/index.blade.php",
-		"/D/wwwroot/XYCMF/resources/views/admin/console/database/export.blade.php",
-		"/D/wwwroot/XYCMF/resources/views/admin/console/admins/index.blade.php",
-		"/D/wwwroot/XYCMF/resources/views/admin/console/group/index.blade.php",
-		"/D/wwwroot/XYCMF/resources/views/admin/console/log/index.blade.php",
-		"/D/wwwroot/XYCMF/resources/views/admin/console/section/index.blade.php",
-		"/D/wwwroot/XYCMF/resources/views/admin/console/type/index.blade.php",
-		"/D/wwwroot/XYCMF/resources/views/admin/console/adpos/index.blade.php",
-		"/D/wwwroot/XYCMF/resources/views/admin/console/area/index.blade.php",
-		"/D/wwwroot/XYCMF/resources/views/admin/console/community/index.blade.php",
-		"/D/wwwroot/XYCMF/resources/views/admin/console/ad/index.blade.php",
-		"/D/wwwroot/XYCMF/public/statics/admin/css/reset.scss"
+		"/D/wwwroot/XYCMF/app/Customize/Func.php"
 	],
 	"find":
 	{
-		"height": 27.0
+		"height": 41.0
 	},
 	"find_in_files":
 	{
 		"height": 133.0,
 		"where_history":
 		[
+			"D:\\wwwroot\\XYCMF\\resources\\assets\\js",
 			"D:\\wwwroot\\XYCMF\\resources\\views\\admin",
 			"D:\\wwwroot\\XYCMF\\app",
 			"D:\\wwwroot\\XYCMF\\app\\Http\\Controllers\\Admin",
@@ -1019,6 +1034,32 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			".format('yyyy-MM-dd HH:mm')",
+			"toString",
+			"this",
+			"this.$http",
+			"resource",
+			"menuitemClasses",
+			"trigger",
+			"Main",
+			"handleDropDownClick",
+			"breadCrumbList",
+			"logo",
+			"console/",
+			"hello",
+			"ArticleList",
+			"custom-bread-crumb",
+			"breadCrumbList",
+			"submenu",
+			"data1",
+			"success",
+			"deleteData",
+			"index",
+			".index",
+			"user-",
+			", otherArgu",
+			"avatar",
+			"layout-header-bar",
 			"table",
 			"laydate",
 			"data[",
@@ -1120,33 +1161,7 @@
 			"select_type",
 			"sizes",
 			"box",
-			"required_flag",
-			"min",
-			"foreach",
-			"filed_name",
-			"$type",
-			"data['option']",
-			"$v",
-			"processKeyword",
-			"out_type",
-			"select_type",
-			"radio",
-			"modal-dialog",
-			"tips",
-			"title",
-			"field_name",
-			"tablename",
-			"模型",
-			"model",
-			"模型",
-			"ModelController",
-			"model/",
-			"model",
-			"uid",
-			"Blueprint",
-			"describe",
-			"title",
-			"name"
+			"required_flag"
 		],
 		"highlight": true,
 		"in_selection": false,

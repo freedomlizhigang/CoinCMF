@@ -15,9 +15,9 @@ class ArticleController extends ResponseController
     public function getList(Request $req)
     {
         try {
-            $catid = $req->input('catid');
+            $catid = $req->input('cateid');
             // 搜索关键字
-            $key = $req->input('q','');
+            $key = $req->input('key','');
             $push_flag = $req->input('push_flag');
             $starttime = $req->input('starttime');
             $endtime = $req->input('endtime');
@@ -37,11 +37,11 @@ class ArticleController extends ResponseController
                     }
                 })->where(function($q) use($starttime){
                     if ($starttime != '') {
-                        $q->where('created_at','>',$starttime);
+                        $q->where('created_at','>',date('Y-m-d H:i:s',$starttime/1000));
                     }
                 })->where(function($q) use($endtime){
                     if ($endtime != '') {
-                        $q->where('created_at','<',$endtime);
+                        $q->where('created_at','<',date('Y-m-d H:i:s',$endtime/1000));
                     }
                 })->select('id','title','cate_id','hits','publish_at','sort')->where('del_flag',0)->orderBy('id','desc')->get();
             $reslist = [];

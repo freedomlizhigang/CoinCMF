@@ -16,7 +16,7 @@ class HomeController extends Controller
      */
     public function getIndex(Request $req)
     {
-        return view('vue');
+        return view('home.home');
     }
     public function test()
     {

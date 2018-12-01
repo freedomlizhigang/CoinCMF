@@ -12,9 +12,8 @@ class CateController extends ResponseController
     public function getSelect()
     {
         try {
-            $cats = Cate::get();
+            $cats = Cate::select('id','parentid','name','sort','url')->get();
             $tree = app('com')->toTree($cats,'0');
-            $tree = app('com')->toTreeSelect($tree);
             return $this->resData(200,'获取成功！',$tree);
         } catch (\Throwable $e) {
             return $this->resData(400,'获取失败，请稍后再试！');

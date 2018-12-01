@@ -37,10 +37,10 @@ Route::group(['prefix'=>'c-api','namespace' => 'Admin\Api'],function(){
 });
 
 // 后台首页，其它页面的导航
-Route::group(['prefix'=>'console','middleware' => ['rbac'],'namespace' => 'Admin'],function(){
+Route::group(['prefix'=>'console','namespace' => 'Admin'],function(){
     // Index
     Route::get('index/index', 'IndexController@getIndex');
     // 直接用正则控制所有请求到一个地址
     Route::pattern('path','.+');
-    Route::any('{path}','IndexController@getAll');
+    Route::any('{path}','IndexController@getIndex');
 });

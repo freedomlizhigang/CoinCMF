@@ -48,9 +48,9 @@
   <div id="app">
     <div class="layout">
       <Layout :style="{height:'100vh'}">
-          <Sider breakpoint="md" collapsible :collapsed-width="78" v-model="isCollapsed">
+          <Sider breakpoint="md" collapsible :collapsed-width="78" v-model="isCollapsed" :style="{zIndex:'1'}">
             <div class="logo-img"><img src="/img/logo.png" alt=""></div>
-            <Menu active-name="1-2" theme="dark" width="auto" :class="menuitemClasses" accordion :open-names="['1']">
+            <Menu active-name="1-2" theme="dark" width="auto" :class="menuitemClasses" accordion>
               <Submenu :name="menu.name" v-for="menu in menuData" :key="menu.id">
                   <template slot="title">
                       <Icon type="ios-paper" />
@@ -83,7 +83,7 @@
                   </Col>
                 </Row>
               </Header>
-              <Content :style="{margin: '15px', padding:'15px', background: '#fff', minHeight: '220px'}">
+              <Content :style="{margin: '15px', padding:'15px', background: '#fff', minHeight: '220px', overflow:'hidden'}">
                   <router-view></router-view>
               </Content>
               <Footer class="layout-footer-center">2018-2021 &copy; 山木枝</Footer>
@@ -94,7 +94,7 @@
 </template>
 
 <script>
-  import router from './../router'
+  import router from './../../router'
   export default {
     data () {
       return {
@@ -121,7 +121,7 @@
         // 路由结束后的通知，从后台获取数据
         this.breadCrumbList = [
           {'to':'/','name':'首页'},
-          {'to':to.path,'name':"fdsa"}
+          {'to':to.path,'name':"fdsa"},
         ];
       })
     },
@@ -130,13 +130,14 @@
         router.push(name);
       },
       getMenuData:function(){
-          this.$http.get('c-api/menu/list').then(function(res){
-            // console.log(res.json())
-            this.menuData = res.json().data;
+          var self = this
+          axios.get('/c-api/menu/list').then(function(res){
+            // console.log(res.data)
+            self.menuData = res.data.data;
           },function(res){
-            this.$Message.error('数据加载失败...');
+            self.$Message.error('数据加载失败...');
           });
-          return this.menuData;
+          return self.menuData;
       },
     }
   }

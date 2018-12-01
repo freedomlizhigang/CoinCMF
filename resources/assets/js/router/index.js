@@ -2,7 +2,8 @@ import Vue from 'vue'
 import Router from 'vue-router'
 
 
-import Hello from '.././components/Hello.vue'
+import Main from '.././components/console/index/Main.vue'
+import ArticleList from '.././components/console/article/ArticleList.vue'
 import Example from '.././components/Example.vue'
 import Count from '.././components/Count.vue'
 import Login from '.././components/Login.vue'
@@ -15,35 +16,17 @@ export default new Router({
   mode: 'history',
   routes: [
     {
-      path: '/login',
-      name: 'Login',
-      component: Login,
+      path: '/console/index/index',
+      name: 'Main',
+      component: Main,
       meta: { requiresAuth: false }
     },
     {
-      path: '/logout',
-      name: 'Logout',
-      component: Logout,
-      meta: { requiresAuth: true }
+      path: '/console/art/index',
+      name: 'ArticleList',
+      component: ArticleList,
+      meta: { requiresAuth: false }
     },
-    {
-      path: '/count',
-      name: 'Count',
-      component: Count,
-      meta: { requiresAuth: true }
-    },
-    {
-      path: '/example',
-      name: 'Example',
-      component: Example,
-      meta: { requiresAuth: true }
-    },
-    {
-      path: '/',
-      name: 'Hello',
-      component: Hello,
-      meta: { requiresAuth: true }
-    },
-    { path: '*', component: Example }
+    { path: '/console/*', component: Main }
   ]
 })
