@@ -27,6 +27,8 @@ Route::group(['prefix'=>'c-api','namespace' => 'Admin\Api'],function(){
     Route::post('article/delete', 'ArticleController@postDelete');
     Route::post('article/deleteall', 'ArticleController@postDeleteAll');
     Route::post('article/sort', 'ArticleController@postSort');
+    // 左侧导航菜单
+    Route::get('menu/list', 'MenuController@getList');
     // 栏目树形下拉
     Route::get('cate/select', 'CateController@getSelect');
     // 直接用正则控制所有错误请求到一个地址

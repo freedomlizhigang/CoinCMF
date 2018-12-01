@@ -16,7 +16,7 @@ class HomeController extends Controller
      */
     public function getIndex(Request $req)
     {
-        dd('xycmf');
+        return view('vue');
     }
     public function test()
     {
