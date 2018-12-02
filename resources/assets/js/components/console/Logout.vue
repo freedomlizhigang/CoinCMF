@@ -2,7 +2,7 @@
   <div>
     <h1> 退出页面 </h1>
     {{logins}}
-    
+
     <router-link :to="{name: 'Login'}">
           登陆
     </router-link>
@@ -10,8 +10,8 @@
 </template>
 
 <script>
-import store from '.././vuex/store'
-import { LOGOUT } from '.././vuex/mutation_types'
+import store from '../.././vuex/store'
+import { LOGOUT } from '../.././vuex/mutation_types'
 export default {
   computed: {
     logins() {

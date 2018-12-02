@@ -11,15 +11,6 @@
 |
 */
 
-// 后台路由
-Route::group(['prefix'=>'console','namespace' => 'Admin'],function(){
-    // 后台管理不用其它，只用登陆，退出
-    Route::get('login', 'PublicController@getLogin');
-    Route::post('login', 'PublicController@postLogin');
-    // 退出登陆
-    Route::get('logout', 'PublicController@getLogout');
-});
-
 // 管理中心API
 Route::group(['prefix'=>'c-api','namespace' => 'Admin\Api'],function(){
     // 文章管理用的
@@ -40,8 +31,6 @@ Route::group(['prefix'=>'c-api','namespace' => 'Admin\Api'],function(){
 
 // 后台首页，其它页面的导航
 Route::group(['prefix'=>'console','namespace' => 'Admin'],function(){
-    // Index
-    Route::get('index/index', 'IndexController@getIndex');
     // 直接用正则控制所有请求到一个地址
     Route::pattern('path','.+');
     Route::any('{path}','IndexController@getIndex');

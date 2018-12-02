@@ -1,39 +1,40 @@
 import Vue from 'vue'
 import Router from 'vue-router'
+import store from '.././vuex/store'
 
-
-import Main from '.././components/console/index/Main.vue'
-import ArticleList from '.././components/console/article/ArticleList.vue'
-import CateList from '.././components/console/cate/CateList.vue'
-import Example from '.././components/Example.vue'
-import Count from '.././components/Count.vue'
-import Login from '.././components/Login.vue'
-import Logout from '.././components/Logout.vue'
+import routers from './routers'
 
 
 Vue.use(Router)
 
-export default new Router({
+const router = new Router({
   mode: 'history',
-  routes: [
+  routes: routers
+});
+
+// 导航钩子，全局钩子
+router.beforeEach((to, from, next) => {
+    // 登录页面
+    if (to.name == 'login') {
+        if (store.getters.user_id != 0) {
+            next('/console/index/index');
+        }
+        else
+        {
+            next()
+        }
+    }
+    // 其它页面
+    else
     {
-      path: '/console/index/index',
-      name: 'index-index',
-      component: Main,
-      meta: { requiresAuth: false }
-    },
-    {
-      path: '/console/cate/index',
-      name: 'cate-index',
-      component: CateList,
-      meta: { requiresAuth: false }
-    },
-    {
-      path: '/console/art/index',
-      name: 'art-index',
-      component: ArticleList,
-      meta: { requiresAuth: false }
-    },
-    { path: '/console/*', component: Main }
-  ]
+        if (store.getters.user_id == 0 && to.meta.requiresAuth) {
+            next('/console/login');
+        }
+        else
+        {
+            next();
+        }
+    }
 })
+
+export default router

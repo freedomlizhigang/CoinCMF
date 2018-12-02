@@ -4,19 +4,43 @@
 		"selected_items":
 		[
 			[
+				"requ",
+				"requiresAuth"
+			],
+			[
+				"con",
+				"console"
+			],
+			[
+				"Log",
+				"LOGOUT\t(Login.vue)"
+			],
+			[
+				"consol",
+				"console\t(Login.vue)"
+			],
+			[
+				"请输入",
+				"请输入密码"
+			],
+			[
+				"请",
+				"请输入用户名"
+			],
+			[
+				"conso",
+				"console\t(CommonController.php)"
+			],
+			[
+				"brea",
+				"breadcrumb\t(admin.php)"
+			],
+			[
 				"cate",
 				"cateid"
 			],
 			[
 				"console",
-				"console.log"
-			],
-			[
-				"consol",
-				"console.log"
-			],
-			[
-				"conso",
 				"console.log"
 			],
 			[
@@ -490,30 +514,6 @@
 			[
 				"numb",
 				"number_format"
-			],
-			[
-				"btn-s",
-				"btn-sm \tBootstrap 3 Class"
-			],
-			[
-				"media",
-				"media-object \tBootstrap 3 Class"
-			],
-			[
-				"form-c",
-				"form-control \tBootstrap 3 Class"
-			],
-			[
-				"forma",
-				"formatid"
-			],
-			[
-				"pll",
-				"pull-right \tBootstrap 3 Class"
-			],
-			[
-				"po",
-				"pos:f\tposition:fixed"
 			]
 		]
 	},
@@ -548,6 +548,10 @@
 		"selected_items":
 		[
 			[
+				"rena",
+				"File: Rename"
+			],
+			[
 				"instal",
 				"Package Control: Install Package"
 			],
@@ -558,10 +562,6 @@
 			[
 				"renal",
 				"Rename Local and Remote Files"
-			],
-			[
-				"rena",
-				"File: Rename"
 			],
 			[
 				"cl",
@@ -766,31 +766,54 @@
 		"/D/wwwroot/XYCMF/app/Http",
 		"/D/wwwroot/XYCMF/app/Http/Controllers",
 		"/D/wwwroot/XYCMF/app/Http/Controllers/Admin",
-		"/D/wwwroot/XYCMF/app/Http/Controllers/Admin/Api",
 		"/D/wwwroot/XYCMF/resources",
 		"/D/wwwroot/XYCMF/resources/assets",
 		"/D/wwwroot/XYCMF/resources/assets/js",
 		"/D/wwwroot/XYCMF/resources/assets/js/components",
 		"/D/wwwroot/XYCMF/resources/assets/js/components/console",
-		"/D/wwwroot/XYCMF/resources/assets/js/components/console/article",
+		"/D/wwwroot/XYCMF/resources/assets/js/router",
+		"/D/wwwroot/XYCMF/resources/views",
 		"/D/wwwroot/XYCMF/routes"
 	],
 	"file_history":
 	[
+		"/D/wwwroot/XYCMF/resources/assets/js/router/index.js",
+		"/D/wwwroot/XYCMF/resources/assets/js/router/routers.js",
+		"/D/wwwroot/XYCMF/resources/assets/js/app.js",
+		"/D/wwwroot/XYCMF/resources/assets/js/components/console/Nofound.vue",
+		"/D/wwwroot/XYCMF/resources/assets/js/components/console/App.vue",
+		"/C/Users/Administrator/Desktop/iview-admin-master/src/router/index.js",
+		"/C/Users/Administrator/Desktop/iview-admin-master/src/router/routers.js",
+		"/C/Users/Administrator/Desktop/iview-admin-master/src/main.js",
+		"/C/Users/Administrator/Desktop/iview-admin-master/src/App.vue",
+		"/C/Users/Administrator/Desktop/iview-admin-master/src/router/before-close.js",
+		"/D/wwwroot/XYCMF/resources/assets/js/components/console/index/Main.vue",
+		"/D/wwwroot/XYCMF/routes/admin.php",
+		"/D/wwwroot/XYCMF/resources/assets/js/components/console/Iframe.vue",
+		"/D/wwwroot/XYCMF/package.json",
+		"/D/wwwroot/XYCMF/resources/assets/js/components/console/Login.vue",
+		"/D/wwwroot/XYCMF/resources/assets/js/vuex/modules/user.js",
+		"/D/wwwroot/XYCMF/resources/assets/js/vuex/store.js",
+		"/C/Users/Administrator/Desktop/Login.vue",
+		"/D/wwwroot/XYCMF/resources/assets/js/vuex/mutation_types.js",
+		"/D/wwwroot/XYCMF/resources/views/admin/index.blade.php",
+		"/D/wwwroot/XYCMF/app/Http/Controllers/Admin/IndexController.php",
+		"/D/wwwroot/XYCMF/resources/assets/js/components/console/Logout.vue",
+		"/D/wwwroot/XYCMF/resources/assets/js/components/Login.vue",
+		"/D/wwwroot/XYCMF/resources/assets/js/components/console/article/ArticleAdd.vue",
 		"/D/wwwroot/XYCMF/resources/assets/js/components/console/article/ArticleList.vue",
+		"/D/wwwroot/XYCMF/app/Http/Controllers/Admin/Api/CommonController.php",
+		"/D/wwwroot/XYCMF/app/Http/Controllers/Admin/Api/MenuController.php",
+		"/D/wwwroot/XYCMF/resources/assets/js/components/console/cate/CateList.vue",
 		"/D/wwwroot/XYCMF/app/Http/Controllers/Admin/Api/CateController.php",
+		"/D/wwwroot/XYCMF/resources/assets/sass/reset.css",
+		"/E/scss/reset-pc/css/reset.scss",
+		"/D/wwwroot/XYCMF/public/css/app.css",
+		"/D/wwwroot/XYCMF/resources/assets/sass/app.scss",
 		"/D/wwwroot/XYCMF/app/Services/ComService.php",
 		"/D/wwwroot/XYCMF/app/Http/Controllers/Admin/Api/ArticleController.php",
-		"/D/wwwroot/XYCMF/resources/assets/js/components/console/App.vue",
-		"/D/wwwroot/XYCMF/resources/assets/js/app.js",
-		"/D/wwwroot/XYCMF/package.json",
 		"/D/wwwroot/XYCMF/app/Http/Kernel.php",
-		"/D/wwwroot/XYCMF/resources/assets/js/router/index.js",
-		"/D/wwwroot/XYCMF/routes/admin.php",
-		"/D/wwwroot/XYCMF/resources/views/admin/index.blade.php",
-		"/D/wwwroot/XYCMF/resources/assets/js/components/console/index/Main.vue",
 		"/D/wwwroot/XYCMF/resources/assets/js/components/Logo.vue",
-		"/D/wwwroot/XYCMF/app/Http/Controllers/Admin/IndexController.php",
 		"/D/wwwroot/XYCMF/routes/webcommon.php",
 		"/D/wwwroot/XYCMF/app/Http/Controllers/Home/HomeController.php",
 		"/D/wwwroot/XYCMF/resources/views/vue.blade.php",
@@ -812,13 +835,7 @@
 		"/D/wwwroot/XYCMF/resources/assets/js/components/App.vue",
 		"/D/wwwroot/XYCMF/resources/assets/js/components/CustomBreadCrumb.vue",
 		"/C/Users/Administrator/Desktop/iview-admin-master/src/view/i18n/i18n-page.vue",
-		"/C/Users/Administrator/Desktop/iview-admin-master/src/router/before-close.js",
-		"/C/Users/Administrator/Desktop/iview-admin-master/src/router/routers.js",
-		"/C/Users/Administrator/Desktop/iview-admin-master/src/router/index.js",
 		"/C/Users/Administrator/Desktop/iview-admin-master/src/plugin/index.js",
-		"/C/Users/Administrator/Desktop/iview-admin-master/src/main.js",
-		"/C/Users/Administrator/Desktop/iview-admin-master/src/App.vue",
-		"/D/wwwroot/XYCMF/app/Http/Controllers/Admin/Api/MenuController.php",
 		"/D/wwwroot/XYCMF/resources/assets/js/components/Hello.vue",
 		"/D/wwwroot/XYCMF/resources/assets/js/components/Example.vue",
 		"/D/wwwroot/XYCMF/.gitignore",
@@ -887,24 +904,7 @@
 		"/D/wwwroot/XYCMF/resources/views/admin/console/field/linkage_option.blade.php",
 		"/D/wwwroot/XYCMF/resources/views/admin/console/field/album.blade.php",
 		"/D/wwwroot/XYCMF/resources/views/admin/console/field/number_option.blade.php",
-		"/D/wwwroot/XYCMF/resources/views/admin/console/field/files_option.blade.php",
-		"/D/wwwroot/XYCMF/resources/views/admin/console/field/box_option.blade.php",
-		"/D/wwwroot/XYCMF/resources/views/admin/console/field/edit.blade.php",
-		"/D/wwwroot/XYCMF/resources/views/admin/console/field/box.blade.php",
-		"/D/wwwroot/XYCMF/resources/views/admin/console/field/index.blade.php",
-		"/D/wwwroot/XYCMF/app/Http/Requests/FieldRequest.php",
-		"/D/wwwroot/XYCMF/resources/views/fields/password.blade.php",
-		"/D/wwwroot/XYCMF/resources/views/fields/text.blade.php",
-		"/D/wwwroot/XYCMF/resources/views/fields/textarea.blade.php",
-		"/D/wwwroot/XYCMF/resources/views/fields/number.blade.php",
-		"/D/wwwroot/XYCMF/resources/views/admin/console/field/add.blade.php",
-		"/D/wwwroot/XYCMF/database/migrations/2018_10_25_172249_add_display_required_to_model_fields.php",
-		"/D/wwwroot/OA-workflow/resources/views/home/create.blade.php",
-		"/D/wwwroot/XYCMF/resources/views/admin/console/model/index.blade.php",
-		"/D/wwwroot/XYCMF/app/Models/Console/Model.php",
-		"/D/wwwroot/XYCMF/app/Models/Console/ModelField.php",
-		"/D/wwwroot/XYShop/database/migrations/2018_03_05_150126_add_lasttime_lowertime_to_goods.php",
-		"/D/wwwroot/XYCMF/app/Customize/Func.php"
+		"/D/wwwroot/XYCMF/resources/views/admin/console/field/files_option.blade.php"
 	],
 	"find":
 	{
@@ -1034,6 +1034,55 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"beforeEach",
+			"return ",
+			"false",
+			"handleDropDownClick",
+			"get_",
+			"user_name",
+			"formInline",
+			"user",
+			"userInline",
+			"formItem",
+			"layadmin-user-",
+			"/console/",
+			"Iframe",
+			"./",
+			"@",
+			"../../.",
+			"Main",
+			"../.",
+			"App",
+			"login",
+			"/console/",
+			"'/",
+			"console/",
+			"List",
+			"res",
+			"h4",
+			"info",
+			"h5",
+			"h2",
+			"layout-header-bar",
+			"->toArray()",
+			"self",
+			"path",
+			"label",
+			"params",
+			"class",
+			":class",
+			"vv",
+			"tmp",
+			"item",
+			"OptionGroup",
+			"catid",
+			"changeData",
+			"return",
+			"data1",
+			"Data1",
+			"data1",
+			"Main",
+			"ArticleList",
 			".format('yyyy-MM-dd HH:mm')",
 			"toString",
 			"this",
@@ -1112,56 +1161,7 @@
 			"right-main",
 			"span",
 			"iconfont",
-			".layui-layout-admin .layui-body",
-			"50px",
-			".layui-body",
-			"!",
-			"leftmenu",
-			"setState",
-			"{{ $name }}",
-			"div",
-			"'",
-			"\"",
-			"list_thumb",
-			"list_album",
-			"album_src",
-			"album_btn",
-			"$option",
-			"'#album'",
-			"#album",
-			"album_list",
-			"album_img",
-			"thumb_uploader",
-			"btn_ctl",
-			"thumb_btn",
-			"uploader",
-			"uploader-list",
-			"list_thumb",
-			"thelist",
-			"filed_name",
-			"file-item",
-			"btn_ctl",
-			"#thumb",
-			"thumb",
-			"btn_ctl",
-			"thumb_uploader",
-			"list_thumb",
-			"thelist",
-			"thumb_btn",
-			"$option",
-			"field_name",
-			"{{ $v }}",
-			"$option->out_type == 'val' ? $k : $v",
-			"@foreach($o as $k => $v)",
-			"@foreach($option->values as $o)",
-			"{{ $k }}",
-			"radio",
-			"$option",
-			"FieldRequest",
-			"select_type",
-			"sizes",
-			"box",
-			"required_flag"
+			".layui-layout-admin .layui-body"
 		],
 		"highlight": true,
 		"in_selection": false,
