@@ -2,10 +2,8 @@
   <div class="article-list">
     <Form :model="formItem" ref="formItem" :inline="true">
       <FormItem>
-        <Select v-model="formItem.cateid">
-            <Option value="beijing">New York</Option>
-            <Option value="shanghai">London</Option>
-            <Option value="shenzhen">Sydney</Option>
+        <Select v-model="formItem.cateid" :style="{'width':'180px'}">
+          <Option v-for="item in cateSelect" :value="item.value" :key="item.value">{{ item.label }}</Option>
         </Select>
       </FormItem>
       <FormItem>
@@ -18,8 +16,8 @@
         <Button type="primary" @click="renderTable('formItem')">筛选</Button>
       </FormItem>
     </Form>
-    <Table :columns="columns1" ref="selection" @on-selection-change="changeData" :data="data1"></Table>
-    <Button @click="deleteData">Delete all selected</Button>
+    <Table :columns="columns1" ref="selection" @on-selection-change="changeData" :data="tablelist"></Table>
+    <Button @click="deleteData" type="error" class="mt10">删除</Button>
   </div>
 </template>
 
@@ -28,7 +26,7 @@ export default {
   name: 'article-list',
   data () {
     return {
-      cateSelect:{},
+      cateSelect:[],
       formItem:{
         'key':'',
         'cateid':'',
@@ -80,7 +78,7 @@ export default {
                           this.sort(params.row.id)
                         }
                       }
-                  }, 'Delete')
+                  }, '排序')
               ]);
             }
           },
@@ -104,7 +102,7 @@ export default {
                                 this.show(params.row.id)
                             }
                         }
-                    }, 'View'),
+                    }, '查看'),
                     h('Button', {
                         props: {
                             type: 'error',
@@ -115,12 +113,12 @@ export default {
                                 this.remove(params.row.id)
                             }
                         }
-                    }, 'Delete')
+                    }, '删除')
                 ]);
             }
           }
       ],
-      data1: [],
+      tablelist: [],
       selectData:[],
     }
   },
@@ -143,26 +141,26 @@ export default {
   },
   created: function () {
     // 取数据
-    this.getData1();
+    this.getTableList();
   },
   methods:{
-    getData1:function(){
+    getTableList:function(){
       var self = this;
       axios.get('/c-api/cate/select').then(function(res){
-        console.log(res.data)
-        self.$Message.success('数据加载成功...');
+        // console.log(res.data)
+        // self.$Message.success('数据加载成功...');
         self.cateSelect = res.data.data;
       },function(res){
-        self.$Message.error('数据加载失败...');
+        self.$Message.error('栏目数据加载失败...');
       });
       axios.get('/c-api/article/list').then(function(res){
         // console.log(res.data)
-        self.$Message.success('数据加载成功...');
-        self.data1 = res.data.data;
+        self.$Message.success('文章数据加载成功...');
+        self.tablelist = res.data.data;
       },function(res){
         self.$Message.error('数据加载失败...');
       });
-      return self.data1;
+      return;
     },
     show:function(index){
       console.log('show:' + index);
@@ -184,15 +182,17 @@ export default {
     // 筛选
     renderTable:function(name) {
       var self = this;
-      var ps = {'key':self.formItem.key,'cateid':self.formItem.cateid,'starttime':self.formItem.datetime[0].getTime(),'endtime':self.formItem.datetime[1].getTime()};
+      var starttime = self.formItem.datetime[0] != '' ? self.formItem.datetime[0].getTime() : '';
+      var endtime = self.formItem.datetime[1] != '' ? self.formItem.datetime[1].getTime() : '';
+      var ps = {'key':self.formItem.key,'cateid':self.formItem.cateid,'starttime':starttime,'endtime':endtime};
       axios.get('/c-api/article/list',{params:ps}).then(function(res){
         // console.log(res.data)
-        self.$Message.success('数据加载成功...');
-        self.data1 = res.data.data;
+        self.$Message.success('文章数据加载成功...');
+        self.tablelist = res.data.data;
       },function(res){
         self.$Message.error('数据加载失败...');
       });
-      return self.data1;
+      return;
     }
   },
 }

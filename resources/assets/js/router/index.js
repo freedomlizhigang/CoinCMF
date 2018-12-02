@@ -4,6 +4,7 @@ import Router from 'vue-router'
 
 import Main from '.././components/console/index/Main.vue'
 import ArticleList from '.././components/console/article/ArticleList.vue'
+import CateList from '.././components/console/cate/CateList.vue'
 import Example from '.././components/Example.vue'
 import Count from '.././components/Count.vue'
 import Login from '.././components/Login.vue'
@@ -17,13 +18,19 @@ export default new Router({
   routes: [
     {
       path: '/console/index/index',
-      name: 'Main',
+      name: 'index-index',
       component: Main,
       meta: { requiresAuth: false }
     },
     {
+      path: '/console/cate/index',
+      name: 'cate-index',
+      component: CateList,
+      meta: { requiresAuth: false }
+    },
+    {
       path: '/console/art/index',
-      name: 'ArticleList',
+      name: 'art-index',
       component: ArticleList,
       meta: { requiresAuth: false }
     },

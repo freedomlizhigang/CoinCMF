@@ -83,6 +83,14 @@
                   </Col>
                 </Row>
               </Header>
+              <!-- 标题 + 按钮组 -->
+              <Card :bordered="false" class="clearfix" :style="{margin: '15px',marginBottom:'0',padding:'0 0 10px 0'}">
+                <h4 class="f-l" :style="{color:'#515A6E'}">这是个标题</h4>
+                <div class="f-r">
+                  <Button icon="md-add">Cancel</Button>
+                  <Button icon="md-refresh">Confirm</Button>
+                </div>
+              </Card>
               <Content :style="{margin: '15px', padding:'15px', background: '#fff', minHeight: '220px', overflow:'hidden'}">
                   <router-view></router-view>
               </Content>
@@ -113,16 +121,32 @@
     },
     created:function(){
       this.getMenuData();
-      // 更新面包屑
-      this.breadCrumbList = [
-        {'to':'/','name':'首页'},
-      ];
+      var self = this
+      // 初始化面包屑
+      axios.get('/c-api/breadcrumb/list',{params:{'label':this.$route.name}}).then(function(res){
+        if (res.data.code == 200) {
+          self.breadCrumbList = res.data.data;
+        }
+        else
+        {
+          self.$Message.error(res.data.msg);
+        }
+      },function(res){
+        self.$Message.error('面包屑数据加载失败...');
+      });
+      // 路由结束后更新面包屑
       router.afterEach((to, from) => {
-        // 路由结束后的通知，从后台获取数据
-        this.breadCrumbList = [
-          {'to':'/','name':'首页'},
-          {'to':to.path,'name':"fdsa"},
-        ];
+        axios.get('/c-api/breadcrumb/list',{params:{'label':to.name}}).then(function(res){
+          if (res.data.code == 200) {
+            self.breadCrumbList = res.data.data;
+          }
+          else
+          {
+            self.$Message.error(res.data.msg);
+          }
+        },function(res){
+          self.$Message.error('面包屑数据加载失败...');
+        });
       })
     },
     methods:{

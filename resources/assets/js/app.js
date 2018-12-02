@@ -13,6 +13,7 @@ import axios from 'axios'
 import VueAxios from 'vue-axios'
 import iView from 'iview';
 import 'iview/dist/styles/iview.css';
+import './../sass/reset.css';
 // 首页模板
 import App from './components/console/App.vue'
 
