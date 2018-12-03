@@ -21,7 +21,7 @@
 
 <style>
     #login {
-        margin-top: 18%;
+        margin-top: 180px;
     }
     .login-header {
         text-align: center;
@@ -30,7 +30,6 @@
 
 <script>
 import router from '../.././router'
-import store from '../.././vuex/store'
 import { LOGOUT,LOGIN } from '../.././vuex/mutation_types'
 export default {
     data() {
@@ -56,10 +55,12 @@ export default {
         loginSubmit(name) {
             this.$refs[name].validate((valid) => {
                 if (valid) {
-                    var userinfo = {'id':1,'name':'李大仙'};
-                    store.commit(LOGIN,userinfo)
-                    // 跳转到首页
-                    router.push('/console/index/index');
+                    var params = {'name':this.user.name,'password':this.user.password};
+                    this.$api.login.login(params).then(res=>{
+                        this.$store.commit(LOGIN,res.data)
+                        // 跳转到首页
+                        router.push('/console/index/index');
+                    });
                 } else {
                     this.$Message.error('请检查输入的信息是否正确！');
                 }

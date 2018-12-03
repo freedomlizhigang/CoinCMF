@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import store from '.././vuex/store'
-
+import iView from 'iview';
 import routers from './routers'
 
 
@@ -35,6 +35,9 @@ router.beforeEach((to, from, next) => {
             next();
         }
     }
+})
+router.afterEach(to => {
+  iView.LoadingBar.finish()
 })
 
 export default router

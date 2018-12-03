@@ -98,7 +98,6 @@
 </template>
 <script>
     import router from '../.././router'
-    import store from '../.././vuex/store'
     import { LOGOUT,LOGIN } from '../.././vuex/mutation_types'
     export default {
         data () {
@@ -113,7 +112,7 @@
         computed: {
             // 登录状态
             username() {
-                return store.getters.user_id != 0 ? store.getters.user_name : '未登陆'
+                return this.$store.getters.user_id != 0 ? this.$store.getters.user_name : '未登陆'
             },
             menuitemClasses: function () {
                 return [
@@ -126,51 +125,34 @@
           this.getMenuData();
           var self = this
           // 初始化面包屑及标题+按钮组
-          axios.get('/c-api/breadcrumb/list',{params:{'label':this.$route.name}}).then(function(res){
-            if (res.data.code == 200) {
-              self.breadCrumbList = res.data.data.breadcrumb;
-              self.title = res.data.data.title;
-              self.btns = res.data.data.btns;
-            }
-            else
-            {
-              self.$Message.error(res.data.msg);
-            }
-          },function(res){
-            self.$Message.error('面包屑数据加载失败...');
+          var params = {'label':this.$route.name};
+          this.$api.common.breadcrumb(params).then(res=>{
+            this.breadCrumbList = res.data.breadcrumb;
+            this.title = res.data.title;
+            this.btns = res.data.btns;
           });
           // 路由结束后更新面包屑及标题+按钮组
           router.afterEach((to, from) => {
-            axios.get('/c-api/breadcrumb/list',{params:{'label':to.name}}).then(function(res){
-              if (res.data.code == 200) {
-                self.breadCrumbList = res.data.data.breadcrumb;
-                self.title = res.data.data.title;
-                self.btns = res.data.data.btns;
-              }
-              else
-              {
-                self.$Message.error(res.data.msg);
-              }
-            },function(res){
-              self.$Message.error('面包屑数据加载失败...');
+            var params = {'label':to.name};
+            this.$api.common.breadcrumb(params).then(res=>{
+              this.breadCrumbList = res.data.breadcrumb;
+              this.title = res.data.title;
+              this.btns = res.data.btns;
             });
           })
         },
         methods:{
           handleDropDownClick: function (name) {
             if (name == 'logout') {
-                store.commit(LOGOUT)
+                this.$store.commit(LOGOUT)
                 // 跳转到登录
                 router.push('/console/login');
             }
           },
           getMenuData:function(){
               var self = this
-              axios.get('/c-api/menu/list').then(function(res){
-                // console.log(res.data)
-                self.menuData = res.data.data;
-              },function(res){
-                self.$Message.error('数据加载失败...');
+              this.$api.article.articleList().then(res=>{
+                this.menuData = res.data
               });
               return self.menuData;
           },

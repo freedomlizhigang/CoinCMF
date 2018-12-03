@@ -14,6 +14,8 @@ import VueAxios from 'vue-axios'
 import iView from 'iview';
 import 'iview/dist/styles/iview.css';
 import './../sass/reset.css';
+// 各API接口
+import api from './api/api' // 导入api接口
 // 首页模板
 import App from './components/console/App.vue'
 
@@ -21,10 +23,12 @@ import store from './vuex/store'
 
 Vue.use(iView);
 Vue.config.productionTip = false
+Vue.prototype.$api = api; // 将api挂载到vue的原型上
 
 /* eslint-disable no-new */
 new Vue({
     el: '#app',
+    store,
     router,
     template: '<App/>',
     components: { App },

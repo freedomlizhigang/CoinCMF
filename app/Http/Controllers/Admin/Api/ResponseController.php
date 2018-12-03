@@ -20,6 +20,6 @@ class ResponseController extends Controller
     // 所有错误的返回
     public function anyErrors()
     {
-        return response()->json(['code'=>500,'msg'=>'请求地址有误！']);
+        return response()->json(['code'=>500,'msg'=>'请求地址有误！','data'=>[]]);
     }
 }

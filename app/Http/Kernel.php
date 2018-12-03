@@ -59,7 +59,7 @@ class Kernel extends HttpKernel
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
 
         'rbac' => \App\Http\Middleware\BetoAdmin::class,
-        'consoleapi' => \App\Http\Middleware\ConsoleApi::class,
+        'c-api' => \App\Http\Middleware\ConsoleApi::class,
         // 网站用户认证
         'member'=> \App\Http\Middleware\Member::class,
         // APP用户认证

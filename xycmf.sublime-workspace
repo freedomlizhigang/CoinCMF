@@ -4,6 +4,10 @@
 		"selected_items":
 		[
 			[
+				"arti",
+				"articleList\t(index.js)"
+			],
+			[
 				"requ",
 				"requiresAuth"
 			],
@@ -510,10 +514,6 @@
 			[
 				"Car",
 				"Carbon"
-			],
-			[
-				"numb",
-				"number_format"
 			]
 		]
 	},
@@ -765,7 +765,6 @@
 		"/D/wwwroot/XYCMF/app",
 		"/D/wwwroot/XYCMF/app/Http",
 		"/D/wwwroot/XYCMF/app/Http/Controllers",
-		"/D/wwwroot/XYCMF/app/Http/Controllers/Admin",
 		"/D/wwwroot/XYCMF/resources",
 		"/D/wwwroot/XYCMF/resources/assets",
 		"/D/wwwroot/XYCMF/resources/assets/js",
@@ -777,26 +776,30 @@
 	],
 	"file_history":
 	[
-		"/D/wwwroot/XYCMF/resources/assets/js/router/index.js",
-		"/D/wwwroot/XYCMF/resources/assets/js/router/routers.js",
+		"/D/wwwroot/XYCMF/resources/assets/js/components/console/api/article/index.js",
+		"/D/wwwroot/XYCMF/resources/assets/js/components/console/api/api.js",
+		"/D/wwwroot/XYCMF/resources/assets/js/components/console/Iframe.vue",
 		"/D/wwwroot/XYCMF/resources/assets/js/app.js",
+		"/D/wwwroot/XYCMF/resources/assets/js/components/console/api/http.js",
+		"/D/wwwroot/XYCMF/resources/assets/js/vuex/modules/user.js",
+		"/D/wwwroot/XYCMF/resources/assets/js/router/index.js",
+		"/D/wwwroot/XYCMF/resources/assets/js/vuex/store.js",
+		"/D/wwwroot/XYCMF/resources/assets/js/components/console/Login.vue",
+		"/D/wwwroot/XYCMF/resources/views/admin/index.blade.php",
+		"/C/Users/Administrator/Desktop/iview-admin-master/src/router/index.js",
+		"/C/Users/Administrator/Desktop/iview-admin-master/src/libs/util.js",
+		"/D/wwwroot/XYCMF/resources/assets/js/router/routers.js",
 		"/D/wwwroot/XYCMF/resources/assets/js/components/console/Nofound.vue",
 		"/D/wwwroot/XYCMF/resources/assets/js/components/console/App.vue",
-		"/C/Users/Administrator/Desktop/iview-admin-master/src/router/index.js",
 		"/C/Users/Administrator/Desktop/iview-admin-master/src/router/routers.js",
 		"/C/Users/Administrator/Desktop/iview-admin-master/src/main.js",
 		"/C/Users/Administrator/Desktop/iview-admin-master/src/App.vue",
 		"/C/Users/Administrator/Desktop/iview-admin-master/src/router/before-close.js",
 		"/D/wwwroot/XYCMF/resources/assets/js/components/console/index/Main.vue",
 		"/D/wwwroot/XYCMF/routes/admin.php",
-		"/D/wwwroot/XYCMF/resources/assets/js/components/console/Iframe.vue",
 		"/D/wwwroot/XYCMF/package.json",
-		"/D/wwwroot/XYCMF/resources/assets/js/components/console/Login.vue",
-		"/D/wwwroot/XYCMF/resources/assets/js/vuex/modules/user.js",
-		"/D/wwwroot/XYCMF/resources/assets/js/vuex/store.js",
 		"/C/Users/Administrator/Desktop/Login.vue",
 		"/D/wwwroot/XYCMF/resources/assets/js/vuex/mutation_types.js",
-		"/D/wwwroot/XYCMF/resources/views/admin/index.blade.php",
 		"/D/wwwroot/XYCMF/app/Http/Controllers/Admin/IndexController.php",
 		"/D/wwwroot/XYCMF/resources/assets/js/components/console/Logout.vue",
 		"/D/wwwroot/XYCMF/resources/assets/js/components/Login.vue",
@@ -900,11 +903,7 @@
 		"/D/wwwroot/XYCMF/app/Http/Controllers/Admin/FieldController.php",
 		"/D/wwwroot/XYCMF/app/Http/Controllers/Admin/ModelController.php",
 		"/D/wwwroot/XYCMF/resources/views/admin/console/field/thumb_option.blade.php",
-		"/D/wwwroot/XYCMF/resources/views/admin/console/field/album_option.blade.php",
-		"/D/wwwroot/XYCMF/resources/views/admin/console/field/linkage_option.blade.php",
-		"/D/wwwroot/XYCMF/resources/views/admin/console/field/album.blade.php",
-		"/D/wwwroot/XYCMF/resources/views/admin/console/field/number_option.blade.php",
-		"/D/wwwroot/XYCMF/resources/views/admin/console/field/files_option.blade.php"
+		"/D/wwwroot/XYCMF/resources/views/admin/console/field/album_option.blade.php"
 	],
 	"find":
 	{
@@ -1034,6 +1033,15 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"redirect",
+			"store",
+			"localStorage",
+			"sessionStorage",
+			"isLogin",
+			"username",
+			"removeItem",
+			"user_id",
+			"localStorage",
 			"beforeEach",
 			"return ",
 			"false",
@@ -1152,16 +1160,7 @@
 			"push_flag",
 			"button",
 			"username",
-			"toolbarDemo",
-			"th",
-			" 2016-05-03",
-			"status",
-			" class=\"form-control\"",
-			"form-control",
-			"right-main",
-			"span",
-			"iconfont",
-			".layui-layout-admin .layui-body"
+			"toolbarDemo"
 		],
 		"highlight": true,
 		"in_selection": false,
