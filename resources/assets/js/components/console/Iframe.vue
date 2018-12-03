@@ -88,7 +88,7 @@
                     <Button :icon="item.icon" :to="'/console/' + item.url" v-for="item in btns">{{ item.name }}</Button>
                 </div>
             </Card>
-            <Content :style="{margin: '15px', padding:'15px', background: '#fff', minHeight: '220px', overflow:'hidden'}">
+            <Content :style="{margin: '15px', padding:'15px', background: '#fff'}">
                 <router-view></router-view>
             </Content>
             <Footer class="layout-footer-center">2018-2021 &copy; 山木枝</Footer>

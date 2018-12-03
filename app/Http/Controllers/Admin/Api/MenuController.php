@@ -93,7 +93,7 @@ class MenuController extends ResponseController
             foreach($data as $v)
             {
                 if ($v->parentid == $pid) {
-                    $v = ['menu_id'=>$v->id,'title'=>$v->name,'expand'=>true];
+                    $v = ['menu_id'=>$v->id,'title'=>$v->name,'expand'=>false];
                     $v['children'] = $this->toTree($data,$v['menu_id']);
                     $tree[] = $v;
                 }

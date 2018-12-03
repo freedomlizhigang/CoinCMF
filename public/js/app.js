@@ -55681,6 +55681,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
@@ -58652,7 +58654,7 @@ exports.push([module.i, "\n.layout[data-v-ca60df82]{\n    background: #f5f7f9;\n
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(3)();
-exports.push([module.i, "\n.menutree-left {\n    max-height: 70vh;\n    overflow-y: auto;\n    overflow-x: hidden;\n}\n.menutree-border {\n    border-left: #EEEEEE dashed 1px;\n    height: 100vh;\n}\n", ""]);
+exports.push([module.i, "\n.menutree-left {\n    overflow-x: hidden;\n}\n.menutree-border {\n    border-left: #EEEEEE dashed 2px;\n    width: 0px;\n    margin:0 auto;\n    min-height: 70vh;\n}\n", ""]);
 
 /***/ }),
 /* 66 */
@@ -87659,9 +87661,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     style: ({
       margin: '15px',
       padding: '15px',
-      background: '#fff',
-      minHeight: '220px',
-      overflow: 'hidden'
+      background: '#fff'
     })
   }, [_c('router-view')], 1), _vm._v(" "), _c('Footer', {
     staticClass: "layout-footer-center"
@@ -87707,12 +87707,13 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       "render": _vm.renderMenu
     }
   })], 1)]), _vm._v(" "), _c('Col', {
-    staticClass: "menutree-border",
     attrs: {
-      "xs": 24,
+      "xs": 0,
       "sm": 1
     }
-  }), _vm._v(" "), _c('Col', {
+  }, [_c('div', {
+    staticClass: "menutree-border"
+  })]), _vm._v(" "), _c('Col', {
     attrs: {
       "xs": 24,
       "sm": 16

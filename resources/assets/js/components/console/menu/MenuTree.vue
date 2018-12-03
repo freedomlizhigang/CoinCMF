@@ -7,7 +7,9 @@
                 <Tree :data="menutree" ref="menutree" :render="renderMenu" class="mt10"></Tree>
             </div>
             </Col>
-            <Col :xs="24" :sm="1" class="menutree-border"></Col>
+            <Col :xs="0" :sm="1" >
+                <div class="menutree-border"></div>
+            </Col>
             <Col :xs="24" :sm="16">
                 <Form ref="menuData" :model="menuData" :rules="menuValidate">
                     <FormItem label="菜单名称" prop="name">
@@ -43,13 +45,13 @@
 
 <style>
     .menutree-left {
-        max-height: 70vh;
-        overflow-y: auto;
         overflow-x: hidden;
     }
     .menutree-border {
-        border-left: #EEEEEE dashed 1px;
-        height: 100vh;
+        border-left: #EEEEEE dashed 2px;
+        width: 0px;
+        margin:0 auto;
+        min-height: 70vh;
     }
 </style>
 
