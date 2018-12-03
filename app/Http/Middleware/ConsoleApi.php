@@ -26,6 +26,8 @@ class ConsoleApi
     public function handle($request, Closure $next)
     {
         try {
+            $request->admin_id = 1;
+            return $next($request);
             $token = $request->header('Authorization');
             if (is_null($token) || $token == '') {
                 return response()->json(['code'=>401,'msg'=>'请重新登录，获取验证信息...','data'=>[]]);
@@ -46,12 +48,8 @@ class ConsoleApi
             // 如果不写方法名，默认为index
             $toArr[2] = count($toArr) == 2 ? 'index' : $toArr[2];
             $priv = $toArr[1].'-'.$toArr[2];
-            // 在这里进行一部分权限判断，主要是判断打开的页面是否有权限
-            // 所有角色ID
-            $allRole = [1];
-            // 所有角色权限累加
-            $allPriv = [];
-            if(in_array(1,$allRole) || in_array($priv,$allPriv))
+            // 在这里进行一部分权限判断，主要是判断打开的页面是否有权限，所有角色ID，所有角色权限累加
+            if(in_array(1,$user->allRole) || in_array($priv,$user->allPriv))
             {
                 // 日志记录，只记录post或者del操作(通过比较url来得出结果)
                 Log::create(['admin_id'=>$user->id,'method'=>$request->method(),'url'=>$request->fullUrl(),'user'=>$user->name,'data'=>json_encode($request->all()),'created_at'=>date('Y-m-d H:i:s')]);

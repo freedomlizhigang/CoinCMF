@@ -3,7 +3,7 @@
 
 <head>
     <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
-    <title>{{ cache('config')['sitename'] }}管理中心</title>
+    <title>山木枝 - 管理中心</title>
     <meta name="author" content="李潇喃：www.shanmuzhi.com" />
     <!-- IE最新兼容 -->
     <meta http-equiv="X-UA-Compatible" content="IE=edge">

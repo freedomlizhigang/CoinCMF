@@ -6,6 +6,7 @@ import Main from '.././components/console/index/Main.vue'
 import ArticleList from '.././components/console/article/ArticleList.vue'
 import ArticleAdd from '.././components/console/article/ArticleAdd.vue'
 import CateList from '.././components/console/cate/CateList.vue'
+import MenuTree from '.././components/console/menu/MenuTree.vue'
 
 export default [
     // 登录
@@ -47,6 +48,13 @@ export default [
               path: 'art/add',
               name: 'art-add',
               component: ArticleAdd,
+              meta: { requiresAuth: true }
+            },
+            // 权限菜单
+            {
+              path: 'menu/index',
+              name: 'menu-index',
+              component: MenuTree,
               meta: { requiresAuth: true }
             },
             // 其它404

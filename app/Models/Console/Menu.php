@@ -38,6 +38,16 @@ class Menu extends Model
      */
     public $timestamps = true;
 
+    /**
+     * 应该被转换成原生类型的属性。
+     *
+     * @var array
+     */
+    protected $casts = [
+        'display' => 'boolean',
+        'sort' => 'integer',
+    ];
+
     // 关联role表
     public function role()
     {
