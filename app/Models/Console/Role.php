@@ -40,6 +40,15 @@ class Role extends Model
     public $timestamps = true;
 
     /**
+     * 应该被转换成原生类型的属性。
+     *
+     * @var array
+     */
+    protected $casts = [
+        'status' => 'boolean',
+    ];
+
+    /**
      * 用户
      */
     public function Admin()

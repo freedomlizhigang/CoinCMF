@@ -7,6 +7,7 @@ import login from './login/index'
 import article from './article/index'
 import menu from './menu/index'
 import section from './section/index'
+import role from './role/index'
 
 const api = {
     common,
@@ -14,6 +15,7 @@ const api = {
     article,
     menu,
     section,
+    role,
 }
 
 export default api

@@ -785,6 +785,11 @@
 	],
 	"file_history":
 	[
+		"/D/wwwroot/isoftstone-shared/.env",
+		"/D/wwwroot/isoftstone-shared/.gitignore",
+		"/D/希夷/局气/服务器信息.txt",
+		"/D/希夷/郭晓飞/info.txt",
+		"/D/希夷/故城环保/OA/info.txt",
 		"/D/wwwroot/XYCMF/resources/assets/js/components/console/section/SectionList.vue",
 		"/D/wwwroot/XYCMF/routes/admin.php",
 		"/D/wwwroot/XYCMF/resources/assets/js/components/console/menu/MenuTree.vue",
@@ -797,7 +802,6 @@
 		"/D/wwwroot/XYCMF/resources/assets/js/api/http.js",
 		"/D/wwwroot/XYCMF/app/Http/Controllers/Admin/Api/LoginController.php",
 		"/D/wwwroot/XYCMF/app/Http/Controllers/Admin/Api/MenuController.php",
-		"/D/希夷/局气/服务器信息.txt",
 		"/D/wwwroot/XYCMF/app/Models/Console/Section.php",
 		"/D/wwwroot/XYCMF/README.md",
 		"/D/wwwroot/XYCMF/resources/assets/js/router/routers.js",
@@ -908,15 +912,11 @@
 		"/D/wwwroot/XYCMF/public/statics/admin/js/login.js",
 		"/D/希夷/CoinCms/coins/login.html",
 		"/D/wwwroot/XYCMF/public/statics/admin/js/com.js",
-		"/D/希夷/衡水检察院/会议排位系统/几个页面.txt",
-		"/D/wwwroot/XYCMF/resources/views/fields/files.blade.php",
-		"/D/wwwroot/XYCMF/resources/views/fields/album.blade.php",
-		"/D/wwwroot/XYCMF/resources/views/fields/thumb.blade.php",
-		"/D/希夷文件/服务器信息/xi-yi(1).txt"
+		"/D/希夷/衡水检察院/会议排位系统/几个页面.txt"
 	],
 	"find":
 	{
-		"height": 41.0
+		"height": 27.0
 	},
 	"find_in_files":
 	{

@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Admin\Api;
 use App\Http\Controllers\Controller;
 use App\Models\Console\Admin;
 use App\Models\Console\Section;
-use DB;
 use Illuminate\Http\Request;
 use Validator;
 
@@ -24,10 +23,35 @@ class SectionController extends ResponseController
                     if ($key != '') {
                         $q->where('name','like','%'.$key.'%');
                     }
-                })->orderBy('id','desc')->get();
+                })->orderBy('id','asc')->get();
             return $this->resData(200,'获取部门数据成功...',$list);
         } catch (\Throwable $e) {
             return $this->anyErrors(400,'获取数据失败，请稍后再试！',[]);
+        }
+    }
+    // 创建部门
+    public function postCreate(Request $req)
+    {
+        try {
+            $validator = Validator::make($req->input(), [
+                'name' => 'required|max:255',
+                'status' => 'required|in:true,false',
+            ]);
+             $attrs = array(
+                'name' => '名称',
+                'status' => '状态',
+            );
+            $validator->setAttributeNames($attrs);
+            if ($validator->fails()) {
+                // 如果有错误，提示第一条
+                return $this->resData(402,$validator->errors()->all()[0].'...');
+            }
+            $name = $req->input('name');
+            $status = $req->input('status') == true ? 1 : 0;
+            Section::create(['name'=>$name,'status'=>$status]);
+            return $this->resData(200,'创建部门成功...');
+        } catch (\Throwable $e) {
+            return $this->resData(400,'创建部门失败，请稍后再试...');
         }
     }
     // 修改名称
@@ -60,7 +84,7 @@ class SectionController extends ResponseController
         try {
             $validator = Validator::make($req->input(), [
                 'section_id' => 'required|integer',
-                'status' => 'required',
+                'status' => 'required|in:true,false',
             ]);
              $attrs = array(
                 'section_id' => '部门ID',

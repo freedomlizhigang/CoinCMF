@@ -1,5 +1,5 @@
 <template>
-  <div class="section-list">
+  <div class="role-list">
     <Row>
         <Col :xs="24" :sm="12">
             <Form :model="formItem" ref="formItem" :inline="true" action="javascript:void(0)">
@@ -12,34 +12,39 @@
             </Form>
         </Col>
         <Col :xs="24" :sm="12">
-            <Button @click="showModel()" type="success" class="f-r">添加部门</Button>
+            <Button @click="showModel()" type="success" class="f-r">添加角色</Button>
         </Col>
     </Row>
-    <Table :columns="list" ref="selection" :data="tablelist"></Table>
+    <Table :columns="list" ref="roleList" :data="tablelist"></Table>
     <!-- 添加的弹出 -->
-    <Modal v-model="showModalStatus" title="添加部门" @on-ok="createSection">
-        <Form :model="section" ref="sectionValidate" :rules="sectionValidate" action="javascript:void(0)">
-            <FormItem label="部门名称" prop="name">
-                <Input v-model="section.name" placeholder="输入部门名称..."></Input>
+    <Modal v-model="showModalStatus" title="添加角色" @on-ok="createSection">
+        <Form :model="role" ref="roleValidate" :rules="roleValidate" action="javascript:void(0)">
+            <FormItem label="角色名称" prop="name">
+                <Input v-model="role.name" placeholder="输入角色名称..."></Input>
             </FormItem>
-            <FormItem label="部门状态">
-                <i-switch v-model="section.status">
+            <FormItem label="角色状态">
+                <i-switch v-model="role.status">
                     <span slot="on">正常</span>
                     <span slot="off">禁用</span>
                 </i-switch>
             </FormItem>
         </Form>
     </Modal>
+    <!-- 权限的弹出 -->
+    <Modal v-model="showPrivStatus" title="修改权限" @on-ok="updatePriv">
+        <Tree :data="privTree" ref="privSelect" show-checkbox multiple></Tree>
+    </Modal>
   </div>
 </template>
 
 <script>
 export default {
-    name: 'section-list',
+    name: 'role-list',
     data () {
         return {
+            role_id:0,
             formItem:{
-            'key':'',
+                'key':'',
             },
             list: [
                 {
@@ -89,10 +94,24 @@ export default {
                 {
                     title: '操作',
                     key: 'action',
-                    width:80,
+                    width:160,
                     align: 'left',
                     render: (h, params) => {
                         return h('div', [
+                            h('Button', {
+                                style:{
+                                    marginRight:'8px'
+                                },
+                                props: {
+                                    type: 'primary',
+                                    size: 'small',
+                                },
+                                on: {
+                                    click: () => {
+                                        this.showPrivModal(params.row.id)
+                                    }
+                                }
+                            }, '权限'),
                             h('Button', {
                                 props: {
                                     type: 'error',
@@ -109,16 +128,18 @@ export default {
                 }
             ],
             tablelist: [],
-            section:{
+            role:{
                 name:'',
                 status:true,
             },
             showModalStatus:false,
-            sectionValidate: {
+            showPrivStatus:false,
+            roleValidate: {
                 name: [
-                    { required: true, message: '部门名称必须填写', trigger: 'blur' }
+                    { required: true, message: '角色名称必须填写', trigger: 'blur' }
                 ]
             },
+            privTree:[]
         }
     },
     created: function () {
@@ -127,7 +148,7 @@ export default {
     },
     methods:{
         getTableList:function(){
-          this.$api.section.list().then(res=>{
+          this.$api.role.list().then(res=>{
             if(res.code == 200)
             {
                 this.tablelist = res.data;
@@ -144,12 +165,28 @@ export default {
         showModel(){
             this.showModalStatus = !this.showModalStatus;
         },
-        // 添加
-        createSection(){
-            this.$api.section.create({name:this.section.name,status:this.section.status}).then(res=>{
+        showPrivModal(value){
+            this.role_id = value;
+            this.showPrivStatus = !this.showPrivStatus;
+            // 取树形菜单
+            this.$api.role.priv({role_id:value}).then(res=>{
                 if(res.code == 200)
                 {
-                    this.section.name = '';
+                    this.privTree = res.data;
+                    this.$Message.success(res.msg);
+                }
+                else
+                {
+                    this.$Message.error(res.msg);
+                }
+            });
+        },
+        // 添加
+        createSection(){
+            this.$api.role.create({name:this.role.name,status:this.role.status}).then(res=>{
+                if(res.code == 200)
+                {
+                    this.role.name = '';
                     this.getTableList();
                 }
                 else
@@ -160,7 +197,7 @@ export default {
         },
         // 修改名称
         editName:function(index,value){
-            this.$api.section.edit({section_id:index,name:value}).then(res=>{
+            this.$api.role.edit({role_id:index,name:value}).then(res=>{
                 if(res.code == 200)
                 {
                     this.$Message.success(res.msg);
@@ -173,7 +210,7 @@ export default {
         },
         // 删除
         remove:function(index,id){
-            this.$api.section.remove({section_id:id}).then(res=>{
+            this.$api.role.remove({role_id:id}).then(res=>{
                 if(res.code == 200)
                 {
                     this.$Message.success(res.msg);
@@ -183,7 +220,7 @@ export default {
         },
         // 修改状态
         changeStatus:function(index,value){
-            this.$api.section.status({section_id:index,status:value}).then(res=>{
+            this.$api.role.status({role_id:index,status:value}).then(res=>{
                 if(res.code == 200)
                 {
                     this.$Message.success(res.msg);
@@ -198,7 +235,7 @@ export default {
         renderTable:function(name) {
           var ps = {'key':this.formItem.key};
           console.log(ps)
-          this.$api.section.list(ps).then(res=>{
+          this.$api.role.list(ps).then(res=>{
             if(res.code == 200)
             {
                 this.tablelist = res.data;
@@ -210,7 +247,21 @@ export default {
             }
           });
           return;
-        }
+        },
+        updatePriv:function(){
+            var node = this.$refs['privSelect'].getCheckedAndIndeterminateNodes()
+            var menu_id = [];
+            node.forEach((item,index) =>{
+                menu_id.push(item.menu_id)
+            });
+            // 提交
+            this.$api.role.updatepriv({role_id:this.role_id,menu_id:menu_id}).then(res=>{
+                if(res.code == 200)
+                {
+                    this.$Message.success(res.msg);
+                }
+            });
+        },
     },
 }
 </script>

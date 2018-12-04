@@ -9,7 +9,7 @@ import qs from 'qs'; // 根据需求是否导入qs模块，把请求字段直接
 const api = '/c-api/';
 
 const section = {
-    // 树形列表
+    // 列表
     list (params) {
         return axios.get(api + 'section/list',{params: params})
     },

@@ -27,6 +27,14 @@ Route::group(['prefix'=>'c-api','namespace' => 'Admin\Api','middleware'=>['c-api
     Route::get('cate/select', 'CateController@getSelect');
     // 面包屑
     Route::get('breadcrumb/list', 'CommonController@getBreadCrumbList');
+    // 角色管理
+    Route::get('role/list', 'RoleController@getList');
+    Route::post('role/create', 'RoleController@postCreate');
+    Route::post('role/edit', 'RoleController@postEdit');
+    Route::post('role/remove', 'RoleController@postRemove');
+    Route::post('role/status', 'RoleController@postStatus');
+    Route::get('role/priv', 'RoleController@getPriv');
+    Route::post('role/priv', 'RoleController@postPriv');
     // 部门管理
     Route::get('section/list', 'SectionController@getList');
     Route::post('section/create', 'SectionController@postCreate');

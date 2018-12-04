@@ -8,6 +8,7 @@ import ArticleAdd from '.././components/console/article/ArticleAdd.vue'
 import CateList from '.././components/console/cate/CateList.vue'
 import MenuTree from '.././components/console/menu/MenuTree.vue'
 import SectionList from '.././components/console/section/SectionList.vue'
+import RoleList from '.././components/console/role/RoleList.vue'
 
 export default [
     // 登录
@@ -51,7 +52,14 @@ export default [
               component: ArticleAdd,
               meta: { requiresAuth: true }
             },
-            // 部门列表
+            // 角色
+            {
+              path: 'role/index',
+              name: 'role-index',
+              component: RoleList,
+              meta: { requiresAuth: true }
+            },
+            // 部门
             {
               path: 'section/index',
               name: 'section-index',
