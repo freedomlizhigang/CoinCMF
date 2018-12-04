@@ -3,7 +3,7 @@
  * @package [App\Http\Controllers\Admin]
  * @author [李志刚]
  * @createdate  [2018-06-26]
- * @copyright [2018-2020 衡水希夷信息技术工作室]
+ * @copyright [2018-2020 衡水山木枝技术服务有限公司]
  * @version [1.0.0]
  * @directions 部门管理
  *
@@ -11,92 +11,133 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\SectionRequest;
+use App\Models\Console\Admin;
 use App\Models\Console\Section;
 use Illuminate\Http\Request;
+use Validator;
 
-class SectionController extends Controller
+class SectionController extends ResponseController
 {
-    public function getIndex(Request $res)
-    {
-    	try {
-            $title = '部门列表';
-            $list = Section::orderBy('id','desc')->paginate(10);
-            return view('admin.console.section.index',compact('list','title'));
-        } catch (\Throwable $e) {
-            return view('errors.500');
-        }
-    }
-
-    // 添加部门
-    public function getAdd()
+    /**
+     * 部门列表
+     * @return [type] [description]
+     */
+    public function getList(Request $req)
     {
         try {
-            $title = '添加部门';
-            return view('admin.console.section.add',compact('title'));
+            // 搜索关键字
+            $key = $req->input('key','');
+            $list = Section::where(function($q) use($key){
+                    if ($key != '') {
+                        $q->where('name','like','%'.$key.'%');
+                    }
+                })->orderBy('id','asc')->get();
+            return $this->resData(200,'获取部门数据成功...',$list);
         } catch (\Throwable $e) {
-            return view('errors.500');
+            return $this->anyErrors(400,'获取数据失败，请稍后再试！',[]);
         }
     }
-
-    public function postAdd(SectionRequest $request)
+    // 创建部门
+    public function postCreate(Request $req)
     {
         try {
-            $data = $request->input('data');
-            Section::create($data);
-            return $this->adminJson(1,'添加部门成功！',url('/console/section/index'));
+            $validator = Validator::make($req->input(), [
+                'name' => 'required|max:255',
+                'status' => 'required|in:true,false',
+            ]);
+             $attrs = array(
+                'name' => '名称',
+                'status' => '状态',
+            );
+            $validator->setAttributeNames($attrs);
+            if ($validator->fails()) {
+                // 如果有错误，提示第一条
+                return $this->resData(402,$validator->errors()->all()[0].'...');
+            }
+            $name = $req->input('name');
+            $status = $req->input('status') == true ? 1 : 0;
+            Section::create(['name'=>$name,'status'=>$status]);
+            return $this->resData(200,'创建部门成功...');
         } catch (\Throwable $e) {
-            return $this->adminJson(0,'添加部门失败！');
+            return $this->resData(400,'创建部门失败，请稍后再试...');
         }
     }
-    // 修改部门
-    public function getEdit($id)
+    // 修改名称
+    public function postEdit(Request $req)
     {
         try {
-            $title = '修改部门';
-            // 拼接返回用的url参数
-            $info = Section::findOrFail($id);
-            return view('admin.console.section.edit',compact('title','info'));
+            $validator = Validator::make($req->input(), [
+                'section_id' => 'required|integer',
+                'name' => 'required|max:255',
+            ]);
+             $attrs = array(
+                'section_id' => '部门ID',
+                'name' => '名称',
+            );
+            $validator->setAttributeNames($attrs);
+            if ($validator->fails()) {
+                // 如果有错误，提示第一条
+                return $this->resData(402,$validator->errors()->all()[0].'...');
+            }
+            $name = $req->input('name');
+            Section::where('id',$req->input('section_id'))->update(['name'=>$name]);
+            return $this->resData(200,'更新部门名称成功...');
         } catch (\Throwable $e) {
-            return view('errors.500');
+            return $this->resData(400,'更新部门名称失败，请稍后再试...');
         }
     }
-    public function postEdit(SectionRequest $request,$id)
+    // 修改状态
+    public function postStatus(Request $req)
     {
         try {
-            Section::where('id',$id)->update($request->input('data'));
-            return $this->adminJson(1,'修改部门成功！');
+            $validator = Validator::make($req->input(), [
+                'section_id' => 'required|integer',
+                'status' => 'required|in:true,false',
+            ]);
+             $attrs = array(
+                'section_id' => '部门ID',
+                'status' => '状态',
+            );
+            $validator->setAttributeNames($attrs);
+            if ($validator->fails()) {
+                // 如果有错误，提示第一条
+                return $this->resData(402,$validator->errors()->all()[0].'...');
+            }
+            $status = $req->input('status') == 'true' ? 1 : 0;
+            Section::where('id',$req->input('section_id'))->update(['status'=>$status]);
+            return $this->resData(200,'更新部门状态成功...');
         } catch (\Throwable $e) {
-            return $this->adminJson(0,'修改部门失败！');
+            return $this->resData(400,'更新部门状态失败，请稍后再试...');
         }
     }
     // 删除部门
-    public function getDel($id)
+    public function postRemove(Request $req)
     {
         try {
+            $validator = Validator::make($req->input(), [
+                'section_id' => 'required|integer',
+            ]);
+             $attrs = array(
+                'section_id' => '部门ID',
+            );
+            $validator->setAttributeNames($attrs);
+            if ($validator->fails()) {
+                // 如果有错误，提示第一条
+                return $this->resData(402,$validator->errors()->all()[0].'...');
+            }
+            $id = $req->input('section_id');
             // 查询下属用户
             if(is_null(Admin::where('section_id',$id)->first()))
             {
-                // 开启事务
-                DB::beginTransaction();
-                try {
-                    // 同时删除关联的用户关系
-                    Section::destroy($id);
-                    // 没出错，提交事务
-                    DB::commit();
-                    return back()->with('message', '删除部门成功！');
-                } catch (\Throwable $e) {
-                    // 出错回滚
-                    DB::rollBack();
-                    return back()->with('message','删除失败，请稍后再试！');
-                }
+                Section::destroy($id);
+                return $this->resData(200,'删除部门成功...');
             }
             else
             {
-                return back()->with('message', '部门下有用户！');
+                return $this->resData(402,'此部门下有用户...');
             }
         } catch (\Throwable $e) {
-            return back()->with('message', '删除失败，请稍后再试！');
+            return $this->resData(400,'删除部门失败，请稍后再试...');
         }
     }
 }

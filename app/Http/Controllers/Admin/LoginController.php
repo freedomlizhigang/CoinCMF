@@ -1,6 +1,14 @@
 <?php
-
-namespace App\Http\Controllers\Admin\Api;
+/*
+ * @package [App\Http\Controllers\Admin]
+ * @author [李志刚]
+ * @createdate  [2018-06-26]
+ * @copyright [2018-2020 衡水山木枝技术服务有限公司]
+ * @version [1.0.0]
+ * @directions 登录
+ *
+ */
+namespace App\Http\Controllers\Admin;
 
 use App\Customize\Func;
 use App\Http\Controllers\Controller;

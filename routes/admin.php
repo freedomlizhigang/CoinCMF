@@ -12,12 +12,12 @@
 */
 
 // 管理中心API
-Route::group(['prefix'=>'c-api','namespace' => 'Admin\Api'],function(){
+Route::group(['prefix'=>'c-api','namespace' => 'Admin'],function(){
     // 登录
     Route::post('login', 'LoginController@postLogin');
 });
 // 管理中心API
-Route::group(['prefix'=>'c-api','namespace' => 'Admin\Api','middleware'=>['c-api']],function(){
+Route::group(['prefix'=>'c-api','namespace' => 'Admin','middleware'=>['c-api']],function(){
     // 文章管理用的
     Route::get('article/list', 'ArticleController@getList');
     Route::post('article/delete', 'ArticleController@postDelete');

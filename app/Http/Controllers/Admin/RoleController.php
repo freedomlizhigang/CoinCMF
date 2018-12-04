@@ -3,7 +3,7 @@
  * @package [App\Http\Controllers\Admin]
  * @author [李志刚]
  * @createdate  [2018-06-26]
- * @copyright [2018-2020 衡水希夷信息技术工作室]
+ * @copyright [2018-2020 衡水山木枝技术服务有限公司]
  * @version [1.0.0]
  * @directions 角色管理
  *
@@ -11,75 +11,126 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\RoleRequest;
 use App\Models\Console\Menu;
 use App\Models\Console\Priv;
 use App\Models\Console\Role;
 use App\Models\Console\RoleUser;
 use DB;
 use Illuminate\Http\Request;
+use Validator;
 
-class RoleController extends Controller
+class RoleController extends ResponseController
 {
-    public function getIndex(Request $req)
+    /**
+     * 角色列表
+     * @return [type] [description]
+     */
+    public function getList(Request $req)
     {
         try {
-            $title = '角色列表';
-            $list = Role::paginate(10);
-            return view('admin.console.role.index',compact('list','title'));
+            // 搜索关键字
+            $key = $req->input('key','');
+            $list = Role::where(function($q) use($key){
+                    if ($key != '') {
+                        $q->where('name','like','%'.$key.'%');
+                    }
+                })->orderBy('id','asc')->get();
+            return $this->resData(200,'获取角色数据成功...',$list);
         } catch (\Throwable $e) {
-            return view('errors.500');
+            return $this->anyErrors(400,'获取数据失败，请稍后再试！',[]);
         }
     }
-
-    // 添加角色
-    public function getAdd()
+    // 创建角色
+    public function postCreate(Request $req)
     {
         try {
-            $title = '添加角色';
-            return view('admin.console.role.add',compact('title'));
+            $validator = Validator::make($req->input(), [
+                'name' => 'required|max:255',
+                'status' => 'required|in:true,false',
+            ]);
+             $attrs = array(
+                'name' => '名称',
+                'status' => '状态',
+            );
+            $validator->setAttributeNames($attrs);
+            if ($validator->fails()) {
+                // 如果有错误，提示第一条
+                return $this->resData(402,$validator->errors()->all()[0].'...');
+            }
+            $name = $req->input('name');
+            $status = $req->input('status') == true ? 1 : 0;
+            Role::create(['name'=>$name,'status'=>$status]);
+            return $this->resData(200,'创建角色成功...');
         } catch (\Throwable $e) {
-            return view('errors.500');
+            return $this->resData(400,'创建角色失败，请稍后再试...');
         }
     }
-
-    public function postAdd(RoleRequest $req)
+    // 修改名称
+    public function postEdit(Request $req)
     {
         try {
-            $data = $req->input('data');
-            Role::create($data);
-            return $this->adminJson(1,'添加角色成功！',url('/console/role/index'));
+            $validator = Validator::make($req->input(), [
+                'role_id' => 'required|integer',
+                'name' => 'required|max:255',
+            ]);
+             $attrs = array(
+                'role_id' => '角色ID',
+                'name' => '名称',
+            );
+            $validator->setAttributeNames($attrs);
+            if ($validator->fails()) {
+                // 如果有错误，提示第一条
+                return $this->resData(402,$validator->errors()->all()[0].'...');
+            }
+            $name = $req->input('name');
+            Role::where('id',$req->input('role_id'))->update(['name'=>$name]);
+            return $this->resData(200,'更新角色名称成功...');
         } catch (\Throwable $e) {
-            return $this->adminJson(0,'添加角色失败！');
+            return $this->resData(400,'更新角色名称失败，请稍后再试...');
         }
     }
-    // 修改角色
-    public function getEdit($rid)
+    // 修改状态
+    public function postStatus(Request $req)
     {
         try {
-            $title = '修改角色';
-            // 拼接返回用的url参数
-            $info = Role::findOrFail($rid);
-            return view('admin.console.role.edit',compact('title','info'));
+            $validator = Validator::make($req->input(), [
+                'role_id' => 'required|integer',
+                'status' => 'required|in:true,false',
+            ]);
+             $attrs = array(
+                'role_id' => '角色ID',
+                'status' => '状态',
+            );
+            $validator->setAttributeNames($attrs);
+            if ($validator->fails()) {
+                // 如果有错误，提示第一条
+                return $this->resData(402,$validator->errors()->all()[0].'...');
+            }
+            $status = $req->input('status') == 'true' ? 1 : 0;
+            Role::where('id',$req->input('role_id'))->update(['status'=>$status]);
+            return $this->resData(200,'更新角色状态成功...');
         } catch (\Throwable $e) {
-            return view('errors.500');
-        }
-    }
-    public function postEdit(RoleRequest $req,$rid)
-    {
-        try {
-            Role::where('id',$rid)->update($req->input('data'));
-            return $this->adminJson(1,'修改角色成功！');
-        } catch (\Throwable $e) {
-            return $this->adminJson(0,'添加角色失败！');
+            return $this->resData(400,'更新角色状态失败，请稍后再试...');
         }
     }
     // 删除角色
-    public function getDel($rid)
+    public function postRemove(Request $req)
     {
         try {
+            $validator = Validator::make($req->input(), [
+                'role_id' => 'required|integer',
+            ]);
+             $attrs = array(
+                'role_id' => '角色ID',
+            );
+            $validator->setAttributeNames($attrs);
+            if ($validator->fails()) {
+                // 如果有错误，提示第一条
+                return $this->resData(402,$validator->errors()->all()[0].'...');
+            }
+            $rid = $req->input('role_id');
             if ($rid === 1) {
-                return back()->with('message','超级管理员组不能删除！');
+                return $this->resData(402,'超级管理员组不能删除...');
             }
             // 查询下属用户
             if(is_null(RoleUser::where('role_id',$rid)->first()))
@@ -92,7 +143,7 @@ class RoleController extends Controller
                     Priv::where('role_id',$rid)->delete();
                     // 没出错，提交事务
                     DB::commit();
-                    return back()->with('message', '删除角色成功！');
+                    return $this->resData(200,'删除角色成功...');
                 } catch (\Throwable $e) {
                     // 出错回滚
                     DB::rollBack();
@@ -101,90 +152,93 @@ class RoleController extends Controller
             }
             else
             {
-                return back()->with('message', '角色下有用户！');
+                return $this->resData(402,'此角色下有用户...');
             }
         } catch (\Throwable $e) {
-            return back()->with('message', '删除角色失败！');
+            return $this->resData(400,'删除角色失败，请稍后再试...');
         }
-
     }
     // 更新角色权限，主要是为了显示后台菜单
-    public function getPriv($rid)
+    public function getPriv(Request $req)
     {
         try {
-            $title = '更新权限';
-            $ishav = Priv::where('role_id',$rid)->get();
-            $rids = '';
-            if($ishav->isEmpty() == false)
-            {
-                $hav = $ishav->toArray();
-                foreach ($hav as $v) {
-                    $rids .= "'".$v['menu_id']."',";
-                }
+            $validator = Validator::make($req->input(), [
+                'role_id' => 'required|integer',
+            ]);
+             $attrs = array(
+                'role_id' => '角色ID',
+            );
+            $validator->setAttributeNames($attrs);
+            if ($validator->fails()) {
+                // 如果有错误，提示第一条
+                return $this->resData(402,$validator->errors()->all()[0].'...');
             }
-            // dd($rids);
-            $all = Menu::get();
-            $tree = app('com')->toTree($all,'0');
-            $treePriv = $this->treePriv($tree);
-            return view('admin.console.role.priv',compact('title','rids','treePriv'));
+            $rid = $req->input('role_id');
+            // 所有权限
+            $priv = Priv::where('role_id',$rid)->select('id','menu_id')->get();
+            // 所有菜单
+            $all = Menu::select('id','parentid','name','url')->orderBy('sort','asc')->orderBy('id','asc')->get();
+            // 变成树形菜单用的
+            $tree = $this->toTree($priv,$all,0);
+            return $this->resData(200,'获取权限列表成功...',$tree);
         } catch (\Throwable $e) {
-            return view('errors.500');
+            return $this->resData(400,'获取权限列表失败...');
         }
     }
-    public function postPriv(Request $res,$rid)
+    // 转成树形菜单数组
+    private function toTree($priv,$data,$pid)
     {
-        try {
-            if ($rid === 1) {
-                return back()->with('message','超级管理员有所有权限，不用修改！');
+        $tree = [];
+        if ($data->count() > 0) {
+            foreach($data as $v)
+            {
+                if ($v->parentid == $pid) {
+                    $v = ['menu_id'=>$v->id,'title'=>$v->name,'expand'=>false];
+                    // 所有子菜单都选中的时候，此菜单选中checked，部分选中时selected
+                    $child_count = $data->where('parentid',$v['menu_id'])->count();
+                    // 没有子菜单的时候，判断他本身
+                    if ($child_count == 0) {
+                        $v['checked'] = $priv->where('menu_id',$v['menu_id'])->count() > 0 ? true : false;
+                    }
+                    $v['children'] = $this->toTree($priv,$data,$v['menu_id']);
+                    $tree[] = $v;
+                }
             }
-            // 开启事务
-            DB::beginTransaction();
-            try {
-                Priv::where('role_id',$rid)->delete();
-                // 所有选中的菜单url，以此查找出所有url label
-                $ids = $res->input('ids');
-                $all = Menu::whereIn('id',$ids)->get()->toArray();
-                // 将查出来的数据组成数组插入到role_privs表里
+        }
+        return $tree;
+    }
+    public function postPriv(Request $req)
+    {
+        // 开启事务
+        DB::beginTransaction();
+        try {
+            $validator = Validator::make($req->input(), [
+                'role_id' => 'required|integer',
+            ]);
+             $attrs = array(
+                'role_id' => '角色ID',
+            );
+            $validator->setAttributeNames($attrs);
+            if ($validator->fails()) {
+                // 如果有错误，提示第一条
+                return $this->resData(402,$validator->errors()->all()[0].'...');
+            }
+            $rid = $req->input('role_id');
+            Priv::where('role_id',$rid)->delete();
+            // 所有选中的菜单url，以此查找出所有url label
+            $ids = $req->input('menu_id',[]);
+            $all = Menu::whereIn('id',$ids)->get();
+            // 将查出来的数据组成数组插入到role_privs表里
+            if (!is_null($all) && count($all) > 0) {
                 foreach ($all as $v) {
-                    $insertArr = array('menu_id'=>$v['id'],'role_id'=>$rid,'url'=>$v['url'],'label'=>$v['label']);
+                    $insertArr = array('menu_id'=>$v->id,'role_id'=>$rid,'url'=>$v->url,'label'=>$v->label);
                     Priv::create($insertArr);
                 }
-                // 没出错，提交事务
-                DB::commit();
-                return back()->with('message', '更新权限菜单成功！');
-            } catch (\Throwable $e) {
-                // 出错回滚
-                DB::rollBack();
-                return back()->with('message','更新权限菜单失败，请稍后再试！');
             }
+            DB::commit();
+            return $this->resData(200,'更新权限菜单成功...');
         } catch (\Throwable $e) {
-            return back()->with('message', '更新权限菜单失败，请稍后再试！');
-        }
-    }
-    // 权限菜单 html
-    private function treePriv($tree)
-    {
-        try {
-            $html = '';
-            if (is_array($tree)) {
-                foreach ($tree as $v) {
-                    // 计算level
-                    $level = count(explode(',',$v['arrparentid']));
-                    if ($v['parentid'] == '')
-                    {
-                        $html .= "<li><label class='checkbox-inline'><input type='checkbox' name='ids[]' class='check-mr' value='".$v['id']."'>".$v['name']."</label></li>";
-                    }
-                    else
-                    {
-                        $html .= "<li><label class='checkbox-inline'><input type='checkbox' name='ids[]' class='check-mr' value='".$v['id']."'>".$v['name']."</label>";
-                        $html .= $this->treePriv($v['parentid']);
-                        $html .= "</li>";
-                    }
-                }
-            }
-            return $html ? "<ul class='clearfix priv-level-".$level."'>".$html."</ul>" : $html;
-        } catch (\Throwable $e) {
-            return '';
+            return $this->resData(400,'更新权限菜单失败，请稍后再试...');
         }
     }
 }

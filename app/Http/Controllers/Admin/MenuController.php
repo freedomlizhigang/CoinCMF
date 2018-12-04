@@ -3,7 +3,7 @@
  * @package [App\Http\Controllers\Admin]
  * @author [李志刚]
  * @createdate  [2018-06-26]
- * @copyright [2018-2020 衡水希夷信息技术工作室]
+ * @copyright [2018-2020 衡水山木枝技术服务有限公司]
  * @version [1.0.0]
  * @directions 菜单管理
  *
@@ -11,143 +11,218 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\MenuRequest;
 use App\Models\Console\Menu;
-use Cache;
 use Illuminate\Http\Request;
+use Validator;
+use DB;
+use Redis;
 
-class MenuController extends Controller
+class MenuController extends ResponseController
 {
-    public function getIndex()
+    // 取下拉框菜单
+    public function getList(Request $req)
     {
         try {
-            $title = '菜单列表';
-            $list = Menu::orderBy('sort','asc')->orderBy('id','asc')->get();
-            $tree = app('com')->toTree($list,'0');
-            $treeHtml = $this->toTreeHtml($tree);
-            return view('admin.console.menu.index',compact('treeHtml','title'));
-        } catch (\Throwable $e) {
-            return view('errors.500');
-        }
-    }
-
-    // 树形菜单 html
-    private function toTreeHtml($tree)
-    {
-        try {
-            $html = '';
-            foreach ($tree as $v) {
-                // 用level判断层级，最好不要超过四层，样式中只写了四级
-                $level = count(explode(',', $v['arrparentid']));
-                $disStr = $v['display'] ? "<span class='text-success'>是</span>" : "<span class='text-danger'>否</span>";
-                // level < 4 是为了不添加更多的层级关系，其它地方不用判断，只是后台菜单不用那么多级
-                if ($level < 4) {
-                     $html .= "<tr>
-                        <td>".$v['sort']."</td>
-                        <td>".$v['id']."</td>
-                        <td><span class='level-".$level."'></span>".$v['name']."<div data-url='/console/menu/add/".$v['id']."' class='iconfont icon-addbox curp add_submenu btn_modal' data-title='添加菜单' data-toggle='modal' data-target='#myModal'></div></td>
-                        <td>".$v['url']."</td>
-                        <td>".$disStr."</td>
-                        <td><div data-url='/console/menu/edit/".$v['id']."' class='btn btn-xs btn-info iconfont icon-translate btn_modal' data-title='修改菜单' data-toggle='modal' data-target='#myModal'></div> <a href='/console/menu/del/".$v['id']."' class='btn btn-xs btn-danger iconfont icon-delete confirm'></a></td>
-                        </tr>";
+            // 一级菜单
+            $all = Menu::select('id','parentid','name','url')->where('display','=','1')->orderBy('sort','asc')->orderBy('id','asc')->get();
+            $leftmenu = array();
+            // 判断权限
+            $left = $all->where('parentid',0)->all();
+            // 取到用户信息
+            $token = $req->header('Authorization');
+            $token_info = Redis::get('c-token:'.$token);
+            // 解析用户信息，判断权限
+            $user = json_decode($token_info);
+            // 判断权限
+            if (!in_array(1, $user->allRole))
+            {
+                foreach ($left as $k => $v) {
+                    foreach ($user->allPriv as $url) {
+                        if ($v['url'] == $url) {
+                            $leftmenu[$k] = $v;
+                        }
+                    }
+                }
+            }
+            else
+            {
+                $leftmenu = $left;
+            }
+            // 二级菜单
+            foreach ($leftmenu as $k => $v) {
+                // 取所有下级菜单
+                $submenu = $all->where('parentid','=',$v['id'])->all();
+                // 进行权限判断
+                if (!in_array(1, $user->allRole))
+                {
+                    foreach ($res as $s => $v) {
+                        foreach ($user->allPriv as $url) {
+                            if ($v['url'] == $url) {
+                                $leftmenu[$k]['submenu'][$s] = $v;
+                            }
+                        }
+                    }
                 }
                 else
                 {
-                     $html .= "<tr>
-                        <td>".$v['sort']."</td>
-                        <td>".$v['id']."</td>
-                        <td><span class='level-".$level."'></span>".$v['name']."</td>
-                        <td>".$v['url']."</td>
-                        <td>".$disStr."</td>
-                        <td><div data-url='/console/menu/edit/".$v['id']."' class='btn btn-xs btn-info iconfont icon-translate btn_modal' data-title='修改菜单' data-toggle='modal' data-target='#myModal'></div> <a href='/console/menu/del/".$v['id']."' class='btn btn-xs btn-danger iconfont icon-delete confirm'></a></td>
-                        </tr>";
-                }
-                if ($v['parentid'] != '')
-                {
-                    $html .= $this->toTreeHtml($v['parentid']);
+                    $leftmenu[$k]['submenu'] = $submenu;
                 }
             }
-            return $html;
+            return $this->resData(200,'获取成功...',$leftmenu);
         } catch (\Throwable $e) {
-            return '';
+            return $this->resData(400,'获取失败，请稍后再试...');
         }
     }
-
-    /**
-     * 添加菜单模板
-     * @param  Request $request [description]
-     * @param  integer $pid     [父栏目id，默认为0，即为一级菜单]
-     * @return [type]           [description]
-     */
-    public function getAdd(Request $request,$pid = 0)
+    // 查出所有有权限的url
+    private function allPriv()
+    {
+        $rid = session('console')->allRole;
+        // 查url
+        $priv = Priv::whereIn('role_id',$rid)->pluck('url')->toArray();
+        return $priv;
+    }
+    // 取菜单树
+    public function getTree()
     {
         try {
-            $title = '添加菜单';
-        	return view('admin.console.menu.add',compact('pid','title'));
+            // 所有菜单
+            $all = Menu::select('id','parentid','name','url')->orderBy('sort','asc')->orderBy('id','asc')->get();
+            $tree = $this->toTree($all,0);
+            return $this->resData(200,'获取成功...',$tree);
         } catch (\Throwable $e) {
-            return view('errors.500');
+            return $this->resData(400,'获取失败，请稍后再试...');
         }
     }
-    /**
-     * 添加菜单提交数据
-     * @param  Request $request [description]
-     * @return [type]           [description]
-     */
-    public function postAdd(MenuRequest $request)
+    // 转成树形菜单数组
+    private function toTree($data,$pid)
     {
+        $tree = [];
+        if ($data->count() > 0) {
+            foreach($data as $v)
+            {
+                if ($v->parentid == $pid) {
+                    $v = ['menu_id'=>$v->id,'title'=>$v->name,'expand'=>true];
+                    $v['children'] = $this->toTree($data,$v['menu_id']);
+                    $tree[] = $v;
+                }
+            }
+        }
+        return $tree;
+    }
+    // 添加菜单
+    public function postCreate(Request $req)
+    {
+        DB::beginTransaction();
         try {
-        	$data = request('data');
-        	Menu::create($data);
+            $validator = Validator::make($req->input(), [
+                'name' => 'required|max:255',
+                'url' => 'required|max:255',
+                'label' => 'required|max:255',
+            ]);
+             $attrs = array(
+                'name' => '菜单名称',
+                'url' => '菜单名称',
+                'label' => '菜单标签',
+            );
+            $validator->setAttributeNames($attrs);
+            if ($validator->fails()) {
+                // 如果有错误，提示第一条
+                return $this->resData(402,$validator->errors()->all()[0].'...');
+            }
+            $insert = ['name'=>$req->input('name'),'url'=>$req->input('url'),'label'=>$req->input('label'),'icon'=>$req->input('icon'),'display'=>$req->input('display') === true ? 1 : 0,'sort'=>$req->input('sort')];
+            $detail = Menu::create($insert);
+            // 更新缓存
             app('com')->updateCache(new Menu(),'menuCache');
-            return $this->adminJson(1,'添加菜单成功',url('/console/menu/index'));
+            DB::commit();
+            return $this->resData(200,'添加权限菜单成功...',$detail);
         } catch (\Throwable $e) {
-            return $this->adminJson(0,'添加菜单失败');
+            DB::rollback();
+            return $this->resData(400,'添加权限菜单失败，请稍后再试...');
         }
     }
-    /**
-     * 修改菜单，当修改父级菜单的时候level要相应的进行修改
-     * @param  integer $id [要修改的菜单ID]
-     * @return [type]      [description]
-     */
-    public function getEdit($id = 0)
+    // 修改菜单
+    public function postEdit(Request $req)
     {
+        DB::beginTransaction();
         try {
-            $title = '修改菜单';
-            $info = Menu::findOrFail($id);
-            $list = Menu::orderBy('sort','asc')->get();
-            $tree = app('com')->toTree($list,'0');
-            $treeSelect = app('com')->toTreeSelect($tree,$info->parentid);
-            return view('admin.console.menu.edit',compact('title','info','treeSelect'));
-        } catch (\Throwable $e) {
-            return view('errors.500');
-        }
-    }
-    public function postEdit(MenuRequest $res,$id)
-    {
-        try {
-            $data = $res->input('data');
-            Menu::where('id',$id)->update($data);
+            $validator = Validator::make($req->input(), [
+                'id' => 'required|integer',
+                'name' => 'required|max:255',
+                'url' => 'required|max:255',
+                'label' => 'required|max:255',
+            ]);
+             $attrs = array(
+                'id' => '菜单ID',
+                'name' => '菜单名称',
+                'url' => '菜单名称',
+                'label' => '菜单标签',
+            );
+            $validator->setAttributeNames($attrs);
+            if ($validator->fails()) {
+                // 如果有错误，提示第一条
+                return $this->resData(402,$validator->errors()->all()[0].'...');
+            }
+            $id = $req->input('id');
+            $update = ['name'=>$req->input('name'),'url'=>$req->input('url'),'label'=>$req->input('label'),'icon'=>$req->input('icon'),'display'=>$req->input('display') === true ? 1 : 0,'sort'=>$req->input('sort')];
+            Menu::where('id',$id)->update($update);
+            // 更新缓存
             app('com')->updateCache(new Menu(),'menuCache');
-            return $this->adminJson(1,'修改菜单成功',url('/console/menu/index'));
+            DB::commit();
+            return $this->resData(200,'更新权限菜单成功...');
         } catch (\Throwable $e) {
-            return $this->adminJson(0,'修改菜单失败');
+            DB::rollback();
+            return $this->resData(400,'更新权限菜单失败，请稍后再试...');
         }
     }
-    /**
-     * 删除菜单及下属子菜单，取出当前菜单ID下边所有的子菜单ID（添加修改的时候会进行更新，包含最小是自身），然后转换成数组格式，指进行删除，然后更新菜单
-     * @param  [type] $id [要删除的菜单ID]
-     * @return [type]     [description]
-     */
-    public function getDel($id)
+    // 取单条信息
+    public function postDetail(Request $req)
     {
         try {
-            $info = Menu::findOrFail($id);
+            $validator = Validator::make($req->input(), [
+                'menu_id' => 'required|integer',
+            ]);
+             $attrs = array(
+                'menu_id' => '菜单ID',
+            );
+            $validator->setAttributeNames($attrs);
+            if ($validator->fails()) {
+                // 如果有错误，提示第一条
+                return $this->resData(402,$validator->errors()->all()[0].'...');
+            }
+            $menu_id = $req->input('menu_id');
+            $detail = Menu::findOrFail($menu_id);
+            return $this->resData(200,'获取成功...',$detail);
+        } catch (\Throwable $e) {
+            return $this->resData(400,'获取失败，请稍后再试...');
+        }
+    }
+    // 删除一条，同时删除子菜单
+    public function postRemove(Request $req)
+    {
+        DB::beginTransaction();
+        try {
+            $validator = Validator::make($req->input(), [
+                'menu_id' => 'required|integer',
+            ]);
+             $attrs = array(
+                'menu_id' => '菜单ID',
+            );
+            $validator->setAttributeNames($attrs);
+            if ($validator->fails()) {
+                // 如果有错误，提示第一条
+                return $this->resData(402,$validator->errors()->all()[0].'...');
+            }
+            $menu_id = $req->input('menu_id');
+            $info = Menu::findOrFail($menu_id);
             $arr = explode(',', $info->arrchildid);
             Menu::destroy($arr);
+            // 更新缓存
             app('com')->updateCache(new Menu(),'menuCache');
-            return back()->with('message', '删除菜单成功！');
+            DB::commit();
+            return $this->resData(200,'删除成功...');
         } catch (\Throwable $e) {
-            return back()->with('message', '删除菜单失败！');
+            DB::rollback();
+            return $this->resData(400,'获取失败，请稍后再试...');
         }
     }
 }
