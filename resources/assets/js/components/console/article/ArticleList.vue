@@ -1,6 +1,6 @@
 <template>
   <div class="article-list">
-    <Form :model="formItem" ref="formItem" :inline="true">
+    <Form :model="formItem" ref="formItem" :inline="true" action="javascript:void(0)">
       <FormItem>
         <Select v-model="formItem.cateid" :style="{'width':'180px'}">
           <Option v-for="item in cateSelect" :value="item.value" :key="item.value">{{ item.label }}</Option>

@@ -28,18 +28,18 @@ class LoginController extends ResponseController
             $validator->setAttributeNames($attrs);
             if ($validator->fails()) {
                 // 如果有错误，提示第一条
-                return $this->resData(400,$validator->errors()->all()[0].'...');
+                return $this->resData(402,$validator->errors()->all()[0].'...');
             }
             $username = $req->input('name');
             $pwd = $req->input('password');
             $user = Admin::where('status',1)->where('name',$username)->first();
             if (is_null($user)) {
-                return $this->resData(400,'用户不存在或已被禁用...');
+                return $this->resData(402,'用户不存在或已被禁用...');
             }
             else
             {
                 if ($user->password != Func::makepwd($pwd,$user->crypt)) {
-                    return $this->resData(400,'密码不正确...');
+                    return $this->resData(402,'密码不正确...');
                 }
                 $token = md5(md5($user->id.'-SMZ-'.$user->name));
                 $allRole = RoleUser::where('user_id',$user->id)->pluck('role_id')->unique()->toArray();

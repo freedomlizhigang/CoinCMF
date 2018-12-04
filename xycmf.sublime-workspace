@@ -771,10 +771,13 @@
 		"/D/wwwroot/XYCMF/resources/assets",
 		"/D/wwwroot/XYCMF/resources/assets/js",
 		"/D/wwwroot/XYCMF/resources/assets/js/api",
-		"/D/wwwroot/XYCMF/resources/assets/js/api/menu",
+		"/D/wwwroot/XYCMF/resources/assets/js/api/common",
+		"/D/wwwroot/XYCMF/resources/assets/js/api/section",
 		"/D/wwwroot/XYCMF/resources/assets/js/components",
 		"/D/wwwroot/XYCMF/resources/assets/js/components/console",
+		"/D/wwwroot/XYCMF/resources/assets/js/components/console/article",
 		"/D/wwwroot/XYCMF/resources/assets/js/components/console/menu",
+		"/D/wwwroot/XYCMF/resources/assets/js/components/console/section",
 		"/D/wwwroot/XYCMF/resources/assets/js/router",
 		"/D/wwwroot/XYCMF/resources/assets/sass",
 		"/D/wwwroot/XYCMF/resources/views",
@@ -782,28 +785,36 @@
 	],
 	"file_history":
 	[
+		"/D/wwwroot/XYCMF/resources/assets/js/components/console/section/SectionList.vue",
+		"/D/wwwroot/XYCMF/routes/admin.php",
 		"/D/wwwroot/XYCMF/resources/assets/js/components/console/menu/MenuTree.vue",
-		"/D/wwwroot/XYCMF/resources/assets/js/components/console/Iframe.vue",
+		"/D/wwwroot/XYCMF/resources/assets/js/components/console/Login.vue",
+		"/D/wwwroot/XYCMF/resources/assets/js/components/console/cate/CateList.vue",
+		"/D/wwwroot/XYCMF/resources/assets/js/components/console/article/ArticleList.vue",
+		"/D/wwwroot/XYCMF/resources/assets/js/components/console/article/ArticleAdd.vue",
+		"/D/wwwroot/XYCMF/app/Http/Controllers/Admin/Api/SectionController.php",
+		"/D/wwwroot/XYCMF/resources/assets/js/api/section/index.js",
+		"/D/wwwroot/XYCMF/resources/assets/js/api/http.js",
+		"/D/wwwroot/XYCMF/app/Http/Controllers/Admin/Api/LoginController.php",
 		"/D/wwwroot/XYCMF/app/Http/Controllers/Admin/Api/MenuController.php",
+		"/D/希夷/局气/服务器信息.txt",
+		"/D/wwwroot/XYCMF/app/Models/Console/Section.php",
+		"/D/wwwroot/XYCMF/README.md",
+		"/D/wwwroot/XYCMF/resources/assets/js/router/routers.js",
+		"/D/wwwroot/XYCMF/resources/assets/js/api/api.js",
+		"/D/希夷/局气/账号.txt",
+		"/D/wwwroot/XYCMF/resources/assets/js/components/console/Iframe.vue",
 		"/D/wwwroot/XYCMF/app/Http/Controllers/Admin/IndexController.php",
 		"/D/wwwroot/XYCMF/app/Http/Middleware/ConsoleApi.php",
-		"/D/wwwroot/XYCMF/routes/admin.php",
 		"/D/wwwroot/XYCMF/app/Models/Console/Menu.php",
 		"/D/wwwroot/XYCMF/resources/assets/js/api/menu/index.js",
-		"/D/wwwroot/XYCMF/resources/assets/js/api/http.js",
 		"/D/wwwroot/XYCMF/app/Services/ComService.php",
-		"/D/wwwroot/XYCMF/resources/assets/js/api/api.js",
-		"/D/wwwroot/XYCMF/resources/assets/js/components/console/Login.vue",
-		"/D/希夷/局气/服务器信息.txt",
 		"/D/wwwroot/XYCMF/resources/assets/sass/reset.css",
-		"/D/wwwroot/XYCMF/resources/assets/js/router/routers.js",
 		"/D/wwwroot/XYCMF/resources/assets/js/components/console/menu",
-		"/D/希夷/局气/账号.txt",
 		"/D/希夷/局气/客情push时间.txt",
 		"/D/希夷/局气/督导需求表格/督导.txt",
 		"/D/wwwroot/XYCMF/resources/views/admin/index.blade.php",
 		"/D/wwwroot/XYCMF/resources/assets/js/api/common/index.js",
-		"/D/wwwroot/XYCMF/app/Http/Controllers/Admin/Api/LoginController.php",
 		"/D/wwwroot/XYCMF/resources/assets/js/router/index.js",
 		"/D/wwwroot/XYCMF/resources/assets/js/components/console/index/Main.vue",
 		"/D/wwwroot/XYCMF/resources/assets/js/api/login/index.js",
@@ -832,10 +843,7 @@
 		"/D/wwwroot/XYCMF/resources/assets/js/vuex/mutation_types.js",
 		"/D/wwwroot/XYCMF/resources/assets/js/components/console/Logout.vue",
 		"/D/wwwroot/XYCMF/resources/assets/js/components/Login.vue",
-		"/D/wwwroot/XYCMF/resources/assets/js/components/console/article/ArticleAdd.vue",
-		"/D/wwwroot/XYCMF/resources/assets/js/components/console/article/ArticleList.vue",
 		"/D/wwwroot/XYCMF/app/Http/Controllers/Admin/Api/CommonController.php",
-		"/D/wwwroot/XYCMF/resources/assets/js/components/console/cate/CateList.vue",
 		"/D/wwwroot/XYCMF/app/Http/Controllers/Admin/Api/CateController.php",
 		"/E/scss/reset-pc/css/reset.scss",
 		"/D/wwwroot/XYCMF/public/css/app.css",
@@ -902,24 +910,20 @@
 		"/D/wwwroot/XYCMF/public/statics/admin/js/com.js",
 		"/D/希夷/衡水检察院/会议排位系统/几个页面.txt",
 		"/D/wwwroot/XYCMF/resources/views/fields/files.blade.php",
-		"/D/wwwroot/XYCMF/README.md",
 		"/D/wwwroot/XYCMF/resources/views/fields/album.blade.php",
 		"/D/wwwroot/XYCMF/resources/views/fields/thumb.blade.php",
-		"/D/希夷文件/服务器信息/xi-yi(1).txt",
-		"/D/希夷文件/服务器信息/预发布服务器.txt",
-		"/D/wwwroot/XYCMF/public/statics/common/ueditor/ueditor.config.js",
-		"/D/wwwroot/XYCMF/resources/views/fields/ueditor.blade.php",
-		"/D/wwwroot/XYCMF/app/Services/TagService.php"
+		"/D/希夷文件/服务器信息/xi-yi(1).txt"
 	],
 	"find":
 	{
-		"height": 28.0
+		"height": 41.0
 	},
 	"find_in_files":
 	{
 		"height": 133.0,
 		"where_history":
 		[
+			"D:\\wwwroot\\XYCMF\\resources\\assets\\js\\components",
 			"D:\\wwwroot\\XYCMF\\resources\\assets\\js",
 			"D:\\wwwroot\\XYCMF\\resources\\views\\admin",
 			"D:\\wwwroot\\XYCMF\\app",
@@ -1039,6 +1043,18 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"<Form ",
+			"remove",
+			"402",
+			"状态",
+			"status",
+			"sort",
+			"changeStatus",
+			"MenuController",
+			"menu/",
+			"article",
+			"MenuTree",
+			"menu",
 			"获取",
 			"menu_id",
 			"menu_",
@@ -1154,19 +1170,7 @@
 			"custom-bread-crumb",
 			"breadCrumbList",
 			"submenu",
-			"data1",
-			"success",
-			"deleteData",
-			"index",
-			".index",
-			"user-",
-			", otherArgu",
-			"avatar",
-			"layout-header-bar",
-			"table",
-			"laydate",
-			"data[",
-			"data."
+			"data1"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -1301,7 +1305,7 @@
 	],
 	"incremental_find":
 	{
-		"height": 28.0
+		"height": 27.0
 	},
 	"input":
 	{
@@ -1362,7 +1366,7 @@
 	"project": "xycmf.sublime-project",
 	"replace":
 	{
-		"height": 52.0
+		"height": 50.0
 	},
 	"save_all_on_build": false,
 	"select_file":

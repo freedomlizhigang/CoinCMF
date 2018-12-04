@@ -93,7 +93,7 @@ class MenuController extends ResponseController
             foreach($data as $v)
             {
                 if ($v->parentid == $pid) {
-                    $v = ['menu_id'=>$v->id,'title'=>$v->name,'expand'=>false];
+                    $v = ['menu_id'=>$v->id,'title'=>$v->name,'expand'=>true];
                     $v['children'] = $this->toTree($data,$v['menu_id']);
                     $tree[] = $v;
                 }
@@ -119,7 +119,7 @@ class MenuController extends ResponseController
             $validator->setAttributeNames($attrs);
             if ($validator->fails()) {
                 // 如果有错误，提示第一条
-                return $this->resData(400,$validator->errors()->all()[0].'...');
+                return $this->resData(402,$validator->errors()->all()[0].'...');
             }
             $insert = ['name'=>$req->input('name'),'url'=>$req->input('url'),'label'=>$req->input('label'),'icon'=>$req->input('icon'),'display'=>$req->input('display') === true ? 1 : 0,'sort'=>$req->input('sort')];
             $detail = Menu::create($insert);
@@ -152,7 +152,7 @@ class MenuController extends ResponseController
             $validator->setAttributeNames($attrs);
             if ($validator->fails()) {
                 // 如果有错误，提示第一条
-                return $this->resData(400,$validator->errors()->all()[0].'...');
+                return $this->resData(402,$validator->errors()->all()[0].'...');
             }
             $id = $req->input('id');
             $update = ['name'=>$req->input('name'),'url'=>$req->input('url'),'label'=>$req->input('label'),'icon'=>$req->input('icon'),'display'=>$req->input('display') === true ? 1 : 0,'sort'=>$req->input('sort')];
@@ -179,7 +179,7 @@ class MenuController extends ResponseController
             $validator->setAttributeNames($attrs);
             if ($validator->fails()) {
                 // 如果有错误，提示第一条
-                return $this->resData(400,$validator->errors()->all()[0].'...');
+                return $this->resData(402,$validator->errors()->all()[0].'...');
             }
             $menu_id = $req->input('menu_id');
             $detail = Menu::findOrFail($menu_id);
@@ -202,7 +202,7 @@ class MenuController extends ResponseController
             $validator->setAttributeNames($attrs);
             if ($validator->fails()) {
                 // 如果有错误，提示第一条
-                return $this->resData(400,$validator->errors()->all()[0].'...');
+                return $this->resData(402,$validator->errors()->all()[0].'...');
             }
             $menu_id = $req->input('menu_id');
             $info = Menu::findOrFail($menu_id);

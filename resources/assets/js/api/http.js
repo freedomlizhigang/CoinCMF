@@ -88,7 +88,7 @@ instance.interceptors.response.use(
                     }, 1000);
                     break;
                 // 402没有接口权限
-                case 404:
+                case 402:
                     iView.Message.error(res.data.msg);
                     break;
                 // 403 token过期

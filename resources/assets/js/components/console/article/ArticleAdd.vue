@@ -1,6 +1,6 @@
 <template>
   <div class="article-add">
-    <Form :model="formItem" ref="formItem" :inline="true">
+    <Form :model="formItem" ref="formItem" :inline="true" action="javascript:void(0)">
       <FormItem label="Input">
           <Input v-model="formItem.input" placeholder="Enter something..."></Input>
       </FormItem>

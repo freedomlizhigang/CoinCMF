@@ -1,5 +1,27 @@
 ### 计划
 
+1. 部门管理
+
+2. 角色管理，权限修改
+
+3. 用户管理，个人资料修改
+
+4. 删除不常用功能，整理文件夹
+
+5. 系统设置
+
+6. 日志
+
+7. 分类
+
+8. 栏目
+
+9. 文章
+
+10. 广告位，广告
+
+
+
 字段类型，text单行文本，textarea多行文本，ueditor富文本，number数字，password密码，thumb单图，album多图，datetime时间，box选项（radio单选，checkbox多选，select下拉框，multiple多选列表框），files文件，linkage联动菜单（分类，radio单选，checkbox多选，select下拉框，multiple多选列表框）
 
 模型生成的表单页面，预览效果

@@ -3,7 +3,7 @@
     <Row>
         <Col :xs="{ span: 18, offset: 3 }" :md="{ span: 12, offset: 6 }">
             <h2 class="login-header"><img src="/img/login_logo.png" width="70" alt=""></h2>
-            <Form :model="user" ref="user" :rules="ruleInline">
+            <Form :model="user" ref="user" :rules="ruleInline" action="javascript:void(0)">
                 <FormItem prop="name">
                     <Input v-model="user.name" placeholder="请输入用户名..."></Input>
                 </FormItem>

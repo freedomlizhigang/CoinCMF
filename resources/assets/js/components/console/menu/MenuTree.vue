@@ -11,7 +11,7 @@
                 <div class="menutree-border"></div>
             </Col>
             <Col :xs="24" :sm="16">
-                <Form ref="menuData" :model="menuData" :rules="menuValidate">
+                <Form ref="menuData" :model="menuData" :rules="menuValidate" action="javascript:void(0)">
                     <FormItem label="菜单名称" prop="name">
                         <Input v-model="menuData.name" placeholder="请输入权限菜单名称..."></Input>
                     </FormItem>

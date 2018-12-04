@@ -530,7 +530,7 @@ function (res) {
                 }, 1000);
                 break;
             // 402没有接口权限
-            case 404:
+            case 402:
                 __WEBPACK_IMPORTED_MODULE_3_iview___default.a.Message.error(res.data.msg);
                 break;
             // 403 token过期
@@ -55908,9 +55908,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__login_index__ = __webpack_require__(56);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__article_index__ = __webpack_require__(54);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__menu_index__ = __webpack_require__(57);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__section_index__ = __webpack_require__(115);
 /**
 * api接口统一管理
 */
+
 
 
 
@@ -55921,7 +55923,8 @@ var api = {
     common: __WEBPACK_IMPORTED_MODULE_1__common_index__["a" /* default */],
     login: __WEBPACK_IMPORTED_MODULE_2__login_index__["a" /* default */],
     article: __WEBPACK_IMPORTED_MODULE_3__article_index__["a" /* default */],
-    menu: __WEBPACK_IMPORTED_MODULE_4__menu_index__["a" /* default */]
+    menu: __WEBPACK_IMPORTED_MODULE_4__menu_index__["a" /* default */],
+    section: __WEBPACK_IMPORTED_MODULE_5__section_index__["a" /* default */]
 };
 
 /* harmony default export */ __webpack_exports__["a"] = (api);
@@ -56123,6 +56126,9 @@ if (token) {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__components_console_cate_CateList_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_7__components_console_cate_CateList_vue__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__components_console_menu_MenuTree_vue__ = __webpack_require__(88);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__components_console_menu_MenuTree_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_8__components_console_menu_MenuTree_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__components_console_section_SectionList_vue__ = __webpack_require__(116);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__components_console_section_SectionList_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_9__components_console_section_SectionList_vue__);
+
 
 
 
@@ -56173,6 +56179,13 @@ if (token) {
     path: 'art/add',
     name: 'art-add',
     component: __WEBPACK_IMPORTED_MODULE_6__components_console_article_ArticleAdd_vue___default.a,
+    meta: { requiresAuth: true }
+  },
+  // 部门列表
+  {
+    path: 'section/index',
+    name: 'section-index',
+    component: __WEBPACK_IMPORTED_MODULE_9__components_console_section_SectionList_vue___default.a,
     meta: { requiresAuth: true }
   },
   // 权限菜单
@@ -87192,7 +87205,8 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     ref: "user",
     attrs: {
       "model": _vm.user,
-      "rules": _vm.ruleInline
+      "rules": _vm.ruleInline,
+      "action": "javascript:void(0)"
     }
   }, [_c('FormItem', {
     attrs: {
@@ -87296,7 +87310,8 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     ref: "formItem",
     attrs: {
       "model": _vm.formItem,
-      "inline": true
+      "inline": true,
+      "action": "javascript:void(0)"
     }
   }, [_c('FormItem', [_c('Select', {
     style: ({
@@ -87368,7 +87383,8 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     ref: "formItem",
     attrs: {
       "model": _vm.formItem,
-      "inline": true
+      "inline": true,
+      "action": "javascript:void(0)"
     }
   }, [_c('FormItem', {
     attrs: {
@@ -87430,7 +87446,8 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     ref: "formItem",
     attrs: {
       "model": _vm.formItem,
-      "inline": true
+      "inline": true,
+      "action": "javascript:void(0)"
     }
   }, [_c('FormItem', [_c('Select', {
     style: ({
@@ -87722,7 +87739,8 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     ref: "menuData",
     attrs: {
       "model": _vm.menuData,
-      "rules": _vm.menuValidate
+      "rules": _vm.menuValidate,
+      "action": "javascript:void(0)"
     }
   }, [_c('FormItem', {
     attrs: {
@@ -91591,6 +91609,347 @@ module.exports = function(module) {
 
 module.exports = __webpack_require__(22);
 
+
+/***/ }),
+/* 108 */,
+/* 109 */,
+/* 110 */,
+/* 111 */,
+/* 112 */,
+/* 113 */,
+/* 114 */,
+/* 115 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__http__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_qs__ = __webpack_require__(12);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_qs___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_qs__);
+/**
+  * 部门 接口的统一出口
+  */
+ // 导入http中创建的axios实例
+ // 根据需求是否导入qs模块，把请求字段直接映射过来
+
+
+// 接口请求地址
+var api = '/c-api/';
+
+var section = {
+    // 树形列表
+    list: function list(params) {
+        return __WEBPACK_IMPORTED_MODULE_0__http__["a" /* default */].get(api + 'section/list', { params: params });
+    },
+
+    // 添加
+    create: function create(params) {
+        return __WEBPACK_IMPORTED_MODULE_0__http__["a" /* default */].post(api + 'section/create', __WEBPACK_IMPORTED_MODULE_1_qs___default.a.stringify(params));
+    },
+
+    // 修改
+    edit: function edit(params) {
+        return __WEBPACK_IMPORTED_MODULE_0__http__["a" /* default */].post(api + 'section/edit', __WEBPACK_IMPORTED_MODULE_1_qs___default.a.stringify(params));
+    },
+
+    // 修改状态
+    status: function status(params) {
+        return __WEBPACK_IMPORTED_MODULE_0__http__["a" /* default */].post(api + 'section/status', __WEBPACK_IMPORTED_MODULE_1_qs___default.a.stringify(params));
+    },
+
+    // 删除
+    remove: function remove(params) {
+        return __WEBPACK_IMPORTED_MODULE_0__http__["a" /* default */].post(api + 'section/remove', __WEBPACK_IMPORTED_MODULE_1_qs___default.a.stringify(params));
+    }
+};
+
+// 导出接口
+/* harmony default export */ __webpack_exports__["a"] = (section);
+
+/***/ }),
+/* 116 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var Component = __webpack_require__(1)(
+  /* script */
+  __webpack_require__(117),
+  /* template */
+  __webpack_require__(118),
+  /* scopeId */
+  null,
+  /* cssModules */
+  null
+)
+Component.options.__file = "D:\\wwwroot\\XYCMF\\resources\\assets\\js\\components\\console\\section\\SectionList.vue"
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
+if (Component.options.functional) {console.error("[vue-loader] SectionList.vue: functional components are not supported with templates, they should use render functions.")}
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-0156f2ee", Component.options)
+  } else {
+    hotAPI.reload("data-v-0156f2ee", Component.options)
+  }
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 117 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    name: 'section-list',
+    data: function data() {
+        var _this = this;
+
+        return {
+            formItem: {
+                'key': ''
+            },
+            list: [{
+                type: 'selection',
+                width: 60,
+                align: 'center',
+                fixed: 'left'
+            }, {
+                title: 'Id',
+                key: 'id',
+                width: 80,
+                fixed: 'left'
+            }, {
+                title: '名称',
+                minWidth: 300,
+                key: 'name',
+                render: function render(h, params) {
+                    return h('div', [h('Input', {
+                        props: {
+                            value: params.row.name
+                        },
+                        on: {
+                            'on-blur': function onBlur(value) {
+                                _this.editName(params.row.id, value.target.value);
+                            }
+                        }
+                    }, '排序')]);
+                }
+            }, {
+                title: '状态',
+                key: 'status',
+                width: 150,
+                render: function render(h, params) {
+                    return h('div', [h('i-switch', {
+                        props: {
+                            value: params.row.status //控制开关的打开或关闭状态，官网文档属性是value
+                        },
+                        on: {
+                            'on-change': function onChange(value) {
+                                _this.changeStatus(params.row.id, value);
+                            }
+                        }
+                    }, '开关')]);
+                }
+            }, {
+                title: '操作',
+                key: 'action',
+                width: 80,
+                align: 'left',
+                render: function render(h, params) {
+                    return h('div', [h('Button', {
+                        props: {
+                            type: 'error',
+                            size: 'small'
+                        },
+                        on: {
+                            click: function click() {
+                                _this.remove(params.row.id);
+                            }
+                        }
+                    }, '删除')]);
+                }
+            }],
+            tablelist: []
+        };
+    },
+
+    // 计算
+    computed: {
+        /*formItem2: function () {
+          console.log(this.formItem.input + ' ' + this.formItem.inputss);
+          return this.formItem.input + ' ' + this.formItem.inputss;
+        }*/
+    },
+    // 监听
+    watch: {
+        // 尝试监听一个对象
+        /*formItem:{
+          handler(newName, oldName) {
+            this.formItem.inputss = newName.input;
+          },
+          deep: true
+        }*/
+    },
+    created: function created() {
+        // 取数据
+        this.getTableList();
+    },
+    methods: {
+        getTableList: function getTableList() {
+            var _this2 = this;
+
+            this.$api.section.list().then(function (res) {
+                if (res.code == 200) {
+                    _this2.tablelist = res.data;
+                    _this2.$Message.success(res.msg);
+                } else {
+                    _this2.$Message.error(res.msg);
+                }
+            });
+            return;
+        },
+        editName: function editName(index, value) {
+            var _this3 = this;
+
+            this.$api.section.edit({ section_id: index, name: value }).then(function (res) {
+                if (res.code == 200) {
+                    _this3.$Message.success(res.msg);
+                } else {
+                    _this3.$Message.error(res.msg);
+                }
+            });
+        },
+        remove: function remove(index) {
+            var _this4 = this;
+
+            this.$api.section.remove({ section_id: index }).then(function (res) {
+                if (res.code == 200) {
+                    _this4.$Message.success(res.msg);
+                }
+            });
+        },
+        changeStatus: function changeStatus(index, value) {
+            var _this5 = this;
+
+            this.$api.section.status({ section_id: index, status: value }).then(function (res) {
+                if (res.code == 200) {
+                    _this5.$Message.success(res.msg);
+                } else {
+                    _this5.$Message.error(res.msg);
+                }
+            });
+        },
+        // 筛选
+        renderTable: function renderTable(name) {
+            var _this6 = this;
+
+            var ps = { 'key': this.formItem.key };
+            console.log(ps);
+            this.$api.section.list(ps).then(function (res) {
+                if (res.code == 200) {
+                    _this6.tablelist = res.data;
+                    _this6.$Message.success(res.msg);
+                } else {
+                    _this6.$Message.error(res.msg);
+                }
+            });
+            return;
+        }
+    }
+});
+
+/***/ }),
+/* 118 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
+    staticClass: "section-list"
+  }, [_c('Row', [_c('Col', {
+    attrs: {
+      "xs": 24,
+      "sm": 12
+    }
+  }, [_c('Form', {
+    ref: "formItem",
+    attrs: {
+      "model": _vm.formItem,
+      "inline": true,
+      "action": "javascript:void(0)"
+    }
+  }, [_c('FormItem', [_c('Input', {
+    attrs: {
+      "placeholder": "输入关键词查找..."
+    },
+    model: {
+      value: (_vm.formItem.key),
+      callback: function($$v) {
+        _vm.$set(_vm.formItem, "key", $$v)
+      },
+      expression: "formItem.key"
+    }
+  })], 1), _vm._v(" "), _c('FormItem', [_c('Button', {
+    attrs: {
+      "type": "primary"
+    },
+    on: {
+      "click": function($event) {
+        _vm.renderTable('formItem')
+      }
+    }
+  }, [_vm._v("筛选")])], 1)], 1)], 1), _vm._v(" "), _c('Col', {
+    attrs: {
+      "xs": 24,
+      "sm": 12
+    }
+  }, [_c('Button', {
+    staticClass: "f-r",
+    attrs: {
+      "type": "success"
+    }
+  }, [_vm._v("添加部门")])], 1)], 1), _vm._v(" "), _c('Table', {
+    ref: "selection",
+    attrs: {
+      "columns": _vm.list,
+      "data": _vm.tablelist
+    }
+  })], 1)
+},staticRenderFns: []}
+module.exports.render._withStripped = true
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+     require("vue-hot-reload-api").rerender("data-v-0156f2ee", module.exports)
+  }
+}
 
 /***/ })
 /******/ ]);
