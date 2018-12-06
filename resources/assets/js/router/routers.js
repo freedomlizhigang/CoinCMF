@@ -9,6 +9,7 @@ import CateList from '.././components/console/cate/CateList.vue'
 import MenuTree from '.././components/console/menu/MenuTree.vue'
 import SectionList from '.././components/console/section/SectionList.vue'
 import RoleList from '.././components/console/role/RoleList.vue'
+import AdminList from '.././components/console/admin/AdminList.vue'
 
 export default [
     // 登录
@@ -50,6 +51,13 @@ export default [
               path: 'art/add',
               name: 'art-add',
               component: ArticleAdd,
+              meta: { requiresAuth: true }
+            },
+            // 用户
+            {
+              path: 'admin/index',
+              name: 'admin-index',
+              component: AdminList,
               meta: { requiresAuth: true }
             },
             // 角色

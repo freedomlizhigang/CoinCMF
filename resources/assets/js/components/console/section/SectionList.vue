@@ -15,9 +15,9 @@
             <Button @click="showModel()" type="success" class="f-r">添加部门</Button>
         </Col>
     </Row>
-    <Table :columns="list" ref="selection" :data="tablelist"></Table>
+    <Table :columns="list" ref="selection" :data="tablelist" :loading="dataloading"></Table>
     <!-- 添加的弹出 -->
-    <Modal v-model="showModalStatus" title="添加部门" @on-ok="createSection">
+    <Modal v-model="showModalStatus" title="添加部门" @on-ok="createSection('sectionValidate')" :loading="loading">
         <Form :model="section" ref="sectionValidate" :rules="sectionValidate" action="javascript:void(0)">
             <FormItem label="部门名称" prop="name">
                 <Input v-model="section.name" placeholder="输入部门名称..."></Input>
@@ -38,8 +38,10 @@ export default {
     name: 'section-list',
     data () {
         return {
+            loading: true,
+            dataloading: true,
             formItem:{
-            'key':'',
+                'key':'',
             },
             list: [
                 {
@@ -128,14 +130,11 @@ export default {
     methods:{
         getTableList:function(){
           this.$api.section.list().then(res=>{
+            this.dataloading = false;
             if(res.code == 200)
             {
                 this.tablelist = res.data;
                 this.$Message.success(res.msg);
-            }
-            else
-            {
-                this.$Message.error(res.msg);
             }
           });
           return;
@@ -145,18 +144,25 @@ export default {
             this.showModalStatus = !this.showModalStatus;
         },
         // 添加
-        createSection(){
-            this.$api.section.create({name:this.section.name,status:this.section.status}).then(res=>{
-                if(res.code == 200)
-                {
-                    this.section.name = '';
-                    this.getTableList();
+        createSection(name){
+            this.$refs[name].validate((valid) => {
+                if (valid) {
+                    this.$api.section.create({name:this.section.name,status:this.section.status}).then(res=>{
+                        if(res.code == 200)
+                        {
+                            this.section.name = '';
+                            this.getTableList();
+                        }
+                        this.loading = false;
+                        this.$nextTick(()=>{this.loading = true;});
+                        this.showModalStatus = !this.showModalStatus;
+                    });
+                } else {
+                    this.$Message.error('请检查输入的信息是否正确！');
+                    this.loading = false
+                    this.$nextTick(() => {this.loading = true;});
                 }
-                else
-                {
-                    this.$Message.error(res.msg);
-                }
-            });
+            })
         },
         // 修改名称
         editName:function(index,value){
@@ -164,10 +170,6 @@ export default {
                 if(res.code == 200)
                 {
                     this.$Message.success(res.msg);
-                }
-                else
-                {
-                    this.$Message.error(res.msg);
                 }
             });
         },
@@ -188,28 +190,21 @@ export default {
                 {
                     this.$Message.success(res.msg);
                 }
-                else
-                {
-                    this.$Message.error(res.msg);
-                }
             });
         },
         // 筛选
         renderTable:function(name) {
-          var ps = {'key':this.formItem.key};
-          console.log(ps)
-          this.$api.section.list(ps).then(res=>{
-            if(res.code == 200)
-            {
-                this.tablelist = res.data;
-                this.$Message.success(res.msg);
-            }
-            else
-            {
-                this.$Message.error(res.msg);
-            }
-          });
-          return;
+            this.dataloading = true;
+            var ps = {'key':this.formItem.key};
+            this.$api.section.list(ps).then(res=>{
+                this.dataloading = false;
+                if(res.code == 200)
+                {
+                    this.tablelist = res.data;
+                    this.$Message.success(res.msg);
+                }
+            });
+            return;
         }
     },
 }

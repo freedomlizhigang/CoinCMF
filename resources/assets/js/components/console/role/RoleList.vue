@@ -15,9 +15,9 @@
             <Button @click="showModel()" type="success" class="f-r">添加角色</Button>
         </Col>
     </Row>
-    <Table :columns="list" ref="roleList" :data="tablelist"></Table>
+    <Table :columns="list" ref="roleList" :data="tablelist" :loading="dataloading"></Table>
     <!-- 添加的弹出 -->
-    <Modal v-model="showModalStatus" title="添加角色" @on-ok="createSection">
+    <Modal v-model="showModalStatus" title="添加角色" @on-ok="createRole('roleValidate')" :loading="loading">
         <Form :model="role" ref="roleValidate" :rules="roleValidate" action="javascript:void(0)">
             <FormItem label="角色名称" prop="name">
                 <Input v-model="role.name" placeholder="输入角色名称..."></Input>
@@ -31,7 +31,7 @@
         </Form>
     </Modal>
     <!-- 权限的弹出 -->
-    <Modal v-model="showPrivStatus" title="修改权限" @on-ok="updatePriv">
+    <Modal v-model="showPrivStatus" title="修改权限" @on-ok="updatePriv" :loading="loading">
         <Tree :data="privTree" ref="privSelect" show-checkbox multiple></Tree>
     </Modal>
   </div>
@@ -42,6 +42,8 @@ export default {
     name: 'role-list',
     data () {
         return {
+            loading: true,
+            dataloading: true,
             role_id:0,
             formItem:{
                 'key':'',
@@ -139,7 +141,7 @@ export default {
                     { required: true, message: '角色名称必须填写', trigger: 'blur' }
                 ]
             },
-            privTree:[]
+            privTree:[],
         }
     },
     created: function () {
@@ -149,14 +151,11 @@ export default {
     methods:{
         getTableList:function(){
           this.$api.role.list().then(res=>{
+            this.dataloading = false;
             if(res.code == 200)
             {
                 this.tablelist = res.data;
                 this.$Message.success(res.msg);
-            }
-            else
-            {
-                this.$Message.error(res.msg);
             }
           });
           return;
@@ -175,25 +174,28 @@ export default {
                     this.privTree = res.data;
                     this.$Message.success(res.msg);
                 }
-                else
-                {
-                    this.$Message.error(res.msg);
-                }
             });
         },
         // 添加
-        createSection(){
-            this.$api.role.create({name:this.role.name,status:this.role.status}).then(res=>{
-                if(res.code == 200)
-                {
-                    this.role.name = '';
-                    this.getTableList();
+        createRole(name){
+            this.$refs[name].validate((valid) => {
+                if (valid) {
+                    this.$api.role.create({name:this.role.name,status:this.role.status}).then(res=>{
+                        if(res.code == 200)
+                        {
+                            this.showModalStatus = !this.showModalStatus;
+                            this.role.name = '';
+                            this.getTableList();
+                        }
+                    });
+                    this.loading = false
+                    this.$nextTick(() => {this.loading = true;});
+                } else {
+                    this.$Message.error('请检查输入的信息是否正确！');
+                    this.loading = false
+                    this.$nextTick(() => {this.loading = true;});
                 }
-                else
-                {
-                    this.$Message.error(res.msg);
-                }
-            });
+            })
         },
         // 修改名称
         editName:function(index,value){
@@ -201,10 +203,6 @@ export default {
                 if(res.code == 200)
                 {
                     this.$Message.success(res.msg);
-                }
-                else
-                {
-                    this.$Message.error(res.msg);
                 }
             });
         },
@@ -225,27 +223,20 @@ export default {
                 {
                     this.$Message.success(res.msg);
                 }
-                else
-                {
-                    this.$Message.error(res.msg);
-                }
             });
         },
         // 筛选
         renderTable:function(name) {
-          var ps = {'key':this.formItem.key};
-          console.log(ps)
-          this.$api.role.list(ps).then(res=>{
-            if(res.code == 200)
-            {
-                this.tablelist = res.data;
-                this.$Message.success(res.msg);
-            }
-            else
-            {
-                this.$Message.error(res.msg);
-            }
-          });
+            this.dataloading = true;
+            var ps = {'key':this.formItem.key};
+            this.$api.role.list(ps).then(res=>{
+                this.dataloading = false;
+                if(res.code == 200)
+                {
+                    this.tablelist = res.data;
+                    this.$Message.success(res.msg);
+                }
+            });
           return;
         },
         updatePriv:function(){
@@ -258,8 +249,13 @@ export default {
             this.$api.role.updatepriv({role_id:this.role_id,menu_id:menu_id}).then(res=>{
                 if(res.code == 200)
                 {
+                    this.showPrivStatus = !this.showPrivStatus;
+                    this.role.name = '';
                     this.$Message.success(res.msg);
                 }
+                this.loading = false
+                this.$nextTick(() => {this.loading = true;});
+                this.showPrivStatus = !this.showPrivStatus;
             });
         },
     },

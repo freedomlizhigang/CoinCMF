@@ -49,6 +49,8 @@ class LoginController extends ResponseController
                 if ($user->password != Func::makepwd($pwd,$user->crypt)) {
                     return $this->resData(402,'密码不正确...');
                 }
+                // 更新一些信息
+                Admin::where('id',$user->id)->update(['lasttime'=>date('Y-m-d H:i:s'),'lastip'=>$req->ip()]);
                 $token = md5(md5($user->id.'-SMZ-'.$user->name));
                 $allRole = RoleUser::where('user_id',$user->id)->pluck('role_id')->unique()->toArray();
                 $allPriv = Priv::whereIn('role_id',$allRole)->pluck('label')->unique()->toArray();

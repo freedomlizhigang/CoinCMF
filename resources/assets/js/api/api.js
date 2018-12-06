@@ -8,6 +8,7 @@ import article from './article/index'
 import menu from './menu/index'
 import section from './section/index'
 import role from './role/index'
+import admin from './admin/index'
 
 const api = {
     common,
@@ -16,6 +17,7 @@ const api = {
     menu,
     section,
     role,
+    admin,
 }
 
 export default api

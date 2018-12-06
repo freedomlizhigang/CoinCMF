@@ -1,71 +1,89 @@
 <?php
-/*
- * @package [App\Http\Controllers\Admin]
- * @author [李志刚]
- * @createdate  [2018-06-26]
- * @copyright [2018-2020 衡水希夷信息技术工作室]
- * @version [1.0.0]
- * @directions 管理员管理
- *
- */
+
 namespace App\Http\Controllers\Admin;
 
 use App\Customize\Func;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\AdminRequest;
 use App\Models\Console\Admin;
-use App\Models\Console\Role;
 use App\Models\Console\RoleUser;
-use App\Models\Console\Section;
-use Carbon\Carbon;
 use DB;
 use Illuminate\Http\Request;
+use Validator;
 
-class AdminController extends Controller
+class AdminController extends ResponseController
 {
-    public function getIndex(Request $req)
+    /**
+     * 用户列表
+     * @return [type] [description]
+     */
+    public function getList(Request $req)
     {
         try {
-        	$title = '用户列表';
-            $key = isset($req->q) ? $req->q : 0;
-            $list = Admin::with(['section','role'])->where(function($q) use($key){
-                        if($key)
-                        {
-                            $q->where('name','like','%'.$key.'%')->orWhere('realname','like','%'.$key.'%');
-                        }
-                    })->paginate(10);
-            return view('admin.console.admins.index',compact('list','title','key'));
+            // 搜索关键字
+            $key = $req->input('key','');
+            $list = Admin::where(function($q) use($key){
+                    if ($key != '') {
+                        $q->where('name','like','%'.$key.'%');
+                    }
+                })->orderBy('id','asc')->get();
+            return $this->resData(200,'获取用户数据成功...',$list);
         } catch (\Throwable $e) {
-            return view('errors.500');
+            return $this->anyErrors(400,'获取数据失败，请稍后再试！',[]);
         }
     }
-    // 添加用户
-    public function getAdd()
+    // 查看单条信息
+    public function postDetail(Request $req)
     {
         try {
-            $title = '添加用户';
-            $section = Section::where('status',1)->get();
-            $rolelist = Role::where('status',1)->get();
-            return view('admin.console.admins.add',compact('title','rolelist','section'));
+            $validator = Validator::make($req->input(), [
+                'admin_id' => 'required|integer',
+            ]);
+             $attrs = array(
+                'admin_id' => '用户ID',
+            );
+            $validator->setAttributeNames($attrs);
+            if ($validator->fails()) {
+                // 如果有错误，提示第一条
+                return $this->resData(402,$validator->errors()->all()[0].'...');
+            }
+            $admin = Admin::findOrFail($req->input('admin_id'));
+            $admin->section_id = $admin->section->id;
+            $admin->role_ids = $admin->role->pluck('id');
+            return $this->resData(200,'查询成功...',$admin);
         } catch (\Throwable $e) {
-            return view('errors.500');
+            return $this->resData(400,'查询失败，请稍后再试...');
         }
     }
-    public function postAdd(AdminRequest $req)
+    // 创建用户
+    public function postCreate(Request $req)
     {
-        // 添加，事务
-        DB::beginTransaction();
         try {
-            $data = $req->input('data');
-            unset($data['password_confirmation']);
+            $validator = Validator::make($req->input(), [
+                'section_id' => 'required|integer',
+                'name' => 'required|max:255',
+                'realname' => 'required|max:255',
+                'phone' => 'nullable|regex:/^1[3456789]\d{9}$/',
+                'email' => 'nullable|email',
+                'password' => 'confirmed|min:6|max:15|alpha_dash',
+            ]);
+             $attrs = array(
+                'section_id' => '部门',
+                'name' => '名称',
+                'realname' => '姓名',
+                'phone' => '手机号',
+                'email' => '邮箱',
+                'password' => '密码',
+            );
+            $validator->setAttributeNames($attrs);
+            if ($validator->fails()) {
+                // 如果有错误，提示第一条
+                return $this->resData(402,$validator->errors()->all()[0].'...');
+            }
             $crypt = str_random(10);
-            $pwd = Func::makepwd($req->input('data.password'),$crypt);
-            $data['password'] = $pwd;
-            $data['crypt'] = $crypt;
-            $data['lastip'] = $req->ip();
-            $data['lasttime'] = Carbon::now();
-            $admin = Admin::create($data);
-            $rids = $req->role_id;
+            $pwd = Func::makepwd($req->input('password'),$crypt);
+            $create = ['section_id'=>$req->input('section_id'),'name'=>$req->input('name'),'realname'=>$req->input('realname'),'phone'=>$req->input('phone'),'email'=>$req->input('email'),'password'=>$pwd,'crypt'=>$crypt];
+            $admin = Admin::create($create);
+            $rids = $req->input('role_ids');
             if (is_array($rids)) {
                 $rdata = [];
                 foreach ($rids as $k) {
@@ -73,148 +91,133 @@ class AdminController extends Controller
                 }
             }
             RoleUser::insert($rdata);
-            // 没出错，提交事务
-            DB::commit();
-            return $this->adminJson(1,'添加用户成功！',url('/console/admin/index'));
+            return $this->resData(200,'创建用户成功...');
         } catch (\Throwable $e) {
-            // 出错回滚
-            DB::rollBack();
-            return $this->adminJson(0,'添加失败，请稍后再试！');
+            return $this->resData(400,'创建用户失败，请稍后再试...');
         }
     }
-    // 修改资料
-    public function getEdit($uid)
+    // 修改名称
+    public function postEditInfo(Request $req)
     {
-        try{
-            $title = '修改资料';
-            $rolelist = Role::where('status',1)->get();
-            $section = Section::where('status',1)->get();
-            $info = Admin::with('role')->findOrFail($uid);
-            $rids = '';
-            foreach ($info->role as $r) {
-                $rids .= "'".$r->id."',";
-            }
-            return view('admin.console.admins.edit',compact('title','info','rolelist','section','rids'));
-        } catch (\Throwable $e) {
-            return view('errors.500');
-        }
-    }
-    public function postEdit(AdminRequest $req,$uid)
-    {
-        // 添加，事务
         DB::beginTransaction();
         try {
-            $data = $req->input('data');
-            Admin::where('id',$uid)->update($data);
-            $rids = $req->role_id;
+            $validator = Validator::make($req->input(), [
+                'admin_id' => 'required|integer',
+                'section_id' => 'required|integer',
+                'realname' => 'required|max:255',
+                'phone' => 'nullable|regex:/^1[3456789]\d{9}$/',
+                'email' => 'nullable|email',
+            ]);
+             $attrs = array(
+                'admin_id' => '用户ID',
+                'section_id' => '部门',
+                'realname' => '姓名',
+                'phone' => '手机号',
+                'email' => '邮箱',
+            );
+            $validator->setAttributeNames($attrs);
+            if ($validator->fails()) {
+                // 如果有错误，提示第一条
+                return $this->resData(402,$validator->errors()->all()[0].'...');
+            }
+            $id = $req->input('admin_id');
+            $data = ['section_id'=>$req->input('section_id'),'realname'=>$req->input('realname'),'phone'=>$req->input('phone'),'email'=>$req->input('email')];
+            Admin::where('id',$id)->update($data);
+            $rids = $req->input('role_ids');
             // 先删除再添加
-            RoleUser::where('user_id',$uid)->delete();
+            RoleUser::where('user_id',$id)->delete();
             if (is_array($rids)) {
                 $rdata = [];
                 foreach ($rids as $k) {
-                    $rdata[] = ['role_id'=>$k,'user_id'=>$uid];
+                    $rdata[] = ['role_id'=>$k,'user_id'=>$id];
                 }
+                RoleUser::insert($rdata);
             }
-            RoleUser::insert($rdata);
-            // 没出错，提交事务
             DB::commit();
-            return $this->adminJson(1,'修改用户成功！');
+            return $this->resData(200,'更新用户名称成功...');
         } catch (\Throwable $e) {
-            // 出错回滚
-            DB::rollBack();
-            return $this->adminJson(0,'修改失败，请稍后再试！');
+            DB::rollback();
+            return $this->resData(400,'更新用户名称失败，请稍后再试...');
         }
     }
     // 修改密码
-    public function getPwd($uid)
+    public function postEditPassword(Request $req)
     {
+        DB::beginTransaction();
         try {
-            $title = '修改密码';
-            // 拼接返回用的url参数
-            $info = Admin::findOrFail($uid);
-            return view('admin.console.admins.pwd',compact('title','info'));
+            $validator = Validator::make($req->input(), [
+                'admin_id' => 'required|integer',
+                'password' => 'confirmed|min:6|max:15|alpha_dash',
+            ]);
+             $attrs = array(
+                'admin_id' => '用户ID',
+                'password' => '密码',
+            );
+            $validator->setAttributeNames($attrs);
+            if ($validator->fails()) {
+                // 如果有错误，提示第一条
+                return $this->resData(402,$validator->errors()->all()[0].'...');
+            }
+            $id = $req->input('admin_id');
+            $crypt = str_random(10);
+            $pwd = Func::makepwd($req->input('password'),$crypt);
+            $data = ['password'=>$pwd,'crypt'=>$crypt];
+            Admin::where('id',$id)->update($data);
+            DB::commit();
+            return $this->resData(200,'更新用户密码成功...');
         } catch (\Throwable $e) {
-            return view('errors.500');
+            DB::rollback();
+            return $this->resData(400,'更新用户密码失败，请稍后再试...');
         }
     }
-    public function postPwd(AdminRequest $req,$uid)
+    // 修改状态
+    public function postStatus(Request $req)
     {
         try {
-            $crypt = str_random(10);
-            $pwd = Func::makepwd($req->input('data.password'),$crypt);
-            Admin::where('id',$uid)->update(['password'=>$pwd,'crypt'=>$crypt]);
-            return $this->adminJson(1,'修改密码成功！');
+            $validator = Validator::make($req->input(), [
+                'admin_id' => 'required|integer',
+                'status' => 'required|in:true,false',
+            ]);
+             $attrs = array(
+                'admin_id' => '用户ID',
+                'status' => '状态',
+            );
+            $validator->setAttributeNames($attrs);
+            if ($validator->fails()) {
+                // 如果有错误，提示第一条
+                return $this->resData(402,$validator->errors()->all()[0].'...');
+            }
+            $status = $req->input('status') == 'true' ? 1 : 0;
+            Admin::where('id',$req->input('admin_id'))->update(['status'=>$status]);
+            return $this->resData(200,'更新用户状态成功...');
         } catch (\Throwable $e) {
-            return $this->adminJson(0,'修改密码失败！');
+            return $this->resData(400,'更新用户状态失败，请稍后再试...');
         }
     }
     // 删除用户
-    public function getDel($uid)
+    public function postRemove(Request $req)
     {
+        DB::beginTransaction();
         try {
-            if($uid != 1)
-            {
-                Admin::destroy($uid);
-                RoleUser::where('user_id',$uid)->delete();
-                return back()->with('message', '删除用户成功！');
+            $validator = Validator::make($req->input(), [
+                'admin_id' => 'required|integer',
+            ]);
+             $attrs = array(
+                'admin_id' => '用户ID',
+            );
+            $validator->setAttributeNames($attrs);
+            if ($validator->fails()) {
+                // 如果有错误，提示第一条
+                return $this->resData(402,$validator->errors()->all()[0].'...');
             }
-            else
-            {
-                return back()->with('message', '超级管理员不能被删除！');
-            }
+            $id = $req->input('admin_id');
+            Admin::destroy($id);
+            RoleUser::where('user_id',$id)->delete();
+            DB::commit();
+            return $this->resData(200,'删除用户成功...');
         } catch (\Throwable $e) {
-            return back()->with('message', '删除失败！');
-        }
-    }
-
-    // 个人修改资料
-    public function getMyedit()
-    {
-        try {
-            $title = '修改个人资料';
-            $info = Admin::with('role')->findOrFail(session('console')->id);
-            return view('admin.console.admins.myedit',compact('title','info'));
-        } catch (\Throwable $e) {
-            return view('errors.500');
-        }
-    }
-    public function postMyedit(AdminRequest $request)
-    {
-        try {
-            $data = $request->input('datas');
-            Admin::where('id',session('console')->id)->update($data);
-            return $this->adminJson(1,'修改个人资料成功！');
-        } catch (\Throwable $e) {
-            return $this->adminJson(0,'修改个人资料失败！');
-        }
-    }
-    // 修改密码
-    public function getMypwd()
-    {
-        try {
-            $title = '修改密码';
-            $info = Admin::findOrFail(session('console')->id);
-            return view('admin.console.admins.mypwd',compact('title','info'));
-        } catch (\Throwable $e) {
-            return view('errors.500');
-        }
-    }
-    public function postMypwd(AdminRequest $req)
-    {
-        try {
-            $crypt = str_random(10);
-            $pwd = Func::makepwd($req->input('data.password'),$crypt);
-            $res = Admin::where('id',session('console')->id)->update(['password'=>$pwd,'crypt'=>$crypt]);
-            if ($res) {
-                \Session::put('console',null);
-                return $this->adminJson(1,'修改密码成功，请登陆登录！',url('/console/login'));
-            }
-            else
-            {
-                return $this->adminJson(0,'修改密码失败！');
-            }
-        } catch (\Throwable $e) {
-            return $this->adminJson(0,'修改密码失败！');
+            DB::rollback();
+            return $this->resData(400,'删除用户失败，请稍后再试...');
         }
     }
 }

@@ -736,7 +736,7 @@
 	},
 	"console":
 	{
-		"height": 214.0,
+		"height": 416.0,
 		"history":
 		[
 			"git remote -v",
@@ -785,6 +785,12 @@
 	],
 	"file_history":
 	[
+		"/D/希夷/2018-完成项目/德武学堂/coding/server.php",
+		"/D/希夷/2018-完成项目/德武学堂/coding/public/.htaccess",
+		"/D/希夷/2018-完成项目/德武学堂/coding/.htaccess",
+		"/C/Users/Administrator/Downloads/apache_byu1956340001_20181205.log",
+		"/C/Users/Administrator/AppData/Local/Temp/7zO81DD5431/apache_byu1956340001_20181204.log",
+		"/F/soft/FlashFXP4/Cache/~flashfxp/2D202150_edit.tmp/apache_byu1956340001_20181205.log",
 		"/D/wwwroot/XYCMF/resources/views/admin/index.blade.php",
 		"/D/wwwroot/XYCMF/routes/admin.php",
 		"/D/wwwroot/XYCMF/app/Http/Controllers/Admin/ArticleController.php",
@@ -906,21 +912,15 @@
 		"/D/wwwroot/XYCMF/routes/api.php",
 		"/D/wwwroot/XYCMF/routes/admin_api.php",
 		"/D/wwwroot/XYCMF/routes/console.php",
-		"/D/wwwroot/XYCMF/app/Http/Controllers/Admin/Common/ArtController.php",
-		"/C/Users/Administrator/Desktop/table.html",
-		"/D/wwwroot/XYCMF/public/statics/common/css/fixedtable.css",
-		"/D/wwwroot/XYCMF/public/statics/common/js/jquery.fixedtableheader.min.js",
-		"/C/Users/Administrator/AppData/Local/Temp/7zO8559B657/right.blade.php",
-		"/C/Users/Administrator/AppData/Local/Temp/7zO855F88A7/index.blade.php",
-		"/D/wwwroot/XYCMF/.env"
+		"/D/wwwroot/XYCMF/app/Http/Controllers/Admin/Common/ArtController.php"
 	],
 	"find":
 	{
-		"height": 27.0
+		"height": 210.0
 	},
 	"find_in_files":
 	{
-		"height": 133.0,
+		"height": 622.0,
 		"where_history":
 		[
 			"D:\\wwwroot\\XYCMF\\resources\\assets\\js\\components",
@@ -1305,11 +1305,11 @@
 	],
 	"incremental_find":
 	{
-		"height": 27.0
+		"height": 210.0
 	},
 	"input":
 	{
-		"height": 60.0
+		"height": 210.0
 	},
 	"layout":
 	{
@@ -1360,13 +1360,13 @@
 	},
 	"output.sftp":
 	{
-		"height": 161.0
+		"height": 210.0
 	},
 	"pinned_build_system": "",
 	"project": "xycmf.sublime-project",
 	"replace":
 	{
-		"height": 50.0
+		"height": 416.0
 	},
 	"save_all_on_build": false,
 	"select_file":
