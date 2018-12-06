@@ -21,7 +21,7 @@
 
 <style>
     #login {
-        margin-top: 180px;
+        margin-top: 120px;
     }
     .login-header {
         text-align: center;
@@ -57,9 +57,11 @@ export default {
                 if (valid) {
                     var params = {'name':this.user.name,'password':this.user.password};
                     this.$api.login.login(params).then(res=>{
-                        this.$store.commit(LOGIN,res.data)
-                        // 跳转到首页
-                        router.push('/console/index/index');
+                        if (res.code == 200) {
+                            // 跳转到首页
+                            this.$store.commit(LOGIN,res.data)
+                            router.push('/console/index/index');
+                        }
                     });
                 } else {
                     this.$Message.error('请检查输入的信息是否正确！');
