@@ -12,6 +12,11 @@
             </Col>
             <Col :xs="24" :sm="16">
                 <Form ref="menuData" :model="menuData" :rules="menuValidate" action="javascript:void(0)">
+                    <FormItem label="父级菜单" prop="parentid">
+                        <Select v-model="menuData.parentid">
+                            <Option v-for="item in menuSelect" :value="item.value" :key="item.value">{{ item.label }}</Option>
+                        </Select>
+                    </FormItem>
                     <FormItem label="菜单名称" prop="name">
                         <Input v-model="menuData.name" placeholder="请输入权限菜单名称..."></Input>
                     </FormItem>
@@ -92,7 +97,8 @@
                 btnRemove: {
                     type: 'default',
                     size: 'small',
-                }
+                },
+                menuSelect:[]
             }
         },
         created:function(){
@@ -119,7 +125,6 @@
                         }
                         else
                         {
-                            console.log(this.menuData)
                             this.$api.menu.edit(this.menuData).then(res=>{
                                 if (res.code == 200) {
                                     // 更新左侧的树
@@ -205,6 +210,11 @@
             },
             // 单条选中
             detail (data) {
+                this.$api.menu.select().then(res=>{
+                    if (res.code == 200) {
+                        this.menuSelect = res.data;
+                    }
+                });
                 this.$api.menu.detail({'menu_id':data.menu_id}).then(res=>{
                     if (res.code == 200) {
                         this.menuData = res.data;

@@ -20,6 +20,33 @@ use Redis;
 class MenuController extends ResponseController
 {
     // 取下拉框菜单
+    public function getSelect()
+    {
+        try {
+            $menus = Menu::select('id','parentid','name','sort','url')->get();
+            $res = [];
+            $f_menus = $menus->where('parentid',0)->all();
+            // 只查三级
+            foreach ($f_menus as $v) {
+                // 一级
+                $res[] = ['label'=>$v->name,'value'=>$v->id];
+                // 二级
+                $s_menus = $menus->where('parentid',$v->id)->all();
+                foreach ($s_menus as $s) {
+                    $res[] = ['label'=>'|- '.$s->name,'value'=>$s->id];
+                    // 三级的
+                    $t_menus = $menus->where('parentid',$s->id)->all();
+                    foreach ($t_menus as $t) {
+                        $res[] = ['label'=>'||- '.$t->name,'value'=>$t->id];
+                    }
+                }
+            }
+            return $this->resData(200,'获取成功！',$res);
+        } catch (\Throwable $e) {
+            return $this->resData(400,'获取失败，请稍后再试！');
+        }
+    }
+    // 取下拉框菜单
     public function getList(Request $req)
     {
         try {
@@ -146,16 +173,20 @@ class MenuController extends ResponseController
         DB::beginTransaction();
         try {
             $validator = Validator::make($req->input(), [
+                'parentid' => 'required|integer',
                 'id' => 'required|integer',
                 'name' => 'required|max:255',
                 'url' => 'required|max:255',
                 'label' => 'required|max:255',
+                'display' => 'required|in:true,false',
             ]);
              $attrs = array(
+                'parentid' => '父菜单',
                 'id' => '菜单ID',
                 'name' => '菜单名称',
                 'url' => '菜单名称',
                 'label' => '菜单标签',
+                'display' => '状态',
             );
             $validator->setAttributeNames($attrs);
             if ($validator->fails()) {
@@ -163,7 +194,7 @@ class MenuController extends ResponseController
                 return $this->resData(402,$validator->errors()->all()[0].'...');
             }
             $id = $req->input('id');
-            $update = ['name'=>$req->input('name'),'url'=>$req->input('url'),'label'=>$req->input('label'),'icon'=>$req->input('icon'),'display'=>$req->input('display') === true ? 1 : 0,'sort'=>$req->input('sort')];
+            $update = ['parentid'=>$req->input('parentid'),'name'=>$req->input('name'),'url'=>$req->input('url'),'label'=>$req->input('label'),'icon'=>$req->input('icon'),'display'=>$req->input('display') == true ? 1 : 0,'sort'=>$req->input('sort')];
             Menu::where('id',$id)->update($update);
             // 更新缓存
             app('com')->updateCache(new Menu(),'menuCache');

@@ -52,6 +52,7 @@ Route::group(['prefix'=>'c-api','namespace' => 'Admin','middleware'=>['c-api']],
     // 左侧导航菜单
     Route::get('menu/list', 'MenuController@getList');
     Route::get('menu/tree', 'MenuController@getTree');
+    Route::get('menu/select', 'MenuController@getSelect');
     Route::post('menu/detail', 'MenuController@postDetail');
     Route::post('menu/create', 'MenuController@postCreate');
     Route::post('menu/edit', 'MenuController@postEdit');

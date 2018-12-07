@@ -13,6 +13,10 @@ const menu = {
     tree () {
         return axios.get(api + 'menu/tree')
     },
+    // 下拉菜单
+    select () {
+        return axios.get(api + 'menu/select')
+    },
     // 添加
     create (params) {
         return axios.post(api + 'menu/create',qs.stringify(params))
