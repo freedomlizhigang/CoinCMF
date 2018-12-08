@@ -51,7 +51,7 @@
                 <Menu active-name="1-2" theme="dark" width="auto" :class="menuitemClasses" accordion>
                     <Submenu :name="menu.name" v-for="menu in menuData" :key="menu.id">
                         <template slot="title">
-                            <Icon type="ios-paper" />
+                            <Icon :type="menu.icon" />
                             {{ menu.name }}
                         </template>
                         <MenuItem :name="submenu.name" v-for="submenu in menu.submenu" :key="submenu.id" :to="'/console/' + submenu.url">{{ submenu.name }}</MenuItem>

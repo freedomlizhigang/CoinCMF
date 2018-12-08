@@ -15,13 +15,13 @@ const router = new Router({
 // 导航钩子，全局钩子
 router.beforeEach((to, from, next) => {
     // 登录页面
-    if (to.name == 'login') {
-        if (store.getters.user_id != 0) {
-            next('/console/index/index');
+    if (to.name === 'login') {
+        if (store.getters.user_id == 0) {
+            next();
         }
         else
         {
-            next()
+            next('/console/index/index');
         }
     }
     // 其它页面

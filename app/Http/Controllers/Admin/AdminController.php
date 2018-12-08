@@ -96,7 +96,7 @@ class AdminController extends ResponseController
             return $this->resData(400,'创建用户失败，请稍后再试...');
         }
     }
-    // 修改名称
+    // 修改资料
     public function postEditInfo(Request $req)
     {
         DB::beginTransaction();
@@ -134,10 +134,39 @@ class AdminController extends ResponseController
                 RoleUser::insert($rdata);
             }
             DB::commit();
-            return $this->resData(200,'更新用户名称成功...');
+            return $this->resData(200,'更新用户资料成功...');
         } catch (\Throwable $e) {
             DB::rollback();
-            return $this->resData(400,'更新用户名称失败，请稍后再试...');
+            return $this->resData(400,'更新用户资料失败，请稍后再试...');
+        }
+    }
+    // 个人修改资料
+    public function postSelfEditInfo(Request $req)
+    {
+        try {
+            $validator = Validator::make($req->input(), [
+                'admin_id' => 'required|integer',
+                'realname' => 'required|max:255',
+                'phone' => 'nullable|regex:/^1[3456789]\d{9}$/',
+                'email' => 'nullable|email',
+            ]);
+             $attrs = array(
+                'admin_id' => '用户ID',
+                'realname' => '姓名',
+                'phone' => '手机号',
+                'email' => '邮箱',
+            );
+            $validator->setAttributeNames($attrs);
+            if ($validator->fails()) {
+                // 如果有错误，提示第一条
+                return $this->resData(402,$validator->errors()->all()[0].'...');
+            }
+            $id = $req->input('admin_id');
+            $data = ['realname'=>$req->input('realname'),'phone'=>$req->input('phone'),'email'=>$req->input('email')];
+            Admin::where('id',$id)->update($data);
+            return $this->resData(200,'更新用户资料成功...');
+        } catch (\Throwable $e) {
+            return $this->resData(400,'更新用户资料失败，请稍后再试...');
         }
     }
     // 修改密码
@@ -167,6 +196,33 @@ class AdminController extends ResponseController
             return $this->resData(200,'更新用户密码成功...');
         } catch (\Throwable $e) {
             DB::rollback();
+            return $this->resData(400,'更新用户密码失败，请稍后再试...');
+        }
+    }
+    // 个人修改密码
+    public function postSelfEditPassword(Request $req)
+    {
+        try {
+            $validator = Validator::make($req->input(), [
+                'admin_id' => 'required|integer',
+                'password' => 'confirmed|min:6|max:15|alpha_dash',
+            ]);
+             $attrs = array(
+                'admin_id' => '用户ID',
+                'password' => '密码',
+            );
+            $validator->setAttributeNames($attrs);
+            if ($validator->fails()) {
+                // 如果有错误，提示第一条
+                return $this->resData(402,$validator->errors()->all()[0].'...');
+            }
+            $id = $req->input('admin_id');
+            $crypt = str_random(10);
+            $pwd = Func::makepwd($req->input('password'),$crypt);
+            $data = ['password'=>$pwd,'crypt'=>$crypt];
+            Admin::where('id',$id)->update($data);
+            return $this->resData(200,'更新用户密码成功...');
+        } catch (\Throwable $e) {
             return $this->resData(400,'更新用户密码失败，请稍后再试...');
         }
     }

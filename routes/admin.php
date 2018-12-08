@@ -25,6 +25,9 @@ Route::group(['prefix'=>'c-api','namespace' => 'Admin','middleware'=>['c-api']],
     Route::post('article/sort', 'ArticleController@postSort');
     // 栏目
     Route::get('cate/select', 'CateController@getSelect');
+    // 个人修改资料
+    Route::post('admin/selfeditinfo', 'AdminController@postSelfEditInfo');
+    Route::post('admin/selfeditpassword', 'AdminController@postSelfEditPassword');
     // 系统配置
     Route::get('config/get', 'ConfigController@getDetail');
     Route::post('config/edit', 'ConfigController@postEdit');

@@ -51,7 +51,7 @@ class MenuController extends ResponseController
     {
         try {
             // 一级菜单
-            $all = Menu::select('id','parentid','name','url')->where('display','=','1')->orderBy('sort','asc')->orderBy('id','asc')->get();
+            $all = Menu::select('id','parentid','name','url','icon')->where('display','=','1')->orderBy('sort','asc')->orderBy('id','asc')->get();
             $leftmenu = array();
             // 判断权限
             $left = $all->where('parentid',0)->all();
@@ -160,7 +160,7 @@ class MenuController extends ResponseController
                 // 如果有错误，提示第一条
                 return $this->resData(402,$validator->errors()->all()[0].'...');
             }
-            $insert = ['parentid'=>$req->input('parentid'),'name'=>$req->input('name'),'url'=>$req->input('url'),'label'=>$req->input('label'),'icon'=>$req->input('icon'),'display'=>$req->input('display') == true ? 1 : 0,'sort'=>$req->input('sort')];
+            $insert = ['parentid'=>$req->input('parentid'),'name'=>$req->input('name'),'url'=>$req->input('url'),'label'=>$req->input('label'),'icon'=>$req->input('icon'),'display'=>$req->input('display') == 'true' ? 1 : 0,'sort'=>$req->input('sort')];
             $detail = Menu::create($insert);
             // 更新缓存
             app('com')->updateCache(new Menu(),'menuCache');
@@ -198,7 +198,7 @@ class MenuController extends ResponseController
                 return $this->resData(402,$validator->errors()->all()[0].'...');
             }
             $id = $req->input('id');
-            $update = ['parentid'=>$req->input('parentid'),'name'=>$req->input('name'),'url'=>$req->input('url'),'label'=>$req->input('label'),'icon'=>$req->input('icon'),'display'=>$req->input('display') == true ? 1 : 0,'sort'=>$req->input('sort')];
+            $update = ['parentid'=>$req->input('parentid'),'name'=>$req->input('name'),'url'=>$req->input('url'),'label'=>$req->input('label'),'icon'=>$req->input('icon'),'display'=>$req->input('display') == 'true' ? 1 : 0,'sort'=>$req->input('sort')];
             Menu::where('id',$id)->update($update);
             // 更新缓存
             app('com')->updateCache(new Menu(),'menuCache');

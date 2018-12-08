@@ -10,6 +10,8 @@ import MenuTree from '.././components/console/menu/MenuTree.vue'
 import SectionList from '.././components/console/section/SectionList.vue'
 import RoleList from '.././components/console/role/RoleList.vue'
 import AdminList from '.././components/console/admin/AdminList.vue'
+import AdminEditInfo from '.././components/console/admin/AdminEditInfo.vue'
+import AdminEditPwd from '.././components/console/admin/AdminEditPwd.vue'
 import Config from '.././components/console/config/Config.vue'
 
 export default [
@@ -66,6 +68,18 @@ export default [
               path: 'admin/list',
               name: 'admin-list',
               component: AdminList,
+              meta: { requiresAuth: true }
+            },
+            {
+              path: 'admin/editinfo',
+              name: 'admin-editinfo',
+              component: AdminEditInfo,
+              meta: { requiresAuth: true }
+            },
+            {
+              path: 'admin/editpwd',
+              name: 'admin-editpwd',
+              component: AdminEditPwd,
               meta: { requiresAuth: true }
             },
             // 角色

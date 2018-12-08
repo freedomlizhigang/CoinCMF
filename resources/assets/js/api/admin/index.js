@@ -21,6 +21,10 @@ const admin = {
     editinfo (params) {
         return axios.post(api + 'admin/editinfo',qs.stringify(params))
     },
+    // 修改个人资料
+    selfeditinfo (params) {
+        return axios.post(api + 'admin/selfeditinfo',qs.stringify(params))
+    },
     // 修改状态
     status (params) {
         return axios.post(api + 'admin/status',qs.stringify(params))
@@ -32,6 +36,10 @@ const admin = {
     // 修改密码
     editpassword (params) {
         return axios.post(api + 'admin/editpassword',qs.stringify(params))
+    },
+    // 个人修改密码
+    selfeditpassword (params) {
+        return axios.post(api + 'admin/selfeditpassword',qs.stringify(params))
     },
     // 单条信息
     detail (params) {

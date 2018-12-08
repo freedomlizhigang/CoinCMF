@@ -14,9 +14,6 @@ import iView from 'iview';
 const toLogin = () => {
     router.replace({
         path: '/console/login',
-        query: {
-            redirect: router.currentRoute.fullPath
-        }
     });
 }
 
