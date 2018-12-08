@@ -4,6 +4,14 @@
 		"selected_items":
 		[
 			[
+				"AdminEd",
+				"AdminEditInfo"
+			],
+			[
+				"json_d",
+				"json_decode"
+			],
+			[
 				"admin",
 				"adminPasswordValidate"
 			],
@@ -166,10 +174,6 @@
 			[
 				"GoodSpe",
 				"GoodSpecItem"
-			],
-			[
-				"json_d",
-				"json_encode"
 			],
 			[
 				"good_spe",
@@ -510,10 +514,6 @@
 			[
 				"goods",
 				"goodlists"
-			],
-			[
-				"de",
-				"decrement"
 			]
 		]
 	},
@@ -548,16 +548,16 @@
 		"selected_items":
 		[
 			[
+				"rena",
+				"File: Rename"
+			],
+			[
 				"rename",
 				"Rename File"
 			],
 			[
 				"reanm",
 				"Rename File"
-			],
-			[
-				"rena",
-				"File: Rename"
 			],
 			[
 				"instal",
@@ -773,27 +773,44 @@
 		"/D/wwwroot/XYCMF/app",
 		"/D/wwwroot/XYCMF/app/Http",
 		"/D/wwwroot/XYCMF/app/Http/Controllers",
+		"/D/wwwroot/XYCMF/app/Http/Controllers/Admin",
 		"/D/wwwroot/XYCMF/routes"
 	],
 	"file_history":
 	[
-		"/D/wwwroot/XYCMF/phpunit.xml",
-		"/D/phpunit/phpunit.cmd",
+		"/D/wwwroot/XYCMF/config/database.php",
+		"/D/wwwroot/XYCMF/.env",
+		"/D/wwwroot/XYCMF/README.md",
+		"/D/wwwroot/XYCMF/app/Http/Controllers/Admin/MenuController.php",
+		"/D/wwwroot/XYCMF/resources/assets/js/components/console/Iframe.vue",
+		"/D/wwwroot/XYCMF/app/Http/Controllers/Admin/CommonController.php",
+		"/D/wwwroot/XYCMF/resources/assets/js/api/http.js",
+		"/D/wwwroot/XYCMF/resources/assets/js/router/index.js",
+		"/D/wwwroot/XYCMF/resources/assets/js/components/console/admin/AdminEditPwd.vue",
+		"/D/wwwroot/XYCMF/resources/assets/js/components/console/admin/AdminList.vue",
+		"/D/wwwroot/XYCMF/resources/assets/js/components/console/admin/AdminEditInfo.vue",
+		"/D/wwwroot/XYCMF/app/Http/Controllers/Admin/AdminController.php",
+		"/D/wwwroot/XYCMF/routes/admin.php",
+		"/D/wwwroot/XYCMF/resources/assets/js/api/admin/index.js",
+		"/D/wwwroot/XYCMF/resources/assets/js/router/routers.js",
+		"/D/wwwroot/XYCMF/app/Http/Middleware/VerifyCsrfToken.php",
+		"/D/wwwroot/XYCMF/app/Http/Middleware/ConsoleJwt.php",
+		"/D/wwwroot/XYCMF/app/Http/Kernel.php",
+		"/D/wwwroot/XYCMF/app/Http/Middleware/BetoAdmin.php",
+		"/D/wwwroot/XYCMF/app/Http/Middleware/ConsoleApi.php",
 		"/D/wwwroot/XYCMF/tests/Feature/ConfigTest.php",
+		"/D/wwwroot/XYCMF/composer.json",
+		"/D/wwwroot/XYCMF/tests/Feature/ExampleTest.php",
+		"/D/phpunit/phpunit.cmd",
+		"/D/wwwroot/XYCMF/phpunit.xml",
 		"/D/wwwroot/XYCMF/vendor/phpunit/phpunit/phpunit.xml",
 		"/D/wwwroot/XYCMF/resources/views/home/home.blade.php",
-		"/D/wwwroot/XYCMF/tests/Feature/ExampleTest.php",
 		"/D/wwwroot/XYCMF/app/Http/Controllers/Admin/ConfigController1.php",
-		"/D/wwwroot/XYCMF/routes/admin.php",
 		"/D/wwwroot/XYCMF/resources/assets/js/components/console/config/Config.vue",
-		"/D/wwwroot/XYCMF/app/Http/Middleware/ConsoleApi.php",
 		"/D/wwwroot/XYCMF/app/Http/Controllers/Admin/ConfigController.php",
-		"/D/wwwroot/XYCMF/resources/assets/js/router/routers.js",
 		"/D/希夷/局气/服务器信息.txt",
 		"/D/wwwroot/XYCMF/resources/assets/js/api/api.js",
 		"/D/wwwroot/XYCMF/resources/assets/js/api/config/index.js",
-		"/D/wwwroot/XYCMF/resources/assets/js/router/index.js",
-		"/D/wwwroot/XYCMF/app/Http/Controllers/Admin/MenuController.php",
 		"/D/wwwroot/XYCMF/resources/assets/js/components/console/menu/MenuTree.vue",
 		"/D/wwwroot/XYCMF/resources/assets/js/api/common/index.js",
 		"/C/Users/Administrator/Desktop/111.txt",
@@ -801,17 +818,12 @@
 		"/D/wwwroot/isoftstone-shared/.env",
 		"/D/希夷/软通动力/共享服务/远程服务器.txt",
 		"/D/wwwroot/XYCMF/resources/assets/js/api/menu/index.js",
-		"/D/wwwroot/XYCMF/README.md",
 		"/D/wwwroot/XYCMF/xycmf.sublime-project",
 		"/D/wwwroot/XYCMF/resources/assets/js/components/console/role/RoleList.vue",
 		"/D/wwwroot/XYCMF/resources/assets/js/components/console/Login.vue",
 		"/D/wwwroot/XYCMF/app/Http/Controllers/Admin/LoginController.php",
 		"/D/wwwroot/XYCMF/resources/views/admin/index.blade.php",
 		"/F/soft/FlashFXP4/Cache/~flashfxp/4A3A350E_edit.tmp/.env",
-		"/D/wwwroot/XYCMF/app/Http/Middleware/BetoAdmin.php",
-		"/D/wwwroot/XYCMF/resources/assets/js/api/admin/index.js",
-		"/D/wwwroot/XYCMF/app/Http/Controllers/Admin/AdminController.php",
-		"/D/wwwroot/XYCMF/resources/assets/js/components/console/admin/AdminList.vue",
 		"/D/wwwroot/XYCMF/app/Customize/Func.php",
 		"/D/wwwroot/XYCMF/resources/assets/js/components/console/section/SectionList.vue",
 		"/D/wwwroot/XYCMF/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/ConvertEmptyStringsToNull.php",
@@ -835,7 +847,6 @@
 		"/D/wwwroot/XYCMF/resources/assets/js/api/role/index.js",
 		"/D/wwwroot/XYCMF/resources/assets/js/app.js",
 		"/D/wwwroot/XYCMF/app/Http/Controllers/Admin/LogController.php",
-		"/D/wwwroot/XYCMF/resources/assets/js/api/http.js",
 		"/D/希夷/2018-完成项目/德武学堂/coding/server.php",
 		"/D/希夷/2018-完成项目/德武学堂/coding/public/.htaccess",
 		"/D/希夷/2018-完成项目/德武学堂/coding/.htaccess",
@@ -844,7 +855,6 @@
 		"/F/soft/FlashFXP4/Cache/~flashfxp/2D202150_edit.tmp/apache_byu1956340001_20181205.log",
 		"/D/wwwroot/XYCMF/app/Http/Controllers/Admin/ArticleController.php",
 		"/D/wwwroot/XYCMF/app/Http/Controllers/Admin/CateController.php",
-		"/D/wwwroot/XYCMF/app/Http/Controllers/Admin/CommonController.php",
 		"/D/wwwroot/XYCMF/app/Http/Controllers/Admin/ResponseController.php",
 		"/D/wwwroot/XYCMF/app/Http/Controllers/Admin/RoleController.php",
 		"/D/wwwroot/XYCMF/app/Http/Controllers/Admin/SectionController.php",
@@ -867,7 +877,6 @@
 		"/D/wwwroot/XYCMF/resources/assets/js/components/console/article/ArticleAdd.vue",
 		"/D/wwwroot/XYCMF/app/Models/Console/Section.php",
 		"/D/希夷/局气/账号.txt",
-		"/D/wwwroot/XYCMF/resources/assets/js/components/console/Iframe.vue",
 		"/D/wwwroot/XYCMF/resources/assets/sass/reset.css",
 		"/D/wwwroot/XYCMF/resources/assets/js/components/console/menu",
 		"/D/希夷/局气/客情push时间.txt",
@@ -878,7 +887,6 @@
 		"/D/wwwroot/XYCMF/app/Http/Controllers/Api/UserController.php",
 		"/D/wwwroot/XYCMF/app/Providers/RouteServiceProvider.php",
 		"/D/wwwroot/XYCMF/app/Providers/AppServiceProvider.php",
-		"/D/wwwroot/XYCMF/app/Http/Kernel.php",
 		"/D/wwwroot/XYCMF/resources/assets/js/vuex/modules/user.js",
 		"/D/wwwroot/XYCMF/resources/assets/js/components/console/api/article/index.js",
 		"/D/wwwroot/XYCMF/resources/assets/js/components/console/api/api.js",
@@ -897,14 +905,7 @@
 		"/D/wwwroot/XYCMF/resources/assets/js/vuex/mutation_types.js",
 		"/D/wwwroot/XYCMF/resources/assets/js/components/console/Logout.vue",
 		"/D/wwwroot/XYCMF/resources/assets/js/components/Login.vue",
-		"/D/wwwroot/XYCMF/app/Http/Controllers/Admin/Api/CommonController.php",
-		"/D/wwwroot/XYCMF/app/Http/Controllers/Admin/Api/CateController.php",
-		"/E/scss/reset-pc/css/reset.scss",
-		"/D/wwwroot/XYCMF/public/css/app.css",
-		"/D/wwwroot/XYCMF/resources/assets/sass/app.scss",
-		"/D/wwwroot/XYCMF/app/Http/Controllers/Admin/Api/ArticleController.php",
-		"/D/wwwroot/XYCMF/resources/assets/js/components/Logo.vue",
-		"/D/wwwroot/XYCMF/routes/webcommon.php"
+		"/D/wwwroot/XYCMF/app/Http/Controllers/Admin/Api/CommonController.php"
 	],
 	"find":
 	{
@@ -1035,6 +1036,23 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"input('display')",
+			"true",
+			";\n",
+			"btns",
+			"toLogin",
+			"next('/console/login')",
+			"LOGOUT",
+			"logout",
+			"adminInfo",
+			"名称",
+			"editpassword",
+			"store",
+			"getConfig",
+			"updateAdmin",
+			"AdminList",
+			"ConsoleJwt",
+			"ConsoleApi",
 			"phpunit",
 			"电话",
 			"联系电话",
@@ -1145,24 +1163,7 @@
 			"showCreateAdmin",
 			"adminPwd",
 			"Pass",
-			"密码",
-			"adminInfo",
-			"手机号",
-			"role",
-			"手机号",
-			"角色",
-			"RoleList",
-			"Section",
-			"section/",
-			"role",
-			"部门",
-			"\\Api",
-			"v['",
-			"$v->id",
-			"updatePriv",
-			"showPrivModal",
-			"showPrivStatus",
-			"section_id"
+			"密码"
 		],
 		"highlight": true,
 		"in_selection": false,

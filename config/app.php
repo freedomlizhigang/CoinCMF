@@ -12,7 +12,7 @@ return [
     | any other location as required by the application or its packages.
     */
 
-    'name' => env('APP_NAME', 'Xi-Yi-SHOP'),
+    'name' => env('APP_NAME', 'CoinCMF'),
 
     /*
     |--------------------------------------------------------------------------
@@ -51,7 +51,7 @@ return [
     |
     */
 
-    'url' => env('APP_URL', 'http://shop.xi-yi.ren'),
+    'url' => env('APP_URL', 'http://www.shanmuzhi.com'),
 
 
     /*
@@ -170,9 +170,6 @@ return [
         App\Providers\RouteServiceProvider::class,
         // 一些公用服务
         App\Providers\ComServiceProvider::class,
-        // 调试
-        Barryvdh\Debugbar\ServiceProvider::class,
-
     ],
 
     /*
@@ -221,8 +218,6 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
-        // 调试
-        'Debugbar'  => Barryvdh\Debugbar\Facade::class,
     ],
 
 ];
