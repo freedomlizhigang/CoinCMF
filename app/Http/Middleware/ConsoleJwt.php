@@ -5,7 +5,7 @@
  * @createdate  [2018-06-26]
  * @copyright [2018-2020 衡水希夷信息技术工作室]
  * @version [1.0.0]
- * @directions 后台接口权限验证
+ * @directions 后台管理权限验证，日志记录
  *
  */
 namespace App\Http\Middleware;
@@ -14,7 +14,7 @@ use App\Models\Console\Log;
 use Closure;
 use Redis;
 
-class ConsoleApi
+class ConsoleJwt
 {
     /**
      * Handle an incoming request.

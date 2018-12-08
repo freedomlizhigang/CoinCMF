@@ -21,11 +21,5 @@ class VerifyCsrfToken extends Middleware
         // 微信
         'wx/*',
         'oauth/*',
-        // 后台文件上传
-        'console/attr/uploadimg',
-        // 取规格
-        'console/good/goodspecinput',
-        // 后台API
-        'c-api/*',
     ];
 }

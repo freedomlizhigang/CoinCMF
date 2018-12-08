@@ -58,8 +58,7 @@ class Kernel extends HttpKernel
         'guest' => \App\Http\Middleware\RedirectIfAuthenticated::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
 
-        'rbac' => \App\Http\Middleware\BetoAdmin::class,
-        'c-api' => \App\Http\Middleware\ConsoleApi::class,
+        'c-api' => \App\Http\Middleware\ConsoleJwt::class,
         // 网站用户认证
         'member'=> \App\Http\Middleware\Member::class,
         // APP用户认证
