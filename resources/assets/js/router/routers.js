@@ -10,6 +10,7 @@ import MenuTree from '.././components/console/menu/MenuTree.vue'
 import SectionList from '.././components/console/section/SectionList.vue'
 import RoleList from '.././components/console/role/RoleList.vue'
 import AdminList from '.././components/console/admin/AdminList.vue'
+import Config from '.././components/console/config/Config.vue'
 
 export default [
     // 登录
@@ -53,31 +54,38 @@ export default [
               component: ArticleAdd,
               meta: { requiresAuth: true }
             },
+            // 系统
+            {
+              path: 'config/index',
+              name: 'config-index',
+              component: Config,
+              meta: { requiresAuth: true }
+            },
             // 用户
             {
-              path: 'admin/index',
-              name: 'admin-index',
+              path: 'admin/list',
+              name: 'admin-list',
               component: AdminList,
               meta: { requiresAuth: true }
             },
             // 角色
             {
-              path: 'role/index',
-              name: 'role-index',
+              path: 'role/list',
+              name: 'role-list',
               component: RoleList,
               meta: { requiresAuth: true }
             },
             // 部门
             {
-              path: 'section/index',
-              name: 'section-index',
+              path: 'section/list',
+              name: 'section-list',
               component: SectionList,
               meta: { requiresAuth: true }
             },
             // 权限菜单
             {
-              path: 'menu/index',
-              name: 'menu-index',
+              path: 'menu/tree',
+              name: 'menu-tree',
               component: MenuTree,
               meta: { requiresAuth: true }
             },

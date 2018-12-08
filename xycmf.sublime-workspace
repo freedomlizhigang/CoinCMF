@@ -548,6 +548,14 @@
 		"selected_items":
 		[
 			[
+				"rename",
+				"Rename File"
+			],
+			[
+				"reanm",
+				"Rename File"
+			],
+			[
 				"rena",
 				"File: Rename"
 			],
@@ -765,31 +773,40 @@
 		"/D/wwwroot/XYCMF/app",
 		"/D/wwwroot/XYCMF/app/Http",
 		"/D/wwwroot/XYCMF/app/Http/Controllers",
-		"/D/wwwroot/XYCMF/resources",
-		"/D/wwwroot/XYCMF/resources/assets",
-		"/D/wwwroot/XYCMF/resources/assets/js",
-		"/D/wwwroot/XYCMF/resources/assets/js/router",
-		"/D/wwwroot/XYCMF/resources/views",
-		"/D/wwwroot/XYCMF/resources/views/admin",
 		"/D/wwwroot/XYCMF/routes"
 	],
 	"file_history":
 	[
+		"/D/wwwroot/XYCMF/phpunit.xml",
+		"/D/phpunit/phpunit.cmd",
+		"/D/wwwroot/XYCMF/tests/Feature/ConfigTest.php",
+		"/D/wwwroot/XYCMF/vendor/phpunit/phpunit/phpunit.xml",
+		"/D/wwwroot/XYCMF/resources/views/home/home.blade.php",
+		"/D/wwwroot/XYCMF/tests/Feature/ExampleTest.php",
+		"/D/wwwroot/XYCMF/app/Http/Controllers/Admin/ConfigController1.php",
+		"/D/wwwroot/XYCMF/routes/admin.php",
+		"/D/wwwroot/XYCMF/resources/assets/js/components/console/config/Config.vue",
+		"/D/wwwroot/XYCMF/app/Http/Middleware/ConsoleApi.php",
+		"/D/wwwroot/XYCMF/app/Http/Controllers/Admin/ConfigController.php",
+		"/D/wwwroot/XYCMF/resources/assets/js/router/routers.js",
+		"/D/希夷/局气/服务器信息.txt",
+		"/D/wwwroot/XYCMF/resources/assets/js/api/api.js",
+		"/D/wwwroot/XYCMF/resources/assets/js/api/config/index.js",
+		"/D/wwwroot/XYCMF/resources/assets/js/router/index.js",
+		"/D/wwwroot/XYCMF/app/Http/Controllers/Admin/MenuController.php",
+		"/D/wwwroot/XYCMF/resources/assets/js/components/console/menu/MenuTree.vue",
+		"/D/wwwroot/XYCMF/resources/assets/js/api/common/index.js",
 		"/C/Users/Administrator/Desktop/111.txt",
 		"/C/Users/Administrator/Desktop/虚拟主机部署.txt",
 		"/D/wwwroot/isoftstone-shared/.env",
 		"/D/希夷/软通动力/共享服务/远程服务器.txt",
-		"/D/wwwroot/XYCMF/app/Http/Controllers/Admin/MenuController.php",
-		"/D/wwwroot/XYCMF/resources/assets/js/components/console/menu/MenuTree.vue",
 		"/D/wwwroot/XYCMF/resources/assets/js/api/menu/index.js",
-		"/D/wwwroot/XYCMF/routes/admin.php",
 		"/D/wwwroot/XYCMF/README.md",
 		"/D/wwwroot/XYCMF/xycmf.sublime-project",
 		"/D/wwwroot/XYCMF/resources/assets/js/components/console/role/RoleList.vue",
 		"/D/wwwroot/XYCMF/resources/assets/js/components/console/Login.vue",
 		"/D/wwwroot/XYCMF/app/Http/Controllers/Admin/LoginController.php",
 		"/D/wwwroot/XYCMF/resources/views/admin/index.blade.php",
-		"/D/wwwroot/XYCMF/app/Http/Middleware/ConsoleApi.php",
 		"/F/soft/FlashFXP4/Cache/~flashfxp/4A3A350E_edit.tmp/.env",
 		"/D/wwwroot/XYCMF/app/Http/Middleware/BetoAdmin.php",
 		"/D/wwwroot/XYCMF/resources/assets/js/api/admin/index.js",
@@ -815,11 +832,7 @@
 		"/D/wwwroot/XYCMF/config/filesystems.php",
 		"/D/wwwroot/XYCMF/app/Http/Controllers/Admin/Admin1Controller.php",
 		"/D/wwwroot/XYCMF/app/Models/Console/Admin.php",
-		"/D/wwwroot/XYCMF/resources/assets/js/router/routers.js",
-		"/D/wwwroot/XYCMF/resources/assets/js/api/api.js",
 		"/D/wwwroot/XYCMF/resources/assets/js/api/role/index.js",
-		"/D/希夷/局气/服务器信息.txt",
-		"/D/wwwroot/XYCMF/resources/assets/js/router/index.js",
 		"/D/wwwroot/XYCMF/resources/assets/js/app.js",
 		"/D/wwwroot/XYCMF/app/Http/Controllers/Admin/LogController.php",
 		"/D/wwwroot/XYCMF/resources/assets/js/api/http.js",
@@ -859,7 +872,6 @@
 		"/D/wwwroot/XYCMF/resources/assets/js/components/console/menu",
 		"/D/希夷/局气/客情push时间.txt",
 		"/D/希夷/局气/督导需求表格/督导.txt",
-		"/D/wwwroot/XYCMF/resources/assets/js/api/common/index.js",
 		"/D/wwwroot/XYCMF/resources/assets/js/components/console/index/Main.vue",
 		"/D/wwwroot/XYCMF/resources/assets/js/api/login/index.js",
 		"/D/wwwroot/XYCMF/resources/assets/js/api/article/index.js",
@@ -892,21 +904,11 @@
 		"/D/wwwroot/XYCMF/resources/assets/sass/app.scss",
 		"/D/wwwroot/XYCMF/app/Http/Controllers/Admin/Api/ArticleController.php",
 		"/D/wwwroot/XYCMF/resources/assets/js/components/Logo.vue",
-		"/D/wwwroot/XYCMF/routes/webcommon.php",
-		"/D/wwwroot/XYCMF/app/Http/Controllers/Home/HomeController.php",
-		"/D/wwwroot/XYCMF/resources/views/vue.blade.php",
-		"/D/胡群亮/衡水宁源橡胶制品厂.txt",
-		"/D/胡群亮/hsshizhong.conf",
-		"/D/希夷/局气/点餐系统/用户.txt",
-		"/C/Users/Administrator/Desktop/客情push时间.txt",
-		"/D/希夷/局气/文件共享.txt",
-		"/D/希夷/局气/客情需求表格/09-27.txt",
-		"/D/wwwroot/XYCMF/sql/2018-12-01-init.sql",
-		"/F/soft/FlashFXP4/Cache/~flashfxp/F2CCDCE1_edit.tmp/composer.json"
+		"/D/wwwroot/XYCMF/routes/webcommon.php"
 	],
 	"find":
 	{
-		"height": 27.0
+		"height": 41.0
 	},
 	"find_in_files":
 	{
@@ -1033,6 +1035,25 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"phpunit",
+			"电话",
+			"联系电话",
+			"菜单图标",
+			"菜单标签",
+			"email",
+			"sitename",
+			"AdminController",
+			"admin/",
+			"menuData",
+			"handleReset",
+			"admin",
+			"login",
+			"index",
+			"name",
+			"append",
+			"addMenu",
+			"articleList",
+			"this.$api",
 			"name",
 			"parent_id",
 			"renderMenu",
@@ -1141,26 +1162,7 @@
 			"updatePriv",
 			"showPrivModal",
 			"showPrivStatus",
-			"section_id",
-			"超级管理员组不能删除！",
-			"section_id",
-			"remove",
-			"section",
-			".$api.section.",
-			"selection",
-			"section",
-			"Section",
-			"section",
-			"部门",
-			"section",
-			"SectionList",
-			"section",
-			"SectionController",
-			"section/",
-			"Section::",
-			"部门",
-			"DB",
-			"更新"
+			"section_id"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -1365,6 +1367,10 @@
 		"last_filter": "",
 		"selected_items":
 		[
+			[
+				"home/home",
+				"resources\\views\\home\\home.blade.php"
+			],
 			[
 				"ConvertEmptyStringsToNull",
 				"vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Middleware\\ConvertEmptyStringsToNull.php"
@@ -1872,10 +1878,6 @@
 			[
 				"cart.b",
 				"resources\\views\\default\\cart.blade.php"
-			],
-			[
-				"addorder",
-				"resources\\views\\default\\addorder.blade.php"
 			]
 		],
 		"width": 0.0

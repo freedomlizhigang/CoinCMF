@@ -56909,9 +56909,11 @@ var admin = {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__section_index__ = __webpack_require__(63);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__role_index__ = __webpack_require__(62);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__admin_index__ = __webpack_require__(56);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__config_index__ = __webpack_require__(127);
 /**
 * api接口统一管理
 */
+
 
 
 
@@ -56928,7 +56930,8 @@ var api = {
     menu: __WEBPACK_IMPORTED_MODULE_4__menu_index__["a" /* default */],
     section: __WEBPACK_IMPORTED_MODULE_5__section_index__["a" /* default */],
     role: __WEBPACK_IMPORTED_MODULE_6__role_index__["a" /* default */],
-    admin: __WEBPACK_IMPORTED_MODULE_7__admin_index__["a" /* default */]
+    admin: __WEBPACK_IMPORTED_MODULE_7__admin_index__["a" /* default */],
+    config: __WEBPACK_IMPORTED_MODULE_8__config_index__["a" /* default */]
 };
 
 /* harmony default export */ __webpack_exports__["a"] = (api);
@@ -56969,7 +56972,7 @@ var article = {
  // 根据需求是否导入qs模块，把请求字段直接映射过来
 
 var common = {
-    // 新闻列表
+    // 面包屑
     breadcrumb: function breadcrumb(params) {
         return __WEBPACK_IMPORTED_MODULE_0__http__["a" /* default */].get('/c-api/breadcrumb/list', { params: params });
     }
@@ -57247,6 +57250,9 @@ if (token) {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__components_console_role_RoleList_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_10__components_console_role_RoleList_vue__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__components_console_admin_AdminList_vue__ = __webpack_require__(90);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__components_console_admin_AdminList_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_11__components_console_admin_AdminList_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__components_console_config_Config_vue__ = __webpack_require__(129);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__components_console_config_Config_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_12__components_console_config_Config_vue__);
+
 
 
 
@@ -57302,31 +57308,38 @@ if (token) {
     component: __WEBPACK_IMPORTED_MODULE_6__components_console_article_ArticleAdd_vue___default.a,
     meta: { requiresAuth: true }
   },
+  // 系统
+  {
+    path: 'config/index',
+    name: 'config-index',
+    component: __WEBPACK_IMPORTED_MODULE_12__components_console_config_Config_vue___default.a,
+    meta: { requiresAuth: true }
+  },
   // 用户
   {
-    path: 'admin/index',
-    name: 'admin-index',
+    path: 'admin/list',
+    name: 'admin-list',
     component: __WEBPACK_IMPORTED_MODULE_11__components_console_admin_AdminList_vue___default.a,
     meta: { requiresAuth: true }
   },
   // 角色
   {
-    path: 'role/index',
-    name: 'role-index',
+    path: 'role/list',
+    name: 'role-list',
     component: __WEBPACK_IMPORTED_MODULE_10__components_console_role_RoleList_vue___default.a,
     meta: { requiresAuth: true }
   },
   // 部门
   {
-    path: 'section/index',
-    name: 'section-index',
+    path: 'section/list',
+    name: 'section-list',
     component: __WEBPACK_IMPORTED_MODULE_9__components_console_section_SectionList_vue___default.a,
     meta: { requiresAuth: true }
   },
   // 权限菜单
   {
-    path: 'menu/index',
-    name: 'menu-index',
+    path: 'menu/tree',
+    name: 'menu-tree',
     component: __WEBPACK_IMPORTED_MODULE_8__components_console_menu_MenuTree_vue___default.a,
     meta: { requiresAuth: true }
   },
@@ -93576,6 +93589,290 @@ module.exports = function(module) {
 
 module.exports = __webpack_require__(22);
 
+
+/***/ }),
+/* 120 */,
+/* 121 */,
+/* 122 */,
+/* 123 */,
+/* 124 */,
+/* 125 */,
+/* 126 */,
+/* 127 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__http__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_qs__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_qs___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_qs__);
+/**
+  * 登录 接口的统一出口
+  */
+ // 导入http中创建的axios实例
+ // 根据需求是否导入qs模块，把请求字段直接映射过来
+
+var api = '/c-api/';
+
+var config = {
+    // 查询
+    get: function get() {
+        return __WEBPACK_IMPORTED_MODULE_0__http__["a" /* default */].get(api + 'config/get');
+    },
+
+    // 修改
+    edit: function edit(params) {
+        return __WEBPACK_IMPORTED_MODULE_0__http__["a" /* default */].post(api + 'config/edit', __WEBPACK_IMPORTED_MODULE_1_qs___default.a.stringify(params));
+    }
+};
+
+// 导出接口
+/* harmony default export */ __webpack_exports__["a"] = (config);
+
+/***/ }),
+/* 128 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    name: 'config',
+    data: function data() {
+        return {
+            config: {
+                sitename: '',
+                describe: '',
+                person: '',
+                phone: '',
+                email: '',
+                address: ''
+            },
+            configValidate: {
+                sitename: [{ required: true, message: '站点名称必须填写', trigger: 'blur' }]
+            }
+        };
+    },
+
+    created: function created() {
+        this.getConfig();
+    },
+    methods: {
+        handleSubmit: function handleSubmit(name) {
+            var _this = this;
+
+            this.$refs[name].validate(function (valid) {
+                if (valid) {
+                    _this.$api.config.edit(_this.config).then(function (res) {
+                        if (res.code == 200) {
+                            _this.$Message.success('修改权限菜单成功...');
+                        }
+                    });
+                }
+            });
+        },
+
+        getConfig: function getConfig() {
+            var _this2 = this;
+
+            var self = this;
+            this.$api.config.get().then(function (res) {
+                _this2.config = res.data;
+            });
+        }
+
+    }
+});
+
+/***/ }),
+/* 129 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var Component = __webpack_require__(0)(
+  /* script */
+  __webpack_require__(128),
+  /* template */
+  __webpack_require__(130),
+  /* scopeId */
+  null,
+  /* cssModules */
+  null
+)
+Component.options.__file = "D:\\wwwroot\\XYCMF\\resources\\assets\\js\\components\\console\\config\\Config.vue"
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
+if (Component.options.functional) {console.error("[vue-loader] Config.vue: functional components are not supported with templates, they should use render functions.")}
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-02d60ba4", Component.options)
+  } else {
+    hotAPI.reload("data-v-02d60ba4", Component.options)
+  }
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 130 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
+    staticClass: "config"
+  }, [_c('Form', {
+    ref: "configData",
+    attrs: {
+      "model": _vm.config,
+      "rules": _vm.configValidate,
+      "action": "javascript:void(0)"
+    }
+  }, [_c('FormItem', {
+    attrs: {
+      "label": "项目名称",
+      "prop": "sitename"
+    }
+  }, [_c('Input', {
+    attrs: {
+      "placeholder": "请输入项目名称..."
+    },
+    model: {
+      value: (_vm.config.sitename),
+      callback: function($$v) {
+        _vm.$set(_vm.config, "sitename", $$v)
+      },
+      expression: "config.sitename"
+    }
+  })], 1), _vm._v(" "), _c('FormItem', {
+    attrs: {
+      "label": "项目介绍"
+    }
+  }, [_c('Input', {
+    attrs: {
+      "type": "textarea",
+      "rows": 4,
+      "placeholder": "请输入项目介绍..."
+    },
+    model: {
+      value: (_vm.config.describe),
+      callback: function($$v) {
+        _vm.$set(_vm.config, "describe", $$v)
+      },
+      expression: "config.describe"
+    }
+  })], 1), _vm._v(" "), _c('FormItem', {
+    attrs: {
+      "label": "联系人"
+    }
+  }, [_c('Input', {
+    attrs: {
+      "placeholder": "请输入联系人..."
+    },
+    model: {
+      value: (_vm.config.person),
+      callback: function($$v) {
+        _vm.$set(_vm.config, "person", $$v)
+      },
+      expression: "config.person"
+    }
+  })], 1), _vm._v(" "), _c('FormItem', {
+    attrs: {
+      "label": "联系电话"
+    }
+  }, [_c('Input', {
+    attrs: {
+      "placeholder": "请输入联系电话..."
+    },
+    model: {
+      value: (_vm.config.phone),
+      callback: function($$v) {
+        _vm.$set(_vm.config, "phone", $$v)
+      },
+      expression: "config.phone"
+    }
+  })], 1), _vm._v(" "), _c('FormItem', {
+    attrs: {
+      "label": "联系邮箱"
+    }
+  }, [_c('Input', {
+    attrs: {
+      "placeholder": "请输入联系邮箱..."
+    },
+    model: {
+      value: (_vm.config.email),
+      callback: function($$v) {
+        _vm.$set(_vm.config, "email", $$v)
+      },
+      expression: "config.email"
+    }
+  })], 1), _vm._v(" "), _c('FormItem', {
+    attrs: {
+      "label": "联系地址"
+    }
+  }, [_c('Input', {
+    attrs: {
+      "type": "textarea",
+      "rows": 4,
+      "placeholder": "请输入联系地址..."
+    },
+    model: {
+      value: (_vm.config.address),
+      callback: function($$v) {
+        _vm.$set(_vm.config, "address", $$v)
+      },
+      expression: "config.address"
+    }
+  })], 1), _vm._v(" "), _c('FormItem', [_c('Button', {
+    attrs: {
+      "type": "primary"
+    },
+    on: {
+      "click": function($event) {
+        _vm.handleSubmit('configData')
+      }
+    }
+  }, [_vm._v("提交")])], 1)], 1)], 1)
+},staticRenderFns: []}
+module.exports.render._withStripped = true
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+     require("vue-hot-reload-api").rerender("data-v-02d60ba4", module.exports)
+  }
+}
 
 /***/ })
 /******/ ]);

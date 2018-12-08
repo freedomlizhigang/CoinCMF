@@ -23,7 +23,7 @@ class MenuController extends ResponseController
     public function getSelect()
     {
         try {
-            $menus = Menu::select('id','parentid','name','sort','url')->get();
+            $menus = Menu::select('id','parentid','name','sort','url')->orderBy('sort','asc')->get();
             $res = [];
             $f_menus = $menus->where('parentid',0)->all();
             // 只查三级
@@ -142,21 +142,25 @@ class MenuController extends ResponseController
         DB::beginTransaction();
         try {
             $validator = Validator::make($req->input(), [
+                'parentid' => 'required|integer',
                 'name' => 'required|max:255',
                 'url' => 'required|max:255',
                 'label' => 'required|max:255',
+                'display' => 'required|in:true,false',
             ]);
              $attrs = array(
+                'parentid' => '父级菜单',
                 'name' => '菜单名称',
                 'url' => '菜单名称',
                 'label' => '菜单标签',
+                'display' => '状态',
             );
             $validator->setAttributeNames($attrs);
             if ($validator->fails()) {
                 // 如果有错误，提示第一条
                 return $this->resData(402,$validator->errors()->all()[0].'...');
             }
-            $insert = ['name'=>$req->input('name'),'url'=>$req->input('url'),'label'=>$req->input('label'),'icon'=>$req->input('icon'),'display'=>$req->input('display') === true ? 1 : 0,'sort'=>$req->input('sort')];
+            $insert = ['parentid'=>$req->input('parentid'),'name'=>$req->input('name'),'url'=>$req->input('url'),'label'=>$req->input('label'),'icon'=>$req->input('icon'),'display'=>$req->input('display') == true ? 1 : 0,'sort'=>$req->input('sort')];
             $detail = Menu::create($insert);
             // 更新缓存
             app('com')->updateCache(new Menu(),'menuCache');

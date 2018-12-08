@@ -26,8 +26,6 @@ class ConsoleApi
     public function handle($request, Closure $next)
     {
         try {
-            // $request->admin_id = 1;
-            // return $next($request);
             $token = $request->header('Authorization');
             if (is_null($token) || $token == '') {
                 return response()->json(['code'=>401,'msg'=>'请重新登录，获取验证信息...','data'=>[]]);
