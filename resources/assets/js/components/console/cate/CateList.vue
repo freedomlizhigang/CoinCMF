@@ -10,10 +10,14 @@
         <Button type="primary" @click="renderTable('formItem')">筛选</Button>
       </FormItem>
     </Form>
+
+    <editor-bar v-model="editor.info" :isClear="isClear" @change="change"></editor-bar>
+
   </div>
 </template>
 
 <script>
+import EditorBar from '../common/editor'
 export default {
   name: 'cate-list',
   data () {
@@ -24,6 +28,10 @@ export default {
       formItem:{
         'cateid':'',
       },
+      editor: {
+        info: ''
+      },
+      isClear: false
     }
   },
   // 计算
@@ -34,11 +42,18 @@ export default {
   watch:{
 
   },
+  components: {
+    EditorBar
+  },
   created: function () {
     // 取数据
     this.getData1();
   },
   methods:{
+    change (val) {
+      this.editor.info1 = val
+      console.log(val)
+    },
     getData1:function(){
       var self = this;
       axios.get('/c-api/cate/select').then(function(res){

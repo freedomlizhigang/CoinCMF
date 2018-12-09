@@ -15,16 +15,17 @@
     "browser-sync": "^2.18.8",
     "browser-sync-webpack-plugin": "^1.1.4",
     "cross-env": "^3.2.3",
-    "jquery": "^3.1.1",
+    "jquery": "^3.3.1",
     "laravel-mix": "0.*",
     "lodash": "^4.17.4",
-    "vue": "^2.1.10",
+    "vue": "^2.5.18",
     "vue-router": "^2.0.0",
     "vuex": "^2.3.1",
     "webpack-livereload-plugin": "^0.11.0"
   },
   "dependencies": {
     "iview": "^3.1.5",
-    "vue-axios": "^2.1.4"
+    "vue-axios": "^2.1.4",
+    "wangeditor": "^3.1.1"
   }
 }

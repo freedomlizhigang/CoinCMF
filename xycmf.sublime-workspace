@@ -4,16 +4,20 @@
 		"selected_items":
 		[
 			[
+				"admin",
+				"admin_id"
+			],
+			[
+				"type",
+				"type_id"
+			],
+			[
 				"AdminEd",
 				"AdminEditInfo"
 			],
 			[
 				"json_d",
 				"json_decode"
-			],
-			[
-				"admin",
-				"adminPasswordValidate"
 			],
 			[
 				"pass",
@@ -510,10 +514,6 @@
 			[
 				"res",
 				"response"
-			],
-			[
-				"goods",
-				"goodlists"
 			]
 		]
 	},
@@ -769,10 +769,53 @@
 	},
 	"expanded_folders":
 	[
-		"/D/wwwroot/CoinCMF"
+		"/D/wwwroot/CoinCMF",
+		"/D/wwwroot/CoinCMF/app",
+		"/D/wwwroot/CoinCMF/app/Http",
+		"/D/wwwroot/CoinCMF/app/Http/Controllers",
+		"/D/wwwroot/CoinCMF/resources",
+		"/D/wwwroot/CoinCMF/resources/assets",
+		"/D/wwwroot/CoinCMF/resources/assets/js",
+		"/D/wwwroot/CoinCMF/resources/assets/js/api",
+		"/D/wwwroot/CoinCMF/routes",
+		"/D/wwwroot/CoinCMF/tests",
+		"/D/wwwroot/CoinCMF/tests/Feature"
 	],
 	"file_history":
 	[
+		"/D/wwwroot/CoinCMF/package.json",
+		"/D/wwwroot/CoinCMF/resources/assets/js/components/console/common/editor.vue",
+		"/D/wwwroot/CoinCMF/resources/assets/js/components/console/cate/CateList.vue",
+		"/D/wwwroot/CoinCMF/resources/assets/js/components/console/article/ArticleList.vue",
+		"/D/wwwroot/CoinCMF/resources/assets/js/api/article/index.js",
+		"/D/wwwroot/CoinCMF/README.md",
+		"/D/wwwroot/CoinCMF/tests/Feature/LogTest.php",
+		"/D/wwwroot/CoinCMF/tests/Feature/TypeTest.php",
+		"/D/wwwroot/CoinCMF/routes/admin.php",
+		"/D/wwwroot/CoinCMF/app/Http/Controllers/Admin/LogController.php",
+		"/D/wwwroot/CoinCMF/app/Http/Middleware/ConsoleJwt.php",
+		"/D/wwwroot/CoinCMF/resources/assets/js/api/log/index.js",
+		"/D/wwwroot/CoinCMF/resources/assets/js/components/console/log/LogList.vue",
+		"/D/wwwroot/CoinCMF/resources/assets/js/api/admin/index.js",
+		"/D/wwwroot/CoinCMF/resources/assets/js/components/console/type/TypeList.vue",
+		"/D/wwwroot/CoinCMF/resources/assets/js/components/console/section/SectionList.vue",
+		"/D/wwwroot/CoinCMF/resources/assets/js/components/console/role/RoleList.vue",
+		"/D/wwwroot/CoinCMF/resources/assets/js/components/console/admin/AdminList.vue",
+		"/D/wwwroot/CoinCMF/resources/assets/js/router/routers.js",
+		"/D/wwwroot/CoinCMF/resources/assets/js/api/api.js",
+		"/D/wwwroot/CoinCMF/app/Http/Controllers/Admin/MenuController.php",
+		"/D/wwwroot/CoinCMF/app/Http/Controllers/Admin/TypeController.php",
+		"/D/wwwroot/CoinCMF/app/Http/Controllers/Admin/Common/CateController.php",
+		"/D/wwwroot/CoinCMF/resources/assets/js/api/type/index.js",
+		"/D/wwwroot/CoinCMF/resources/assets/js/api/menu/index.js",
+		"/D/wwwroot/CoinCMF/resources/assets/js/components/console/menu/MenuTree.vue",
+		"/D/wwwroot/CoinCMF/app/Services/ComService.php",
+		"/D/wwwroot/CoinCMF/app/Http/Controllers/Admin/SectionController.php",
+		"/D/wwwroot/CoinCMS/app/Http/Controllers/Admin/IndexController.php",
+		"/D/wwwroot/CoinCMF/resources/assets/js/components/console/Iframe.vue",
+		"/D/wwwroot/CoinCMF/resources/assets/js/router/index.js",
+		"/D/wwwroot/CoinCMF/resources/assets/js/api/http.js",
+		"/D/wwwroot/CoinCMF/resources/assets/js/vuex/modules/user.js",
 		"/C/Users/Administrator/Desktop/PPT2/响应式用例/响应式布局.html",
 		"/D/wwwroot/XYCMF/config/app.php",
 		"/D/wwwroot/XYCMF/.env",
@@ -867,50 +910,18 @@
 		"/D/wwwroot/XYCMF/resources/assets/js/api/section/index.js",
 		"/D/wwwroot/XYCMF/app/Models/Console/Menu.php",
 		"/D/wwwroot/XYCMF/app/Models/Console/Role.php",
-		"/D/wwwroot/isoftstone-shared/.gitignore",
-		"/D/希夷/郭晓飞/info.txt",
-		"/D/希夷/故城环保/OA/info.txt",
-		"/D/wwwroot/XYCMF/resources/assets/js/components/console/cate/CateList.vue",
-		"/D/wwwroot/XYCMF/resources/assets/js/components/console/article/ArticleList.vue",
-		"/D/wwwroot/XYCMF/resources/assets/js/components/console/article/ArticleAdd.vue",
-		"/D/wwwroot/XYCMF/app/Models/Console/Section.php",
-		"/D/希夷/局气/账号.txt",
-		"/D/wwwroot/XYCMF/resources/assets/sass/reset.css",
-		"/D/wwwroot/XYCMF/resources/assets/js/components/console/menu",
-		"/D/希夷/局气/客情push时间.txt",
-		"/D/希夷/局气/督导需求表格/督导.txt",
-		"/D/wwwroot/XYCMF/resources/assets/js/components/console/index/Main.vue",
-		"/D/wwwroot/XYCMF/resources/assets/js/api/login/index.js",
-		"/D/wwwroot/XYCMF/resources/assets/js/api/article/index.js",
-		"/D/wwwroot/XYCMF/app/Http/Controllers/Api/UserController.php",
-		"/D/wwwroot/XYCMF/app/Providers/RouteServiceProvider.php",
-		"/D/wwwroot/XYCMF/app/Providers/AppServiceProvider.php",
-		"/D/wwwroot/XYCMF/resources/assets/js/vuex/modules/user.js",
-		"/D/wwwroot/XYCMF/resources/assets/js/components/console/api/article/index.js",
-		"/D/wwwroot/XYCMF/resources/assets/js/components/console/api/api.js",
-		"/D/wwwroot/XYCMF/resources/assets/js/components/console/api/http.js",
-		"/D/wwwroot/XYCMF/resources/assets/js/vuex/store.js",
-		"/C/Users/Administrator/Desktop/iview-admin-master/src/router/index.js",
-		"/C/Users/Administrator/Desktop/iview-admin-master/src/libs/util.js",
-		"/D/wwwroot/XYCMF/resources/assets/js/components/console/Nofound.vue",
-		"/D/wwwroot/XYCMF/resources/assets/js/components/console/App.vue",
-		"/C/Users/Administrator/Desktop/iview-admin-master/src/router/routers.js",
-		"/C/Users/Administrator/Desktop/iview-admin-master/src/main.js",
-		"/C/Users/Administrator/Desktop/iview-admin-master/src/App.vue",
-		"/C/Users/Administrator/Desktop/iview-admin-master/src/router/before-close.js",
-		"/D/wwwroot/XYCMF/package.json",
-		"/C/Users/Administrator/Desktop/Login.vue",
-		"/D/wwwroot/XYCMF/resources/assets/js/vuex/mutation_types.js"
+		"/D/wwwroot/isoftstone-shared/.gitignore"
 	],
 	"find":
 	{
-		"height": 36.0
+		"height": 27.0
 	},
 	"find_in_files":
 	{
 		"height": 622.0,
 		"where_history":
 		[
+			"D:\\wwwroot\\CoinCMF\\resources\\assets\\js\\components",
 			"D:\\wwwroot\\XYCMF\\resources\\assets\\js\\components",
 			"D:\\wwwroot\\XYCMF\\resources\\assets\\js",
 			"D:\\wwwroot\\XYCMF\\resources\\views\\admin",
@@ -1031,6 +1042,78 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"isClear",
+			"connect",
+			"$page",
+			"renderTable",
+			"AdminEditInfo",
+			"remove",
+			"pages",
+			"page",
+			"listPage",
+			"e",
+			"type",
+			"tree",
+			"select",
+			"menu",
+			"type",
+			"TypeList",
+			"index",
+			"list",
+			"！",
+			"获取",
+			"res",
+			"remove",
+			"edit",
+			"信息",
+			"section_id",
+			"sort",
+			"changeData",
+			"deleteData",
+			"changeData",
+			",$res",
+			"public",
+			"->",
+			"tree",
+			"html",
+			"type.id",
+			"名称",
+			"section_id",
+			"typeValidate",
+			"typeCreateEdit",
+			",'menuCache'",
+			"name",
+			"sort",
+			"status",
+			"showEdit",
+			"menu_id",
+			"部门",
+			"status",
+			"section",
+			"status",
+			"section",
+			"typeCreateEdit",
+			"showEdit",
+			"showModel",
+			"section",
+			"部门",
+			"label",
+			"selection",
+			"config",
+			"Config",
+			"article",
+			"menu",
+			"config",
+			"res",
+			"menus",
+			"MenuController",
+			"menu/",
+			"submenu",
+			"leftmenu",
+			"0",
+			"user_id",
+			"redirect",
+			"toLogin",
 			"</div>",
 			"input('display')",
 			"true",
@@ -1086,79 +1169,7 @@
 			"名",
 			"updateAdmin",
 			"adminPwd",
-			"showCreateStatus",
-			"updateAdmin",
-			"showCreateStatus",
-			"showModalStatus",
-			"nextTick",
-			"role_ids",
-			"updateAdmin",
-			"section",
-			"changeStatus",
-			"changeStatus ",
-			"ConvertEmptyStringsToNull",
-			"middleware",
-			"ConvertEmptyStringsToNull",
-			"name",
-			"email",
-			"adminPwd",
-			"adminCreateValidate",
-			"password",
-			"validatePass",
-			"passwdCheck",
-			"password",
-			"adminCreateValidate",
-			"console",
-			"/console",
-			"public_path",
-			"base",
-			"public_pat",
-			"public",
-			"public_path",
-			"adminCreateValidate",
-			"createSection",
-			"createAdmin",
-			"adminCreateValidate",
-			"createAdmin",
-			"adminCreateValidate",
-			"createAdmin",
-			"nextTick",
-			"this.$nextTick(() => {\n                        this.loading = true;\n                    });",
-			"dataloading",
-			"getTableList",
-			"Modal",
-			"Priv",
-			"createRole",
-			"self",
-			"createRole",
-			"createSection",
-			"loginSubmit",
-			"createSection",
-			"adminInfoValidate",
-			"realname",
-			"name",
-			"realname",
-			"roles_ids",
-			"role_ids",
-			"password_confirmation",
-			"adminInfo",
-			"showEditInfo",
-			"更新用户",
-			"更新用户状态成功",
-			"section_id",
-			"name",
-			"priv",
-			"label=\"item.id\"",
-			"roles_ids",
-			"adminPassValidate",
-			"updateAdmin",
-			"confirmpassword",
-			"name",
-			"Info",
-			"Priv",
-			"showCreateAdmin",
-			"adminPwd",
-			"Pass"
+			"showCreateStatus"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -1293,7 +1304,7 @@
 	],
 	"incremental_find":
 	{
-		"height": 36.0
+		"height": 27.0
 	},
 	"input":
 	{
@@ -1354,7 +1365,7 @@
 	"project": "xycmf.sublime-project",
 	"replace":
 	{
-		"height": 68.0
+		"height": 50.0
 	},
 	"save_all_on_build": false,
 	"select_file":
@@ -1363,6 +1374,14 @@
 		"last_filter": "",
 		"selected_items":
 		[
+			[
+				"logtest",
+				"tests\\Feature\\LogTest.php"
+			],
+			[
+				"typetest",
+				"tests\\Feature\\TypeTest.php"
+			],
 			[
 				"home/home",
 				"resources\\views\\home\\home.blade.php"
@@ -1866,14 +1885,6 @@
 			[
 				"order.b",
 				"resources\\views\\default\\order.blade.php"
-			],
-			[
-				"order.bla",
-				"resources\\views\\default\\order.blade.php"
-			],
-			[
-				"cart.b",
-				"resources\\views\\default\\cart.blade.php"
 			]
 		],
 		"width": 0.0
