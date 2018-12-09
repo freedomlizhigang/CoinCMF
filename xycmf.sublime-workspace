@@ -769,17 +769,16 @@
 	},
 	"expanded_folders":
 	[
-		"/D/wwwroot/XYCMF",
-		"/D/wwwroot/XYCMF/app",
-		"/D/wwwroot/XYCMF/app/Http",
-		"/D/wwwroot/XYCMF/app/Http/Controllers",
-		"/D/wwwroot/XYCMF/app/Http/Controllers/Admin",
-		"/D/wwwroot/XYCMF/routes"
+		"/D/wwwroot/CoinCMF"
 	],
 	"file_history":
 	[
-		"/D/wwwroot/XYCMF/config/database.php",
+		"/C/Users/Administrator/Desktop/PPT2/响应式用例/响应式布局.html",
+		"/D/wwwroot/XYCMF/config/app.php",
 		"/D/wwwroot/XYCMF/.env",
+		"/D/wwwroot/XYCMF/.env.example",
+		"/D/wwwroot/XYCMF/composer.json",
+		"/D/wwwroot/XYCMF/config/database.php",
 		"/D/wwwroot/XYCMF/README.md",
 		"/D/wwwroot/XYCMF/app/Http/Controllers/Admin/MenuController.php",
 		"/D/wwwroot/XYCMF/resources/assets/js/components/console/Iframe.vue",
@@ -799,7 +798,6 @@
 		"/D/wwwroot/XYCMF/app/Http/Middleware/BetoAdmin.php",
 		"/D/wwwroot/XYCMF/app/Http/Middleware/ConsoleApi.php",
 		"/D/wwwroot/XYCMF/tests/Feature/ConfigTest.php",
-		"/D/wwwroot/XYCMF/composer.json",
 		"/D/wwwroot/XYCMF/tests/Feature/ExampleTest.php",
 		"/D/phpunit/phpunit.cmd",
 		"/D/wwwroot/XYCMF/phpunit.xml",
@@ -902,14 +900,11 @@
 		"/C/Users/Administrator/Desktop/iview-admin-master/src/router/before-close.js",
 		"/D/wwwroot/XYCMF/package.json",
 		"/C/Users/Administrator/Desktop/Login.vue",
-		"/D/wwwroot/XYCMF/resources/assets/js/vuex/mutation_types.js",
-		"/D/wwwroot/XYCMF/resources/assets/js/components/console/Logout.vue",
-		"/D/wwwroot/XYCMF/resources/assets/js/components/Login.vue",
-		"/D/wwwroot/XYCMF/app/Http/Controllers/Admin/Api/CommonController.php"
+		"/D/wwwroot/XYCMF/resources/assets/js/vuex/mutation_types.js"
 	],
 	"find":
 	{
-		"height": 41.0
+		"height": 36.0
 	},
 	"find_in_files":
 	{
@@ -1036,6 +1031,7 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"</div>",
 			"input('display')",
 			"true",
 			";\n",
@@ -1162,8 +1158,7 @@
 			"Priv",
 			"showCreateAdmin",
 			"adminPwd",
-			"Pass",
-			"密码"
+			"Pass"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -1298,7 +1293,7 @@
 	],
 	"incremental_find":
 	{
-		"height": 27.0
+		"height": 36.0
 	},
 	"input":
 	{
@@ -1359,7 +1354,7 @@
 	"project": "xycmf.sublime-project",
 	"replace":
 	{
-		"height": 50.0
+		"height": 68.0
 	},
 	"save_all_on_build": false,
 	"select_file":

@@ -41,12 +41,12 @@ class MenuController extends ResponseController
                     }
                 }
             }
-            return $this->resData(200,'获取成功！',$res);
+            return $this->resData(200,'获取成功...',$res);
         } catch (\Throwable $e) {
-            return $this->resData(400,'获取失败，请稍后再试！');
+            return $this->resData(400,'获取失败，请稍后再试...');
         }
     }
-    // 取下拉框菜单
+    // 取右侧权限菜单
     public function getList(Request $req)
     {
         try {
@@ -82,11 +82,9 @@ class MenuController extends ResponseController
                 // 进行权限判断
                 if (!in_array(1, $user->allRole))
                 {
-                    foreach ($res as $s => $v) {
-                        foreach ($user->allPriv as $url) {
-                            if ($v['url'] == $url) {
-                                $leftmenu[$k]['submenu'][$s] = $v;
-                            }
+                    foreach ($submenu as $s => $v) {
+                        if (in_array($v['url'],$user->allPriv)) {
+                            $leftmenu[$k]['submenu'][$s] = $v;
                         }
                     }
                 }
@@ -163,7 +161,7 @@ class MenuController extends ResponseController
             $insert = ['parentid'=>$req->input('parentid'),'name'=>$req->input('name'),'url'=>$req->input('url'),'label'=>$req->input('label'),'icon'=>$req->input('icon'),'display'=>$req->input('display') == 'true' ? 1 : 0,'sort'=>$req->input('sort')];
             $detail = Menu::create($insert);
             // 更新缓存
-            app('com')->updateCache(new Menu(),'menuCache');
+            app('com')->updateCache(new Menu());
             DB::commit();
             return $this->resData(200,'添加权限菜单成功...',$detail);
         } catch (\Throwable $e) {
@@ -201,7 +199,7 @@ class MenuController extends ResponseController
             $update = ['parentid'=>$req->input('parentid'),'name'=>$req->input('name'),'url'=>$req->input('url'),'label'=>$req->input('label'),'icon'=>$req->input('icon'),'display'=>$req->input('display') == 'true' ? 1 : 0,'sort'=>$req->input('sort')];
             Menu::where('id',$id)->update($update);
             // 更新缓存
-            app('com')->updateCache(new Menu(),'menuCache');
+            app('com')->updateCache(new Menu());
             DB::commit();
             return $this->resData(200,'更新权限菜单成功...');
         } catch (\Throwable $e) {
@@ -252,7 +250,7 @@ class MenuController extends ResponseController
             $arr = explode(',', $info->arrchildid);
             Menu::destroy($arr);
             // 更新缓存
-            app('com')->updateCache(new Menu(),'menuCache');
+            app('com')->updateCache(new Menu());
             DB::commit();
             return $this->resData(200,'删除成功...');
         } catch (\Throwable $e) {

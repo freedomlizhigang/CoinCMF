@@ -25,6 +25,16 @@ Route::group(['prefix'=>'c-api','namespace' => 'Admin','middleware'=>['c-api']],
     Route::post('article/sort', 'ArticleController@postSort');
     // 栏目
     Route::get('cate/select', 'CateController@getSelect');
+    // 日志
+    Route::get('log/list', 'LogController@getList');
+    Route::post('log/clear', 'LogController@postClear');
+    // 分类管理
+    Route::get('type/list', 'TypeController@getList');
+    Route::post('type/detail', 'TypeController@postDetail');
+    Route::post('type/create', 'TypeController@postCreate');
+    Route::post('type/edit', 'TypeController@postEdit');
+    Route::post('type/sort', 'TypeController@postSort');
+    Route::post('type/remove', 'TypeController@postRemove');
     // 个人修改资料
     Route::post('admin/selfeditinfo', 'AdminController@postSelfEditInfo');
     Route::post('admin/selfeditpassword', 'AdminController@postSelfEditPassword');

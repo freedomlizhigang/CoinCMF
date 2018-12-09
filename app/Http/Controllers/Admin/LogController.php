@@ -11,47 +11,51 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\Console\Admin;
 use App\Models\Console\Log;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 
-class LogController extends Controller
+class LogController extends ResponseController
 {
 	// 查询
-    public function getIndex(Request $res)
+    public function getList(Request $req)
     {
         try {
         	$title = '日志列表';
-        	$admins = Admin::select('id','realname','name')->get();
+            $page = $req->input('page',0);
+            $size = $req->input('size',10);
         	// 超级管理员可以查看所有用户日志，其它人只能看自己的
-        	if (session('console')->id === 1) {
-        		$admin_id = $res->input('admin_id',0);
+        	if ($req->admin_id == '1') {
+        		$admin_id = $req->input('admin_id',0);
         		if ($admin_id != 0) {
-        			$list = Log::where('admin_id',$admin_id)->orderBy('id','desc')->paginate(10);
-        		}
-        		else
-        		{
-        			$list = Log::orderBy('id','desc')->paginate(10);
-        		}
+                    $list = Log::where('admin_id',$admin_id)->offset(($page - 1) * $size)->limit($size)->orderBy('id','desc')->get();
+                    $total = Log::where('admin_id',$admin_id)->count();
+                }
+                else
+                {
+                    $list = Log::offset(($page - 1) * $size)->limit($size)->orderBy('id','desc')->get();
+                    $total = Log::count();
+                }
+            }
+            else
+            {
+                $list = Log::where('admin_id',$req->admin_id)->offset(($page - 1) * $size)->limit($size)->orderBy('id','desc')->get();
+    			$total = Log::where('admin_id',$req->admin_id)->count();
         	}
-        	else
-        	{
-        		$list = Log::where('admin_id',Auth::guard('admin')->user()->id)->orderBy('id','desc')->paginate(10);
-        	}
-        	return view('admin.console.log.index',compact('title','list','admins'));
+            $res = ['list'=>$list,'total'=>$total];
+            return $this->resData(200,'获取成功...',$res);;
         } catch (\Throwable $e) {
-            return view('errors.500');
+            return $this->resData(400,'获取失败，请稍后再试...');
         }
     }
     // 清除7天前日志
-    public function getDel()
+    public function postClear()
     {
         try {
-        	$logs = Log::where('created_at','<',Carbon::now()->addWeek(-1))->delete();
-            return back()->with('message','清除成功！');
+            $logs = Log::where('created_at','<',Carbon::now()->addWeek(-1))->delete();
+        	return $this->resData(200,'操作成功...');;
         } catch (\Throwable $e) {
-        	return back()->with('message','清除失败！');
+        	return $this->resData(400,'操作失败，请稍后再试...');
         }
     }
 }

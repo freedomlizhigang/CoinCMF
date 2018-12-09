@@ -16,7 +16,7 @@ const router = new Router({
 router.beforeEach((to, from, next) => {
     // 登录页面
     if (to.name === 'login') {
-        if (store.getters.user_id == 0) {
+        if (store.getters.token == '') {
             next();
         }
         else
@@ -27,7 +27,7 @@ router.beforeEach((to, from, next) => {
     // 其它页面
     else
     {
-        if (store.getters.user_id == 0 && to.meta.requiresAuth) {
+        if (store.getters.token == '' && to.meta.requiresAuth) {
             next('/console/login');
         }
         else
@@ -37,7 +37,7 @@ router.beforeEach((to, from, next) => {
     }
 })
 router.afterEach(to => {
-  iView.LoadingBar.finish()
+    iView.LoadingBar.finish()
 })
 
 export default router

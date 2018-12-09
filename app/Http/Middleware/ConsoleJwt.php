@@ -50,7 +50,9 @@ class ConsoleJwt
             if(in_array(1,$user->allRole) || in_array($priv,$user->allPriv))
             {
                 // 日志记录，只记录post或者del操作(通过比较url来得出结果)
-                Log::create(['admin_id'=>$user->id,'method'=>$request->method(),'url'=>$request->fullUrl(),'user'=>$user->name,'data'=>json_encode($request->all()),'created_at'=>date('Y-m-d H:i:s')]);
+                if (!$request->isMethod('get')) {
+                    Log::create(['admin_id'=>$user->id,'method'=>$request->method(),'url'=>$request->fullUrl(),'user'=>$user->name,'data'=>json_encode($request->all()),'created_at'=>date('Y-m-d H:i:s')]);
+                }
                 $request->admin_id = $user->id;
                 return $next($request);
             }

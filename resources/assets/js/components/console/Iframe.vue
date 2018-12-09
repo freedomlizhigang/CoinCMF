@@ -134,11 +134,14 @@
             // 路由结束后更新面包屑及标题+按钮组
             router.afterEach((to, from) => {
                 var params = {'label':to.name};
-                this.$api.common.breadcrumb(params).then(res=>{
-                    this.breadCrumbList = res.data.breadcrumb;
-                    this.title = res.data.title;
-                    this.btns = res.data.btns;
-                });
+                // 这里是个大坑，不判断登录页面会在退出时让登录页面进入死循环，全局的钩子还是要少加为好
+                if (to.name !== 'login') {
+                    this.$api.common.breadcrumb(params).then(res=>{
+                        this.breadCrumbList = res.data.breadcrumb;
+                        this.title = res.data.title;
+                        this.btns = res.data.btns;
+                    });
+                }
             })
         },
         methods:{

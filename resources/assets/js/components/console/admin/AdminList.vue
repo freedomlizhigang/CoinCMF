@@ -397,11 +397,18 @@ export default {
         },
         // 删除
         remove:function(index,id){
-            this.$api.admin.remove({admin_id:id}).then(res=>{
-                if(res.code == 200)
-                {
-                    this.$Message.success(res.msg);
-                    this.tablelist.splice(index, 1);
+            // 弹出确认框
+            this.$Modal.confirm({
+                title: '警告',
+                content: '<p>此操作不可恢复，三思而后行...</p>',
+                onOk: () => {
+                    this.$api.admin.remove({admin_id:id}).then(res=>{
+                        if(res.code == 200)
+                        {
+                            this.$Message.success(res.msg);
+                            this.tablelist.splice(index, 1);
+                        }
+                    });
                 }
             });
         },

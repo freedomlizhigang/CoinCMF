@@ -15,7 +15,7 @@
             <Button @click="showModel()" type="success" class="f-r">添加部门</Button>
         </Col>
     </Row>
-    <Table :columns="list" ref="selection" :data="tablelist" :loading="dataloading"></Table>
+    <Table :columns="list" :data="tablelist" :loading="dataloading"></Table>
     <!-- 添加的弹出 -->
     <Modal v-model="showModalStatus" title="添加部门" @on-ok="createSection('sectionValidate')" :loading="loading">
         <Form :model="section" ref="sectionValidate" :rules="sectionValidate" action="javascript:void(0)">
@@ -175,11 +175,18 @@ export default {
         },
         // 删除
         remove:function(index,id){
-            this.$api.section.remove({section_id:id}).then(res=>{
-                if(res.code == 200)
-                {
-                    this.$Message.success(res.msg);
-                    this.tablelist.splice(index, 1);
+            // 弹出确认框
+            this.$Modal.confirm({
+                title: '警告',
+                content: '<p>此操作不可恢复，三思而后行...</p>',
+                onOk: () => {
+                    this.$api.section.remove({section_id:id}).then(res=>{
+                        if(res.code == 200)
+                        {
+                            this.$Message.success(res.msg);
+                            this.tablelist.splice(index, 1);
+                        }
+                    });
                 }
             });
         },

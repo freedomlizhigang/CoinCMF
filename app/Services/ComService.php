@@ -103,7 +103,7 @@ class ComService
      * @param  [type] $model [模型]
      * @return [type] $cacheName [缓存名称]
      */
-    public function updateCache($model,$cacheName,$cache = 0){
+    public function updateCache($model,$cacheName = 'cache',$cache = 0){
         $this->types = $types = array();
         $this->types = $types = $model->get()->toArray();
         // 将数组索引转化为typeid，phpcms v9的select方法支持定义数组索引，这个坑花了两小时

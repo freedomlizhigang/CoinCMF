@@ -10,6 +10,8 @@ import section from './section/index'
 import role from './role/index'
 import admin from './admin/index'
 import config from './config/index'
+import type from './type/index'
+import log from './log/index'
 
 const api = {
     common,
@@ -20,6 +22,8 @@ const api = {
     role,
     admin,
     config,
+    type,
+    log,
 }
 
 export default api
