@@ -4,6 +4,22 @@
 		"selected_items":
 		[
 			[
+				"upload",
+				"uploadList"
+			],
+			[
+				"Upload",
+				"UploadImg\t(upload.vue)"
+			],
+			[
+				"Upl",
+				"UploadImg"
+			],
+			[
+				"Up",
+				"UploadImg\t(upload.vue)"
+			],
+			[
 				"admin",
 				"admin_id"
 			],
@@ -498,22 +514,6 @@
 			[
 				"return",
 				"return"
-			],
-			[
-				"retur",
-				"return"
-			],
-			[
-				"cont",
-				"contents\t.contents()"
-			],
-			[
-				"sub",
-				"submit\t.submit()"
-			],
-			[
-				"res",
-				"response"
 			]
 		]
 	},
@@ -777,15 +777,22 @@
 		"/D/wwwroot/CoinCMF/resources/assets",
 		"/D/wwwroot/CoinCMF/resources/assets/js",
 		"/D/wwwroot/CoinCMF/resources/assets/js/api",
+		"/D/wwwroot/CoinCMF/resources/assets/js/components",
+		"/D/wwwroot/CoinCMF/resources/assets/js/components/console",
+		"/D/wwwroot/CoinCMF/resources/assets/js/components/console/article",
+		"/D/wwwroot/CoinCMF/resources/assets/js/components/console/cate",
+		"/D/wwwroot/CoinCMF/resources/assets/js/components/console/common",
 		"/D/wwwroot/CoinCMF/routes",
 		"/D/wwwroot/CoinCMF/tests",
 		"/D/wwwroot/CoinCMF/tests/Feature"
 	],
 	"file_history":
 	[
-		"/D/wwwroot/CoinCMF/package.json",
-		"/D/wwwroot/CoinCMF/resources/assets/js/components/console/common/editor.vue",
 		"/D/wwwroot/CoinCMF/resources/assets/js/components/console/cate/CateList.vue",
+		"/D/wwwroot/CoinCMF/resources/assets/js/components/console/common/upload.vue",
+		"/D/wwwroot/CoinCMF/resources/assets/js/components/console/common/editor.vue",
+		"/D/wwwroot/CoinCMF/resources/assets/js/components/console/Iframe.vue",
+		"/D/wwwroot/CoinCMF/package.json",
 		"/D/wwwroot/CoinCMF/resources/assets/js/components/console/article/ArticleList.vue",
 		"/D/wwwroot/CoinCMF/resources/assets/js/api/article/index.js",
 		"/D/wwwroot/CoinCMF/README.md",
@@ -812,7 +819,6 @@
 		"/D/wwwroot/CoinCMF/app/Services/ComService.php",
 		"/D/wwwroot/CoinCMF/app/Http/Controllers/Admin/SectionController.php",
 		"/D/wwwroot/CoinCMS/app/Http/Controllers/Admin/IndexController.php",
-		"/D/wwwroot/CoinCMF/resources/assets/js/components/console/Iframe.vue",
 		"/D/wwwroot/CoinCMF/resources/assets/js/router/index.js",
 		"/D/wwwroot/CoinCMF/resources/assets/js/api/http.js",
 		"/D/wwwroot/CoinCMF/resources/assets/js/vuex/modules/user.js",
@@ -909,12 +915,11 @@
 		"/D/wwwroot/XYCMF/app/Http/Controllers/Admin/FieldController.php",
 		"/D/wwwroot/XYCMF/resources/assets/js/api/section/index.js",
 		"/D/wwwroot/XYCMF/app/Models/Console/Menu.php",
-		"/D/wwwroot/XYCMF/app/Models/Console/Role.php",
-		"/D/wwwroot/isoftstone-shared/.gitignore"
+		"/D/wwwroot/XYCMF/app/Models/Console/Role.php"
 	],
 	"find":
 	{
-		"height": 27.0
+		"height": 41.0
 	},
 	"find_in_files":
 	{
@@ -1042,6 +1047,15 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"demo-",
+			"showProgress",
+			"demo-",
+			"defaultList",
+			"my-",
+			"uploadList",
+			"handleFormatError",
+			"handleView",
+			"template-complier",
 			"isClear",
 			"connect",
 			"$page",
@@ -1160,16 +1174,7 @@
 			"cates",
 			"f_cates",
 			"tree",
-			"btns",
-			"uid",
-			"section",
-			"role",
-			"editpassword",
-			"updatePassword",
-			"名",
-			"updateAdmin",
-			"adminPwd",
-			"showCreateStatus"
+			"btns"
 		],
 		"highlight": true,
 		"in_selection": false,
