@@ -34,19 +34,12 @@ const errorHandle = (status, other) => {
                 toLogin();
             }, 1000);
             break;
-        // 403 token过期
-        // 清除token并跳转登录页
-        case 403:
-            iView.Message.error('登录过期，请重新登录...');
-            store.commit('LOGOUT');
-            setTimeout(() => {
-                toLogin();
-            }, 1000);
-            break;
+
         // 404请求不存在
         case 404:
             iView.Message.error('请求的资源不存在...');
             break;
+
         default:
             iView.Message.error('服务器有点忙...');
             console.log(other);
@@ -80,6 +73,11 @@ instance.interceptors.response.use(
         if(res.status === 200) {
             // 状态码判断
             switch (res.data.code) {
+                // 400参数的错误
+                case 400:
+                    iView.Message.error('请求的资源不存在...');
+                    break;
+
                 // 401: 未登录状态，跳转登录页
                 case 401:
                     store.commit('LOGOUT');
@@ -91,15 +89,12 @@ instance.interceptors.response.use(
                 case 402:
                     iView.Message.error(res.data.msg);
                     break;
-                // 403 token过期
-                // 清除token并跳转登录页
+
+                // 403 输入正确，但其它相关数据有问题，拒绝继续执行
                 case 403:
-                    iView.Message.error('登录过期，请重新登录...');
-                    store.commit('LOGOUT');
-                    setTimeout(() => {
-                        toLogin();
-                    }, 1000);
+                    iView.Message.error(res.data.msg);
                     break;
+
                 // 404请求不存在
                 case 404:
                     iView.Message.error('请求的资源不存在...');

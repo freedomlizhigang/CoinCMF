@@ -771,46 +771,43 @@
 	[
 		"/D/wwwroot/CoinCMF",
 		"/D/wwwroot/CoinCMF/app",
-		"/D/wwwroot/CoinCMF/app/Http",
-		"/D/wwwroot/CoinCMF/app/Http/Controllers",
 		"/D/wwwroot/CoinCMF/resources",
 		"/D/wwwroot/CoinCMF/resources/assets",
 		"/D/wwwroot/CoinCMF/resources/assets/js",
-		"/D/wwwroot/CoinCMF/resources/assets/js/api",
 		"/D/wwwroot/CoinCMF/resources/assets/js/components",
 		"/D/wwwroot/CoinCMF/resources/assets/js/components/console",
-		"/D/wwwroot/CoinCMF/resources/assets/js/components/console/article",
 		"/D/wwwroot/CoinCMF/resources/assets/js/components/console/cate",
 		"/D/wwwroot/CoinCMF/resources/assets/js/components/console/common",
-		"/D/wwwroot/CoinCMF/routes",
-		"/D/wwwroot/CoinCMF/tests",
-		"/D/wwwroot/CoinCMF/tests/Feature"
+		"/D/wwwroot/CoinCMF/resources/views"
 	],
 	"file_history":
 	[
-		"/D/wwwroot/CoinCMF/resources/assets/js/components/console/cate/CateList.vue",
 		"/D/wwwroot/CoinCMF/resources/assets/js/components/console/common/upload.vue",
+		"/D/wwwroot/CoinCMF/webpack.mix.js",
+		"/D/wwwroot/CoinCMF/resources/views/admin/index.blade.php",
+		"/D/wwwroot/CoinCMF/app/Http/Middleware/ConsoleJwt.php",
+		"/D/wwwroot/CoinCMF/app/Http/Controllers/Admin/MenuController.php",
+		"/D/wwwroot/CoinCMF/resources/assets/js/components/console/admin/AdminList.vue",
+		"/D/wwwroot/CoinCMF/resources/assets/js/components/console/article/ArticleList.vue",
+		"/D/wwwroot/CoinCMF/resources/assets/js/components/console/type/TypeList.vue",
+		"/D/wwwroot/CoinCMF/resources/assets/js/bootstrap.js",
+		"/D/wwwroot/CoinCMF/resources/assets/js/components/console/cate/CateList.vue",
 		"/D/wwwroot/CoinCMF/resources/assets/js/components/console/common/editor.vue",
 		"/D/wwwroot/CoinCMF/resources/assets/js/components/console/Iframe.vue",
 		"/D/wwwroot/CoinCMF/package.json",
-		"/D/wwwroot/CoinCMF/resources/assets/js/components/console/article/ArticleList.vue",
 		"/D/wwwroot/CoinCMF/resources/assets/js/api/article/index.js",
 		"/D/wwwroot/CoinCMF/README.md",
 		"/D/wwwroot/CoinCMF/tests/Feature/LogTest.php",
 		"/D/wwwroot/CoinCMF/tests/Feature/TypeTest.php",
 		"/D/wwwroot/CoinCMF/routes/admin.php",
 		"/D/wwwroot/CoinCMF/app/Http/Controllers/Admin/LogController.php",
-		"/D/wwwroot/CoinCMF/app/Http/Middleware/ConsoleJwt.php",
 		"/D/wwwroot/CoinCMF/resources/assets/js/api/log/index.js",
 		"/D/wwwroot/CoinCMF/resources/assets/js/components/console/log/LogList.vue",
 		"/D/wwwroot/CoinCMF/resources/assets/js/api/admin/index.js",
-		"/D/wwwroot/CoinCMF/resources/assets/js/components/console/type/TypeList.vue",
 		"/D/wwwroot/CoinCMF/resources/assets/js/components/console/section/SectionList.vue",
 		"/D/wwwroot/CoinCMF/resources/assets/js/components/console/role/RoleList.vue",
-		"/D/wwwroot/CoinCMF/resources/assets/js/components/console/admin/AdminList.vue",
 		"/D/wwwroot/CoinCMF/resources/assets/js/router/routers.js",
 		"/D/wwwroot/CoinCMF/resources/assets/js/api/api.js",
-		"/D/wwwroot/CoinCMF/app/Http/Controllers/Admin/MenuController.php",
 		"/D/wwwroot/CoinCMF/app/Http/Controllers/Admin/TypeController.php",
 		"/D/wwwroot/CoinCMF/app/Http/Controllers/Admin/Common/CateController.php",
 		"/D/wwwroot/CoinCMF/resources/assets/js/api/type/index.js",
@@ -912,14 +909,11 @@
 		"/D/wwwroot/XYCMF/app/Http/Controllers/Admin/Api/MenuController.php",
 		"/D/wwwroot/XYCMF/app/Http/Controllers/Admin/Api/LoginController.php",
 		"/D/wwwroot/XYCMF/app/Http/Controllers/Admin/PublicController.php",
-		"/D/wwwroot/XYCMF/app/Http/Controllers/Admin/FieldController.php",
-		"/D/wwwroot/XYCMF/resources/assets/js/api/section/index.js",
-		"/D/wwwroot/XYCMF/app/Models/Console/Menu.php",
-		"/D/wwwroot/XYCMF/app/Models/Console/Role.php"
+		"/D/wwwroot/XYCMF/app/Http/Controllers/Admin/FieldController.php"
 	],
 	"find":
 	{
-		"height": 41.0
+		"height": 27.0
 	},
 	"find_in_files":
 	{
@@ -1047,6 +1041,8 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"showEditInfo",
+			"InputNumber",
 			"demo-",
 			"showProgress",
 			"demo-",
@@ -1172,9 +1168,7 @@
 			"menuSelect",
 			"detail",
 			"cates",
-			"f_cates",
-			"tree",
-			"btns"
+			"f_cates"
 		],
 		"highlight": true,
 		"in_selection": false,

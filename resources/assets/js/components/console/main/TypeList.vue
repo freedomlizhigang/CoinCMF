@@ -57,7 +57,8 @@ export default {
                         min: 0,
                         value: params.row.sort,
                         size: 'small',
-                        number: true
+                        number: true,
+                        activeChange:false,
                       },
                       on: {
                         'on-change': (value) => {

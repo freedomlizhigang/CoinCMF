@@ -13,7 +13,7 @@
         </div>
         <!-- 上传，限制张数 -->
         <Upload
-            :ref="refname"
+            ref="upload-thumb"
             :show-upload-list="false"
             :default-file-list="defaultList"
             :on-success="handleSuccess"
@@ -25,16 +25,107 @@
             multiple
             type="drag"
             name="imgFile"
+            :data="postData"
             action="/api/common/upload"
             style="display: inline-block;width:58px;">
             <div style="width: 58px;height:58px;line-height: 58px;">
                 <Icon type="ios-camera" size="20"></Icon>
             </div>
         </Upload>
+        <Alert>上传图片格式为'jpg','jpeg','png','gif'，大小不超过2M，请自己处理好宽高比例</Alert>
     </div>
 
 
 </template>
+
+<script>
+export default {
+    name: 'UploadThumb',
+    data () {
+        return {
+            // 已经上传成功的所有文件结果
+            uploadList: [],
+            postData:{
+                'thumb':0,
+                'thumbWidth':'200px',
+                'thumbWidth':'200px',
+            }
+        }
+    },
+    props: {
+        defaultList:{
+            type: Array,
+            default: function () {
+                return [];
+            }
+        },
+    },
+    mounted() {
+        this.uploadList = this.$refs['upload-thumb'].fileList;
+    },
+    watch:{
+        defaultList(curVal,oldVal){
+            if(curVal){
+                this.uploadList = curVal;
+            }
+        }
+    },
+    created: function () {
+    },
+    methods:{
+        handleClearFiles () {
+            // 再次点击上传之前，清空之前已上传文件
+            this.$refs.upload.clearFiles()
+        },
+        // 移除的回调
+        handleRemove (file) {
+            // console.log(file)
+            const fileList = this.$refs.upload.fileList;
+            this.$refs.upload.fileList.splice(fileList.indexOf(file), 1);
+        },
+        // 上传成功的回调
+        handleSuccess (res, file) {
+            // console.log(res)
+            if (res.code == 200) {
+                file.name = res.data.filename;
+                file.url = res.data.url;
+            }
+            else
+            {
+                this.$Notice.warning({
+                    title: '上传失败',
+                    desc: '请检查网络及上传的内容是否符合要求！'
+                });
+            }
+        },
+        // 检查文件格式
+        handleFormatError (file) {
+            this.$Notice.warning({
+                title: '文件格式不正确',
+                desc: '文件 ' + file.name + ' 格式不正确, 请插入jpg/jpeg/png/gif图片。'
+            });
+        },
+        // 检查大小
+        handleMaxSize (file) {
+            this.$Notice.warning({
+                title: '文件大小超出限制',
+                desc: '文件 ' + file.name + ' 太大，最大就不要超过2M！'
+            });
+        },
+        // 上传前检查数量
+        handleBeforeUpload () {
+            const check = this.uploadList.length < 1;
+            if (!check) {
+                this.$Notice.warning({
+                    title: '已经超出最大可上传数量！'
+                });
+            }
+            return check;
+        },
+    },
+}
+</script>
+
 
 <style>
     .upload-list{
@@ -74,70 +165,3 @@
         margin: 0 2px;
     }
 </style>
-
-<script>
-export default {
-    name: 'UploadImg',
-    data () {
-        return {
-            defaultList: [
-            ],
-            imgName: '',
-            uploadList: []
-        }
-    },
-    props: {
-        refname: {
-            type: String,
-            default: ''
-        }
-    },
-    mounted() {
-        this.uploadList = this.$refs[this.refname].fileList;
-    },
-    created: function () {
-    },
-    methods:{
-        handleClearFiles () {
-            // 再次点击上传之前，清空之前已上传文件
-            this.$refs.upload.clearFiles()
-        },
-        // 移除的回调
-        handleRemove (file) {
-            console.log(file)
-            const fileList = this.$refs.upload.fileList;
-            this.$refs.upload.fileList.splice(fileList.indexOf(file), 1);
-        },
-        // 上传成功的回调
-        handleSuccess (res, file) {
-            console.log(res)
-            file.url = res.url;
-            file.name = '7eb99afb9d5f317c912f08b5212fd69a';
-        },
-        // 检查文件格式
-        handleFormatError (file) {
-            this.$Notice.warning({
-                title: '文件格式不正确',
-                desc: '文件 ' + file.name + ' 格式不正确, 请插入jpg/jpeg/png/gif图片。'
-            });
-        },
-        // 检查大小
-        handleMaxSize (file) {
-            this.$Notice.warning({
-                title: '文件大小超出限制',
-                desc: '文件 ' + file.name + ' 太大，最大就不要超过2M！'
-            });
-        },
-        // 上传前检查数量
-        handleBeforeUpload () {
-            const check = this.uploadList.length < 5;
-            if (!check) {
-                this.$Notice.warning({
-                    title: '已经超出最大可上传数量！'
-                });
-            }
-            return check;
-        },
-    },
-}
-</script>

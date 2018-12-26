@@ -20,11 +20,20 @@ Route::group(['prefix'=>'c-api','namespace' => 'Admin'],function(){
 Route::group(['prefix'=>'c-api','namespace' => 'Admin','middleware'=>['c-api']],function(){
     // 文章管理用的
     Route::get('article/list', 'ArticleController@getList');
-    Route::post('article/delete', 'ArticleController@postDelete');
-    Route::post('article/deleteall', 'ArticleController@postDeleteAll');
+    Route::post('article/create', 'ArticleController@postCreate');
+    Route::get('article/detail', 'ArticleController@getDetail');
+    Route::post('article/edit', 'ArticleController@postEdit');
+    Route::post('article/remove', 'ArticleController@postRemove');
     Route::post('article/sort', 'ArticleController@postSort');
+    Route::post('article/deleteall', 'ArticleController@postDeleteAll');
     // 栏目
     Route::get('cate/select', 'CateController@getSelect');
+    Route::get('cate/list', 'CateController@getList');
+    Route::post('cate/create', 'CateController@postCreate');
+    Route::get('cate/detail', 'CateController@getDetail');
+    Route::post('cate/edit', 'CateController@postEdit');
+    Route::post('cate/remove', 'CateController@postRemove');
+    Route::post('cate/sort', 'CateController@postSort');
     // 日志
     Route::get('log/list', 'LogController@getList');
     Route::post('log/clear', 'LogController@postClear');

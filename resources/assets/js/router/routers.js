@@ -1,18 +1,20 @@
+import Nofound from '.././components/console/Nofound.vue'
 import Login from '.././components/console/Login.vue'
 import Logout from '.././components/console/Logout.vue'
 import Iframe from '.././components/console/Iframe.vue'
-import Nofound from '.././components/console/Nofound.vue'
-import Main from '.././components/console/index/Main.vue'
-import ArticleList from '.././components/console/article/ArticleList.vue'
-import ArticleAdd from '.././components/console/article/ArticleAdd.vue'
-import CateList from '.././components/console/cate/CateList.vue'
-import MenuTree from '.././components/console/menu/MenuTree.vue'
-import SectionList from '.././components/console/section/SectionList.vue'
-import RoleList from '.././components/console/role/RoleList.vue'
-import AdminList from '.././components/console/admin/AdminList.vue'
-import Config from '.././components/console/config/Config.vue'
-import TypeList from '.././components/console/type/TypeList.vue'
-import LogList from '.././components/console/log/LogList.vue'
+import Main from '.././components/console/main/Main.vue'
+import ArticleList from '.././components/console/main/ArticleList.vue'
+import ArticleAdd from '.././components/console/main/ArticleAdd.vue'
+import CateList from '.././components/console/main/CateList.vue'
+import MenuTree from '.././components/console/main/MenuTree.vue'
+import SectionList from '.././components/console/main/SectionList.vue'
+import RoleList from '.././components/console/main/RoleList.vue'
+import AdminList from '.././components/console/main/AdminList.vue'
+import AdminEditInfo from '.././components/console/main/AdminEditInfo.vue'
+import AdminEditPwd from '.././components/console/main/AdminEditPwd.vue'
+import Config from '.././components/console/main/Config.vue'
+import TypeList from '.././components/console/main/TypeList.vue'
+import LogList from '.././components/console/main/LogList.vue'
 
 export default [
     // 登录
@@ -82,6 +84,18 @@ export default [
               path: 'admin/list',
               name: 'admin-list',
               component: AdminList,
+              meta: { requiresAuth: true }
+            },
+            {
+              path: 'admin/editinfo',
+              name: 'admin-editinfo',
+              component: AdminEditInfo,
+              meta: { requiresAuth: true }
+            },
+            {
+              path: 'admin/editpwd',
+              name: 'admin-editpwd',
+              component: AdminEditPwd,
               meta: { requiresAuth: true }
             },
             // 角色

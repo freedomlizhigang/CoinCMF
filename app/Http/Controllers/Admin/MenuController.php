@@ -46,12 +46,12 @@ class MenuController extends ResponseController
             return $this->resData(400,'获取失败，请稍后再试...');
         }
     }
-    // 取右侧权限菜单
+    // 取左侧权限菜单
     public function getList(Request $req)
     {
         try {
             // 一级菜单
-            $all = Menu::select('id','parentid','name','url','icon')->where('display','=','1')->orderBy('sort','asc')->orderBy('id','asc')->get();
+            $all = Menu::select('id','parentid','name','url','icon','label')->where('display','=','1')->orderBy('sort','asc')->orderBy('id','asc')->get();
             $leftmenu = array();
             // 判断权限
             $left = $all->where('parentid',0)->all();
@@ -65,7 +65,7 @@ class MenuController extends ResponseController
             {
                 foreach ($left as $k => $v) {
                     foreach ($user->allPriv as $url) {
-                        if ($v['url'] == $url) {
+                        if ($v['label'] == $url) {
                             $leftmenu[$k] = $v;
                         }
                     }
@@ -83,8 +83,9 @@ class MenuController extends ResponseController
                 if (!in_array(1, $user->allRole))
                 {
                     foreach ($submenu as $s => $v) {
-                        if (in_array($v['url'],$user->allPriv)) {
-                            $leftmenu[$k]['submenu'][$s] = $v;
+                        if (in_array($v['label'],(array) $user->allPriv)) {
+                            $submenu[$s] = $v;
+                            $leftmenu[$k]['submenu'] = $submenu;
                         }
                     }
                 }

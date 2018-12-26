@@ -37,7 +37,7 @@ class RoleController extends ResponseController
                 })->orderBy('id','asc')->get();
             return $this->resData(200,'获取角色数据成功...',$list);
         } catch (\Throwable $e) {
-            return $this->anyErrors(400,'获取数据失败，请稍后再试！',[]);
+            return $this->resData(400,'获取数据失败，请稍后再试！',[]);
         }
     }
     // 创建角色

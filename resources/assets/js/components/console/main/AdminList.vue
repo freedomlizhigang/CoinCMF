@@ -348,7 +348,6 @@ export default {
                 }
                 this.loading = false;
                 this.$nextTick(() => {this.loading = true;});
-                this.showEditInfo = !this.showEditInfo;
             });
         },
         // 展开修改密码

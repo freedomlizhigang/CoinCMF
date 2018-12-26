@@ -11,12 +11,9 @@
 namespace App\Models\Common;
 
 use Illuminate\Database\Eloquent\Model;
-use Laravel\Scout\Searchable;
 
 class Article extends Model
 {
-
-    use Searchable;
 
     /**
      * 关联到模型的数据表
@@ -41,26 +38,6 @@ class Article extends Model
      * @var bool
      */
     public $timestamps = true;
-
-    /**
-     * 搜索索引
-     *
-     * @return string
-     */
-    public function searchableAs()
-    {
-        return 'articles_index';
-    }
-
-    /**
-     * 索引数据
-     *
-     * @return array
-     */
-    public function toSearchableArray()
-    {
-        return $this->only('id', 'title', 'describe', 'content');
-    }
 
     // 关联categorys
     public function cate()

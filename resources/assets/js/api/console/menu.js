@@ -17,6 +17,10 @@ const menu = {
     select () {
         return axios.get(api + 'menu/select')
     },
+    // 左侧菜单
+    left () {
+        return axios.get(api + 'menu/list')
+    },
     // 添加
     create (params) {
         return axios.post(api + 'menu/create',qs.stringify(params))

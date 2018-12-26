@@ -33,7 +33,7 @@ class ConsoleJwt
             // 查有没有这个用户，及用户状态
             $hav = Redis::exists('c-token:'.$token);
             if (!$hav) {
-                return response()->json(['code'=>403,'msg' => '验证信息无效，请重新登录...','data'=>[]]);
+                return response()->json(['code'=>401,'msg' => '验证信息无效，请重新登录...','data'=>[]]);
             }
             $token_info = Redis::get('c-token:'.$token);
             // 解析用户信息，判断权限
@@ -47,7 +47,7 @@ class ConsoleJwt
             $toArr[2] = count($toArr) == 2 ? 'index' : $toArr[2];
             $priv = $toArr[1].'-'.$toArr[2];
             // 在这里进行一部分权限判断，主要是判断打开的页面是否有权限，所有角色ID，所有角色权限累加
-            if(in_array(1,$user->allRole) || in_array($priv,$user->allPriv))
+            if(in_array(1,$user->allRole) || in_array($priv,(array) $user->allPriv))
             {
                 // 日志记录，只记录post或者del操作(通过比较url来得出结果)
                 if (!$request->isMethod('get')) {

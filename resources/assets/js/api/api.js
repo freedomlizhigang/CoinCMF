@@ -1,21 +1,23 @@
 /**
 * api接口统一管理
 */
-import axios from './http'
-import common from './common/index'
-import login from './login/index'
-import article from './article/index'
-import menu from './menu/index'
-import section from './section/index'
-import role from './role/index'
-import admin from './admin/index'
-import config from './config/index'
-import type from './type/index'
-import log from './log/index'
+import axios from './http.js'
+import common from './console/common.js'
+import login from './console/login.js'
+import cate from './console/cate.js'
+import article from './console/article.js'
+import menu from './console/menu.js'
+import section from './console/section.js'
+import role from './console/role.js'
+import admin from './console/admin.js'
+import config from './console/config.js'
+import type from './console/type.js'
+import log from './console/log.js'
 
 const api = {
     common,
     login,
+    cate,
     article,
     menu,
     section,

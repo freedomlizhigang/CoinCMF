@@ -154,7 +154,7 @@
             },
             getMenuData:function(){
                 var self = this
-                this.$api.article.articleList().then(res=>{
+                this.$api.menu.left().then(res=>{
                     this.menuData = res.data
                 });
                 return self.menuData;
