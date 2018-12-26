@@ -204,8 +204,7 @@ class ComService
             $return['error'] = 1;
             // 验证是否有要上传的文件
             if(!$res->hasFile('imgFile')){
-                $return['message'] = '文件不存在！';
-                return json_encode($return);
+                return response()->json(['code'=>402,'msg'=>'文件不存在！']);
             }
             // 取得文件后缀
             $ext = $res->file('imgFile')->getClientOriginalExtension();
@@ -213,14 +212,13 @@ class ComService
             if(!$isAllow->contains(strtolower($ext)))
             {
                 $return['message']  = '文件类型错误!';
-                return json_encode($return);
+                return response()->json(['code'=>402,'msg'=>'文件类型错误！']);
             }
             // 检查文件大小，不得大于3M
             $size = $res->file('imgFile')->getClientSize();
             if($size > $allSize*1073741824)
             {
-                $return['message']   = '单个文件大于'.$allSize.'M!';
-                return json_encode($return);
+                return response()->json(['code'=>402,'msg'=>'单个文件大于'.$allSize.'M!']);
             }
             // 生成文件名
             $filename = date('Ymdhis').rand(100, 999);
@@ -229,9 +227,9 @@ class ComService
             {
                 // 缩略图设置图片位置
                 // 移动到新的位置，先创建目录及更新文件名为时间点
-                $dir = public_path('upload/thumb/'.date('Ymd').'/');
+                $dir = public_path('/upload/thumb/'.date('Ymd').'/');
                 if(!is_dir($dir)){
-                    Storage::makeDirectory('thumb/'.date('Ymd'));
+                    Storage::makeDirectory('upload/thumb/'.date('Ymd'));
                 }
                 // 缩略图
                 $srcWidth = getimagesize($res->file('imgFile'))[0];
@@ -280,7 +278,7 @@ class ComService
                         $ext = 'jpg';
                         break;
                 }
-                $localurl = '/thumb/'.date('Ymd').'/'.$filename.'.'.$ext;
+                $localurl = '/upload/thumb/'.date('Ymd').'/'.$filename.'.'.$ext;
                 imagedestroy($dstThumbPic);
                 imagedestroy($source_img);
             }
@@ -289,12 +287,12 @@ class ComService
                 // 移动到新的位置，先创建目录及更新文件名为时间点
                 $dir = public_path('upload/'.date('Ymd').'/');
                 if(!is_dir($dir)){
-                    Storage::makeDirectory(date('Ymd'));
+                    Storage::makeDirectory('upload/'.date('Ymd'));
                 }
-                $isTrue = Storage::putFileAs(date('Ymd'),$res->file('imgFile'),$filename.'.'.$ext);
-                $localurl = '/'.date('Ymd').'/'.$filename.'.'.$ext;
+                $isTrue = Storage::putFileAs('upload/'.date('Ymd'),$res->file('imgFile'),$filename.'.'.$ext);
+                $localurl = '/upload/'.date('Ymd').'/'.$filename.'.'.$ext;
             }
-            $url = '/upload'.$localurl;
+            $url = Storage::url($localurl);
             // 附件信息记入数据库
             $data['filename'] = $res->file('imgFile')->getClientOriginalName();
             $data['url'] = $url;
@@ -302,13 +300,13 @@ class ComService
                 $data['isattr'] = 1;
             }
             \App\Models\Common\Attr::create($data);
-            if($isTrue){
-                $return['error'] = 0;
-                $return['url'] = $url;
+            if(!$isTrue){
+                return response()->json(['code'=>400,'msg'=>'系统有错误了！','data'=>$isTrue]);
             }
-            return json_encode($return);
+            return response()->json(['code'=>200,'msg'=>'上传成功！','data'=>['url'=>$url,'filename'=>$filename]]);
         } catch (\Throwable $e) {
             Storage::disk('log')->append('upload.log',json_encode($e).date('Y-m-d H:i:s'));
+            return response()->json(['code'=>400,'msg'=>'系统有错误了！','data'=>$e->getLine().' : '.$e->getMessage()]);
         }
     }
     // 请求接口用的CURL功能
