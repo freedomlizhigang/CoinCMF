@@ -70,7 +70,7 @@ class ArticleController extends ResponseController
             $res = ['list'=>$reslist,'total'=>$count];
             return $this->resData(200,'获取数据成功...',$res);
         } catch (\Throwable $e) {
-            return $this->resData(400,'获取数据失败，请稍后再试...');
+            return $this->resData(500,'获取数据失败，请稍后再试...');
         }
     }
 
@@ -98,7 +98,7 @@ class ArticleController extends ResponseController
             $validator->setAttributeNames($attrs);
             if ($validator->fails()) {
                 // 如果有错误，提示第一条
-                return $this->resData(402,$validator->errors()->all()[0].'...');
+                return $this->resData(400,$validator->errors()->all()[0].'...');
             }
             $data['cate_id']                = $request->input('cate_id');
             $data['title']                  = $request->input('title');
@@ -110,7 +110,7 @@ class ArticleController extends ResponseController
             Article::create($data);
             return $this->resData(200,'添加成功...');
         }catch (\Throwable $e){
-            return $this->resData(400,'添加文章失败，请重新操作...');
+            return $this->resData(500,'添加文章失败，请重新操作...');
         }
     }
     //详情
@@ -125,13 +125,13 @@ class ArticleController extends ResponseController
             $validator->setAttributeNames($attrs);
             if ($validator->fails()) {
                 // 如果有错误，提示第一条
-                return $this->resData(402, $validator->errors()->all()[0] . '...');
+                return $this->resData(400, $validator->errors()->all()[0] . '...');
             }
             $id = $request->input('article_id');
             $info = Article::find($id,['id','cate_id','title','thumb','describe','content','sort','video']);
             return $this->resData(200,'获取数据成功...',$info);
         }catch (\Throwable $e){
-            return $this->resData(400,'获取数据失败，请重新操作...');
+            return $this->resData(500,'获取数据失败，请重新操作...');
         }
     }
     //编辑
@@ -154,7 +154,7 @@ class ArticleController extends ResponseController
             $validator->setAttributeNames($attrs);
             if ($validator->fails()) {
                 // 如果有错误，提示第一条
-                return $this->resData(402,$validator->errors()->all()[0].'...');
+                return $this->resData(400,$validator->errors()->all()[0].'...');
             }
             $id                             = $request->input('article_id');
             $data['cate_id']                = $request->input('cate_id');
@@ -167,7 +167,7 @@ class ArticleController extends ResponseController
             Article::where('id',$id)->update($data);
             return $this->resData(200,'编辑成功...');
         }catch (\Throwable $e){
-            return $this->resData(400,'编辑失败，请重新操作...');
+            return $this->resData(500,'编辑失败，请重新操作...');
         }
     }
 
@@ -183,13 +183,13 @@ class ArticleController extends ResponseController
             $validator->setAttributeNames($attrs);
             if ($validator->fails()) {
                 // 如果有错误，提示第一条
-                return $this->resData(402,$validator->errors()->all()[0].'...');
+                return $this->resData(400,$validator->errors()->all()[0].'...');
             }
             $id = $request->input('article_id');
             Article::where('id',$id)->delete();
             return $this->resData(200,'删除成功...');
         }catch (\Throwable $e){
-            return $this->resData(400,'删除失败，请重新操作...');
+            return $this->resData(500,'删除失败，请重新操作...');
         }
     }
 
@@ -205,7 +205,7 @@ class ArticleController extends ResponseController
             Article::whereIn('id',$ids)->delete();
             return $this->resData(200,'删除成功！');
         } catch (\Throwable $e) {
-            return $this->resData(400,'删除失败，请稍后再试！');
+            return $this->resData(500,'删除失败，请稍后再试！');
         }
     }
     /**
@@ -228,14 +228,14 @@ class ArticleController extends ResponseController
             $validator->setAttributeNames($attrs);
             if ($validator->fails()) {
                 // 如果有错误，提示第一条
-                return $this->resData(402,$validator->errors()->all()[0].'...');
+                return $this->resData(400,$validator->errors()->all()[0].'...');
             }
             $id = $req->input('id');
             $sort = $req->input('sort');
             Article::where('id',$id)->update(['sort'=>$sort]);
             return $this->resData(200,'排序成功！');
         } catch (\Throwable $e) {
-            return $this->resData(400,'排序失败，请稍后再试！');
+            return $this->resData(500,'排序失败，请稍后再试！');
         }
     }
 }

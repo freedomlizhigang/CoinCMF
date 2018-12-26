@@ -43,7 +43,7 @@ class MenuController extends ResponseController
             }
             return $this->resData(200,'获取成功...',$res);
         } catch (\Throwable $e) {
-            return $this->resData(400,'获取失败，请稍后再试...');
+            return $this->resData(500,'获取失败，请稍后再试...');
         }
     }
     // 取左侧权限菜单
@@ -96,7 +96,7 @@ class MenuController extends ResponseController
             }
             return $this->resData(200,'获取成功...',$leftmenu);
         } catch (\Throwable $e) {
-            return $this->resData(400,'获取失败，请稍后再试...');
+            return $this->resData(500,'获取失败，请稍后再试...');
         }
     }
     // 查出所有有权限的url
@@ -116,7 +116,7 @@ class MenuController extends ResponseController
             $tree = $this->toTree($all,0);
             return $this->resData(200,'获取成功...',$tree);
         } catch (\Throwable $e) {
-            return $this->resData(400,'获取失败，请稍后再试...');
+            return $this->resData(500,'获取失败，请稍后再试...');
         }
     }
     // 转成树形菜单数组
@@ -157,7 +157,7 @@ class MenuController extends ResponseController
             $validator->setAttributeNames($attrs);
             if ($validator->fails()) {
                 // 如果有错误，提示第一条
-                return $this->resData(402,$validator->errors()->all()[0].'...');
+                return $this->resData(400,$validator->errors()->all()[0].'...');
             }
             $insert = ['parentid'=>$req->input('parentid'),'name'=>$req->input('name'),'url'=>$req->input('url'),'label'=>$req->input('label'),'icon'=>$req->input('icon'),'display'=>$req->input('display') == 'true' ? 1 : 0,'sort'=>$req->input('sort')];
             $detail = Menu::create($insert);
@@ -167,7 +167,7 @@ class MenuController extends ResponseController
             return $this->resData(200,'添加权限菜单成功...',$detail);
         } catch (\Throwable $e) {
             DB::rollback();
-            return $this->resData(400,'添加权限菜单失败，请稍后再试...');
+            return $this->resData(500,'添加权限菜单失败，请稍后再试...');
         }
     }
     // 修改菜单
@@ -194,7 +194,7 @@ class MenuController extends ResponseController
             $validator->setAttributeNames($attrs);
             if ($validator->fails()) {
                 // 如果有错误，提示第一条
-                return $this->resData(402,$validator->errors()->all()[0].'...');
+                return $this->resData(400,$validator->errors()->all()[0].'...');
             }
             $id = $req->input('id');
             $update = ['parentid'=>$req->input('parentid'),'name'=>$req->input('name'),'url'=>$req->input('url'),'label'=>$req->input('label'),'icon'=>$req->input('icon'),'display'=>$req->input('display') == 'true' ? 1 : 0,'sort'=>$req->input('sort')];
@@ -205,7 +205,7 @@ class MenuController extends ResponseController
             return $this->resData(200,'更新权限菜单成功...');
         } catch (\Throwable $e) {
             DB::rollback();
-            return $this->resData(400,'更新权限菜单失败，请稍后再试...');
+            return $this->resData(500,'更新权限菜单失败，请稍后再试...');
         }
     }
     // 取单条信息
@@ -221,13 +221,13 @@ class MenuController extends ResponseController
             $validator->setAttributeNames($attrs);
             if ($validator->fails()) {
                 // 如果有错误，提示第一条
-                return $this->resData(402,$validator->errors()->all()[0].'...');
+                return $this->resData(400,$validator->errors()->all()[0].'...');
             }
             $menu_id = $req->input('menu_id');
             $detail = Menu::findOrFail($menu_id);
             return $this->resData(200,'获取成功...',$detail);
         } catch (\Throwable $e) {
-            return $this->resData(400,'获取失败，请稍后再试...');
+            return $this->resData(500,'获取失败，请稍后再试...');
         }
     }
     // 删除一条，同时删除子菜单
@@ -244,7 +244,7 @@ class MenuController extends ResponseController
             $validator->setAttributeNames($attrs);
             if ($validator->fails()) {
                 // 如果有错误，提示第一条
-                return $this->resData(402,$validator->errors()->all()[0].'...');
+                return $this->resData(400,$validator->errors()->all()[0].'...');
             }
             $menu_id = $req->input('menu_id');
             $info = Menu::findOrFail($menu_id);
@@ -256,7 +256,7 @@ class MenuController extends ResponseController
             return $this->resData(200,'删除成功...');
         } catch (\Throwable $e) {
             DB::rollback();
-            return $this->resData(400,'获取失败，请稍后再试...');
+            return $this->resData(500,'获取失败，请稍后再试...');
         }
     }
 }

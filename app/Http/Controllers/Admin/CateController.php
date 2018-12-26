@@ -36,7 +36,7 @@ class CateController extends ResponseController
             }
             return $this->resData(200,'获取成功！',$res);
         } catch (\Throwable $e) {
-            return $this->resData(400,'获取失败，请稍后再试！');
+            return $this->resData(500,'获取失败，请稍后再试！');
         }
     }
     public function getList(Request $request){
@@ -46,7 +46,7 @@ class CateController extends ResponseController
             $list = $this->toTableTree($tree,'0');
             return $this->resData(200,'获取成功...',$list);
         } catch (\Throwable $e) {
-            return $this->resData(400,'获取失败，请稍后再试！');
+            return $this->resData(500,'获取失败，请稍后再试！');
         }
     }
     // 转成树形数组
@@ -106,7 +106,7 @@ class CateController extends ResponseController
             $validator->setAttributeNames($attrs);
             if ($validator->fails()) {
                 // 如果有错误，提示第一条
-                return $this->resData(402,$validator->errors()->all()[0].'...');
+                return $this->resData(400,$validator->errors()->all()[0].'...');
             }
             $data['name']       = $request->input('name');
             $data['keyword']    = $request->input('keyword');
@@ -116,7 +116,7 @@ class CateController extends ResponseController
             app('com')->updateCache(new Cate(),'cateCache',1);
             return $this->resData(200,'添加成功...');
         }catch (\Throwable $e){
-            return $this->resData(400,'添加失败，请重新操作...');
+            return $this->resData(500,'添加失败，请重新操作...');
         }
     }
     //详情
@@ -131,13 +131,13 @@ class CateController extends ResponseController
             $validator->setAttributeNames($attrs);
             if ($validator->fails()) {
                 // 如果有错误，提示第一条
-                return $this->resData(402,$validator->errors()->all()[0].'...');
+                return $this->resData(400,$validator->errors()->all()[0].'...');
             }
             $id = $request->input('cate_id');
             $info = Cate::find($id,['id','name','keyword','sort','parentid']);
             return $this->resData(200,'获取信息成功...',$info);
         }catch (\Throwable $e){
-            return $this->resData(400,'获取信息失败，请重新操作...');
+            return $this->resData(500,'获取信息失败，请重新操作...');
         }
     }
     //编辑栏目
@@ -158,7 +158,7 @@ class CateController extends ResponseController
             $validator->setAttributeNames($attrs);
             if ($validator->fails()) {
                 // 如果有错误，提示第一条
-                return $this->resData(402,$validator->errors()->all()[0].'...');
+                return $this->resData(400,$validator->errors()->all()[0].'...');
             }
             $data['name']       = $request->input('name');
             $data['keyword']    = $request->input('keyword');
@@ -169,7 +169,7 @@ class CateController extends ResponseController
             app('com')->updateCache(new Cate(),'cateCache',1);
             return $this->resData(200,'编辑成功...');
         }catch (\Throwable $e){
-            return $this->resData(400,'编辑失败，请重新操作...');
+            return $this->resData(500,'编辑失败，请重新操作...');
         }
     }
     //删除栏目
@@ -184,7 +184,7 @@ class CateController extends ResponseController
             $validator->setAttributeNames($attrs);
             if ($validator->fails()) {
                 // 如果有错误，提示第一条
-                return $this->resData(402,$validator->errors()->all()[0].'...');
+                return $this->resData(400,$validator->errors()->all()[0].'...');
             }
             $id = $request->input('cate_id');
             // 先找出所有子栏目，再判断子栏目中是否有文章，如果有文章，返回错误
@@ -193,7 +193,7 @@ class CateController extends ResponseController
             $childs = collect(explode(',',$allChild));
             $child = Article::whereIn('cate_id',$childs)->get()->count();
             if($child != 0) {
-                return $this->resData(402,'请检查栏目及子栏目下是否有文章或文章...');$message = '';
+                return $this->resData(403,'请检查栏目及子栏目下是否有文章或文章...');$message = '';
             }else {
                 // 开启事务
                 DB::beginTransaction();
@@ -207,12 +207,12 @@ class CateController extends ResponseController
                 } catch (\Throwable $e) {
                     // 出错回滚
                     DB::rollBack();
-                    return $this->resData(400,'删除失败，请重新操作...');
+                    return $this->resData(500,'删除失败，请重新操作...');
                 }
             }
             return $this->resData(200,'删除成功，请重新操作...');
         }catch (\Throwable $e){
-            return $this->resData(400,'删除失败，请重新操作...');
+            return $this->resData(500,'删除失败，请重新操作...');
         }
     }
     // 排序
@@ -230,12 +230,12 @@ class CateController extends ResponseController
             $validator->setAttributeNames($attrs);
             if ($validator->fails()) {
                 // 如果有错误，提示第一条
-                return $this->resData(402,$validator->errors()->all()[0].'...');
+                return $this->resData(400,$validator->errors()->all()[0].'...');
             }
             Cate::where('id',$req->input('cate_id'))->update(['sort'=>$req->input('sort')]);
             return $this->resData(200,'更新排序成功...');
         } catch (\Throwable $e) {
-            return $this->resData(400,'更新排序失败，请稍后再试...');
+            return $this->resData(500,'更新排序失败，请稍后再试...');
         }
     }
 }

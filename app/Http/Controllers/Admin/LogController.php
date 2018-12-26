@@ -45,7 +45,7 @@ class LogController extends ResponseController
             $res = ['list'=>$list,'total'=>$total];
             return $this->resData(200,'获取成功...',$res);;
         } catch (\Throwable $e) {
-            return $this->resData(400,'获取失败，请稍后再试...');
+            return $this->resData(500,'获取失败，请稍后再试...');
         }
     }
     // 清除7天前日志
@@ -55,7 +55,7 @@ class LogController extends ResponseController
             $logs = Log::where('created_at','<',Carbon::now()->addWeek(-1))->delete();
         	return $this->resData(200,'操作成功...');;
         } catch (\Throwable $e) {
-        	return $this->resData(400,'操作失败，请稍后再试...');
+        	return $this->resData(500,'操作失败，请稍后再试...');
         }
     }
 }

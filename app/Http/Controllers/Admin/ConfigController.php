@@ -17,7 +17,7 @@ class ConfigController extends ResponseController
             $detail = Config::findOrFail(1);
             return $this->resData(200,'获取成功...',$detail);
         } catch (\Throwable $e) {
-            return $this->resData(400,'获取失败，请稍后再试...');
+            return $this->resData(500,'获取失败，请稍后再试...');
         }
     }
     // 修改配置信息
@@ -43,13 +43,13 @@ class ConfigController extends ResponseController
             $validator->setAttributeNames($attrs);
             if ($validator->fails()) {
                 // 如果有错误，提示第一条
-                return $this->resData(402,$validator->errors()->all()[0].'...');
+                return $this->resData(400,$validator->errors()->all()[0].'...');
             }
             $data = ['sitename'=>$req->input('sitename'),'describe'=>$req->input('describe'),'person'=>$req->input('person'),'phone'=>$req->input('phone'),'email'=>$req->input('email'),'address'=>$req->input('address')];
             Config::where('id',1)->update($data);
             return $this->resData(200,'更新成功...');
         } catch (\Throwable $e) {
-            return $this->resData(400,'更新失败，请稍后再试...');
+            return $this->resData(500,'更新失败，请稍后再试...');
         }
     }
 }

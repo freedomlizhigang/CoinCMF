@@ -28,7 +28,7 @@ class AdminController extends ResponseController
                 })->orderBy('id','asc')->get();
             return $this->resData(200,'获取用户数据成功...',$list);
         } catch (\Throwable $e) {
-            return $this->resData(400,'获取数据失败，请稍后再试！',[]);
+            return $this->resData(500,'获取数据失败，请稍后再试！',[]);
         }
     }
     // 查看单条信息
@@ -44,14 +44,14 @@ class AdminController extends ResponseController
             $validator->setAttributeNames($attrs);
             if ($validator->fails()) {
                 // 如果有错误，提示第一条
-                return $this->resData(402,$validator->errors()->all()[0].'...');
+                return $this->resData(400,$validator->errors()->all()[0].'...');
             }
             $admin = Admin::findOrFail($req->input('admin_id'));
             $admin->section_id = $admin->section->id;
             $admin->role_ids = $admin->role->pluck('id');
             return $this->resData(200,'查询成功...',$admin);
         } catch (\Throwable $e) {
-            return $this->resData(400,'查询失败，请稍后再试...');
+            return $this->resData(500,'查询失败，请稍后再试...');
         }
     }
     // 创建用户
@@ -77,7 +77,7 @@ class AdminController extends ResponseController
             $validator->setAttributeNames($attrs);
             if ($validator->fails()) {
                 // 如果有错误，提示第一条
-                return $this->resData(402,$validator->errors()->all()[0].'...');
+                return $this->resData(400,$validator->errors()->all()[0].'...');
             }
             $crypt = str_random(10);
             $pwd = Func::makepwd($req->input('password'),$crypt);
@@ -93,7 +93,7 @@ class AdminController extends ResponseController
             RoleUser::insert($rdata);
             return $this->resData(200,'创建用户成功...');
         } catch (\Throwable $e) {
-            return $this->resData(400,'创建用户失败，请稍后再试...');
+            return $this->resData(500,'创建用户失败，请稍后再试...');
         }
     }
     // 修改资料
@@ -118,7 +118,7 @@ class AdminController extends ResponseController
             $validator->setAttributeNames($attrs);
             if ($validator->fails()) {
                 // 如果有错误，提示第一条
-                return $this->resData(402,$validator->errors()->all()[0].'...');
+                return $this->resData(400,$validator->errors()->all()[0].'...');
             }
             $id = $req->input('admin_id');
             $data = ['section_id'=>$req->input('section_id'),'realname'=>$req->input('realname'),'phone'=>$req->input('phone'),'email'=>$req->input('email')];
@@ -137,7 +137,7 @@ class AdminController extends ResponseController
             return $this->resData(200,'更新用户资料成功...');
         } catch (\Throwable $e) {
             DB::rollback();
-            return $this->resData(400,'更新用户资料失败，请稍后再试...');
+            return $this->resData(500,'更新用户资料失败，请稍后再试...');
         }
     }
     // 个人修改资料
@@ -159,14 +159,14 @@ class AdminController extends ResponseController
             $validator->setAttributeNames($attrs);
             if ($validator->fails()) {
                 // 如果有错误，提示第一条
-                return $this->resData(402,$validator->errors()->all()[0].'...');
+                return $this->resData(400,$validator->errors()->all()[0].'...');
             }
             $id = $req->input('admin_id');
             $data = ['realname'=>$req->input('realname'),'phone'=>$req->input('phone'),'email'=>$req->input('email')];
             Admin::where('id',$id)->update($data);
             return $this->resData(200,'更新用户资料成功...');
         } catch (\Throwable $e) {
-            return $this->resData(400,'更新用户资料失败，请稍后再试...');
+            return $this->resData(500,'更新用户资料失败，请稍后再试...');
         }
     }
     // 修改密码
@@ -185,7 +185,7 @@ class AdminController extends ResponseController
             $validator->setAttributeNames($attrs);
             if ($validator->fails()) {
                 // 如果有错误，提示第一条
-                return $this->resData(402,$validator->errors()->all()[0].'...');
+                return $this->resData(400,$validator->errors()->all()[0].'...');
             }
             $id = $req->input('admin_id');
             $crypt = str_random(10);
@@ -196,7 +196,7 @@ class AdminController extends ResponseController
             return $this->resData(200,'更新用户密码成功...');
         } catch (\Throwable $e) {
             DB::rollback();
-            return $this->resData(400,'更新用户密码失败，请稍后再试...');
+            return $this->resData(500,'更新用户密码失败，请稍后再试...');
         }
     }
     // 个人修改密码
@@ -214,7 +214,7 @@ class AdminController extends ResponseController
             $validator->setAttributeNames($attrs);
             if ($validator->fails()) {
                 // 如果有错误，提示第一条
-                return $this->resData(402,$validator->errors()->all()[0].'...');
+                return $this->resData(400,$validator->errors()->all()[0].'...');
             }
             $id = $req->input('admin_id');
             $crypt = str_random(10);
@@ -223,7 +223,7 @@ class AdminController extends ResponseController
             Admin::where('id',$id)->update($data);
             return $this->resData(200,'更新用户密码成功...');
         } catch (\Throwable $e) {
-            return $this->resData(400,'更新用户密码失败，请稍后再试...');
+            return $this->resData(500,'更新用户密码失败，请稍后再试...');
         }
     }
     // 修改状态
@@ -241,13 +241,13 @@ class AdminController extends ResponseController
             $validator->setAttributeNames($attrs);
             if ($validator->fails()) {
                 // 如果有错误，提示第一条
-                return $this->resData(402,$validator->errors()->all()[0].'...');
+                return $this->resData(400,$validator->errors()->all()[0].'...');
             }
             $status = $req->input('status') == 'true' ? 1 : 0;
             Admin::where('id',$req->input('admin_id'))->update(['status'=>$status]);
             return $this->resData(200,'更新用户状态成功...');
         } catch (\Throwable $e) {
-            return $this->resData(400,'更新用户状态失败，请稍后再试...');
+            return $this->resData(500,'更新用户状态失败，请稍后再试...');
         }
     }
     // 删除用户
@@ -264,7 +264,7 @@ class AdminController extends ResponseController
             $validator->setAttributeNames($attrs);
             if ($validator->fails()) {
                 // 如果有错误，提示第一条
-                return $this->resData(402,$validator->errors()->all()[0].'...');
+                return $this->resData(400,$validator->errors()->all()[0].'...');
             }
             $id = $req->input('admin_id');
             Admin::destroy($id);
@@ -273,7 +273,7 @@ class AdminController extends ResponseController
             return $this->resData(200,'删除用户成功...');
         } catch (\Throwable $e) {
             DB::rollback();
-            return $this->resData(400,'删除用户失败，请稍后再试...');
+            return $this->resData(500,'删除用户失败，请稍后再试...');
         }
     }
 }

@@ -34,7 +34,7 @@ class SectionController extends ResponseController
                 })->orderBy('id','asc')->get();
             return $this->resData(200,'获取部门数据成功...',$list);
         } catch (\Throwable $e) {
-            return $this->resData(400,'获取数据失败，请稍后再试！',[]);
+            return $this->resData(500,'获取数据失败，请稍后再试！',[]);
         }
     }
     // 创建部门
@@ -52,14 +52,14 @@ class SectionController extends ResponseController
             $validator->setAttributeNames($attrs);
             if ($validator->fails()) {
                 // 如果有错误，提示第一条
-                return $this->resData(402,$validator->errors()->all()[0].'...');
+                return $this->resData(400,$validator->errors()->all()[0].'...');
             }
             $name = $req->input('name');
             $status = $req->input('status') == true ? 1 : 0;
             Section::create(['name'=>$name,'status'=>$status]);
             return $this->resData(200,'创建部门成功...');
         } catch (\Throwable $e) {
-            return $this->resData(400,'创建部门失败，请稍后再试...');
+            return $this->resData(500,'创建部门失败，请稍后再试...');
         }
     }
     // 修改名称
@@ -77,13 +77,13 @@ class SectionController extends ResponseController
             $validator->setAttributeNames($attrs);
             if ($validator->fails()) {
                 // 如果有错误，提示第一条
-                return $this->resData(402,$validator->errors()->all()[0].'...');
+                return $this->resData(400,$validator->errors()->all()[0].'...');
             }
             $name = $req->input('name');
             Section::where('id',$req->input('section_id'))->update(['name'=>$name]);
             return $this->resData(200,'更新部门名称成功...');
         } catch (\Throwable $e) {
-            return $this->resData(400,'更新部门名称失败，请稍后再试...');
+            return $this->resData(500,'更新部门名称失败，请稍后再试...');
         }
     }
     // 修改状态
@@ -101,13 +101,13 @@ class SectionController extends ResponseController
             $validator->setAttributeNames($attrs);
             if ($validator->fails()) {
                 // 如果有错误，提示第一条
-                return $this->resData(402,$validator->errors()->all()[0].'...');
+                return $this->resData(400,$validator->errors()->all()[0].'...');
             }
             $status = $req->input('status') == 'true' ? 1 : 0;
             Section::where('id',$req->input('section_id'))->update(['status'=>$status]);
             return $this->resData(200,'更新部门状态成功...');
         } catch (\Throwable $e) {
-            return $this->resData(400,'更新部门状态失败，请稍后再试...');
+            return $this->resData(500,'更新部门状态失败，请稍后再试...');
         }
     }
     // 删除部门
@@ -123,7 +123,7 @@ class SectionController extends ResponseController
             $validator->setAttributeNames($attrs);
             if ($validator->fails()) {
                 // 如果有错误，提示第一条
-                return $this->resData(402,$validator->errors()->all()[0].'...');
+                return $this->resData(400,$validator->errors()->all()[0].'...');
             }
             $id = $req->input('section_id');
             // 查询下属用户
@@ -134,10 +134,10 @@ class SectionController extends ResponseController
             }
             else
             {
-                return $this->resData(402,'此部门下有用户...');
+                return $this->resData(403,'此部门下有用户...');
             }
         } catch (\Throwable $e) {
-            return $this->resData(400,'删除部门失败，请稍后再试...');
+            return $this->resData(500,'删除部门失败，请稍后再试...');
         }
     }
 }

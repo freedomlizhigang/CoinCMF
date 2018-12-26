@@ -37,7 +37,7 @@ class RoleController extends ResponseController
                 })->orderBy('id','asc')->get();
             return $this->resData(200,'获取角色数据成功...',$list);
         } catch (\Throwable $e) {
-            return $this->resData(400,'获取数据失败，请稍后再试！',[]);
+            return $this->resData(500,'获取数据失败，请稍后再试！',[]);
         }
     }
     // 创建角色
@@ -55,14 +55,14 @@ class RoleController extends ResponseController
             $validator->setAttributeNames($attrs);
             if ($validator->fails()) {
                 // 如果有错误，提示第一条
-                return $this->resData(402,$validator->errors()->all()[0].'...');
+                return $this->resData(400,$validator->errors()->all()[0].'...');
             }
             $name = $req->input('name');
             $status = $req->input('status') == true ? 1 : 0;
             Role::create(['name'=>$name,'status'=>$status]);
             return $this->resData(200,'创建角色成功...');
         } catch (\Throwable $e) {
-            return $this->resData(400,'创建角色失败，请稍后再试...');
+            return $this->resData(500,'创建角色失败，请稍后再试...');
         }
     }
     // 修改名称
@@ -80,13 +80,13 @@ class RoleController extends ResponseController
             $validator->setAttributeNames($attrs);
             if ($validator->fails()) {
                 // 如果有错误，提示第一条
-                return $this->resData(402,$validator->errors()->all()[0].'...');
+                return $this->resData(400,$validator->errors()->all()[0].'...');
             }
             $name = $req->input('name');
             Role::where('id',$req->input('role_id'))->update(['name'=>$name]);
             return $this->resData(200,'更新角色名称成功...');
         } catch (\Throwable $e) {
-            return $this->resData(400,'更新角色名称失败，请稍后再试...');
+            return $this->resData(500,'更新角色名称失败，请稍后再试...');
         }
     }
     // 修改状态
@@ -104,13 +104,13 @@ class RoleController extends ResponseController
             $validator->setAttributeNames($attrs);
             if ($validator->fails()) {
                 // 如果有错误，提示第一条
-                return $this->resData(402,$validator->errors()->all()[0].'...');
+                return $this->resData(400,$validator->errors()->all()[0].'...');
             }
             $status = $req->input('status') == 'true' ? 1 : 0;
             Role::where('id',$req->input('role_id'))->update(['status'=>$status]);
             return $this->resData(200,'更新角色状态成功...');
         } catch (\Throwable $e) {
-            return $this->resData(400,'更新角色状态失败，请稍后再试...');
+            return $this->resData(500,'更新角色状态失败，请稍后再试...');
         }
     }
     // 删除角色
@@ -126,11 +126,11 @@ class RoleController extends ResponseController
             $validator->setAttributeNames($attrs);
             if ($validator->fails()) {
                 // 如果有错误，提示第一条
-                return $this->resData(402,$validator->errors()->all()[0].'...');
+                return $this->resData(400,$validator->errors()->all()[0].'...');
             }
             $rid = $req->input('role_id');
             if ($rid === 1) {
-                return $this->resData(402,'超级管理员组不能删除...');
+                return $this->resData(403,'超级管理员组不能删除...');
             }
             // 查询下属用户
             if(is_null(RoleUser::where('role_id',$rid)->first()))
@@ -152,10 +152,10 @@ class RoleController extends ResponseController
             }
             else
             {
-                return $this->resData(402,'此角色下有用户...');
+                return $this->resData(403,'此角色下有用户...');
             }
         } catch (\Throwable $e) {
-            return $this->resData(400,'删除角色失败，请稍后再试...');
+            return $this->resData(500,'删除角色失败，请稍后再试...');
         }
     }
     // 更新角色权限，主要是为了显示后台菜单
@@ -171,7 +171,7 @@ class RoleController extends ResponseController
             $validator->setAttributeNames($attrs);
             if ($validator->fails()) {
                 // 如果有错误，提示第一条
-                return $this->resData(402,$validator->errors()->all()[0].'...');
+                return $this->resData(400,$validator->errors()->all()[0].'...');
             }
             $rid = $req->input('role_id');
             // 所有权限
@@ -182,7 +182,7 @@ class RoleController extends ResponseController
             $tree = $this->toTree($priv,$all,0);
             return $this->resData(200,'获取权限列表成功...',$tree);
         } catch (\Throwable $e) {
-            return $this->resData(400,'获取权限列表失败...');
+            return $this->resData(500,'获取权限列表失败...');
         }
     }
     // 转成树形菜单数组
@@ -221,7 +221,7 @@ class RoleController extends ResponseController
             $validator->setAttributeNames($attrs);
             if ($validator->fails()) {
                 // 如果有错误，提示第一条
-                return $this->resData(402,$validator->errors()->all()[0].'...');
+                return $this->resData(400,$validator->errors()->all()[0].'...');
             }
             $rid = $req->input('role_id');
             Priv::where('role_id',$rid)->delete();
@@ -238,7 +238,7 @@ class RoleController extends ResponseController
             DB::commit();
             return $this->resData(200,'更新权限菜单成功...');
         } catch (\Throwable $e) {
-            return $this->resData(400,'更新权限菜单失败，请稍后再试...');
+            return $this->resData(500,'更新权限菜单失败，请稍后再试...');
         }
     }
 }

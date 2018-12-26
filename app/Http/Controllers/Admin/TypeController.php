@@ -20,7 +20,7 @@ class TypeController extends ResponseController
             $list = $this->toTableTree($tree,'0');
             return $this->resData(200,'获取成功...',$list);
         } catch (\Throwable $e) {
-            return $this->resData(400,'获取失败，请稍后再试...');
+            return $this->resData(500,'获取失败，请稍后再试...');
         }
     }
     // 转成树形数组
@@ -77,13 +77,13 @@ class TypeController extends ResponseController
             $validator->setAttributeNames($attrs);
             if ($validator->fails()) {
                 // 如果有错误，提示第一条
-                return $this->resData(402,$validator->errors()->all()[0].'...');
+                return $this->resData(400,$validator->errors()->all()[0].'...');
             }
             $type_id = $req->input('type_id');
             $detail = Type::select('id','parentid','name','sort')->findOrFail($type_id);
             return $this->resData(200,'获取成功...',$detail);
         } catch (\Throwable $e) {
-            return $this->resData(400,'获取失败，请稍后再试...');
+            return $this->resData(500,'获取失败，请稍后再试...');
         }
     }
     // 创建分类
@@ -103,7 +103,7 @@ class TypeController extends ResponseController
             $validator->setAttributeNames($attrs);
             if ($validator->fails()) {
                 // 如果有错误，提示第一条
-                return $this->resData(402,$validator->errors()->all()[0].'...');
+                return $this->resData(400,$validator->errors()->all()[0].'...');
             }
             $name = $req->input('name');
             $parentid = $req->input('parentid');
@@ -113,7 +113,7 @@ class TypeController extends ResponseController
             app('com')->updateCache(new Type());
             return $this->resData(200,'创建分类成功...');
         } catch (\Throwable $e) {
-            return $this->resData(400,'创建分类失败，请稍后再试...');
+            return $this->resData(500,'创建分类失败，请稍后再试...');
         }
     }
     // 修改分类信息
@@ -133,12 +133,12 @@ class TypeController extends ResponseController
             $validator->setAttributeNames($attrs);
             if ($validator->fails()) {
                 // 如果有错误，提示第一条
-                return $this->resData(402,$validator->errors()->all()[0].'...');
+                return $this->resData(400,$validator->errors()->all()[0].'...');
             }
             Type::where('id',$req->input('type_id'))->update(['name'=>$req->input('name'),'sort'=>$req->input('sort')]);
             return $this->resData(200,'更新分类信息成功...');
         } catch (\Throwable $e) {
-            return $this->resData(400,'更新分类信息失败，请稍后再试...');
+            return $this->resData(500,'更新分类信息失败，请稍后再试...');
         }
     }
     // 排序
@@ -156,12 +156,12 @@ class TypeController extends ResponseController
             $validator->setAttributeNames($attrs);
             if ($validator->fails()) {
                 // 如果有错误，提示第一条
-                return $this->resData(402,$validator->errors()->all()[0].'...');
+                return $this->resData(400,$validator->errors()->all()[0].'...');
             }
             Type::where('id',$req->input('type_id'))->update(['sort'=>$req->input('sort')]);
             return $this->resData(200,'更新排序成功...');
         } catch (\Throwable $e) {
-            return $this->resData(400,'更新排序失败，请稍后再试...');
+            return $this->resData(500,'更新排序失败，请稍后再试...');
         }
     }
     // 删除分类
@@ -178,7 +178,7 @@ class TypeController extends ResponseController
             $validator->setAttributeNames($attrs);
             if ($validator->fails()) {
                 // 如果有错误，提示第一条
-                return $this->resData(402,$validator->errors()->all()[0].'...');
+                return $this->resData(400,$validator->errors()->all()[0].'...');
             }
             $id = $req->input('type_id');
             // 先找出所有子分类
@@ -191,7 +191,7 @@ class TypeController extends ResponseController
             return $this->resData(200,'删除分类成功...');
         } catch (\Throwable $e) {
             DB::rollback();
-            return $this->resData(400,'删除分类失败，请稍后再试...');
+            return $this->resData(500,'删除分类失败，请稍后再试...');
         }
     }
 }

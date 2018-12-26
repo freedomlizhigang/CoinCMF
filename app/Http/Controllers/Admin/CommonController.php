@@ -41,7 +41,7 @@ class CommonController extends ResponseController
             $res = ['title'=>$title,'breadcrumb'=>$breadcrumb,'btns'=>$btns];
             return $this->resData(200,'获取成功！',$res);
         } catch (\Throwable $e) {
-            return $this->resData(400,'获取失败，请稍后再试！');
+            return $this->resData(500,'获取失败，请稍后再试！');
         }
     }
 }
