@@ -39,22 +39,22 @@ export default [
             },
             // 栏目页面
             {
-              path: 'cate/index',
-              name: 'cate-index',
+              path: 'cate/list',
+              name: 'cate-list',
               component: CateList,
               meta: { requiresAuth: true }
             },
             // 文章列表
             {
-              path: 'art/index',
-              name: 'art-index',
+              path: 'article/list',
+              name: 'article-list',
               component: ArticleList,
               meta: { requiresAuth: true }
             },
             // 添加文章
             {
-              path: 'art/add',
-              name: 'art-add',
+              path: 'article/add',
+              name: 'article-add',
               component: ArticleAdd,
               meta: { requiresAuth: true }
             },

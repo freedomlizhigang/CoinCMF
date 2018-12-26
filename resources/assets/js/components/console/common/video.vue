@@ -62,8 +62,8 @@ export default {
         // 移除的回调
         handleRemove (file) {
             // console.log(file)
-            const fileList = this.$refs.upload.fileList;
-            this.$refs.upload.fileList.splice(fileList.indexOf(file), 1);
+            const fileList = this.$refs['upload-thumb'].fileList;
+            this.$refs['upload-thumb'].fileList.splice(fileList.indexOf(file), 1);
         },
         // 上传成功的回调
         handleSuccess (res, file) {

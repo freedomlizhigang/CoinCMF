@@ -773,18 +773,21 @@
 		"/D/wwwroot/CoinCMF/app",
 		"/D/wwwroot/CoinCMF/app/Http",
 		"/D/wwwroot/CoinCMF/app/Http/Controllers",
-		"/D/wwwroot/CoinCMF/app/Http/Controllers/Admin",
 		"/D/wwwroot/CoinCMF/app/Models",
 		"/D/wwwroot/CoinCMF/resources",
 		"/D/wwwroot/CoinCMF/resources/assets",
-		"/D/wwwroot/CoinCMF/resources/assets/js",
-		"/D/wwwroot/CoinCMF/resources/assets/js/api",
-		"/D/wwwroot/CoinCMF/resources/assets/js/components",
-		"/D/wwwroot/CoinCMF/resources/assets/js/components/console",
 		"/D/wwwroot/CoinCMF/routes"
 	],
 	"file_history":
 	[
+		"/D/wwwroot/CoinCMF/resources/assets/js/components/console/main/MenuTree.vue",
+		"/D/wwwroot/CoinCMF/resources/assets/js/api/console/menu.js",
+		"/D/wwwroot/CoinCMF/resources/assets/js/router/routers.js",
+		"/D/wwwroot/CoinCMF/resources/assets/js/api/console/cate.js",
+		"/D/wwwroot/CoinCMF/resources/assets/js/api/console/article.js",
+		"/D/wwwroot/CoinCMF/resources/assets/js/components/console/common/thumb.vue",
+		"/D/wwwroot/CoinCMF/resources/assets/js/components/console/common/video.vue",
+		"/D/wwwroot/CoinCMF/resources/assets/js/components/console/common/editor.vue",
 		"/D/wwwroot/CoinCMF/resources/assets/js/api/http.js",
 		"/D/wwwroot/CoinCMF/resources/assets/js/components/console/main/ArticleList.vue",
 		"/D/wwwroot/CoinCMF/README.md",
@@ -804,14 +807,11 @@
 		"/D/wwwroot/CoinCMF/resources/assets/js/components/console/main/AdminEditPwd.vue",
 		"/D/wwwroot/CoinCMF/resources/assets/js/components/console/main/AdminEditInfo.vue",
 		"/D/wwwroot/CoinCMF/resources/assets/js/components/console/main/AdminList.vue",
-		"/D/wwwroot/CoinCMF/resources/assets/js/router/routers.js",
 		"/D/wwwroot/CoinCMF/resources/assets/js/components/console/main/CateList.vue",
 		"/D/wwwroot/CoinCMF/app/Models/Common/Article.php",
 		"/D/wwwroot/CoinCMF/routes/admin.php",
 		"/D/wwwroot/CoinCMF/resources/assets/js/api/api.js",
 		"/D/wwwroot/CoinCMF/app/Http/Middleware/ConsoleJwt.php",
-		"/D/wwwroot/CoinCMF/resources/assets/js/api/console/article.js",
-		"/D/wwwroot/CoinCMF/resources/assets/js/api/console/menu.js",
 		"/D/wwwroot/shortlink/resources/assets/js/api/menu/index.js",
 		"/D/wwwroot/shortlink/resources/assets/js/api/common/index.js",
 		"/D/wwwroot/CoinCMF/resources/views/admin/index.blade.php",
@@ -822,7 +822,6 @@
 		"/D/wwwroot/CoinCMF/resources/assets/js/components/console/type/TypeList.vue",
 		"/D/wwwroot/CoinCMF/resources/assets/js/bootstrap.js",
 		"/D/wwwroot/CoinCMF/resources/assets/js/components/console/cate/CateList.vue",
-		"/D/wwwroot/CoinCMF/resources/assets/js/components/console/common/editor.vue",
 		"/D/wwwroot/CoinCMF/resources/assets/js/components/console/Iframe.vue",
 		"/D/wwwroot/CoinCMF/package.json",
 		"/D/wwwroot/CoinCMF/resources/assets/js/api/article/index.js",
@@ -908,15 +907,11 @@
 		"/D/wwwroot/www.time-memory.com/app/Http/Controllers/Api/Map/LocationErrorController.php",
 		"/D/wwwroot/www.time-memory.com/app/Http/Controllers/Api/Map/IntangibleItemController.php",
 		"/D/wwwroot/XYCMF/config/filesystems.php",
-		"/D/wwwroot/XYCMF/app/Http/Controllers/Admin/Admin1Controller.php",
-		"/D/wwwroot/XYCMF/app/Models/Console/Admin.php",
-		"/D/wwwroot/XYCMF/resources/assets/js/api/role/index.js",
-		"/D/wwwroot/XYCMF/resources/assets/js/app.js",
-		"/D/wwwroot/XYCMF/app/Http/Controllers/Admin/LogController.php"
+		"/D/wwwroot/XYCMF/app/Http/Controllers/Admin/Admin1Controller.php"
 	],
 	"find":
 	{
-		"height": 27.0
+		"height": 41.0
 	},
 	"find_in_files":
 	{
@@ -1046,6 +1041,9 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"art/",
+			"art",
+			"index",
 			"402",
 			"400",
 			"402",
@@ -1170,10 +1168,7 @@
 			"adminInfo",
 			"名称",
 			"editpassword",
-			"store",
-			"getConfig",
-			"updateAdmin",
-			"AdminList"
+			"store"
 		],
 		"highlight": true,
 		"in_selection": false,
