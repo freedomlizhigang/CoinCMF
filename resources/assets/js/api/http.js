@@ -75,7 +75,7 @@ instance.interceptors.response.use(
             switch (res.data.code) {
                 // 400参数的错误
                 case 400:
-                    iView.Message.error('请求的资源不存在...');
+                    iView.Message.error(res.data.msg);
                     break;
 
                 // 401: 未登录状态，跳转登录页

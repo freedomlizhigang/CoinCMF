@@ -165,6 +165,10 @@ export default {
             });
             return;
         },
+        changePage(){
+            this.pages.current = this.$refs['listPage'].currentPage;
+            this.getTableList();
+        },
         edit:function(index){
             this.$router.push('/console/art/edit/' + index);
         },
