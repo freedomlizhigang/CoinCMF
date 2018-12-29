@@ -31,7 +31,8 @@ class MyCrypt
      * @return string
      */
     public static function ssl_decrypt($data,$key = self::KEY,$iv = self::IV){
-        return openssl_decrypt(base64_decode($data),"AES-128-CBC",$key,OPENSSL_RAW_DATA,$iv);
+        $data = openssl_decrypt(base64_decode($data),"AES-128-CBC",$key,OPENSSL_RAW_DATA,$iv);
+        return base64_decode(str_pad(strtr($data, '-_', '+/'), strlen($data) % 4, '=', STR_PAD_RIGHT));
     }
     /**
      * 加密字符串
@@ -40,6 +41,7 @@ class MyCrypt
      * @return string
      */
     public static function ssl_encrypt($data,$key = self::KEY,$iv = self::IV){
+        $data = rtrim(strtr(base64_encode($data), '+/', '-_'), '=');
         return base64_encode(openssl_encrypt($data,"AES-128-CBC",$key,OPENSSL_RAW_DATA,$iv));
     }
     /*
