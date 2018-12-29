@@ -2,7 +2,7 @@
 
 @if(App::make('com')->ifCan('menu-add'))
 @section('rmenu')
-	<div data-url="{{ url('/console/menu/add') }}" data-title="添加菜单" data-toggle='modal' data-target='#myModal' class="btn btn-default btn-xs btn_modal"><span class="iconfont icon-add"></span> 添加菜单</div>
+	<div data-url="{{ url('/console/menu/add') }}" data-title="添加菜单" data-toggle='modal' data-target='#myModal' class="btn btn-default btn-xs btn_modal"><span class="glyphicon glyphicon-plus"></span> 添加菜单</div>
 @endsection
 @endif
 

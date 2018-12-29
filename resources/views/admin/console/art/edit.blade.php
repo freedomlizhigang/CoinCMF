@@ -91,13 +91,6 @@
 	        </td>
 	    </tr>
 
-        <tr>
-            <td class="td_left">点击量：</td>
-            <td>
-                <input type="text" name="data[hits]" value="{{ $info->hits }}" class="form-control input-xs">
-            </td>
-        </tr>
-
 	    <tr>
             <td class="td_left">发布时间：</td>
             <td>

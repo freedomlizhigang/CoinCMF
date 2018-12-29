@@ -2,7 +2,7 @@
 
 @section('rmenu')
 @if(App::make('com')->ifCan('art-add'))
-<a href="{{ url('/console/art/add',$catid) }}" class="btn btn-xs btn-default"><span class="iconfont icon-add"></span> 添加文章</a>
+<a href="{{ url('/console/art/add',$catid) }}" class="btn btn-xs btn-default"><span class="glyphicon glyphicon-plus"></span> 添加文章</a>
 @endif
 
 @endsection
@@ -15,11 +15,6 @@
 		<select name="catid" id="catid" class="form-control">
 			<option value="">请选择栏目</option>
 			{!! $cate !!}
-		</select>
-		<select name="push_flag" id="push_flag" class="form-control">
-			<option value="">是否推荐</option>
-			<option value="1"@if($push_flag == 1) selected="selected"@endif>推荐</option>
-			<option value="0"@if($push_flag == 0) selected="selected"@endif>普通</option>
 		</select>
 		开始时间：
 		<input type="text" name="starttime" class="form-control" value="{{ $starttime }}" id="laydate">
@@ -38,6 +33,7 @@
 			<th width="60">排序</th>
 			<th width="50">ID</th>
 			<th>标题</th>
+			<th width="100">发布人</th>
 			<th width="100">栏目</th>
 			<th width="100">点击量</th>
 			<th width="180">发布时间</th>
@@ -51,7 +47,7 @@
 				<input type="text" name="sort[{{ $a->id }}]" class="form-control input-xs" value="{{ $a->sort }}"></td>
 			<td>{{ $a->id }}</td>
 			<td>
-				<a href="{{ url('/post',$a->url) }}" target="_blank">{{ $a->title }}</a>
+				<span data-url="{{ url('/console/art/show',$a->id) }}" data-title="查看文章详细" data-toggle='modal' data-target='#myModal' class="btn_modal curp text-primary">{{ $a->title }}</span>
 				@if($a->thumb != '')
 				<span class="color_red">图</span>
 				@endif
@@ -59,15 +55,16 @@
 				<span class="text-success">荐</span>
 				@endif
 			</td>
-			<td>{{ $a->cate->name }}</td>
-			<td>{{ $a->hits }}</td>
+			<td class="text-primary">{{ optional($a->admin)->realname }}</td>
+			<td class="text-success">{{ optional($a->cate)->name }}</td>
+			<td class="text-info">{{ is_null($a->hit) ? 0 : $a->hit->count() }}</td>
 			<td>{{ $a->publish_at }}</td>
 			<td>
-				@if(App::make('com')->ifCan('art-edit'))
-				<a href="{{ url('/console/art/edit',$a->id) }}" class="btn btn-xs btn-info iconfont icon-translate"></a>
+				@if(App::make('com')->ifCan('art-edit') && ($a->admin_id == session('console')->id || $is_super))
+				<a href="{{ url('/console/art/edit',$a->id) }}" class="btn btn-xs btn-info glyphicon glyphicon-edit"></a>
 				@endif
 				@if(App::make('com')->ifCan('art-del'))
-				<a href="{{ url('/console/art/del',$a->id) }}" class="confirm btn btn-xs btn-danger iconfont icon-delete"></a>
+				<a href="{{ url('/console/art/del',$a->id) }}" class="confirm btn btn-xs btn-danger glyphicon glyphicon-trash"></a>
 				@endif
 			</td>
 		</tr>
@@ -79,9 +76,15 @@
 			<label class="btn btn-xs btn-primary"><input type="checkbox" autocomplete="off" class="checkall">全选</label>
 		</div>
 		@if(App::make('com')->ifCan('art-sort'))
-		<button type="submit" name="dosubmit" class="btn btn-xs btn-warning btn_listrorder" data-status="0">排序</button>
+		<button type="submit" name="dosubmit" class="btn btn-xs btn-info btn_listrorder">排序</button>
 		@endif
-
+		<input type="hidden" name="result" class="steps_result" value="1">
+		@if(App::make('com')->ifCan('art-allstatus'))
+		<button type="submit" name="dosubmit" class="btn btn-xs btn-success btn_allstatus" data-result="1">通过审核</button>
+		@endif
+		@if(App::make('com')->ifCan('art-allstatus'))
+		<button type="submit" name="dosubmit" class="btn btn-xs btn-warning btn_allstatus" data-result="0">退稿</button>
+		@endif
 		@if(App::make('com')->ifCan('art-alldel'))
 		<span class="btn btn-xs btn-danger btn_del">批量删除</span>
 		@endif
@@ -89,13 +92,17 @@
 </form>
 <!-- 分页，appends是给分页添加参数 -->
 <div class="pages clearfix pull-right">
-	{!! $list->appends(['catid' =>$catid,'q'=>$key,'push_flag'=>$push_flag,'starttime'=>$starttime,'endtime'=>$endtime])->links() !!}
+	{!! $list->appends(['catid' =>$catid,'q'=>$key,'starttime'=>$starttime,'endtime'=>$endtime])->links() !!}
 </div>
 <!-- 选中当前栏目 -->
 <script>
 	$(function(){
 		$('.btn_listrorder').click(function(){
 			$('.form_status').attr({'action':"{{ url('console/art/sort') }}",'method':'post'}).submit();
+		});
+		$('.btn_allstatus').click(function(){
+			$('.steps_result').val($(this).attr('data-result'));
+			$('.form_status').attr({'action':"{{ url('console/art/allstatus') }}",'method':'post'}).submit();
 		});
 		$('.btn_del').click(function(){
 			if (!confirm("确实要删除吗?")){

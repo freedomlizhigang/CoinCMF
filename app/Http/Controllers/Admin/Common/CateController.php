@@ -13,6 +13,7 @@ namespace App\Http\Controllers\Admin\Common;
 use App\Customize\Func;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Common\CateRequest;
+use App\Models\Coin\Workflow;
 use App\Models\Common\Article;
 use App\Models\Common\Cate;
 use DB;
@@ -47,7 +48,7 @@ class CateController extends Controller
                     // 用level判断层级，最好不要超过四层，样式中只写了四级
                     $cj = count(explode(',', $v['arrparentid']));
                     $level = $cj > 4 ? 4 : $cj;
-                    $typename = $v['type'] ? "<span class='text-success'>单页</span>" : "<span class='text-primary'>栏目</span>";
+                    $typename = $v['type'] ? "<span class='text-success'>栏目</span>" : "<span class='text-primary'>单页</span>";
                     $display = $v['display'] ? "<span class='text-success'>显示</span>" : "<span class='text-warning'>隐藏</span>";
                     $html .= "<tr>
                         <td>".$v['sort']."</td>
@@ -55,7 +56,7 @@ class CateController extends Controller
                         <td><span class='level-".$level."'></span>".$v['name']."</td>
                         <td>".$typename."</td>
                         <td>".$display."</td>
-                        <td><a href='/console/cate/add/".$v['id']."' class='btn btn-xs btn-primary icon icon-addbox'></a> <a href='/console/cate/edit/".$v['id']."' class='btn btn-xs btn-info iconfont icon-translate'></a> <a href='/console/cate/del/".$v['id']."' class='btn btn-xs btn-danger iconfont icon-delete confirm'></a></td>
+                        <td><a href='/console/cate/add/".$v['id']."' class='btn btn-xs btn-primary glyphicon glyphicon-plus'></a> <a href='/console/cate/edit/".$v['id']."' class='btn btn-xs btn-info glyphicon glyphicon-edit'></a> <a href='/console/cate/del/".$v['id']."' class='btn btn-xs btn-danger glyphicon glyphicon-trash confirm'></a></td>
                         </tr>";
                     if ($v['parentid'] != '')
                     {
@@ -87,7 +88,8 @@ class CateController extends Controller
     {
         try {
         	$title = '添加栏目';
-        	return view('admin.console.cate.add',compact('title','pid'));
+            $workflow = Workflow::get();
+        	return view('admin.console.cate.add',compact('title','pid','workflow'));
         } catch (\Throwable $e) {
             return view('errors.500');
         }
@@ -125,7 +127,8 @@ class CateController extends Controller
             $all = Cate::orderBy('sort','asc')->get();
             $tree = app('com')->toTree($all,'0');
             $treeHtml = app('com')->toTreeSelect($tree,$info->parentid);
-            return view('admin.console.cate.edit',compact('title','info','treeHtml'));
+            $workflow = Workflow::get();
+            return view('admin.console.cate.edit',compact('title','info','treeHtml','workflow'));
         } catch (\Throwable $e) {
             return view('errors.500');
         }
@@ -137,7 +140,17 @@ class CateController extends Controller
         try {
             $data = $res->input('data');
             Cate::where('id',$id)->update($data);
-            Article::where('cate_id',$id)->update(['tpl'=>$data['art_tpl']]);
+            $update = ['tpl'=>$data['art_tpl']];
+            if ($data['workflow_id'] == 0) {
+                $update['status'] = 99;
+                Article::where('cate_id',$id)->update($update);
+            }
+            else
+            {
+                // 重新审批，从第一个开始
+                $update['status'] = 1;
+                Article::where('cate_id',$id)->whereIn('status',[2,3,4])->update($update);
+            }
             // 更新缓存
             app('com')->updateCache(new Cate(),'cateCache',1);
             // 没出错，提交事务

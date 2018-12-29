@@ -2,7 +2,7 @@
 
 @if(App::make('com')->ifCan('log-del'))
 @section('rmenu')
-	<a href="{{ url('/console/log/del') }}" class="btn btn-xs btn-default btn_modal"><span class="iconfont icon-delete"></span> 清除七天前日志</a>
+	<a href="{{ url('/console/log/del') }}" class="btn btn-xs btn-default btn_modal"><span class="glyphicon glyphicon-trash"></span> 清除七天前日志</a>
 @endsection
 @endif
 

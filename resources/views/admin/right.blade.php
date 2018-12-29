@@ -4,7 +4,7 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
     <title>{{ cache('config')['sitename'] }}-右侧框架</title>
-    <meta name="author" content="李潇喃：www.www.xi-yi.ren" />
+    <meta name="author" content="李潇喃：www.www.xi-yi.net" />
     <!-- IE最新兼容 -->
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <!-- 国产浏览器高速/微信开发不要用 -->
@@ -17,8 +17,6 @@
     <meta http-equiv="Cache-Control" content="no-siteapp" />
 
     <!-- 上传用的 css -->
-    <link rel="stylesheet" href="{{ $sites['static']}}common/css/bootstrap.min.css">
-    <link rel="stylesheet" href="{{ $sites['static']}}common/css/iconfont.css">
     <link rel="stylesheet" href="{{ $sites['static']}}admin/css/reset.css">
     <script src="{{ $sites['static']}}common/js/jquery.min.js"></script>
     <script src="{{ $sites['static']}}common/js/bootstrap.min.js"></script>

@@ -3,7 +3,7 @@
 
 @section('rmenu')
 	@if(App::make('com')->ifCan('community-add'))
-	<div data-url="{{ url('/console/community/add') }}" data-title="添加社区" data-toggle='modal' data-target='#myModal' class="btn btn-xs btn-default btn_modal"><span class="iconfont icon-add"></span> 添加社区</div>
+	<div data-url="{{ url('/console/community/add') }}" data-title="添加社区" data-toggle='modal' data-target='#myModal' class="btn btn-xs btn-default btn_modal"><span class="glyphicon glyphicon-plus"></span> 添加社区</div>
 	@endif
 @endsection
 
@@ -46,10 +46,10 @@
 			</td>
 			<td>
 				@if(App::make('com')->ifCan('community-edit'))
-				<div data-url="{{ url('/console/community/edit',['id'=>$l->id]) }}" data-title="修改社区" data-toggle='modal' data-target='#myModal' class="btn btn-xs btn-info iconfont icon-translate btn_modal"></div>
+				<div data-url="{{ url('/console/community/edit',['id'=>$l->id]) }}" data-title="修改社区" data-toggle='modal' data-target='#myModal' class="btn btn-xs btn-info glyphicon glyphicon-edit btn_modal"></div>
 				@endif
 				@if(App::make('com')->ifCan('community-del'))
-				<a href="{{ url('/console/community/del',['id'=>$l->id]) }}" class="btn btn-xs btn-danger iconfont icon-delete confirm"></a>
+				<a href="{{ url('/console/community/del',['id'=>$l->id]) }}" class="btn btn-xs btn-danger glyphicon glyphicon-trash confirm"></a>
 				@endif
 			</td>
 		</tr>

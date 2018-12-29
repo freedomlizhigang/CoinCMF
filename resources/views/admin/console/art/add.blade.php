@@ -94,13 +94,6 @@
         </tr>
 
         <tr>
-            <td class="td_left">点击量：</td>
-            <td>
-                <input type="text" name="data[hits]" value="{{ old('data.hits',99) }}" class="form-control input-xs">
-            </td>
-        </tr>
-
-        <tr>
             <td class="td_left">发布时间：</td>
             <td>
                 <input type="text" name="data[publish_at]" class="form-control input-sm" value="{{ date('Y-m-d H:i:s') }}" id="laydate">

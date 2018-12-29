@@ -4,20 +4,15 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
     <title>{{ cache('config')['sitename'] }}管理中心</title>
-    <meta name="author" content="李潇喃：www.www.xi-yi.ren" />
+    <meta name="author" content="李潇喃：www.www.xi-yi.net" />
     <!-- IE最新兼容 -->
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <!-- 国产浏览器高速/微信开发不要用 -->
-     <meta name="renderer" content="webkit">
-
+    <meta name="renderer" content="webkit">
     <!-- 移动设备禁止缩放 -->
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-
     <!-- No Baidu Siteapp-->
     <meta http-equiv="Cache-Control" content="no-siteapp" />
-
-    <link rel="stylesheet" href="{{ $sites['static']}}common/css/bootstrap.min.css">
-    <link rel="stylesheet" href="{{ $sites['static']}}common/css/iconfont.css">
     <link rel="stylesheet" href="{{ $sites['static']}}admin/css/reset.css">
     <script src="{{ $sites['static']}}common/js/jquery.min.js"></script>
     <script src="{{ $sites['static']}}common/js/bootstrap.min.js"></script>
@@ -49,7 +44,7 @@
             <iframe name="right" id="rightMain" src="{{ url('/console/index/main') }}" frameborder="false" scrolling="auto" style="border:none; margin-bottom:30px" width="100%" height="auto" allowtransparency="true"></iframe>
         </section>
         <footer class="copyright clearfix">
-            @ <a href="http://www.xi-yi.ren/" target="_blank" class="color_f60">console</a>&<a href="https://github.com/laravel/laravel" target="_blank">Laravel</a>
+            @ <span class="color_f60">CoinCMS</span>&<a href="https://github.com/laravel/laravel" target="_blank">Laravel</a>
         </footer>
     </div>
     <script>

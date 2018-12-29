@@ -170,8 +170,6 @@ return [
         App\Providers\RouteServiceProvider::class,
         // 一些公用服务
         App\Providers\ComServiceProvider::class,
-        // 调试
-        Barryvdh\Debugbar\ServiceProvider::class,
 
     ],
 
@@ -221,8 +219,6 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
-        // 调试
-        'Debugbar'  => Barryvdh\Debugbar\Facade::class,
     ],
 
 ];

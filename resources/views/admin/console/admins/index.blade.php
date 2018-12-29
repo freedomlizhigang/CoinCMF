@@ -2,7 +2,7 @@
 
 @if(App::make('com')->ifCan('admin-add'))
 @section('rmenu')
-	<div data-url="{{ url('/console/admin/add') }}" data-title="添加用户" data-toggle='modal' data-target='#myModal' class="btn btn-xs btn-default btn_modal"><span class="iconfont icon-add"></span> 添加用户</div>
+	<div data-url="{{ url('/console/admin/add') }}" data-title="添加用户" data-toggle='modal' data-target='#myModal' class="btn btn-xs btn-default btn_modal"><span class="glyphicon glyphicon-plus"></span> 添加用户</div>
 @endsection
 @endif
 
@@ -56,13 +56,13 @@
 		</td>
 		<td>
 			@if(App::make('com')->ifCan('admin-edit'))
-			<div data-url="{{ url('/console/admin/edit',$m->id) }}" data-title="修改" data-toggle='modal' data-target='#myModal' class="btn btn-xs btn-info iconfont icon-translate btn_modal"></div>
+			<div data-url="{{ url('/console/admin/edit',$m->id) }}" data-title="修改" data-toggle='modal' data-target='#myModal' class="btn btn-xs btn-info glyphicon glyphicon-edit btn_modal"></div>
 			@endif
 			@if(App::make('com')->ifCan('admin-pwd'))
-			<div data-url="{{ url('/console/admin/pwd',$m->id) }}" data-title="修改密码" data-toggle='modal' data-target='#myModal' title="改密码" class="btn btn-xs btn-warning iconfont icon-lockopen btn_modal"></div>
+			<div data-url="{{ url('/console/admin/pwd',$m->id) }}" data-title="修改密码" data-toggle='modal' data-target='#myModal' title="改密码" class="btn btn-xs btn-warning glyphicon glyphicon-eye-close btn_modal"></div>
 			@endif
 			@if($m->id != 1 && App::make('com')->ifCan('admin-del'))
-			<a href="{{ url('/console/admin/del',$m->id) }}" class="btn btn-xs btn-danger iconfont icon-delete confirm"></a>
+			<a href="{{ url('/console/admin/del',$m->id) }}" class="btn btn-xs btn-danger glyphicon glyphicon-trash confirm"></a>
 			@endif
 		</td>
 	</tr>

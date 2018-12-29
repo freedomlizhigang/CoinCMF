@@ -92,6 +92,19 @@
         </tr>
 
         <tr>
+            <td class="td_left">工作流：</td>
+            <td>
+                <select name="data[workflow_id]" class="form-control input-sm">
+                    <option value="0">不需要审核</option>
+                    @foreach($workflow as $w)
+                    <option value="{{ $w->id }}">{{ $w->workname }}</option>
+                    @endforeach
+                </select>
+                <p class="input-info">带文章的栏目需要，单页类不起作用</p>
+            </td>
+        </tr>
+
+        <tr>
             <td class="td_left">栏目模板：</td>
             <td>
                 <input type="text" name="data[cate_tpl]" class="form-control input-sm" value="list">

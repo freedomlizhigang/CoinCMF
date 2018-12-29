@@ -45,10 +45,10 @@ class MenuController extends Controller
                      $html .= "<tr>
                         <td>".$v['sort']."</td>
                         <td>".$v['id']."</td>
-                        <td><span class='level-".$level."'></span>".$v['name']."<div data-url='/console/menu/add/".$v['id']."' class='iconfont icon-addbox curp add_submenu btn_modal' data-title='添加菜单' data-toggle='modal' data-target='#myModal'></div></td>
+                        <td><span class='level-".$level."'></span>".$v['name']."<div data-url='/console/menu/add/".$v['id']."' class='glyphicon glyphicon-plus curp add_submenu btn_modal' data-title='添加菜单' data-toggle='modal' data-target='#myModal'></div></td>
                         <td>".$v['url']."</td>
                         <td>".$disStr."</td>
-                        <td><div data-url='/console/menu/edit/".$v['id']."' class='btn btn-xs btn-info iconfont icon-translate btn_modal' data-title='修改菜单' data-toggle='modal' data-target='#myModal'></div> <a href='/console/menu/del/".$v['id']."' class='btn btn-xs btn-danger iconfont icon-delete confirm'></a></td>
+                        <td><div data-url='/console/menu/edit/".$v['id']."' class='btn btn-xs btn-info glyphicon glyphicon-edit btn_modal' data-title='修改菜单' data-toggle='modal' data-target='#myModal'></div> <a href='/console/menu/del/".$v['id']."' class='btn btn-xs btn-danger glyphicon glyphicon-trash confirm'></a></td>
                         </tr>";
                 }
                 else
@@ -59,7 +59,7 @@ class MenuController extends Controller
                         <td><span class='level-".$level."'></span>".$v['name']."</td>
                         <td>".$v['url']."</td>
                         <td>".$disStr."</td>
-                        <td><div data-url='/console/menu/edit/".$v['id']."' class='btn btn-xs btn-info iconfont icon-translate btn_modal' data-title='修改菜单' data-toggle='modal' data-target='#myModal'></div> <a href='/console/menu/del/".$v['id']."' class='btn btn-xs btn-danger iconfont icon-delete confirm'></a></td>
+                        <td><div data-url='/console/menu/edit/".$v['id']."' class='btn btn-xs btn-info glyphicon glyphicon-edit btn_modal' data-title='修改菜单' data-toggle='modal' data-target='#myModal'></div> <a href='/console/menu/del/".$v['id']."' class='btn btn-xs btn-danger glyphicon glyphicon-trash confirm'></a></td>
                         </tr>";
                 }
                 if ($v['parentid'] != '')
