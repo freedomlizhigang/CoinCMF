@@ -4,164 +4,8 @@
 		"selected_items":
 		[
 			[
-				"upload",
-				"uploadList"
-			],
-			[
-				"Upload",
-				"UploadImg\t(upload.vue)"
-			],
-			[
-				"Upl",
-				"UploadImg"
-			],
-			[
-				"Up",
-				"UploadImg\t(upload.vue)"
-			],
-			[
-				"admin",
-				"admin_id"
-			],
-			[
-				"type",
-				"type_id"
-			],
-			[
-				"AdminEd",
-				"AdminEditInfo"
-			],
-			[
-				"json_d",
-				"json_decode"
-			],
-			[
-				"pass",
-				"password_confirmation"
-			],
-			[
-				"show",
-				"showEditPwdStatus"
-			],
-			[
-				"showe",
-				"showEditInfo"
-			],
-			[
-				"showCreate",
-				"showCreateStatus"
-			],
-			[
-				"on",
-				"on-change"
-			],
-			[
-				"data",
-				"dataloading"
-			],
-			[
-				"section",
-				"section_id"
-			],
-			[
-				"sect",
-				"section_id"
-			],
-			[
-				"req",
-				"required|integer"
-			],
-			[
-				"showCr",
-				"showCreateStatus"
-			],
-			[
-				"child",
-				"child_count"
-			],
-			[
-				"chi",
-				"child"
-			],
-			[
-				"wd",
-				"width\tproperty"
-			],
-			[
-				"menu",
-				"menu_id"
-			],
-			[
-				"arti",
-				"articleList\t(index.js)"
-			],
-			[
-				"requ",
-				"requiresAuth"
-			],
-			[
-				"con",
-				"console"
-			],
-			[
-				"Log",
-				"LOGOUT\t(Login.vue)"
-			],
-			[
-				"consol",
-				"console\t(Login.vue)"
-			],
-			[
-				"请输入",
-				"请输入密码"
-			],
-			[
-				"请",
-				"请输入用户名"
-			],
-			[
-				"conso",
-				"console\t(CommonController.php)"
-			],
-			[
-				"brea",
-				"breadcrumb\t(admin.php)"
-			],
-			[
-				"cate",
-				"cateid"
-			],
-			[
-				"console",
-				"console.log"
-			],
-			[
-				"datet",
-				"datetime"
-			],
-			[
-				"delete",
-				"deleteData"
-			],
-			[
-				"check",
-				"checkStatus"
-			],
-			[
-				"push",
-				"publish_at\t(index.blade.php)"
-			],
-			[
-				"layb",
-				"layui-btn-primary"
-			],
-			[
-				"optop",
-				"optional($option)->nums"
-			],
-			[
-				"option",
-				"optional($option)->height"
+				"render",
+				"renderTable"
 			],
 			[
 				"chec",
@@ -194,6 +38,10 @@
 			[
 				"GoodSpe",
 				"GoodSpecItem"
+			],
+			[
+				"json_d",
+				"json_encode"
 			],
 			[
 				"good_spe",
@@ -270,6 +118,10 @@
 			[
 				"good_",
 				"good_title"
+			],
+			[
+				"req",
+				"request"
 			],
 			[
 				"btn-de",
@@ -514,6 +366,154 @@
 			[
 				"return",
 				"return"
+			],
+			[
+				"retur",
+				"return"
+			],
+			[
+				"cont",
+				"contents\t.contents()"
+			],
+			[
+				"sub",
+				"submit\t.submit()"
+			],
+			[
+				"res",
+				"response"
+			],
+			[
+				"goods",
+				"goodlists"
+			],
+			[
+				"de",
+				"decrement"
+			],
+			[
+				"tot",
+				"total_prices"
+			],
+			[
+				"pays",
+				"paystatus\t(PayController.php)"
+			],
+			[
+				"toa",
+				"total_prices"
+			],
+			[
+				"cha",
+				"change\t.change()"
+			],
+			[
+				"conta",
+				"container-fluid"
+			],
+			[
+				"tra",
+				"target\tAttr"
+			],
+			[
+				"Auth",
+				"AuthTmp"
+			],
+			[
+				"is_n",
+				"is_null"
+			],
+			[
+				"var",
+				"var_dump"
+			],
+			[
+				"pa",
+				"paylist"
+			],
+			[
+				"w",
+				"width\tAttr"
+			],
+			[
+				"is_",
+				"is_null"
+			],
+			[
+				"Car",
+				"Carbon"
+			],
+			[
+				"numb",
+				"number_format"
+			],
+			[
+				"btn-s",
+				"btn-sm \tBootstrap 3 Class"
+			],
+			[
+				"media",
+				"media-object \tBootstrap 3 Class"
+			],
+			[
+				"form-c",
+				"form-control \tBootstrap 3 Class"
+			],
+			[
+				"forma",
+				"formatid"
+			],
+			[
+				"pll",
+				"pull-right \tBootstrap 3 Class"
+			],
+			[
+				"po",
+				"pos:f\tposition:fixed"
+			],
+			[
+				"exp",
+				"explode"
+			],
+			[
+				"attr",
+				"attr_ids"
+			],
+			[
+				"tem",
+				"temp_attr"
+			],
+			[
+				"str_re",
+				"str_replace"
+			],
+			[
+				"temp",
+				"temp_arrt_url_arr"
+			],
+			[
+				"temp_",
+				"temp_arrt_url"
+			],
+			[
+				"clear",
+				"clearfix"
+			],
+			[
+				"jum",
+				"jumb_btn\t(layout.blade.php)"
+			],
+			[
+				"jumb",
+				"jumb_h1\t(layout.blade.php)"
+			],
+			[
+				"cl",
+				"clearfix"
+			],
+			[
+				"as",
+				"aside_name"
 			]
 		]
 	},
@@ -552,26 +552,6 @@
 				"File: Rename"
 			],
 			[
-				"rename",
-				"Rename File"
-			],
-			[
-				"reanm",
-				"Rename File"
-			],
-			[
-				"instal",
-				"Package Control: Install Package"
-			],
-			[
-				"re",
-				"File: Rename"
-			],
-			[
-				"renal",
-				"Rename Local and Remote Files"
-			],
-			[
 				"cl",
 				"File: Close All"
 			],
@@ -590,6 +570,10 @@
 			[
 				"clo",
 				"File: Close All"
+			],
+			[
+				"re",
+				"File: Rename"
 			],
 			[
 				"install",
@@ -744,7 +728,7 @@
 	},
 	"console":
 	{
-		"height": 416.0,
+		"height": 214.0,
 		"history":
 		[
 			"git remote -v",
@@ -773,141 +757,146 @@
 		"/D/wwwroot/CoinCMF/app",
 		"/D/wwwroot/CoinCMF/app/Http",
 		"/D/wwwroot/CoinCMF/app/Http/Controllers",
-		"/D/wwwroot/CoinCMF/app/Models",
+		"/D/wwwroot/CoinCMF/app/Http/Controllers/Admin",
 		"/D/wwwroot/CoinCMF/resources",
 		"/D/wwwroot/CoinCMF/resources/assets",
+		"/D/wwwroot/CoinCMF/resources/assets/js",
+		"/D/wwwroot/CoinCMF/resources/assets/js/components",
+		"/D/wwwroot/CoinCMF/resources/assets/js/components/console",
+		"/D/wwwroot/CoinCMF/resources/views",
+		"/D/wwwroot/CoinCMF/resources/views/admin",
 		"/D/wwwroot/CoinCMF/routes"
 	],
 	"file_history":
 	[
-		"/D/wwwroot/CoinCMF/resources/assets/js/components/console/main/MenuTree.vue",
-		"/D/wwwroot/CoinCMF/resources/assets/js/api/console/menu.js",
-		"/D/wwwroot/CoinCMF/resources/assets/js/router/routers.js",
-		"/D/wwwroot/CoinCMF/resources/assets/js/api/console/cate.js",
-		"/D/wwwroot/CoinCMF/resources/assets/js/api/console/article.js",
-		"/D/wwwroot/CoinCMF/resources/assets/js/components/console/common/thumb.vue",
-		"/D/wwwroot/CoinCMF/resources/assets/js/components/console/common/video.vue",
-		"/D/wwwroot/CoinCMF/resources/assets/js/components/console/common/editor.vue",
-		"/D/wwwroot/CoinCMF/resources/assets/js/api/http.js",
+		"/D/wwwroot/CoinCMF/resources/assets/js/components/console/main/LogList.vue",
 		"/D/wwwroot/CoinCMF/resources/assets/js/components/console/main/ArticleList.vue",
-		"/D/wwwroot/CoinCMF/README.md",
-		"/D/wwwroot/CoinCMF/app/Http/Controllers/Admin/TypeController.php",
-		"/D/wwwroot/CoinCMF/app/Http/Controllers/Admin/SectionController.php",
-		"/D/wwwroot/CoinCMF/app/Http/Controllers/Admin/RoleController.php",
-		"/D/wwwroot/CoinCMF/app/Http/Controllers/Admin/ResponseController.php",
-		"/D/wwwroot/CoinCMF/app/Http/Controllers/Admin/MenuController.php",
-		"/D/wwwroot/CoinCMF/app/Http/Controllers/Admin/LoginController.php",
-		"/D/wwwroot/CoinCMF/app/Http/Controllers/Admin/LogController.php",
-		"/D/wwwroot/CoinCMF/app/Http/Controllers/Admin/ConfigController.php",
-		"/D/wwwroot/CoinCMF/app/Http/Controllers/Admin/CommonController.php",
-		"/D/wwwroot/CoinCMF/app/Http/Controllers/Admin/CateController.php",
-		"/D/wwwroot/CoinCMF/app/Http/Controllers/Admin/ArticleController.php",
-		"/D/wwwroot/CoinCMF/app/Http/Controllers/Admin/AdminController.php",
-		"/D/wwwroot/CoinCMF/resources/assets/js/api/console/admin.js",
-		"/D/wwwroot/CoinCMF/resources/assets/js/components/console/main/AdminEditPwd.vue",
-		"/D/wwwroot/CoinCMF/resources/assets/js/components/console/main/AdminEditInfo.vue",
-		"/D/wwwroot/CoinCMF/resources/assets/js/components/console/main/AdminList.vue",
-		"/D/wwwroot/CoinCMF/resources/assets/js/components/console/main/CateList.vue",
+		"/D/wwwroot/CoinCMF/resources/views/admin/console/art/index.blade.php",
+		"/D/wwwroot/CoinCMF/app/Http/Controllers/Admin/Common/ArtController.php",
+		"/D/wwwroot/library-sys/app/Http/Controllers/Admin/Common/ArtController.php",
+		"/D/wwwroot/XYShop/app/Http/Controllers/Admin/Common/ArtController.php",
+		"/D/wwwroot/CoinCMF/app/Http/Controllers/Admin/Common/AttrController.php",
 		"/D/wwwroot/CoinCMF/app/Models/Common/Article.php",
-		"/D/wwwroot/CoinCMF/routes/admin.php",
-		"/D/wwwroot/CoinCMF/resources/assets/js/api/api.js",
-		"/D/wwwroot/CoinCMF/app/Http/Middleware/ConsoleJwt.php",
-		"/D/wwwroot/shortlink/resources/assets/js/api/menu/index.js",
-		"/D/wwwroot/shortlink/resources/assets/js/api/common/index.js",
+		"/D/wwwroot/CoinCMF/config/broadcasting.php",
+		"/D/wwwroot/CoinCMF/config/scout.php",
+		"/D/wwwroot/CoinCMF/composer.json",
+		"/D/wwwroot/CoinCMF/public/statics/admin/css/reset.scss",
+		"/C/Users/Administrator/Desktop/111.sql",
+		"/D/wwwroot/CoinCMF/app/Http/Controllers/Admin/MenuController.php",
+		"/D/wwwroot/CoinCMS/app/Http/Controllers/Admin/MenuController.php",
+		"/D/wwwroot/juqi-kq/app/Http/Controllers/Admin/MenuController.php",
+		"/D/wwwroot/CoinCMF/resources/views/admin/left.blade.php",
 		"/D/wwwroot/CoinCMF/resources/views/admin/index.blade.php",
-		"/D/wwwroot/CoinCMF/resources/assets/js/components/console/common/upload.vue",
-		"/D/wwwroot/CoinCMF/webpack.mix.js",
-		"/D/wwwroot/CoinCMF/resources/assets/js/components/console/admin/AdminList.vue",
-		"/D/wwwroot/CoinCMF/resources/assets/js/components/console/article/ArticleList.vue",
-		"/D/wwwroot/CoinCMF/resources/assets/js/components/console/type/TypeList.vue",
-		"/D/wwwroot/CoinCMF/resources/assets/js/bootstrap.js",
-		"/D/wwwroot/CoinCMF/resources/assets/js/components/console/cate/CateList.vue",
-		"/D/wwwroot/CoinCMF/resources/assets/js/components/console/Iframe.vue",
-		"/D/wwwroot/CoinCMF/package.json",
-		"/D/wwwroot/CoinCMF/resources/assets/js/api/article/index.js",
-		"/D/wwwroot/CoinCMF/tests/Feature/LogTest.php",
-		"/D/wwwroot/CoinCMF/tests/Feature/TypeTest.php",
-		"/D/wwwroot/CoinCMF/resources/assets/js/api/log/index.js",
-		"/D/wwwroot/CoinCMF/resources/assets/js/components/console/log/LogList.vue",
-		"/D/wwwroot/CoinCMF/resources/assets/js/api/admin/index.js",
-		"/D/wwwroot/CoinCMF/resources/assets/js/components/console/section/SectionList.vue",
-		"/D/wwwroot/CoinCMF/resources/assets/js/components/console/role/RoleList.vue",
-		"/D/wwwroot/CoinCMF/app/Http/Controllers/Admin/Common/CateController.php",
-		"/D/wwwroot/CoinCMF/resources/assets/js/api/type/index.js",
-		"/D/wwwroot/CoinCMF/resources/assets/js/api/menu/index.js",
-		"/D/wwwroot/CoinCMF/resources/assets/js/components/console/menu/MenuTree.vue",
-		"/D/wwwroot/CoinCMF/app/Services/ComService.php",
-		"/D/wwwroot/CoinCMS/app/Http/Controllers/Admin/IndexController.php",
-		"/D/wwwroot/CoinCMF/resources/assets/js/router/index.js",
-		"/D/wwwroot/CoinCMF/resources/assets/js/vuex/modules/user.js",
-		"/C/Users/Administrator/Desktop/PPT2/响应式用例/响应式布局.html",
-		"/D/wwwroot/XYCMF/config/app.php",
-		"/D/wwwroot/XYCMF/.env",
-		"/D/wwwroot/XYCMF/.env.example",
-		"/D/wwwroot/XYCMF/composer.json",
-		"/D/wwwroot/XYCMF/config/database.php",
-		"/D/wwwroot/XYCMF/README.md",
-		"/D/wwwroot/XYCMF/app/Http/Controllers/Admin/MenuController.php",
-		"/D/wwwroot/XYCMF/resources/assets/js/components/console/Iframe.vue",
-		"/D/wwwroot/XYCMF/app/Http/Controllers/Admin/CommonController.php",
-		"/D/wwwroot/XYCMF/resources/assets/js/api/http.js",
-		"/D/wwwroot/XYCMF/resources/assets/js/router/index.js",
-		"/D/wwwroot/XYCMF/resources/assets/js/components/console/admin/AdminEditPwd.vue",
-		"/D/wwwroot/XYCMF/resources/assets/js/components/console/admin/AdminList.vue",
-		"/D/wwwroot/XYCMF/resources/assets/js/components/console/admin/AdminEditInfo.vue",
-		"/D/wwwroot/XYCMF/app/Http/Controllers/Admin/AdminController.php",
-		"/D/wwwroot/XYCMF/routes/admin.php",
-		"/D/wwwroot/XYCMF/resources/assets/js/api/admin/index.js",
-		"/D/wwwroot/XYCMF/resources/assets/js/router/routers.js",
-		"/D/wwwroot/XYCMF/app/Http/Middleware/VerifyCsrfToken.php",
-		"/D/wwwroot/XYCMF/app/Http/Middleware/ConsoleJwt.php",
-		"/D/wwwroot/XYCMF/app/Http/Kernel.php",
-		"/D/wwwroot/XYCMF/app/Http/Middleware/BetoAdmin.php",
-		"/D/wwwroot/XYCMF/app/Http/Middleware/ConsoleApi.php",
-		"/D/wwwroot/XYCMF/tests/Feature/ConfigTest.php",
-		"/D/wwwroot/XYCMF/tests/Feature/ExampleTest.php",
-		"/D/phpunit/phpunit.cmd",
-		"/D/wwwroot/XYCMF/phpunit.xml",
-		"/D/wwwroot/XYCMF/vendor/phpunit/phpunit/phpunit.xml",
-		"/D/wwwroot/XYCMF/resources/views/home/home.blade.php",
-		"/D/wwwroot/XYCMF/app/Http/Controllers/Admin/ConfigController1.php",
-		"/D/wwwroot/XYCMF/resources/assets/js/components/console/config/Config.vue",
-		"/D/wwwroot/XYCMF/app/Http/Controllers/Admin/ConfigController.php",
-		"/D/希夷/局气/服务器信息.txt",
-		"/D/wwwroot/XYCMF/resources/assets/js/api/api.js",
-		"/D/wwwroot/XYCMF/resources/assets/js/api/config/index.js",
-		"/D/wwwroot/XYCMF/resources/assets/js/components/console/menu/MenuTree.vue",
-		"/D/wwwroot/XYCMF/resources/assets/js/api/common/index.js",
-		"/C/Users/Administrator/Desktop/111.txt",
-		"/C/Users/Administrator/Desktop/虚拟主机部署.txt",
-		"/D/wwwroot/isoftstone-shared/.env",
+		"/D/wwwroot/CoinCMF/resources/views/admin/right.blade.php",
+		"/D/wwwroot/CoinCMF/resources/views/admin/login.blade.php",
+		"/D/wwwroot/CoinCMF/app/Http/Controllers/Admin/PublicController.php",
+		"/D/wwwroot/CoinCMF/.env",
+		"/D/wwwroot/CoinCMF/routes/admin.php",
+		"/C/Windows/System32/drivers/etc/hosts",
+		"/C/Users/Administrator/Desktop/zxgj.thzhsq.com(1).txt",
+		"/D/wwwroot/CoinCMF/config/app.php",
 		"/D/希夷/软通动力/共享服务/远程服务器.txt",
-		"/D/wwwroot/XYCMF/resources/assets/js/api/menu/index.js",
-		"/D/wwwroot/XYCMF/xycmf.sublime-project",
-		"/D/wwwroot/XYCMF/resources/assets/js/components/console/role/RoleList.vue",
-		"/D/wwwroot/XYCMF/resources/assets/js/components/console/Login.vue",
-		"/D/wwwroot/XYCMF/app/Http/Controllers/Admin/LoginController.php",
-		"/D/wwwroot/XYCMF/resources/views/admin/index.blade.php",
-		"/F/soft/FlashFXP4/Cache/~flashfxp/4A3A350E_edit.tmp/.env",
+		"/D/wwwroot/shortlink/app/Customize/MyCrypt.php",
+		"/D/wwwroot/CoinCMF/app/Customize/MyCrypt.php",
+		"/D/wwwroot/CoinCMF/config/database.php",
+		"/D/wwwroot/CoinCMF/sql/2018-10-24-init.sql",
+		"/D/wwwroot/XYCMF/resources/views/fields/thumb.blade.php",
+		"/D/wwwroot/XYCMF/resources/views/fields/files.blade.php",
+		"/D/wwwroot/XYCMF/resources/views/fields/album.blade.php",
+		"/D/wwwroot/XYCMF/resources/views/fields/ueditor.blade.php",
+		"/D/wwwroot/XYCMF/app/Services/TagService.php",
+		"/D/wwwroot/XYCMF/resources/views/fields/box.blade.php",
+		"/D/wwwroot/XYCMF/resources/views/fields/linkage.blade.php",
+		"/D/wwwroot/XYCMF/app/Providers/ComServiceProvider.php",
+		"/D/wwwroot/XYCMF/resources/views/fields/datetime.blade.php",
+		"/D/wwwroot/XYCMF/resources/views/admin/console/field/datetime_option.blade.php",
+		"/D/wwwroot/XYCMF/resources/views/admin/console/field/datetime.blade.php",
+		"/D/wwwroot/XYCMF/resources/views/admin/console/model/view.blade.php",
+		"/D/wwwroot/XYCMF/app/Http/Controllers/Admin/FieldController.php",
+		"/D/wwwroot/XYCMF/app/Http/Controllers/Admin/ModelController.php",
+		"/D/wwwroot/XYCMF/resources/views/admin/console/field/thumb_option.blade.php",
+		"/D/wwwroot/XYCMF/resources/views/admin/console/field/album_option.blade.php",
+		"/D/wwwroot/XYCMF/resources/views/admin/console/field/linkage_option.blade.php",
+		"/D/wwwroot/XYCMF/resources/views/admin/console/field/album.blade.php",
+		"/D/wwwroot/XYCMF/resources/views/admin/console/field/number_option.blade.php",
+		"/D/wwwroot/XYCMF/resources/views/admin/console/field/files_option.blade.php",
+		"/D/wwwroot/XYCMF/resources/views/admin/console/field/box_option.blade.php",
+		"/D/wwwroot/XYCMF/resources/views/admin/console/field/edit.blade.php",
+		"/D/wwwroot/XYCMF/resources/views/admin/console/field/box.blade.php",
+		"/D/wwwroot/XYCMF/resources/views/admin/console/field/index.blade.php",
+		"/D/wwwroot/XYCMF/app/Http/Requests/FieldRequest.php",
+		"/D/wwwroot/XYCMF/resources/views/fields/password.blade.php",
+		"/D/希夷/局气/服务器信息.txt",
+		"/D/希夷/局气/账号.txt",
+		"/D/wwwroot/XYCMF/resources/views/fields/text.blade.php",
+		"/D/wwwroot/XYCMF/resources/views/fields/textarea.blade.php",
+		"/D/wwwroot/XYCMF/resources/views/fields/number.blade.php",
+		"/D/wwwroot/XYCMF/resources/views/admin/console/field/add.blade.php",
+		"/D/wwwroot/XYCMF/README.md",
+		"/D/wwwroot/XYCMF/database/migrations/2018_10_25_172249_add_display_required_to_model_fields.php",
+		"/D/wwwroot/OA-workflow/resources/views/home/create.blade.php",
+		"/D/wwwroot/XYCMF/resources/views/admin/console/model/index.blade.php",
+		"/D/wwwroot/XYCMF/routes/admin.php",
+		"/D/wwwroot/XYCMF/app/Models/Console/Model.php",
+		"/D/wwwroot/XYCMF/app/Models/Console/ModelField.php",
+		"/D/wwwroot/XYShop/database/migrations/2018_03_05_150126_add_lasttime_lowertime_to_goods.php",
 		"/D/wwwroot/XYCMF/app/Customize/Func.php",
-		"/D/wwwroot/XYCMF/resources/assets/js/components/console/section/SectionList.vue",
-		"/D/wwwroot/XYCMF/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/ConvertEmptyStringsToNull.php",
-		"/D/wwwroot/isoftstone-shared/app/Http/Controllers/Admin/Common/CateController.php",
-		"/D/wwwroot/isoftstone-shared/app/Http/Controllers/Api/V1/BannerController.php",
-		"/D/wwwroot/XYCMF/app/Services/ComService.php",
-		"/D/wwwroot/www.time-memory.com/.env",
-		"/D/wwwroot/isoftstone-shared/app/Http/Controllers/Api/V1/NewsController.php",
-		"/D/wwwroot/isoftstone-shared/app/Services/ComService.php",
-		"/D/wwwroot/isoftstone-shared/app/Services/TagService.php",
-		"/D/wwwroot/isoftstone-shared/config/filesystems.php",
-		"/D/wwwroot/www.time-memory.com/app/Services/ComService.php",
-		"/D/wwwroot/www.time-memory.com/config/filesystems.php",
-		"/D/wwwroot/www.time-memory.com/app/Http/Controllers/Api/Map/MapNoteController.php",
-		"/D/wwwroot/www.time-memory.com/app/Http/Controllers/Api/Map/MyController.php",
-		"/D/wwwroot/www.time-memory.com/app/Http/Controllers/Api/Map/LocationErrorController.php",
-		"/D/wwwroot/www.time-memory.com/app/Http/Controllers/Api/Map/IntangibleItemController.php",
-		"/D/wwwroot/XYCMF/config/filesystems.php",
-		"/D/wwwroot/XYCMF/app/Http/Controllers/Admin/Admin1Controller.php"
+		"/D/希夷文件/服务器信息/xi-yi(1).txt",
+		"/D/wwwroot/XYCMF/resources/views/admin/console/field/linkage.blade.php",
+		"/D/wwwroot/XYCMF/resources/views/admin/console/field/files.blade.php",
+		"/D/wwwroot/XYCMF/resources/views/admin/console/field/thumb.blade.php",
+		"/D/wwwroot/XYCMF/resources/views/admin/right.blade.php",
+		"/D/wwwroot/XYCMF/resources/views/admin/console/field/number.blade.php",
+		"/D/wwwroot/XYCMF/routes/api.php",
+		"/D/wwwroot/XYCMF/app/Http/Controllers/Common/AjaxCommonController.php",
+		"/D/wwwroot/XYCMF/database/migrations/2018_10_24_054852_create_model_fields.php",
+		"/D/希夷文件/服务器信息/山木枝.txt",
+		"/D/wwwroot/XYCMF/database/migrations/2018_10_24_054742_create_models.php",
+		"/D/wwwroot/XYCMF/resources/views/admin/console/model/add.blade.php",
+		"/D/wwwroot/XYCMF/resources/views/admin/console/model/edit.blade.php",
+		"/D/wwwroot/XYCMF/app/Http/Requests/ModelRequest.php",
+		"/D/wwwroot/XYCMF/app/Http/Requests/MenuRequest.php",
+		"/D/wwwroot/XYCMF/app/Models/Console/ModelFiled.php",
+		"/D/wwwroot/XYCMF/config/app.php",
+		"/D/wwwroot/XYCMF/composer.json",
+		"/D/wwwroot/XYCMF/resources/views/home/form.blade.php",
+		"/D/wwwroot/XYCMF/app/Http/Controllers/Home/HomeController.php",
+		"/D/wwwroot/XYCMF/resources/views/vendor/form-builder/assets.blade.php",
+		"/D/wwwroot/XYCMF/routes/webcommon.php",
+		"/D/wwwroot/XYCMF/app/Http/Controllers/Admin/Common/CateController.php",
+		"/D/wwwroot/XYCMF/app/Http/Controllers/Admin/MenuController.php",
+		"/D/wwwroot/XYCMF/resources/views/admin/console/role/index.blade.php",
+		"/D/wwwroot/XYCMF/resources/views/admin/console/member/index.blade.php",
+		"/D/wwwroot/XYCMF/resources/views/admin/console/database/export.blade.php",
+		"/D/wwwroot/XYCMF/resources/views/admin/console/admins/index.blade.php",
+		"/D/wwwroot/XYCMF/resources/views/admin/console/group/index.blade.php",
+		"/D/wwwroot/XYCMF/resources/views/admin/console/log/index.blade.php",
+		"/D/wwwroot/XYCMF/resources/views/admin/console/section/index.blade.php",
+		"/D/wwwroot/XYCMF/resources/views/admin/console/type/index.blade.php",
+		"/D/wwwroot/XYCMF/resources/views/admin/console/adpos/index.blade.php",
+		"/D/wwwroot/XYCMF/resources/views/admin/console/area/index.blade.php",
+		"/D/wwwroot/XYCMF/resources/views/admin/console/art/index.blade.php",
+		"/D/wwwroot/XYCMF/resources/views/admin/console/community/index.blade.php",
+		"/D/wwwroot/XYCMF/resources/views/admin/console/ad/index.blade.php",
+		"/D/wwwroot/XYCMF/resources/views/admin/console/cate/index.blade.php",
+		"/D/wwwroot/XYCMF/public/statics/admin/css/reset.scss",
+		"/D/wwwroot/XYCMF/resources/views/admin/console/menu/index.blade.php",
+		"/D/wwwroot/XYCMF/public/statics/common/css/iconfont.css",
+		"/D/wwwroot/XYCMF/sql/2018-10-16-init.sql",
+		"/D/wwwroot/XYCMF/.gitignore",
+		"/D/wwwroot/XYCMF/resources/views/admin/left.blade.php",
+		"/D/希夷/李玉霞图书馆/info.md",
+		"/C/Users/Administrator/Downloads/config.json",
+		"/D/wwwroot/XYCMF/resources/views/admin/index.blade.php",
+		"/D/wwwroot/XYCMF/resources/views/admin/login.blade.php",
+		"/C/Users/Administrator/Downloads/css/bootstrap.css",
+		"/C/Users/Administrator/Downloads/css/bootstrap.min.css",
+		"/D/wwwroot/XYCMF/public/statics/common/css/bootstrap.min.css",
+		"/D/wwwroot/juqi-kq/sql/2018-06-26-init.sql",
+		"/D/wwwroot/XYCMF/resources/views/home/layout.blade.php",
+		"/D/wwwroot/XYCMF/database/migrations/2018_07_25_110734_add_keywords_psuh_flag_del_flag_to_articles.php",
+		"/D/wwwroot/XYCMF/database/migrations/2018_07_25_105109_add_display_to_categorys.php",
+		"/D/wwwroot/XYCMF/app/Http/Controllers/Admin/Common/ArtController.php"
 	],
 	"find":
 	{
@@ -915,14 +904,10 @@
 	},
 	"find_in_files":
 	{
-		"height": 622.0,
+		"height": 133.0,
 		"where_history":
 		[
-			"D:\\wwwroot\\CoinCMF\\resources\\assets\\js\\components\\console",
-			"D:\\wwwroot\\CoinCMF\\app\\Http\\Controllers\\Admin",
-			"D:\\wwwroot\\CoinCMF\\resources\\assets\\js\\components",
-			"D:\\wwwroot\\XYCMF\\resources\\assets\\js\\components",
-			"D:\\wwwroot\\XYCMF\\resources\\assets\\js",
+			"D:\\wwwroot\\CoinCMF\\resources\\assets\\js\\components\\console\\main",
 			"D:\\wwwroot\\XYCMF\\resources\\views\\admin",
 			"D:\\wwwroot\\XYCMF\\app",
 			"D:\\wwwroot\\XYCMF\\app\\Http\\Controllers\\Admin",
@@ -1041,134 +1026,134 @@
 		"case_sensitive": false,
 		"find_history":
 		[
-			"art/",
-			"art",
-			"index",
-			"402",
-			"400",
-			"402",
-			"400",
-			"402",
-			"400",
-			"402",
-			"400",
-			"402",
-			"400",
-			"402",
-			"400",
-			"402",
-			"400",
-			"402",
-			"400",
-			"adminPwd",
-			"info",
-			"getConfig",
-			"adminValidate",
-			"configData",
-			"AdminEditInfo",
-			"AdminList",
-			"config",
-			"selfeditinfo",
-			"admin/selfeditinfo",
-			"article",
-			"anyErrors",
-			"./",
-			"showEditInfo",
-			"InputNumber",
-			"demo-",
-			"showProgress",
-			"demo-",
-			"defaultList",
-			"my-",
-			"uploadList",
-			"handleFormatError",
-			"handleView",
-			"template-complier",
-			"isClear",
-			"connect",
-			"$page",
 			"renderTable",
-			"AdminEditInfo",
-			"remove",
-			"pages",
-			"page",
-			"listPage",
-			"e",
-			"type",
-			"tree",
-			"select",
-			"menu",
-			"type",
-			"TypeList",
-			"index",
-			"list",
-			"！",
-			"获取",
-			"res",
-			"remove",
-			"edit",
-			"信息",
-			"section_id",
-			"sort",
-			"changeData",
-			"deleteData",
-			"changeData",
-			",$res",
-			"public",
-			"->",
-			"tree",
-			"html",
-			"type.id",
-			"名称",
-			"section_id",
-			"typeValidate",
-			"typeCreateEdit",
-			",'menuCache'",
+			"changePage",
+			"// 全文搜索",
+			"font-f",
+			"postLogin",
+			"xycmf",
+			"li_",
+			"filed_name",
+			"file-item",
+			"btn_ctl",
+			"#thumb",
+			"thumb",
+			"btn_ctl",
+			"thumb_uploader",
+			"list_thumb",
+			"thelist",
+			"thumb_btn",
+			"$option",
+			"field_name",
+			"{{ $v }}",
+			"$option->out_type == 'val' ? $k : $v",
+			"@foreach($o as $k => $v)",
+			"@foreach($option->values as $o)",
+			"{{ $k }}",
+			"radio",
+			"$option",
+			"FieldRequest",
+			"select_type",
+			"sizes",
+			"box",
+			"required_flag",
+			"min",
+			"foreach",
+			"filed_name",
+			"$type",
+			"data['option']",
+			"$v",
+			"processKeyword",
+			"out_type",
+			"select_type",
+			"radio",
+			"modal-dialog",
+			"tips",
+			"title",
+			"field_name",
+			"tablename",
+			"模型",
+			"model",
+			"模型",
+			"ModelController",
+			"model/",
+			"model",
+			"uid",
+			"Blueprint",
+			"describe",
+			"title",
 			"name",
-			"sort",
-			"status",
-			"showEdit",
-			"menu_id",
-			"部门",
-			"status",
+			"添加用户",
+			"Common\\Adpos",
+			"adpos/",
 			"section",
-			"status",
+			"添加部门",
 			"section",
-			"typeCreateEdit",
-			"showEdit",
-			"showModel",
-			"section",
-			"部门",
-			"label",
-			"selection",
-			"config",
-			"Config",
-			"article",
-			"menu",
-			"config",
+			"模型管理",
+			"glyphicon",
+			"iconfont",
+			"glyphicon glyphicon-",
+			"glyphicon glyphicon-trash",
+			"glyphicon glyphicon-edit",
+			"glyphicon glyphicon-plus",
+			"addbox",
+			"glyphicon glyphicon-",
+			"../fonts",
+			"iconfont.",
+			"3",
+			"70px",
+			"191D21",
+			"04a8c5",
+			"232930",
+			"has-success",
+			"https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js",
 			"res",
-			"menus",
-			"MenuController",
-			"menu/",
-			"submenu",
-			"leftmenu",
-			"0",
-			"user_id",
-			"redirect",
-			"toLogin",
-			"</div>",
-			"input('display')",
-			"true",
-			";\n",
-			"btns",
-			"toLogin",
-			"next('/console/login')",
-			"LOGOUT",
-			"logout",
-			"adminInfo",
-			"名称",
-			"editpassword",
-			"store"
+			"cate_id",
+			"Art::",
+			"$this->art->",
+			"$this->cate->",
+			"$this->attr",
+			"$this->cate",
+			"$this->cate->",
+			"res",
+			"app('com')",
+			"App",
+			"res",
+			"lng",
+			"$this->menu",
+			"$menu",
+			"$this->menu->",
+			"paginate(15)",
+			"$this->",
+			"$this->menu->",
+			"$this->priv->",
+			"request",
+			"res",
+			"$this->role->",
+			"user.",
+			"admin.",
+			"app('com')->",
+			"request",
+			"ajaxReturn",
+			"request",
+			"Request",
+			"request",
+			"$this->role->",
+			"d",
+			"res",
+			"$this->admin->",
+			"makepwd",
+			"Carbon",
+			"ajaxReturn",
+			"Ueditor",
+			"staff",
+			"toTreeSelect",
+			"random",
+			"makepwd",
+			"Cache",
+			"Gate",
+			"getKeyword",
+			"xycmf_xi_yi_net"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -1307,7 +1292,7 @@
 	},
 	"input":
 	{
-		"height": 210.0
+		"height": 60.0
 	},
 	"layout":
 	{
@@ -1358,7 +1343,7 @@
 	},
 	"output.sftp":
 	{
-		"height": 210.0
+		"height": 161.0
 	},
 	"pinned_build_system": "",
 	"project": "xycmf.sublime-project",
@@ -1373,22 +1358,6 @@
 		"last_filter": "",
 		"selected_items":
 		[
-			[
-				"logtest",
-				"tests\\Feature\\LogTest.php"
-			],
-			[
-				"typetest",
-				"tests\\Feature\\TypeTest.php"
-			],
-			[
-				"home/home",
-				"resources\\views\\home\\home.blade.php"
-			],
-			[
-				"ConvertEmptyStringsToNull",
-				"vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Middleware\\ConvertEmptyStringsToNull.php"
-			],
 			[
 				"model/inde",
 				"resources\\views\\admin\\console\\model\\index.blade.php"
@@ -1884,6 +1853,22 @@
 			[
 				"order.b",
 				"resources\\views\\default\\order.blade.php"
+			],
+			[
+				"order.bla",
+				"resources\\views\\default\\order.blade.php"
+			],
+			[
+				"cart.b",
+				"resources\\views\\default\\cart.blade.php"
+			],
+			[
+				"addorder",
+				"resources\\views\\default\\addorder.blade.php"
+			],
+			[
+				"layu",
+				"resources\\views\\default\\layout.blade.php"
 			]
 		],
 		"width": 0.0

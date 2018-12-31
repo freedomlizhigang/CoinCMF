@@ -14,7 +14,7 @@
         <Input v-model="formItem.key" placeholder="输入关键字查询..."></Input>
       </FormItem>
       <FormItem>
-        <Button type="primary" @click="renderTable('formItem')">筛选</Button>
+        <Button type="primary" @click="renderTable(0)">筛选</Button>
       </FormItem>
     </Form>
     <Table :columns="columns1" ref="selection" @on-selection-change="changeData" :data="tablelist" :loading="dataloading"></Table>
@@ -167,7 +167,7 @@ export default {
         },
         changePage(){
             this.pages.current = this.$refs['listPage'].currentPage;
-            this.getTableList();
+            this.renderTable(1);
         },
         edit:function(index){
             this.$router.push('/console/art/edit/' + index);
@@ -217,17 +217,19 @@ export default {
             });
         },
         // 筛选
-        renderTable:function(name) {
+        renderTable:function(isChange) {
             var self = this;
             var starttime = self.formItem.datetime[0] != '' ? self.formItem.datetime[0].getTime() : '';
             var endtime = self.formItem.datetime[1] != '' ? self.formItem.datetime[1].getTime() : '';
-            var ps = {page:1,size:this.pages.size,'key':self.formItem.key,'cateid':self.formItem.cateid,'starttime':starttime,'endtime':endtime};
+            var cpage = isChange ? this.pages.current : 1;
+            var ps = {page:cpage,size:this.pages.size,'key':self.formItem.key,'cateid':self.formItem.cateid,'starttime':starttime,'endtime':endtime};
             this.$api.article.list(ps).then(res=>{
                 this.dataloading = false;
                 if(res.code == 200)
                 {
                     self.tablelist = res.data.list;
-                    this.pages.total = res.data.total
+                    this.pages.total = res.data.total;
+                    if(!isChange){ this.pages.current = 1;}
                     this.$Message.success(res.msg);
                 }
             });

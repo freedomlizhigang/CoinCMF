@@ -9,7 +9,7 @@
                     </Select>
                 </FormItem>
                 <FormItem>
-                    <Button type="primary" @click="renderTable('formItem')">筛选</Button>
+                    <Button type="primary" @click="renderTable(0)">筛选</Button>
                 </FormItem>
             </Form>
         </Col>
@@ -94,7 +94,7 @@ export default {
     // 翻页
     changePage() {
         this.pages.current = this.$refs['listPage'].currentPage;
-        this.getTableList();
+        this.renderTable(1);
     },
     // 清除日志
     clearLog(){
@@ -115,15 +115,16 @@ export default {
         });
     },
     // 筛选
-    renderTable(name){
-        var params = {page:1,size:this.pages.size,admin_id:this.formItem.admin_id};
+    renderTable(isChange){
+        var cpage = isChange ? this.pages.current : 1;
+        var params = {page:cpage,size:this.pages.size,admin_id:this.formItem.admin_id};
         this.$api.log.list(params).then(res=>{
             this.dataloading = false;
             if(res.code == 200)
             {
                 this.tablelist = res.data.list;
-                this.pages.current = 1;
                 this.pages.total = res.data.total
+                if(!isChange){ this.pages.current = 1;}
                 this.$Message.success(res.msg);
             }
         });
