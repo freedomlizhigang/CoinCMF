@@ -757,18 +757,19 @@
 		"/D/wwwroot/CoinCMF/app",
 		"/D/wwwroot/CoinCMF/app/Http",
 		"/D/wwwroot/CoinCMF/app/Http/Controllers",
-		"/D/wwwroot/CoinCMF/app/Http/Controllers/Admin",
 		"/D/wwwroot/CoinCMF/resources",
 		"/D/wwwroot/CoinCMF/resources/assets",
 		"/D/wwwroot/CoinCMF/resources/assets/js",
 		"/D/wwwroot/CoinCMF/resources/assets/js/components",
 		"/D/wwwroot/CoinCMF/resources/assets/js/components/console",
+		"/D/wwwroot/CoinCMF/resources/assets/js/components/console/main",
 		"/D/wwwroot/CoinCMF/resources/views",
 		"/D/wwwroot/CoinCMF/resources/views/admin",
 		"/D/wwwroot/CoinCMF/routes"
 	],
 	"file_history":
 	[
+		"/D/wwwroot/CoinCMF/resources/assets/js/components/console/main/ArticleEdit.vue",
 		"/D/wwwroot/CoinCMF/resources/assets/js/components/console/main/LogList.vue",
 		"/D/wwwroot/CoinCMF/resources/assets/js/components/console/main/ArticleList.vue",
 		"/D/wwwroot/CoinCMF/resources/views/admin/console/art/index.blade.php",
@@ -895,12 +896,11 @@
 		"/D/wwwroot/juqi-kq/sql/2018-06-26-init.sql",
 		"/D/wwwroot/XYCMF/resources/views/home/layout.blade.php",
 		"/D/wwwroot/XYCMF/database/migrations/2018_07_25_110734_add_keywords_psuh_flag_del_flag_to_articles.php",
-		"/D/wwwroot/XYCMF/database/migrations/2018_07_25_105109_add_display_to_categorys.php",
-		"/D/wwwroot/XYCMF/app/Http/Controllers/Admin/Common/ArtController.php"
+		"/D/wwwroot/XYCMF/database/migrations/2018_07_25_105109_add_display_to_categorys.php"
 	],
 	"find":
 	{
-		"height": 41.0
+		"height": 27.0
 	},
 	"find_in_files":
 	{
