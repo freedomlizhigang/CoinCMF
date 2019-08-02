@@ -769,14 +769,14 @@
 	},
 	"expanded_folders":
 	[
-		"/D/wwwroot/CoinCMF",
-		"/D/wwwroot/CoinCMF/app",
-		"/D/wwwroot/CoinCMF/app/Http",
-		"/D/wwwroot/CoinCMF/app/Http/Controllers",
-		"/D/wwwroot/CoinCMF/app/Models",
-		"/D/wwwroot/CoinCMF/resources",
-		"/D/wwwroot/CoinCMF/resources/assets",
-		"/D/wwwroot/CoinCMF/routes"
+		"/data/projects-coding/php/CoinCMF",
+		"/data/projects-coding/php/CoinCMF/app",
+		"/data/projects-coding/php/CoinCMF/resources",
+		"/data/projects-coding/php/CoinCMF/resources/assets",
+		"/data/projects-coding/php/CoinCMF/resources/assets/js",
+		"/data/projects-coding/php/CoinCMF/resources/assets/js/components",
+		"/data/projects-coding/php/CoinCMF/resources/assets/js/components/console",
+		"/data/projects-coding/php/CoinCMF/resources/assets/js/components/console/main"
 	],
 	"file_history":
 	[
@@ -911,13 +911,14 @@
 	],
 	"find":
 	{
-		"height": 41.0
+		"height": 39.0
 	},
 	"find_in_files":
 	{
 		"height": 622.0,
 		"where_history":
 		[
+			"D:\\wwwroot\\CoinCMF\\resources\\assets\\js\\components",
 			"D:\\wwwroot\\CoinCMF\\resources\\assets\\js\\components\\console",
 			"D:\\wwwroot\\CoinCMF\\app\\Http\\Controllers\\Admin",
 			"D:\\wwwroot\\CoinCMF\\resources\\assets\\js\\components",
@@ -1041,6 +1042,7 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"datetime",
 			"art/",
 			"art",
 			"index",
@@ -1167,8 +1169,7 @@
 			"logout",
 			"adminInfo",
 			"名称",
-			"editpassword",
-			"store"
+			"editpassword"
 		],
 		"highlight": true,
 		"in_selection": false,
