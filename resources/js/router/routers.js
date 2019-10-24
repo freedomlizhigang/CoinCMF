@@ -136,4 +136,11 @@ export default [
             }
         ]
     },
+    // 其它404
+    {
+        path: '*',
+        name: 'noaccess',
+        meta: { requiresAuth: false },
+        component: Nofound
+    }
 ]

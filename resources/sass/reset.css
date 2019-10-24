@@ -47,3 +47,116 @@
 .mr10 {margin-right: 10px;}
 .mr15 {margin-right: 15px;}
 .mr20 {margin-right: 20px;}
+/*背景色*/
+.layout{
+    background: #f5f6fa;
+    position: relative;
+    overflow: hidden;
+}
+/* logo */
+.logo-img {
+    padding: 15px 15px; display: block; background-color: #fff; line-height: 64px; height: 64px; font-size: 0; border-bottom: 1px solid #eee; position: fixed; left:0; z-index:1000;
+}
+.logo-img img {
+	width: 170px; height: 40px;
+}
+/*右上*/
+.layout-header-bar{
+    background: #4cb597;
+    box-shadow: 0px 0px 20px 0px rgba(0,0,0,0.3); position: fixed; z-index: 888; left:200px; right:0;
+}
+.ivu-layout-header {
+	padding: 0 20px; color:#FFF; 
+}
+.ivu-breadcrumb ,.ivu-breadcrumb a ,.ivu-breadcrumb a:hover,.ivu-breadcrumb>span:last-child {
+	color: #FFF;
+}
+.right-top-btn {
+	font-size: 16px; font-weight: 700; float: right; margin-top: 5px; padding: 15px 0 15px 15px;
+}
+.right-top-btn:hover {
+	color:#fff;
+}
+/*左*/
+.ivu-layout-sider {
+    background-color: #fff;
+    box-shadow: 5px 0px 8px -10px rgba(0,0,0,.3);
+}
+.ivu-layout-sider-children {
+    overflow-y: auto; position: relative;
+}
+/*菜单*/
+.ivu-menu-light {
+    margin-top: 64px;
+}
+.ivu-menu-vertical.ivu-menu-light:after {
+    background: transparent;
+}
+.menu-item span{
+    display: inline-block;
+    overflow: hidden;
+    width: 69px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    vertical-align: bottom;
+    transition: width .2s ease .2s;
+}
+.menu-item i{
+    transform: translateX(0px);
+    transition: font-size .2s ease, transform .2s ease;
+    vertical-align: middle;
+    font-size: 16px;
+}
+.ivu-menu-opened {
+    color:#4cb597;
+}
+.ivu-menu-vertical .ivu-menu-item:hover, .ivu-menu-vertical .ivu-menu-submenu-title:hover {
+    color: #4cb597;
+}
+.left_one {
+	font-size: 11px; color:#455a64; padding: 15px 15px 0; font-weight: 700;
+}
+.left_one .ivu-icon {
+	margin-top: -3px;
+}
+.ivu-menu-light.ivu-menu-vertical .ivu-menu-item-active:not(.ivu-menu-submenu) {
+	color:#4cb597; background-color: rgba(76,181,151,0.05);
+}
+.ivu-menu-light.ivu-menu-vertical .ivu-menu-item-active:not(.ivu-menu-submenu):after {
+	background:#4cb597;
+}
+/* 右下背景 */
+.right_top_bg {
+	background-color: #4cb597;display: block; padding:20px 20px 80px; margin-top: 64px;
+}
+.right_top {
+	height: 50px;
+}
+.right_top_btns {
+	background-color: rgba(255,255,255,0.9);
+}
+.right-titles {
+	font-size: 18px; font-weight: normal; color: #FFF; text-indent: 2px;
+}
+/* 主内容 */
+.ivu-layout-content {
+	margin: -80px 20px 20px 20px;  position: relative; z-index:800; border-radius: 3px
+}
+/* 版权 */
+.layout-footer-center{
+    text-align: center;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+

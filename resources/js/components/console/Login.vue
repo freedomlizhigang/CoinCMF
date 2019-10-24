@@ -2,7 +2,7 @@
   <div id="login">
     <Row>
         <Col :xs="{ span: 18, offset: 3 }" :md="{ span: 12, offset: 6 }" :lg="{ span: 6, offset: 9 }">
-            <h2 class="login-header"><img src="/img/login_logo.png" width="70" alt=""></h2>
+            <h2 class="login-header"><img src="/img/logo.png" width="170" alt=""></h2>
             <Form :model="user" ref="user" :rules="ruleInline" action="javascript:void(0)">
                 <FormItem prop="name">
                     <Input v-model="user.name" placeholder="请输入用户名..."></Input>
@@ -24,7 +24,7 @@
         margin-top: 120px;
     }
     .login-header {
-        text-align: center;
+        text-align: center; margin-bottom: 30px;
     }
 </style>
 
