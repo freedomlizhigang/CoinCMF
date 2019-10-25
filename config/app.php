@@ -139,7 +139,7 @@ return [
 		/*
 			         * Laravel Framework Service Providers...
 		*/
-		// Illuminate\Auth\AuthServiceProvider::class,
+		Illuminate\Auth\AuthServiceProvider::class,
 		Illuminate\Broadcasting\BroadcastServiceProvider::class,
 		Illuminate\Bus\BusServiceProvider::class,
 		Illuminate\Cache\CacheServiceProvider::class,
@@ -176,7 +176,6 @@ return [
 		App\Providers\RouteServiceProvider::class,
 		// 一些公用服务
 		App\Providers\ComServiceProvider::class,
-
 	],
 
 	/*
@@ -207,10 +206,11 @@ return [
 		'Eloquent' => Illuminate\Database\Eloquent\Model::class,
 		'Event' => Illuminate\Support\Facades\Event::class,
 		'File' => Illuminate\Support\Facades\File::class,
-		// 'Gate' => Illuminate\Support\Facades\Gate::class,
+		'Gate' => Illuminate\Support\Facades\Gate::class,
 		'Hash' => Illuminate\Support\Facades\Hash::class,
 		'Lang' => Illuminate\Support\Facades\Lang::class,
 		'Log' => Illuminate\Support\Facades\Log::class,
+		'Mail' => Illuminate\Support\Facades\Mail::class,
 		'Notification' => Illuminate\Support\Facades\Notification::class,
 		'Password' => Illuminate\Support\Facades\Password::class,
 		'Queue' => Illuminate\Support\Facades\Queue::class,

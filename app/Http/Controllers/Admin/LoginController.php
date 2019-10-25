@@ -56,7 +56,7 @@ class LoginController extends ResponseController {
 				return $this->resData(200, '登录成功！', $res);
 			}
 		} catch (\Throwable $e) {
-			return $this->resData(500, '获取失败，请稍后再试...');
+			return $this->resData(500, '获取失败，请稍后再试...' . $e->getLine() . $e->getMessage());
 		}
 	}
 }

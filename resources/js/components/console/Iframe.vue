@@ -3,7 +3,7 @@
     <Layout :style="{height:'100vh'}">
         <Sider breakpoint="md" :collapsed-width="78" v-model="isCollapsed" :style="{zIndex:'900'}">
             <div class="logo-img">
-                <a href="/#/console/index/index"><img src="/img/logo.png" alt=""></a>
+                <a href="/#/index/index"><img src="/console/img/logo.png" alt=""></a>
             </div>
             <Menu active-name="1-2" width="auto" :class="menuitemClasses" accordion>
                 <!-- 一级分类 -->
@@ -19,7 +19,7 @@
                             {{ two.name }}
                         </template>
                         <!-- 三级分类 -->
-                        <MenuItem :name="there.name" v-for="there in two.there" :key="there.id" :to="'/console/' + there.url">{{ there.name }}
+                        <MenuItem :name="there.name" v-for="there in two.there" :key="there.id" :to="'/' + there.url">{{ there.name }}
                             <Icon type="ios-arrow-round-forward" :style="{float: 'left'}" />
                         </MenuItem>
                     </Submenu>
@@ -39,7 +39,7 @@
                 <div class="right_top clearfix">
                     <h4 class="f-l right-titles">{{ title }}</h4>
                     <div class="f-r">
-                        <Button :icon="item.icon" class="right_top_btns" :to="'/console/' + item.url" v-for="item in btns" :key="item.id">{{ item.name }}</Button>
+                        <Button :icon="item.icon" class="right_top_btns" :to="'/' + item.url" v-for="item in btns" :key="item.id">{{ item.name }}</Button>
                     </div>
                 </div>
             </div>

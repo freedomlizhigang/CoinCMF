@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import store from '.././vuex/store'
-import iView from 'iview';
+import ViewUI from 'view-design';
 import routers from './routers'
 
 
@@ -15,14 +15,13 @@ const router = new Router({
 // 导航钩子，全局钩子
 router.beforeEach((to, from, next) => {
     // 登录页面
-    console.log(to.name)
     if (to.name === 'login') {
         if (store.getters.token == '') {
             next();
         }
         else
         {
-            next('/console/index/index');
+            next('/index/index');
         }
     }
     // 其它页面
@@ -38,7 +37,7 @@ router.beforeEach((to, from, next) => {
     }
 })
 router.afterEach(to => {
-    iView.LoadingBar.finish()
+    ViewUI.LoadingBar.finish()
 })
 
 export default router

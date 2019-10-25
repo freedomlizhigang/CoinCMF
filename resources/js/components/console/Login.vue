@@ -2,7 +2,7 @@
   <div id="login">
     <Row>
         <Col :xs="{ span: 18, offset: 3 }" :md="{ span: 12, offset: 6 }" :lg="{ span: 6, offset: 9 }">
-            <h2 class="login-header"><img src="/img/logo.png" width="170" alt=""></h2>
+            <h2 class="login-header"><img src="/console/img/logo.png" width="170" alt=""></h2>
             <Form :model="user" ref="user" :rules="ruleInline" action="javascript:void(0)">
                 <FormItem prop="name">
                     <Input v-model="user.name" placeholder="请输入用户名..."></Input>
@@ -60,7 +60,7 @@ export default {
                         if (res.code == 200) {
                             // 跳转到首页
                             this.$store.commit(LOGIN,res.data)
-                            router.push('/console/index/index');
+                            router.push('/index/index');
                         }
                     });
                 } else {

@@ -17,4 +17,5 @@ class Controller extends BaseController {
 	public function adminJson($status = 1, $msg = '', $url = '') {
 		return ['status' => $status, 'msg' => $msg, 'url' => $url];
 	}
+
 }

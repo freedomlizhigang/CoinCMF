@@ -5,7 +5,7 @@
 import axios from 'axios';
 import router from '.././router';
 import store from '.././vuex/store'
-import iView from 'iview';
+import ViewUI from 'view-design';
 
 /**
   * 跳转登录页
@@ -37,11 +37,11 @@ const errorHandle = (status, other) => {
 
         // 404请求不存在
         case 404:
-            iView.Message.error('请求的资源不存在...');
+            ViewUI.Message.error('请求的资源不存在...');
             break;
 
         default:
-            iView.Message.error('服务器有点忙...');
+            ViewUI.Message.error('服务器有点忙...');
             console.log(other);
     }
 }
@@ -75,7 +75,7 @@ instance.interceptors.response.use(
             switch (res.data.code) {
                 // 400参数的错误
                 case 400:
-                    iView.Message.error(res.data.msg);
+                    ViewUI.Message.error(res.data.msg);
                     break;
 
                 // 401: 未登录状态，跳转登录页
@@ -87,17 +87,17 @@ instance.interceptors.response.use(
                     break;
                 // 402没有接口权限
                 case 402:
-                    iView.Message.error(res.data.msg);
+                    ViewUI.Message.error(res.data.msg);
                     break;
 
                 // 403 输入正确，但其它相关数据有问题，拒绝继续执行
                 case 403:
-                    iView.Message.error(res.data.msg);
+                    ViewUI.Message.error(res.data.msg);
                     break;
 
                 // 404请求不存在
                 case 404:
-                    iView.Message.error('请求的资源不存在...');
+                    ViewUI.Message.error('请求的资源不存在...');
                     break;
 
                 // 200 正确返回
@@ -106,7 +106,7 @@ instance.interceptors.response.use(
                     break;
 
                 default:
-                    iView.Message.error('服务器有点忙...');
+                    ViewUI.Message.error('服务器有点忙...');
                     break;
             }
             return res.data;
@@ -128,7 +128,7 @@ instance.interceptors.response.use(
             // eg:请求超时或断网时，更新state的network状态
             // network状态在app.vue中控制着一个全局的断网提示组件的显示隐藏
             // 关于断网组件中的刷新重新获取数据，会在断网组件中说明
-            iView.Message.error('请检查您的网络情况...');
+            ViewUI.Message.error('请检查您的网络情况...');
         }
     });
 

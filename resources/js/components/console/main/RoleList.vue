@@ -15,7 +15,7 @@
             <Button @click="showModel()" type="success" class="f-r">添加角色</Button>
         </Col>
     </Row>
-    <Table :columns="list" ref="roleList" :data="tablelist" :loading="dataloading"></Table>
+    <Table border :columns="list" ref="roleList" :data="tablelist" :loading="dataloading"></Table>
     <!-- 添加的弹出 -->
     <Modal v-model="showModalStatus" title="添加角色" @on-ok="createRole('roleValidate')" :loading="loading">
         <Form :model="role" ref="roleValidate" :rules="roleValidate" action="javascript:void(0)">

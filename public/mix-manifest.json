@@ -1,5 +1,4 @@
 {
-    "/js/app.js": "/js/app.js",
-    "/statics/home/css/home.css": "/statics/home/css/home.css",
-    "/css/app.css": "/css/app.css"
+    "/console/js/app.js": "/console/js/app.js",
+    "/console/css/app.css": "/console/css/app.css"
 }

@@ -17,7 +17,7 @@
             <Button @click="clearLog()" type="default" class="f-r">清除日志</Button>
         </Col>
     </Row>
-    <Table :columns="columns" ref="tableList" :data="tablelist" :loading="dataloading" class="mt10"></Table>
+    <Table border :columns="columns" ref="tableList" :data="tablelist" :loading="dataloading" class="mt10"></Table>
     <div style="margin: 10px;overflow: hidden">
         <div style="float: right;">
             <Page ref="listPage" :total="pages.total" :current="pages.current" :page-size="pages.size" show-elevator show-total @on-change="changePage()"></Page>
@@ -53,8 +53,13 @@ export default {
           },
           {
             title: '操作方式',
-            width:150,
+            width:100,
             key: 'method',
+          },
+          {
+            title: '操作',
+            width:150,
+            key: 'action_name',
           },
           {
             title: '操作地址',

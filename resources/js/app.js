@@ -11,8 +11,8 @@ import Vue from 'vue'
 import router from './router'
 import axios from 'axios'
 import VueAxios from 'vue-axios'
-import iView from 'iview';
-import 'iview/dist/styles/iview.css';
+import ViewUI from 'view-design';
+import 'view-design/dist/styles/iview.css';
 import './../sass/reset.css';
 // 各API接口
 import api from './api/api' // 导入api接口
@@ -21,7 +21,7 @@ import App from './components/console/App.vue'
 
 import store from './vuex/store'
 
-Vue.use(iView);
+Vue.use(ViewUI);
 Vue.config.productionTip = false
 Vue.prototype.$api = api; // 将api挂载到vue的原型上
 

@@ -17,7 +17,7 @@
         <Button type="primary" @click="renderTable('formItem')">筛选</Button>
       </FormItem>
     </Form>
-    <Table :columns="columns1" ref="selection" @on-selection-change="changeData" :data="tablelist" :loading="dataloading"></Table>
+    <Table border :columns="columns1" ref="selection" @on-selection-change="changeData" :data="tablelist" :loading="dataloading"></Table>
     <div style="margin: 10px;overflow: hidden">
         <Button @click="deleteData" type="error">删除</Button>
         <div style="float: right;">
@@ -170,7 +170,7 @@ export default {
             this.getTableList();
         },
         edit:function(index){
-            this.$router.push('/console/article/edit/' + index);
+            this.$router.push('/article/edit/' + index);
         },
         remove:function(index){
             // 弹出确认框

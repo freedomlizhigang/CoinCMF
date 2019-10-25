@@ -46,7 +46,7 @@
                                 this.$Message.success('修改成功，请重新登录...');
                                 this.$store.commit(LOGOUT)
                                 // 跳转到登录
-                                this.$router.push('/console/login');
+                                this.$router.push('/');
                             }
                         });
                     }

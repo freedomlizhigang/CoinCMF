@@ -5,7 +5,7 @@
             <Button @click="showCreate(0)" type="success" class="f-r">添加分类</Button>
         </Col>
     </Row>
-    <Table height="600" :columns="columns" ref="tableList" :data="tablelist" :loading="dataloading" class="mt10"></Table>
+    <Table border height="600" :columns="columns" ref="tableList" :data="tablelist" :loading="dataloading" class="mt10"></Table>
     <!-- 添加的弹出 -->
     <Modal v-model="showModalStatus" title="添加分类" @on-ok="typeCreateEdit('typeValidate')" :loading="loading">
         <Form :model="type" ref="typeValidate" :rules="typeValidate" action="javascript:void(0)">

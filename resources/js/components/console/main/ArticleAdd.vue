@@ -119,7 +119,7 @@ export default {
                         if(res.code == 200)
                         {
                             this.$Message.success(res.msg);
-                            this.$router.push('/console/art/index');
+                            this.$router.push('/art/index');
                         }
                     });
                     return;

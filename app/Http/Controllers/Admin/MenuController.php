@@ -164,7 +164,7 @@ class MenuController extends ResponseController {
 				// 如果有错误，提示第一条
 				return $this->resData(400, $validator->errors()->all()[0] . '...');
 			}
-			$insert = ['parentid' => $req->input('parentid'), 'name' => $req->input('name'), 'url' => $req->input('url'), 'label' => $req->input('label'), 'icon' => $req->input('icon'), 'display' => $req->input('display') == 'true' ? 1 : 0, 'sort' => $req->input('sort')];
+			$insert = ['parentid' => $req->input('parentid', 0), 'name' => $req->input('name'), 'url' => $req->input('url'), 'label' => $req->input('label'), 'icon' => $req->input('icon'), 'display' => $req->input('display') == 'true' ? 1 : 0, 'sort' => $req->input('sort')];
 			$detail = Menu::create($insert);
 			// 更新缓存
 			app('com')->updateCache(new Menu());
@@ -180,7 +180,7 @@ class MenuController extends ResponseController {
 		DB::beginTransaction();
 		try {
 			$validator = Validator::make($req->input(), [
-				'parentid' => 'required|integer',
+				'parentid' => 'integer',
 				'id' => 'required|integer',
 				'name' => 'required|max:255',
 				'url' => 'required|max:255',
@@ -201,7 +201,7 @@ class MenuController extends ResponseController {
 				return $this->resData(400, $validator->errors()->all()[0] . '...');
 			}
 			$id = $req->input('id');
-			$update = ['parentid' => $req->input('parentid'), 'name' => $req->input('name'), 'url' => $req->input('url'), 'label' => $req->input('label'), 'icon' => $req->input('icon'), 'display' => $req->input('display') == 'true' ? 1 : 0, 'sort' => $req->input('sort')];
+			$update = ['parentid' => $req->input('parentid', 0), 'name' => $req->input('name'), 'url' => $req->input('url'), 'label' => $req->input('label'), 'icon' => $req->input('icon'), 'display' => $req->input('display') == 'true' ? 1 : 0, 'sort' => $req->input('sort')];
 			Menu::where('id', $id)->update($update);
 			// 更新缓存
 			app('com')->updateCache(new Menu());

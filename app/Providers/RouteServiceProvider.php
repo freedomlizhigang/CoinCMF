@@ -34,12 +34,10 @@ class RouteServiceProvider extends ServiceProvider {
 	public function map() {
 		$this->mapApiRoutes();
 
-		// 后台用的
-		$this->mapAdminRoutes();
-
 		$this->mapWebRoutes();
 
-		//
+		// 后台用的
+		$this->mapAdminRoutes();
 	}
 
 	/**

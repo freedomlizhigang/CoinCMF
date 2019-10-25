@@ -290,6 +290,41 @@ class ComService {
 			return response()->json(['code' => 400, 'msg' => '系统有错误了！', 'data' => $e->getLine() . ' : ' . $e->getMessage()]);
 		}
 	}
+
+	/**
+	 * 图片上传base64
+	 * @param  Request $res [取文件用，资源]
+	 * @param  string  $ext [文件类型]
+	 * @param  int  $allSize [允许的文件大小，单位M]
+	 */
+	public function uploadBase64($res) {
+		try {
+			$image = $res->input('imgFile');
+			$path = 'upload/' . date('Ymd') . '/';
+			$imageName = $this->base64_image_content($image, $path);
+			$url = $imageName;
+			if ($imageName == null) {
+				return response()->json(['code' => 400, 'msg' => '上传失败！']);
+			}
+			return response()->json(['code' => 200, 'msg' => '上传成功！', 'data' => ['url' => '/' . $url, 'filename' => '/' . $imageName]]);
+		} catch (\Throwable $e) {
+			Storage::disk('log')->append('upload.log', json_encode($e) . date('Y-m-d H:i:s'));
+			return response()->json(['code' => 400, 'msg' => '上传失败！', 'data' => $e->getLine() . ' : ' . $e->getMessage()]);
+		}
+	}
+	private function base64_image_content($base64_image_content, $path) {
+		//匹配出图片的格式
+		if (preg_match('/^(data:\s*image\/(\w+);base64,)/', $base64_image_content, $result)) {
+			$type = $result[2];
+			if (!file_exists($path)) {
+				mkdir($path, 0700, true);
+			}
+			$new_file = $path . date('Ymdhis') . rand(100, 999) . ".{$type}";
+			if (file_put_contents($new_file, base64_decode(str_replace($result[1], '', $base64_image_content)))) {
+				return str_replace('public', '', $new_file);
+			}
+		}
+	}
 	// 请求接口用的CURL功能
 	public function postCurl($url, $body, $type = "POST", $json = 0) {
 		$header = array();

@@ -2,7 +2,7 @@
 <div class="layout">
     <Layout :style="{height:'100vh'}">
         <Sider breakpoint="md" :collapsed-width="78" v-model="isCollapsed" :style="{zIndex:'900'}">
-            <div class="logo-img"><img src="/img/logo.png" alt=""></div>
+            <div class="logo-img"><img src="/console/img/logo.png" alt=""></div>
                 <Menu active-name="1-2" width="auto" :class="menuitemClasses" accordion>
                     <!-- 一级分类 -->
                     <div :name="one.name" theme="light" v-for="one in menuData" :key="one.id">
@@ -17,7 +17,7 @@
                                 {{ two.name }}
                             </template>
                             <!-- 三级分类 -->
-                            <MenuItem :name="there.name" v-for="there in two.there" :key="there.id" :to="'/console/' + there.url">{{ there.name }}
+                            <MenuItem :name="there.name" v-for="there in two.there" :key="there.id" :to="'/' + there.url">{{ there.name }}
                                 <Icon type="ios-arrow-round-forward" :style="{float: 'left'}" />
                             </MenuItem>
                         </Submenu>
@@ -30,14 +30,14 @@
                     <BreadcrumbItem v-for="item in breadCrumbList" :to="item.to">{{ item.name }}</BreadcrumbItem>
                 </Breadcrumb>
                 <!-- 退出 -->
-                <Button class="right-top-btn" icon="ios-power" type="text" ghost to="/console/logout"></Button>
+                <Button class="right-top-btn" icon="ios-power" type="text" ghost to="/logout"></Button>
             </Header>
             <!-- 标题 + 按钮组 -->
             <div class="right_top_bg clearfix">
                 <div class="right_top clearfix">
                     <h4 class="f-l right-titles">{{ title }}</h4>
                     <div class="f-r">
-                        <Button :icon="item.icon" class="right_top_btns" :to="'/console/' + item.url" v-for="item in btns">{{ item.name }}</Button>
+                        <Button :icon="item.icon" class="right_top_btns" :to="'/' + item.url" v-for="item in btns">{{ item.name }}</Button>
                     </div>
                 </div>
             </div>

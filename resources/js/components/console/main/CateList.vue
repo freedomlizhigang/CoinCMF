@@ -5,7 +5,7 @@
             <Button @click="showCreate(0)" type="success" class="f-r">添加栏目</Button>
         </Col>
     </Row>
-    <Table height="600" :columns="columns" ref="tableList" :data="tablelist" :loading="dataloading" class="mt10"></Table>
+    <Table border height="600" :columns="columns" ref="tableList" :data="tablelist" :loading="dataloading" class="mt10"></Table>
     <!-- 添加的弹出 -->
     <Modal v-model="showModalStatus" title="添加栏目" @on-ok="cateCreateEdit('cateValidate')" :loading="loading">
         <Form :model="cate" ref="cateValidate" :rules="cateValidate" action="javascript:void(0)">

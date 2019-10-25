@@ -15,7 +15,7 @@
             <Button @click="showCreate()" type="success" class="f-r">添加管理员</Button>
         </Col>
     </Row>
-    <Table :columns="list" ref="roleList" :data="tablelist" :loading="dataloading"></Table>
+    <Table border :columns="list" ref="roleList" :data="tablelist" :loading="dataloading"></Table>
     <!-- 添加的弹出 -->
     <Modal v-model="showCreateStatus" title="添加管理员" @on-ok="createAdmin('adminCreateValidate')" :loading="loading">
         <Form :model="adminInfo" ref="adminCreateValidate" :rules="adminCreateValidate" action="javascript:void(0)">

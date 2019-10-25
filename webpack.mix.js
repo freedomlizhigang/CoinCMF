@@ -11,9 +11,8 @@ const mix = require('laravel-mix');
  |
  */
 
-mix.sass('public/statics/home/css/home.scss', 'public/statics/home/css/home.css');
-mix.js('resources/js/app.js', 'public/js')
-   .sass('resources/sass/app.scss', 'public/css');
+mix.js('resources/js/app.js', 'public/console/js')
+   .sass('resources/sass/app.scss', 'public/console/css');
    
 const BrowserSyncPlugin = require('browser-sync-webpack-plugin');
 

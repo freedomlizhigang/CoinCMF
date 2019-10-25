@@ -27,7 +27,7 @@ export default [
     },
     // 内容的模板
     {
-        path: '/console/',
+        path: '/',
         component: Iframe,
         meta: { requiresAuth: true },
         children: [
