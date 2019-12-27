@@ -50,6 +50,8 @@ export default {
             }
         }
     },
+    created:function(){
+    },
     methods: {
         // 验证输入
         loginSubmit(name) {

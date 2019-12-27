@@ -3,10 +3,38 @@
   * 请求拦截、响应拦截、错误统一处理
   */
 import axios from 'axios';
+import md5 from './md5.js';
 import router from '.././router';
 import store from '.././vuex/store'
 import ViewUI from 'view-design';
 
+/**
+ * json 排序 
+ * 先排序再toUpperCase
+ */
+function getSign(jsonObj) {
+    // 转成数组
+    var cs = jsonObj.split('&');
+    var theRequest = new Object();
+    for (var i = 0; i < cs.length; i++) {
+        var key = cs[i].split("=")[0]
+        var value = cs[i].split("=")[1]
+        // 给对象赋值
+        theRequest[key] = value
+    }
+    let arr = [];
+    for (var key in theRequest) {
+        arr.push(key)
+    }
+    arr.sort();
+    let str = '';
+    for (var i in arr) {
+        str += arr[i] + theRequest[arr[i]];
+    }
+    // str += "timestamp" + (new Date()).getTime();
+    var sign = md5(str).toUpperCase();
+    return sign+'A';
+}
 /**
   * 跳转登录页
   * 携带当前页面路由，以期在登录页面完成登录后返回当前页面
@@ -62,6 +90,10 @@ instance.interceptors.request.use(
         // 而后我们可以在响应拦截器中，根据状态码进行一些统一的操作。
         const token = store.getters.token;
         token && (config.headers.Authorization = token);
+        token && (config.data += '&token=' + token);
+        config.data = config.data + '&timestamp=' + (new Date()).getTime();
+        config.data = config.data + '&sign=' + getSign(config.data);
+        // console.log(config.data)
         return config;
     },
     error => Promise.error(error))

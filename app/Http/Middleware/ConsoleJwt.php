@@ -10,6 +10,7 @@
  */
 namespace App\Http\Middleware;
 
+use App\Customize\Sign;
 use App\Models\Console\Log;
 use App\Models\Console\Menu;
 use Closure;
@@ -25,6 +26,12 @@ class ConsoleJwt {
 	 */
 	public function handle($request, Closure $next) {
 		try {
+			// 先验证签名
+			$res = Sign::checkSign($request->all());
+			if ($res['code'] != 200) {
+				return response()->json(['code' => 403, 'msg' => $res['msg'] . '...', 'data' => []]);
+			}
+			// 验证 token
 			$token = $request->header('Authorization');
 			if (is_null($token) || $token == '') {
 				return response()->json(['code' => 401, 'msg' => '请重新登录，获取验证信息...', 'data' => []]);
