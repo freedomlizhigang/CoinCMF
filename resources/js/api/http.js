@@ -33,7 +33,7 @@ function getSign(jsonObj) {
     }
     // str += "timestamp" + (new Date()).getTime();
     var sign = md5(str).toUpperCase();
-    return sign+'A';
+    return sign;
 }
 /**
   * 跳转登录页
