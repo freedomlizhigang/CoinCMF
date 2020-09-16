@@ -770,16 +770,17 @@
 	"expanded_folders":
 	[
 		"/data/projects-coding/php/CoinCMF",
-		"/data/projects-coding/php/CoinCMF/app",
-		"/data/projects-coding/php/CoinCMF/resources",
-		"/data/projects-coding/php/CoinCMF/resources/assets",
-		"/data/projects-coding/php/CoinCMF/resources/assets/js",
-		"/data/projects-coding/php/CoinCMF/resources/assets/js/components",
-		"/data/projects-coding/php/CoinCMF/resources/assets/js/components/console",
-		"/data/projects-coding/php/CoinCMF/resources/assets/js/components/console/main"
+		"/data/projects-coding/php/CoinCMF/app"
 	],
 	"file_history":
 	[
+		"/data/projects-coding/php/CoinCMF/app/Http/Controllers/Admin/Common/AdposController.php",
+		"/data/projects-coding/php/CoinCMF/node_modules/_webpack@4.41.2@webpack/bin/webpack.js",
+		"/data/projects-coding/php/CoinCMF/resources/js/components/console/App.vue",
+		"/data/projects-coding/php/CoinCMF/routes/admin.php",
+		"/data/projects-coding/php/CoinCMF/database/migrations/2020_02_21_103955_create_admins_table.php",
+		"/data/projects-coding/php/CoinCMF/app/Http/Middleware/ConsoleJwt.php",
+		"/data/projects-coding/php/CoinCMF/routes/console.php",
 		"/D/wwwroot/CoinCMF/resources/assets/js/components/console/main/MenuTree.vue",
 		"/D/wwwroot/CoinCMF/resources/assets/js/api/console/menu.js",
 		"/D/wwwroot/CoinCMF/resources/assets/js/router/routers.js",
@@ -900,18 +901,11 @@
 		"/D/wwwroot/isoftstone-shared/app/Services/ComService.php",
 		"/D/wwwroot/isoftstone-shared/app/Services/TagService.php",
 		"/D/wwwroot/isoftstone-shared/config/filesystems.php",
-		"/D/wwwroot/www.time-memory.com/app/Services/ComService.php",
-		"/D/wwwroot/www.time-memory.com/config/filesystems.php",
-		"/D/wwwroot/www.time-memory.com/app/Http/Controllers/Api/Map/MapNoteController.php",
-		"/D/wwwroot/www.time-memory.com/app/Http/Controllers/Api/Map/MyController.php",
-		"/D/wwwroot/www.time-memory.com/app/Http/Controllers/Api/Map/LocationErrorController.php",
-		"/D/wwwroot/www.time-memory.com/app/Http/Controllers/Api/Map/IntangibleItemController.php",
-		"/D/wwwroot/XYCMF/config/filesystems.php",
-		"/D/wwwroot/XYCMF/app/Http/Controllers/Admin/Admin1Controller.php"
+		"/D/wwwroot/www.time-memory.com/app/Services/ComService.php"
 	],
 	"find":
 	{
-		"height": 39.0
+		"height": 27.0
 	},
 	"find_in_files":
 	{
@@ -1042,6 +1036,12 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"function getSign(jsonObj) {\n    // 转成数组\n    var cs = jsonObj.split('&');\n    var theRequest = new Object();\n    for (var i = 0; i < cs.length; i++) {\n        var key = cs[i].split(\"=\")[0]\n        var value = cs[i].split(\"=\")[1]\n        // 给对象赋值\n        theRequest[key] = value\n    }\n    let arr = [];\n    for (var key in theRequest) {\n        arr.push(key)\n    }\n    arr.sort();\n    let str = '';\n    for (var i in arr) {\n        str += arr[i] + theRequest[arr[i]];\n    }\n    // str += \"timestamp\" + (new Date()).getTime();\n    var sign = md5(str).toUpperCase();\n    return sign;\n}",
+			"getSign",
+			".interceptors.request",
+			"$tree",
+			"boolean",
+			"static",
 			"datetime",
 			"art/",
 			"art",
@@ -1163,13 +1163,7 @@
 			"true",
 			";\n",
 			"btns",
-			"toLogin",
-			"next('/console/login')",
-			"LOGOUT",
-			"logout",
-			"adminInfo",
-			"名称",
-			"editpassword"
+			"toLogin"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -1959,7 +1953,7 @@
 	"show_open_files": false,
 	"show_tabs": true,
 	"side_bar_visible": true,
-	"side_bar_width": 333.0,
+	"side_bar_width": 339.0,
 	"status_bar_visible": true,
 	"template_settings":
 	{

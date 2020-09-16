@@ -12,53 +12,50 @@ namespace App\Models\Console;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Role extends Model
-{
+class Role extends Model {
 
-    /**
-     * 关联到模型的数据表
-     *
-     * @var string
-     */
-    protected $table = 'roles';
+	/**
+	 * 关联到模型的数据表
+	 *
+	 * @var string
+	 */
+	protected $table = 'roles';
 
-    // 不可以批量赋值的字段，为空则表示都可以
-    protected $guarded = [];
+	// 不可以批量赋值的字段，为空则表示都可以
+	protected $guarded = [];
 
-    /**
-    * The attributes that are mass assignable.
-    *
-    * @var array
-    */
-    protected $hidden = [];
+	/**
+	 * The attributes that are mass assignable.
+	 *
+	 * @var array
+	 */
+	protected $hidden = [];
 
-    /**
-     * 表明模型是否应该被打上时间戳
-     *
-     * @var bool
-     */
-    public $timestamps = true;
+	/**
+	 * 表明模型是否应该被打上时间戳
+	 *
+	 * @var bool
+	 */
+	public $timestamps = true;
 
-    /**
-     * 应该被转换成原生类型的属性。
-     *
-     * @var array
-     */
-    protected $casts = [
-        'status' => 'boolean',
-    ];
+	/**
+	 * 应该被转换成原生类型的属性。
+	 *
+	 * @var array
+	 */
+	protected $casts = [
+		'status' => 'boolean',
+	];
 
-    /**
-     * 用户
-     */
-    public function Admin()
-    {
-        return $this->belongsToMany('\App\Models\Console\Admin','role_users','role_id','user_id');
-    }
+	/**
+	 * 用户
+	 */
+	public function Admin() {
+		return $this->belongsToMany('\App\Models\Console\Admin', 'role_users', 'role_id', 'user_id');
+	}
 
-    // 关联privs表
-    public function priv()
-    {
-        return $this->belongsToMany('\App\Models\Console\Priv','role_privs');
-    }
+	// 关联privs表
+	public function priv() {
+		return $this->belongsToMany('\App\Models\Console\Priv', 'role_privs');
+	}
 }

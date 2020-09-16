@@ -9,10 +9,12 @@
     "license": "MIT",
     "require": {
         "php": "^7.2",
+        "aldas/modbus-tcp-client": "^2.0",
         "fideloper/proxy": "^4.0",
+        "jenssegers/agent": "^2.6",
         "laravel/framework": "^6.2",
         "laravel/tinker": "^1.0",
-        "jenssegers/agent": "^2.6",
+        "oscarafdev/migrations-generator": "^2.0",
         "overtrue/laravel-wechat": "~5.0",
         "predis/predis": "^1.1"
     },
