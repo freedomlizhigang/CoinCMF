@@ -769,11 +769,13 @@
 	},
 	"expanded_folders":
 	[
-		"/data/projects-coding/php/CoinCMF",
-		"/data/projects-coding/php/CoinCMF/app"
+		"/data/projects-coding/php/CoinCMF"
 	],
 	"file_history":
 	[
+		"/data/projects-coding/php/CoinCMF/.env",
+		"/data/projects-coding/php/CoinCMF/config/wechat.php",
+		"/data/projects-coding/php/CoinCMF/app/Models/Console/Role.php",
 		"/data/projects-coding/php/CoinCMF/app/Http/Controllers/Admin/Common/AdposController.php",
 		"/data/projects-coding/php/CoinCMF/node_modules/_webpack@4.41.2@webpack/bin/webpack.js",
 		"/data/projects-coding/php/CoinCMF/resources/js/components/console/App.vue",
@@ -898,14 +900,11 @@
 		"/D/wwwroot/XYCMF/app/Services/ComService.php",
 		"/D/wwwroot/www.time-memory.com/.env",
 		"/D/wwwroot/isoftstone-shared/app/Http/Controllers/Api/V1/NewsController.php",
-		"/D/wwwroot/isoftstone-shared/app/Services/ComService.php",
-		"/D/wwwroot/isoftstone-shared/app/Services/TagService.php",
-		"/D/wwwroot/isoftstone-shared/config/filesystems.php",
-		"/D/wwwroot/www.time-memory.com/app/Services/ComService.php"
+		"/D/wwwroot/isoftstone-shared/app/Services/ComService.php"
 	],
 	"find":
 	{
-		"height": 27.0
+		"height": 39.0
 	},
 	"find_in_files":
 	{
@@ -1036,6 +1035,7 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"WECHAT_OFFICIAL_ACCOUNT_APPID",
 			"function getSign(jsonObj) {\n    // 转成数组\n    var cs = jsonObj.split('&');\n    var theRequest = new Object();\n    for (var i = 0; i < cs.length; i++) {\n        var key = cs[i].split(\"=\")[0]\n        var value = cs[i].split(\"=\")[1]\n        // 给对象赋值\n        theRequest[key] = value\n    }\n    let arr = [];\n    for (var key in theRequest) {\n        arr.push(key)\n    }\n    arr.sort();\n    let str = '';\n    for (var i in arr) {\n        str += arr[i] + theRequest[arr[i]];\n    }\n    // str += \"timestamp\" + (new Date()).getTime();\n    var sign = md5(str).toUpperCase();\n    return sign;\n}",
 			"getSign",
 			".interceptors.request",
@@ -1162,8 +1162,7 @@
 			"input('display')",
 			"true",
 			";\n",
-			"btns",
-			"toLogin"
+			"btns"
 		],
 		"highlight": true,
 		"in_selection": false,

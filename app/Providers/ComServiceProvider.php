@@ -36,10 +36,6 @@ class ComServiceProvider extends ServiceProvider
         $this->app->singleton('com',function($app){
             return new ComService();
         });
-
-        $this->app->singleton('tag',function($app){
-            return new TagService();
-        });
     }
 
     /**

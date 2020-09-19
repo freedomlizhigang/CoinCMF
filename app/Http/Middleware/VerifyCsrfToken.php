@@ -22,8 +22,6 @@ class VerifyCsrfToken extends Middleware {
 		'alipay/gateway',
 		'alipay/return',
 		'weixin/return',
-		'union/return',
-		'union/success',
 		// 微信
 		'wx/*',
 		'oauth/*',

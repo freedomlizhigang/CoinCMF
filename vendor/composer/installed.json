@@ -1,56 +1,5 @@
 [
     {
-        "name": "aldas/modbus-tcp-client",
-        "version": "2.0.1",
-        "version_normalized": "2.0.1.0",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/aldas/modbus-tcp-client.git",
-            "reference": "0930a98bb22ea65f3c6e9debdf56da70f485800d"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/aldas/modbus-tcp-client/zipball/0930a98bb22ea65f3c6e9debdf56da70f485800d",
-            "reference": "0930a98bb22ea65f3c6e9debdf56da70f485800d",
-            "shasum": "",
-            "mirrors": [
-                {
-                    "url": "https://mirrors.aliyun.com/composer/dists/%package%/%reference%.%type%",
-                    "preferred": true
-                }
-            ]
-        },
-        "require": {
-            "php": "^7.0"
-        },
-        "require-dev": {
-            "phpunit/phpunit": "^6.0",
-            "psr/log": "^1.0",
-            "react/child-process": "^0.5.2",
-            "react/datagram": "^1.4",
-            "react/socket": "^0.8"
-        },
-        "suggest": {
-            "psr/log": "Required for using the Log middleware with BinaryStreamConnection"
-        },
-        "time": "2020-04-12T16:55:25+00:00",
-        "type": "library",
-        "installation-source": "dist",
-        "autoload": {
-            "psr-4": {
-                "ModbusTcpClient\\": "src/"
-            }
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "Apache-2.0"
-        ],
-        "description": "Modbus TCP protocol client library",
-        "keywords": [
-            "modbus"
-        ]
-    },
-    {
         "name": "dnoegel/php-xdg-base-dir",
         "version": "v0.1.1",
         "version_normalized": "0.1.1.0",
@@ -90,283 +39,6 @@
             "MIT"
         ],
         "description": "implementation of xdg base directory specification for php"
-    },
-    {
-        "name": "doctrine/cache",
-        "version": "1.10.2",
-        "version_normalized": "1.10.2.0",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/doctrine/cache.git",
-            "reference": "13e3381b25847283a91948d04640543941309727"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/doctrine/cache/zipball/13e3381b25847283a91948d04640543941309727",
-            "reference": "13e3381b25847283a91948d04640543941309727",
-            "shasum": "",
-            "mirrors": [
-                {
-                    "url": "https://mirrors.aliyun.com/composer/dists/%package%/%reference%.%type%",
-                    "preferred": true
-                }
-            ]
-        },
-        "require": {
-            "php": "~7.1 || ^8.0"
-        },
-        "conflict": {
-            "doctrine/common": ">2.2,<2.4"
-        },
-        "require-dev": {
-            "alcaeus/mongo-php-adapter": "^1.1",
-            "doctrine/coding-standard": "^6.0",
-            "mongodb/mongodb": "^1.1",
-            "phpunit/phpunit": "^7.0",
-            "predis/predis": "~1.0"
-        },
-        "suggest": {
-            "alcaeus/mongo-php-adapter": "Required to use legacy MongoDB driver"
-        },
-        "time": "2020-07-07T18:54:01+00:00",
-        "type": "library",
-        "extra": {
-            "branch-alias": {
-                "dev-master": "1.9.x-dev"
-            }
-        },
-        "installation-source": "dist",
-        "autoload": {
-            "psr-4": {
-                "Doctrine\\Common\\Cache\\": "lib/Doctrine/Common/Cache"
-            }
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "MIT"
-        ],
-        "authors": [
-            {
-                "name": "Guilherme Blanco",
-                "email": "guilhermeblanco@gmail.com"
-            },
-            {
-                "name": "Roman Borschel",
-                "email": "roman@code-factory.org"
-            },
-            {
-                "name": "Benjamin Eberlei",
-                "email": "kontakt@beberlei.de"
-            },
-            {
-                "name": "Jonathan Wage",
-                "email": "jonwage@gmail.com"
-            },
-            {
-                "name": "Johannes Schmitt",
-                "email": "schmittjoh@gmail.com"
-            }
-        ],
-        "description": "PHP Doctrine Cache library is a popular cache implementation that supports many different drivers such as redis, memcache, apc, mongodb and others.",
-        "homepage": "https://www.doctrine-project.org/projects/cache.html",
-        "keywords": [
-            "abstraction",
-            "apcu",
-            "cache",
-            "caching",
-            "couchdb",
-            "memcached",
-            "php",
-            "redis",
-            "xcache"
-        ]
-    },
-    {
-        "name": "doctrine/dbal",
-        "version": "2.10.4",
-        "version_normalized": "2.10.4.0",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/doctrine/dbal.git",
-            "reference": "47433196b6390d14409a33885ee42b6208160643"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/doctrine/dbal/zipball/47433196b6390d14409a33885ee42b6208160643",
-            "reference": "47433196b6390d14409a33885ee42b6208160643",
-            "shasum": "",
-            "mirrors": [
-                {
-                    "url": "https://mirrors.aliyun.com/composer/dists/%package%/%reference%.%type%",
-                    "preferred": true
-                }
-            ]
-        },
-        "require": {
-            "doctrine/cache": "^1.0",
-            "doctrine/event-manager": "^1.0",
-            "ext-pdo": "*",
-            "php": "^7.2"
-        },
-        "require-dev": {
-            "doctrine/coding-standard": "^8.1",
-            "jetbrains/phpstorm-stubs": "^2019.1",
-            "nikic/php-parser": "^4.4",
-            "phpstan/phpstan": "^0.12.40",
-            "phpunit/phpunit": "^8.5.5",
-            "psalm/plugin-phpunit": "^0.10.0",
-            "symfony/console": "^2.0.5|^3.0|^4.0|^5.0",
-            "vimeo/psalm": "^3.14.2"
-        },
-        "suggest": {
-            "symfony/console": "For helpful console commands such as SQL execution and import of files."
-        },
-        "time": "2020-09-12T21:20:41+00:00",
-        "bin": [
-            "bin/doctrine-dbal"
-        ],
-        "type": "library",
-        "extra": {
-            "branch-alias": {
-                "dev-master": "2.10.x-dev",
-                "dev-develop": "3.0.x-dev"
-            }
-        },
-        "installation-source": "dist",
-        "autoload": {
-            "psr-4": {
-                "Doctrine\\DBAL\\": "lib/Doctrine/DBAL"
-            }
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "MIT"
-        ],
-        "authors": [
-            {
-                "name": "Guilherme Blanco",
-                "email": "guilhermeblanco@gmail.com"
-            },
-            {
-                "name": "Roman Borschel",
-                "email": "roman@code-factory.org"
-            },
-            {
-                "name": "Benjamin Eberlei",
-                "email": "kontakt@beberlei.de"
-            },
-            {
-                "name": "Jonathan Wage",
-                "email": "jonwage@gmail.com"
-            }
-        ],
-        "description": "Powerful PHP database abstraction layer (DBAL) with many features for database schema introspection and management.",
-        "homepage": "https://www.doctrine-project.org/projects/dbal.html",
-        "keywords": [
-            "abstraction",
-            "database",
-            "db2",
-            "dbal",
-            "mariadb",
-            "mssql",
-            "mysql",
-            "oci8",
-            "oracle",
-            "pdo",
-            "pgsql",
-            "postgresql",
-            "queryobject",
-            "sasql",
-            "sql",
-            "sqlanywhere",
-            "sqlite",
-            "sqlserver",
-            "sqlsrv"
-        ]
-    },
-    {
-        "name": "doctrine/event-manager",
-        "version": "1.1.1",
-        "version_normalized": "1.1.1.0",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/doctrine/event-manager.git",
-            "reference": "41370af6a30faa9dc0368c4a6814d596e81aba7f"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/doctrine/event-manager/zipball/41370af6a30faa9dc0368c4a6814d596e81aba7f",
-            "reference": "41370af6a30faa9dc0368c4a6814d596e81aba7f",
-            "shasum": "",
-            "mirrors": [
-                {
-                    "url": "https://mirrors.aliyun.com/composer/dists/%package%/%reference%.%type%",
-                    "preferred": true
-                }
-            ]
-        },
-        "require": {
-            "php": "^7.1 || ^8.0"
-        },
-        "conflict": {
-            "doctrine/common": "<2.9@dev"
-        },
-        "require-dev": {
-            "doctrine/coding-standard": "^6.0",
-            "phpunit/phpunit": "^7.0"
-        },
-        "time": "2020-05-29T18:28:51+00:00",
-        "type": "library",
-        "extra": {
-            "branch-alias": {
-                "dev-master": "1.0.x-dev"
-            }
-        },
-        "installation-source": "dist",
-        "autoload": {
-            "psr-4": {
-                "Doctrine\\Common\\": "lib/Doctrine/Common"
-            }
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "MIT"
-        ],
-        "authors": [
-            {
-                "name": "Guilherme Blanco",
-                "email": "guilhermeblanco@gmail.com"
-            },
-            {
-                "name": "Roman Borschel",
-                "email": "roman@code-factory.org"
-            },
-            {
-                "name": "Benjamin Eberlei",
-                "email": "kontakt@beberlei.de"
-            },
-            {
-                "name": "Jonathan Wage",
-                "email": "jonwage@gmail.com"
-            },
-            {
-                "name": "Johannes Schmitt",
-                "email": "schmittjoh@gmail.com"
-            },
-            {
-                "name": "Marco Pivetta",
-                "email": "ocramius@gmail.com"
-            }
-        ],
-        "description": "The Doctrine Event Manager is a simple PHP event system that was built to be used with the various Doctrine projects.",
-        "homepage": "https://www.doctrine-project.org/projects/event-manager.html",
-        "keywords": [
-            "event",
-            "event dispatcher",
-            "event manager",
-            "event system",
-            "events"
-        ]
     },
     {
         "name": "doctrine/inflector",
@@ -769,17 +441,17 @@
     },
     {
         "name": "facade/flare-client-php",
-        "version": "1.3.5",
-        "version_normalized": "1.3.5.0",
+        "version": "1.3.6",
+        "version_normalized": "1.3.6.0",
         "source": {
             "type": "git",
             "url": "https://github.com/facade/flare-client-php.git",
-            "reference": "25907a113bfc212a38d458ae365bfb902b4e7fb8"
+            "reference": "451fadf38e9f635e7f8e1f5b3cf5c9eb82f11799"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/facade/flare-client-php/zipball/25907a113bfc212a38d458ae365bfb902b4e7fb8",
-            "reference": "25907a113bfc212a38d458ae365bfb902b4e7fb8",
+            "url": "https://api.github.com/repos/facade/flare-client-php/zipball/451fadf38e9f635e7f8e1f5b3cf5c9eb82f11799",
+            "reference": "451fadf38e9f635e7f8e1f5b3cf5c9eb82f11799",
             "shasum": "",
             "mirrors": [
                 {
@@ -798,11 +470,10 @@
         },
         "require-dev": {
             "friendsofphp/php-cs-fixer": "^2.14",
-            "larapack/dd": "^1.1",
             "phpunit/phpunit": "^7.5.16",
             "spatie/phpunit-snapshot-assertions": "^2.0"
         },
-        "time": "2020-08-26T18:06:23+00:00",
+        "time": "2020-09-18T06:35:11+00:00",
         "type": "library",
         "extra": {
             "branch-alias": {
@@ -1545,140 +1216,6 @@
         "abandoned": "php-parallel-lint/php-console-highlighter"
     },
     {
-        "name": "jaybizzle/crawler-detect",
-        "version": "v1.2.99",
-        "version_normalized": "1.2.99.0",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/JayBizzle/Crawler-Detect.git",
-            "reference": "0ffea34489b258a2709bfe93a9553e1efa5d1904"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/JayBizzle/Crawler-Detect/zipball/0ffea34489b258a2709bfe93a9553e1efa5d1904",
-            "reference": "0ffea34489b258a2709bfe93a9553e1efa5d1904",
-            "shasum": "",
-            "mirrors": [
-                {
-                    "url": "https://mirrors.aliyun.com/composer/dists/%package%/%reference%.%type%",
-                    "preferred": true
-                }
-            ]
-        },
-        "require": {
-            "php": ">=5.3.0"
-        },
-        "require-dev": {
-            "phpunit/phpunit": "^4.8|^5.5|^6.5",
-            "satooshi/php-coveralls": "1.*"
-        },
-        "time": "2020-08-25T21:35:55+00:00",
-        "type": "library",
-        "installation-source": "dist",
-        "autoload": {
-            "psr-4": {
-                "Jaybizzle\\CrawlerDetect\\": "src/"
-            }
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "MIT"
-        ],
-        "authors": [
-            {
-                "name": "Mark Beech",
-                "email": "m@rkbee.ch",
-                "role": "Developer"
-            }
-        ],
-        "description": "CrawlerDetect is a PHP class for detecting bots/crawlers/spiders via the user agent",
-        "homepage": "https://github.com/JayBizzle/Crawler-Detect/",
-        "keywords": [
-            "crawler",
-            "crawler detect",
-            "crawler detector",
-            "crawlerdetect",
-            "php crawler detect"
-        ]
-    },
-    {
-        "name": "jenssegers/agent",
-        "version": "v2.6.4",
-        "version_normalized": "2.6.4.0",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/jenssegers/agent.git",
-            "reference": "daa11c43729510b3700bc34d414664966b03bffe"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/jenssegers/agent/zipball/daa11c43729510b3700bc34d414664966b03bffe",
-            "reference": "daa11c43729510b3700bc34d414664966b03bffe",
-            "shasum": "",
-            "mirrors": [
-                {
-                    "url": "https://mirrors.aliyun.com/composer/dists/%package%/%reference%.%type%",
-                    "preferred": true
-                }
-            ]
-        },
-        "require": {
-            "jaybizzle/crawler-detect": "^1.2",
-            "mobiledetect/mobiledetectlib": "^2.7.6",
-            "php": ">=5.6"
-        },
-        "require-dev": {
-            "php-coveralls/php-coveralls": "^2.1",
-            "phpunit/phpunit": "^5.0|^6.0|^7.0"
-        },
-        "suggest": {
-            "illuminate/support": "Required for laravel service providers"
-        },
-        "time": "2020-06-13T08:05:20+00:00",
-        "type": "library",
-        "extra": {
-            "branch-alias": {
-                "dev-master": "3.0-dev"
-            },
-            "laravel": {
-                "providers": [
-                    "Jenssegers\\Agent\\AgentServiceProvider"
-                ],
-                "aliases": {
-                    "Agent": "Jenssegers\\Agent\\Facades\\Agent"
-                }
-            }
-        },
-        "installation-source": "dist",
-        "autoload": {
-            "psr-4": {
-                "Jenssegers\\Agent\\": "src/"
-            }
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "MIT"
-        ],
-        "authors": [
-            {
-                "name": "Jens Segers",
-                "homepage": "https://jenssegers.com"
-            }
-        ],
-        "description": "Desktop/mobile user agent parser with support for Laravel, based on Mobiledetect",
-        "homepage": "https://github.com/jenssegers/agent",
-        "keywords": [
-            "Agent",
-            "browser",
-            "desktop",
-            "laravel",
-            "mobile",
-            "platform",
-            "user agent",
-            "useragent"
-        ]
-    },
-    {
         "name": "laravel/framework",
         "version": "v6.18.40",
         "version_normalized": "6.18.40.0",
@@ -2126,66 +1663,6 @@
         "description": "Mime-type detection for Flysystem"
     },
     {
-        "name": "mobiledetect/mobiledetectlib",
-        "version": "2.8.34",
-        "version_normalized": "2.8.34.0",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/serbanghita/Mobile-Detect.git",
-            "reference": "6f8113f57a508494ca36acbcfa2dc2d923c7ed5b"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/serbanghita/Mobile-Detect/zipball/6f8113f57a508494ca36acbcfa2dc2d923c7ed5b",
-            "reference": "6f8113f57a508494ca36acbcfa2dc2d923c7ed5b",
-            "shasum": "",
-            "mirrors": [
-                {
-                    "url": "https://mirrors.aliyun.com/composer/dists/%package%/%reference%.%type%",
-                    "preferred": true
-                }
-            ]
-        },
-        "require": {
-            "php": ">=5.0.0"
-        },
-        "require-dev": {
-            "phpunit/phpunit": "~4.8.35||~5.7"
-        },
-        "time": "2019-09-18T18:44:20+00:00",
-        "type": "library",
-        "installation-source": "dist",
-        "autoload": {
-            "classmap": [
-                "Mobile_Detect.php"
-            ],
-            "psr-0": {
-                "Detection": "namespaced/"
-            }
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "MIT"
-        ],
-        "authors": [
-            {
-                "name": "Serban Ghita",
-                "email": "serbanghita@gmail.com",
-                "homepage": "http://mobiledetect.net",
-                "role": "Developer"
-            }
-        ],
-        "description": "Mobile_Detect is a lightweight PHP class for detecting mobile devices. It uses the User-Agent string combined with specific HTTP headers to detect the mobile environment.",
-        "homepage": "https://github.com/serbanghita/Mobile-Detect",
-        "keywords": [
-            "detect mobile devices",
-            "mobile",
-            "mobile detect",
-            "mobile detector",
-            "php mobile detect"
-        ]
-    },
-    {
         "name": "mockery/mockery",
         "version": "1.4.2",
         "version_normalized": "1.4.2.0",
@@ -2408,17 +1885,17 @@
     },
     {
         "name": "nesbot/carbon",
-        "version": "2.39.2",
-        "version_normalized": "2.39.2.0",
+        "version": "2.40.0",
+        "version_normalized": "2.40.0.0",
         "source": {
             "type": "git",
             "url": "https://github.com/briannesbitt/Carbon.git",
-            "reference": "326efde1bc09077a26cb77f6e2e32e13f06c27f2"
+            "reference": "6c7646154181013ecd55e80c201b9fd873c6ee5d"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/briannesbitt/Carbon/zipball/326efde1bc09077a26cb77f6e2e32e13f06c27f2",
-            "reference": "326efde1bc09077a26cb77f6e2e32e13f06c27f2",
+            "url": "https://api.github.com/repos/briannesbitt/Carbon/zipball/6c7646154181013ecd55e80c201b9fd873c6ee5d",
+            "reference": "6c7646154181013ecd55e80c201b9fd873c6ee5d",
             "shasum": "",
             "mirrors": [
                 {
@@ -2443,7 +1920,7 @@
             "phpunit/phpunit": "^7.5 || ^8.0",
             "squizlabs/php_codesniffer": "^3.4"
         },
-        "time": "2020-09-10T12:16:42+00:00",
+        "time": "2020-09-11T19:00:58+00:00",
         "bin": [
             "bin/carbon"
         ],
@@ -2695,128 +2172,6 @@
         ]
     },
     {
-        "name": "oscarafdev/laravel-4-generators",
-        "version": "3.1.9",
-        "version_normalized": "3.1.9.0",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/oscarafdev/Laravel-4-Generators.git",
-            "reference": "3ce0f0250e6ceed3d23d8311d144cc0e03f784b1"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/oscarafdev/Laravel-4-Generators/zipball/3ce0f0250e6ceed3d23d8311d144cc0e03f784b1",
-            "reference": "3ce0f0250e6ceed3d23d8311d144cc0e03f784b1",
-            "shasum": "",
-            "mirrors": [
-                {
-                    "url": "https://mirrors.aliyun.com/composer/dists/%package%/%reference%.%type%",
-                    "preferred": true
-                }
-            ]
-        },
-        "require": {
-            "illuminate/support": "^5.0 || ^6.0 || ^7.0",
-            "php": "^7.0"
-        },
-        "require-dev": {
-            "behat/behat": "^2.5.1",
-            "behat/mink": "^1.5.0",
-            "behat/mink-extension": "^1.2.0",
-            "behat/mink-goutte-driver": "^1.0.9",
-            "behat/mink-selenium2-driver": "^1.1.1",
-            "phpspec/phpspec": "^2.0",
-            "phpunit/phpunit": "^3.7"
-        },
-        "time": "2020-08-28T21:58:39+00:00",
-        "type": "library",
-        "installation-source": "dist",
-        "autoload": {
-            "psr-0": {
-                "Way\\Generators": "src/"
-            }
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "MIT"
-        ],
-        "authors": [
-            {
-                "name": "Oscar Fernandez",
-                "email": "oscarafdev@gmail.com"
-            }
-        ],
-        "description": "Rapidly generate resources, migrations, models, and much more."
-    },
-    {
-        "name": "oscarafdev/migrations-generator",
-        "version": "2.0.23",
-        "version_normalized": "2.0.23.0",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/oscarafdev/migrations-generator.git",
-            "reference": "b087636212eede9d2a266278c7277c13057de5cc"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/oscarafdev/migrations-generator/zipball/b087636212eede9d2a266278c7277c13057de5cc",
-            "reference": "b087636212eede9d2a266278c7277c13057de5cc",
-            "shasum": "",
-            "mirrors": [
-                {
-                    "url": "https://mirrors.aliyun.com/composer/dists/%package%/%reference%.%type%",
-                    "preferred": true
-                }
-            ]
-        },
-        "require": {
-            "doctrine/dbal": "~2.10",
-            "illuminate/support": "^5.0 || ^6.0 || ^7.0",
-            "oscarafdev/laravel-4-generators": "^3.1",
-            "php": "^7.0"
-        },
-        "require-dev": {
-            "illuminate/cache": ">=6.0",
-            "illuminate/console": ">=6.0",
-            "mockery/mockery": ">=1.0.3",
-            "phpunit/phpunit": ">=8.0"
-        },
-        "time": "2020-08-29T00:03:59+00:00",
-        "type": "library",
-        "extra": {
-            "laravel": {
-                "providers": [
-                    "Way\\Generators\\GeneratorsServiceProvider",
-                    "OscarAFDev\\MigrationsGenerator\\MigrationsGeneratorServiceProvider"
-                ]
-            }
-        },
-        "installation-source": "dist",
-        "autoload": {
-            "psr-0": {
-                "OscarAFDev\\MigrationsGenerator": "src/"
-            }
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "MIT"
-        ],
-        "authors": [
-            {
-                "name": "Oscar Fernandez",
-                "email": "oscarafdev@gmail.com"
-            }
-        ],
-        "description": "Generates Laravel Migrations from an existing database",
-        "keywords": [
-            "artisan",
-            "generator",
-            "laravel",
-            "migration",
-            "migrations"
-        ]
-    },
-    {
         "name": "overtrue/laravel-wechat",
         "version": "5.0.9",
         "version_normalized": "5.0.9.0",
@@ -2879,17 +2234,17 @@
     },
     {
         "name": "overtrue/socialite",
-        "version": "2.0.18",
-        "version_normalized": "2.0.18.0",
+        "version": "2.0.19",
+        "version_normalized": "2.0.19.0",
         "source": {
             "type": "git",
             "url": "https://github.com/overtrue/socialite.git",
-            "reference": "d8c3ed6281939e7d2dc4da460b484886f686f8a5"
+            "reference": "ae4c8d1e9fe39418b9a598d42f01d7c1fe30f200"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/overtrue/socialite/zipball/d8c3ed6281939e7d2dc4da460b484886f686f8a5",
-            "reference": "d8c3ed6281939e7d2dc4da460b484886f686f8a5",
+            "url": "https://api.github.com/repos/overtrue/socialite/zipball/ae4c8d1e9fe39418b9a598d42f01d7c1fe30f200",
+            "reference": "ae4c8d1e9fe39418b9a598d42f01d7c1fe30f200",
             "shasum": "",
             "mirrors": [
                 {
@@ -2911,7 +2266,7 @@
             "mockery/mockery": "~1.2",
             "phpunit/phpunit": "~6"
         },
-        "time": "2020-09-14T08:34:23+00:00",
+        "time": "2020-09-16T09:22:24+00:00",
         "type": "library",
         "installation-source": "dist",
         "autoload": {
@@ -3244,17 +2599,17 @@
     },
     {
         "name": "phpdocumentor/reflection-docblock",
-        "version": "5.2.1",
-        "version_normalized": "5.2.1.0",
+        "version": "5.2.2",
+        "version_normalized": "5.2.2.0",
         "source": {
             "type": "git",
             "url": "https://github.com/phpDocumentor/ReflectionDocBlock.git",
-            "reference": "d870572532cd70bc3fab58f2e23ad423c8404c44"
+            "reference": "069a785b2141f5bcf49f3e353548dc1cce6df556"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/phpDocumentor/ReflectionDocBlock/zipball/d870572532cd70bc3fab58f2e23ad423c8404c44",
-            "reference": "d870572532cd70bc3fab58f2e23ad423c8404c44",
+            "url": "https://api.github.com/repos/phpDocumentor/ReflectionDocBlock/zipball/069a785b2141f5bcf49f3e353548dc1cce6df556",
+            "reference": "069a785b2141f5bcf49f3e353548dc1cce6df556",
             "shasum": "",
             "mirrors": [
                 {
@@ -3273,7 +2628,7 @@
         "require-dev": {
             "mockery/mockery": "~1.3.2"
         },
-        "time": "2020-08-15T11:14:08+00:00",
+        "time": "2020-09-03T19:13:55+00:00",
         "type": "library",
         "extra": {
             "branch-alias": {
@@ -3304,17 +2659,17 @@
     },
     {
         "name": "phpdocumentor/type-resolver",
-        "version": "1.3.0",
-        "version_normalized": "1.3.0.0",
+        "version": "1.4.0",
+        "version_normalized": "1.4.0.0",
         "source": {
             "type": "git",
             "url": "https://github.com/phpDocumentor/TypeResolver.git",
-            "reference": "e878a14a65245fbe78f8080eba03b47c3b705651"
+            "reference": "6a467b8989322d92aa1c8bf2bebcc6e5c2ba55c0"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/phpDocumentor/TypeResolver/zipball/e878a14a65245fbe78f8080eba03b47c3b705651",
-            "reference": "e878a14a65245fbe78f8080eba03b47c3b705651",
+            "url": "https://api.github.com/repos/phpDocumentor/TypeResolver/zipball/6a467b8989322d92aa1c8bf2bebcc6e5c2ba55c0",
+            "reference": "6a467b8989322d92aa1c8bf2bebcc6e5c2ba55c0",
             "shasum": "",
             "mirrors": [
                 {
@@ -3330,7 +2685,7 @@
         "require-dev": {
             "ext-tokenizer": "*"
         },
-        "time": "2020-06-27T10:12:23+00:00",
+        "time": "2020-09-17T18:55:26+00:00",
         "type": "library",
         "extra": {
             "branch-alias": {
@@ -3929,83 +3284,6 @@
         "keywords": [
             "container",
             "dependency injection"
-        ]
-    },
-    {
-        "name": "predis/predis",
-        "version": "v1.1.6",
-        "version_normalized": "1.1.6.0",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/predis/predis.git",
-            "reference": "9930e933c67446962997b05201c69c2319bf26de"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/predis/predis/zipball/9930e933c67446962997b05201c69c2319bf26de",
-            "reference": "9930e933c67446962997b05201c69c2319bf26de",
-            "shasum": "",
-            "mirrors": [
-                {
-                    "url": "https://mirrors.aliyun.com/composer/dists/%package%/%reference%.%type%",
-                    "preferred": true
-                }
-            ]
-        },
-        "require": {
-            "php": ">=5.3.9"
-        },
-        "require-dev": {
-            "cweagans/composer-patches": "^1.6",
-            "phpunit/phpunit": "~4.8"
-        },
-        "suggest": {
-            "ext-curl": "Allows access to Webdis when paired with phpiredis",
-            "ext-phpiredis": "Allows faster serialization and deserialization of the Redis protocol"
-        },
-        "time": "2020-09-11T19:18:05+00:00",
-        "type": "library",
-        "extra": {
-            "composer-exit-on-patch-failure": true,
-            "patches": {
-                "phpunit/phpunit-mock-objects": {
-                    "Fix PHP 7 and 8 compatibility": "./tests/phpunit_mock_objects.patch"
-                },
-                "phpunit/phpunit": {
-                    "Fix PHP 7 compatibility": "./tests/phpunit_php7.patch",
-                    "Fix PHP 8 compatibility": "./tests/phpunit_php8.patch"
-                }
-            }
-        },
-        "installation-source": "dist",
-        "autoload": {
-            "psr-4": {
-                "Predis\\": "src/"
-            }
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "MIT"
-        ],
-        "authors": [
-            {
-                "name": "Daniele Alessandri",
-                "email": "suppakilla@gmail.com",
-                "homepage": "http://clorophilla.net",
-                "role": "Creator & Maintainer"
-            },
-            {
-                "name": "Till Krüss",
-                "homepage": "https://till.im",
-                "role": "Maintainer"
-            }
-        ],
-        "description": "Flexible and feature-complete Redis client for PHP and HHVM",
-        "homepage": "http://github.com/predis/predis",
-        "keywords": [
-            "nosql",
-            "predis",
-            "redis"
         ]
     },
     {

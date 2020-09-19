@@ -17,17 +17,6 @@
       0 => 'Fideloper\\Proxy\\TrustedProxyServiceProvider',
     ),
   ),
-  'jenssegers/agent' => 
-  array (
-    'providers' => 
-    array (
-      0 => 'Jenssegers\\Agent\\AgentServiceProvider',
-    ),
-    'aliases' => 
-    array (
-      'Agent' => 'Jenssegers\\Agent\\Facades\\Agent',
-    ),
-  ),
   'laravel/tinker' => 
   array (
     'providers' => 
@@ -47,14 +36,6 @@
     'providers' => 
     array (
       0 => 'NunoMaduro\\Collision\\Adapters\\Laravel\\CollisionServiceProvider',
-    ),
-  ),
-  'oscarafdev/migrations-generator' => 
-  array (
-    'providers' => 
-    array (
-      0 => 'Way\\Generators\\GeneratorsServiceProvider',
-      1 => 'OscarAFDev\\MigrationsGenerator\\MigrationsGeneratorServiceProvider',
     ),
   ),
   'overtrue/laravel-wechat' => 

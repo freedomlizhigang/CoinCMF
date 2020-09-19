@@ -86,10 +86,3 @@ Route::group(['prefix'=>'c-api','namespace' => 'Admin','middleware'=>['c-api']],
     Route::pattern('path','.+');
     Route::any('{path}','ResponseController@anyErrors');
 });
-
-// 后台首页，其它页面的导航
-Route::group(['prefix'=>'console','namespace' => 'Admin'],function(){
-    // 直接用正则控制所有请求到一个地址
-    Route::pattern('path','.+');
-    Route::any('{path}','IndexController@getIndex');
-});

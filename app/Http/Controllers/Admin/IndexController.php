@@ -25,11 +25,7 @@ class IndexController extends Controller
      */
     public function getIndex()
     {
-        try {
-            return view('admin.index');
-        } catch (\Throwable $e) {
-            return view('errors.500');
-        }
+        return redirect('/console.html#/');
     }
 
     // 更新缓存

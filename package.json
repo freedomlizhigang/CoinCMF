@@ -10,27 +10,32 @@
         "production": "cross-env NODE_ENV=production node_modules/webpack/bin/webpack.js --no-progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js"
     },
     "devDependencies": {
-        "axios": "^0.19",
+        "@tinymce/tinymce-vue": "^3.2.2",
+        "axios": "^0.19.2",
+        "compression-webpack-plugin": "^4.0.1",
+        "core-js": "^3.6.5",
+        "crypto-js": "^4.0.0",
+        "echarts": "^4.8.0",
+        "qs": "^6.9.4",
+        "tinymce": "^5.4.1",
+        "view-design": "^4.3.2",
+        "vue": "^2.6.11",
+        "vue-axios": "^2.1.5",
+        "vue-router": "^3.2.0",
+        "vuex": "^3.4.0",
         "cross-env": "^5.1",
         "laravel-mix": "^4.0.7",
         "lodash": "^4.17.13",
         "resolve-url-loader": "^2.3.1",
         "sass": "^1.15.2",
         "sass-loader": "^7.1.0",
-        "jquery": "^3.2",
-        "popper.js": "^1.12",
-        "vue": "^2.5.17",
+        "@popperjs/core": "^2.4.4",
         "browser-sync": "^2.26.7",
         "browser-sync-webpack-plugin": "^2.2.2",
         "vue-loader": "^15.7",
-        "vue-router": "^3.0.7",
         "vue-template-compiler": "^2.6.10",
-        "vuex": "^3.1.1",
         "webpack-livereload-plugin": "^2.2.0"
     },
     "dependencies": {
-        "view-design": "^4.0.0",
-        "vue-axios": "^2.1.4",
-        "wangeditor": "^3.1.1"
     }
 }

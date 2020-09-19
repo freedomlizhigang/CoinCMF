@@ -26,12 +26,6 @@ Route::group(['prefix' => 'user', 'middleware' => ['jwt']], function () {
 
 // 通用功能
 Route::group(['prefix' => 'common', 'namespace' => 'Common'], function () {
-	// 模型字段配置荐
-	Route::post('option/{type}', 'AjaxCommonController@getOption');
-	// 取下级地区
-	Route::post('area', 'AjaxCommonController@postArea');
-	// 取社区
-	Route::post('community', 'AjaxCommonController@postCommunity');
 	// 编辑器文件上传
 	Route::get('ueditor_upload', 'UploaderController@getUeditorupload');
 	Route::post('ueditor_upload', 'UploaderController@postUeditorupload');

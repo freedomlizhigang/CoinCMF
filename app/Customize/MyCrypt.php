@@ -1,37 +1,29 @@
 <?php
 /*
- * @package [App\Customize]
- * @author [李志刚]
- * @createdate  [2018-04-03]
- * @copyright [2018-2020 衡水希夷信息技术工作室]
- * @version [1.0.0]
- * @directions mcrypt des方式加解密
- *
+ * @Author: 李志刚
+ * @CopyRight: 2020-2030 衡水山木枝技术服务有限公司
+ * @Date: 2019-01-03 20:14:16
+ * @Description: AES/RSA 加解密
+ * @LastEditors: 李志刚
+ * @LastEditTime: 2020-09-19 21:48:03
+ * @FilePath: /CoinCMF/app/Customize/MyCrypt.php
  */
+
 namespace App\Customize;
 
 class MyCrypt
 {
-    /*
-    * openssl_encrypt 方式更适合php7.2及以上版本 2018-04-03
-    * openssl_encrypt (PHP 5 >= 5.3.0, PHP 7)
-     */
-    /**向量
-     * @var string
-     */
-    const IV = "lLBvDbxgqUStnz87";//16位
-    /**
-     * 默认秘钥
-     */
-    const KEY = 'd22icaUY3o9NpQM0';//16位
     /**
      * 解密字符串
      * @param string $data 字符串
      * @param string $key 加密key
      * @return string
      */
-    public static function ssl_decrypt($data,$key = self::KEY,$iv = self::IV){
-        return openssl_decrypt(base64_decode($data),"AES-128-CBC",$key,OPENSSL_RAW_DATA,$iv);
+    public static function ssl_decrypt($data)
+    {
+        $iv = config('rsa.aes_iv');
+        $key = config('rsa.aes_key');
+        return openssl_decrypt(base64_decode($data), "AES-128-CBC", $key, true, $iv);
     }
     /**
      * 加密字符串
@@ -39,62 +31,64 @@ class MyCrypt
      * @param string $key 加密key
      * @return string
      */
-    public static function ssl_encrypt($data,$key = self::KEY,$iv = self::IV){
-        return base64_encode(openssl_encrypt($data,"AES-128-CBC",$key,OPENSSL_RAW_DATA,$iv));
+    public static function ssl_encrypt($data)
+    {
+        $iv = config('rsa.aes_iv');
+        $key = config('rsa.aes_key');
+        return base64_encode(openssl_encrypt($data, "AES-128-CBC", $key, true, $iv));
     }
-    /*
-    * Mcrypt 方式不适合php7.2及以上版本 2018-04-03
-    * mcrypt_generic (PHP 4 >= 4.0.2, PHP 5, PHP 7 < 7.2.0, PECL mcrypt >= 1.0.0)
-     */
-    private $key = 'jxf-credit-voucher-keys';
-    // 解密
-    public static function decrypt($decrypt) {
-        /* 打开加密算法和模式 */
-        $td = mcrypt_module_open('des', '', 'ecb', '');
-        /* 创建初始向量，并且检测密钥长度。
-        * Windows 平台请使用 MCRYPT_RAND。 */
-        // get_iv_size 返回打开的算法的初始向量大小,从随机源创建初始向量
-        $iv = mcrypt_create_iv(mcrypt_enc_get_iv_size($td), MCRYPT_DEV_RANDOM);
-        // 返回打开的模式所能支持的最长密钥
-        $ks = mcrypt_enc_get_key_size($td);
-        /* 创建密钥 */
-        $key = substr(md5($this->key), 0, $ks);
-        /* 初始化解密模块 */
-        mcrypt_generic_init($td, $key, $iv);
-        /* 解密数据 */
-        $decrypted = mdecrypt_generic($td, $this->base64url_decode($decrypt));
-        /* 结束解密，执行清理工作，并且关闭模块 */
-        mcrypt_generic_deinit($td);
-        mcrypt_module_close($td);
-        return $decrypted;
-    }
-    // 加密
-    public static function encrypt($encrypt) {
-        /* 打开加密算法和模式 */
-        $td = mcrypt_module_open('des', '', 'ecb', '');
-        /* 创建初始向量，并且检测密钥长度。
-        * Windows 平台请使用 MCRYPT_RAND。 */
-        // get_iv_size 返回打开的算法的初始向量大小,从随机源创建初始向量
-        $iv = mcrypt_create_iv(mcrypt_enc_get_iv_size($td), MCRYPT_DEV_RANDOM);
-        // 返回打开的模式所能支持的最长密钥
-        $ks = mcrypt_enc_get_key_size($td);
-        /* 创建密钥 */
-        $key = substr(md5($this->key), 0, $ks);
-        /* 初始化加密 */
-        mcrypt_generic_init($td, $key, $iv);
-        /* 加密数据 */
-        $encrypted = $this->base64url_encode(mcrypt_generic($td, $encrypt));
-        /* 结束，执行清理工作，并且关闭模块 */
-        mcrypt_generic_deinit($td);
-        mcrypt_module_close($td);
-        return $encrypted;
-    }
+    // RSA 加密、解密==公钥、私钥
+    // $publicKey = config('rsa.rsa_public_key');
+    // $privateKey = config('rsa.rsa_private_key'); 
 
-    // 增加对url友好的支持
-    private function base64url_encode($data) {
-      return rtrim(strtr(base64_encode($data), '+/', '-_'), '=');
+    /**     
+     * @uses 公钥加密     
+     * @param string $data     
+     * @return null|string     
+     */
+    public static function publicEncrypt($data = '')
+    {
+        if (!is_string($data)) {
+            return null;
+        }
+        $publicKey = config('rsa.rsa_public_key');
+        return openssl_public_encrypt($data, $encrypted, $publicKey) ? base64_encode($encrypted) : null;
     }
-    private function base64url_decode($data) {
-      return base64_decode(str_pad(strtr($data, '-_', '+/'), strlen($data) % 4, '=', STR_PAD_RIGHT));
+    /**     
+     * @uses 公钥解密     
+     * @param string $encrypted     
+     * @return null     
+     */
+    public function publicDecrypt($encrypted = '')
+    {
+        if (!is_string($encrypted)) {
+            return null;
+        }
+        $publicKey = config('rsa.rsa_public_key');
+        return (openssl_public_decrypt(base64_decode($encrypted), $decrypted, $publicKey)) ? $decrypted : null;
+    }
+    /**
+     * 私钥加密
+     */
+    public static function privEncrypt($data)
+    {
+        if (!is_string($data)) {
+            return null;
+        }
+        $privateKey = config('rsa.rsa_private_key');
+        return openssl_private_encrypt($data, $encrypted, $privateKey) ? base64_encode($encrypted) : null;
+    }
+    /**
+     * 私钥解密
+     */
+    public static function privDecrypt($encrypted)
+    {
+        if (!is_string($encrypted)) {
+            return null;
+        }
+        $privateKey = config('rsa.rsa_private_key');
+        $privateKey = openssl_pkey_get_private($privateKey);
+        $res = openssl_private_decrypt(base64_decode($encrypted), $decrypted, $privateKey);
+        return $res ? $decrypted : null;
     }
 }

@@ -45,12 +45,12 @@ return [
 
 		'local' => [
 			'driver' => 'local',
-			'root' => public_path(),
+			'root' => storage_path('local'),
 		],
 
 		'log' => [
 			'driver' => 'local',
-			'root' => public_path('storage'),
+			'root' => storage_path('coinlogs'),
 		],
 
 		'public' => [

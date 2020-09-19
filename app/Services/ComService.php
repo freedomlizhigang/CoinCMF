@@ -10,16 +10,10 @@
  */
 namespace App\Services;
 
-use Agent;
 use Cache;
 use Storage;
 
 class ComService {
-	// 判断是不是移动端
-	public function isMoblie() {
-		$res = Agent::isMobile() || Agent::isPhone() || !Agent::isDesktop() || Agent::isAndroidOS() || Agent::isiOS();
-		return $res;
-	}
 	// 判断是不是微信浏览器
 	public function isWeixin() {
 		if (strpos($_SERVER['HTTP_USER_AGENT'], 'MicroMessenger') !== false) {
