@@ -61,12 +61,12 @@ export default {
           // this.$store.commit(LOGIN, {'id':1,'name':'admin','token':'ssss'})
           // console_router.push('/index/index');
           this.$api.login.login(params).then(res => {
-            console.log(res)
-            // if (res.code == 200) {
-            //   // 跳转到首页
-            //   this.$store.commit(LOGIN, res.result)
-            //   console_router.push('/index/index');
-            // }
+            // console.log(res)
+            if (res.code == 200) {
+              // 跳转到首页
+              this.$store.commit(LOGIN, res.result)
+              console_router.push('/index/index');
+            }
           });
         } else {
           this.$Message.error('请检查输入的信息是否正确！');

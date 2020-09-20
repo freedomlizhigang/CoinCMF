@@ -1,13 +1,14 @@
 <?php
 /*
- * @package [App\Models\User]
- * @author [李志刚]
- * @createdate  [2018-06-26]
- * @copyright [2018-2020 衡水希夷信息技术工作室]
- * @version [1.0.0]
- * @directions 用户组
- *
+ * @Author: 李志刚
+ * @CopyRight: 2020-2030 衡水山木枝技术服务有限公司
+ * @Date: 2018-06-26 09:06:20
+ * @Description: 用户组表
+ * @LastEditors: 李志刚
+ * @LastEditTime: 2020-09-20 19:56:20
+ * @FilePath: /CoinCMF/app/Models/User/Group.php
  */
+
 namespace App\Models\User;
 
 use Illuminate\Database\Eloquent\Model;

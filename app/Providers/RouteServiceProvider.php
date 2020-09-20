@@ -34,7 +34,7 @@ class RouteServiceProvider extends ServiceProvider {
 	public function map() {
 		$this->mapApiRoutes();
 		// 后台用的
-		$this->mapAdminRoutes();
+		$this->mapCApiRoutes();
 		// 默认的
 		$this->mapWebRoutes();
 	}
@@ -46,9 +46,9 @@ class RouteServiceProvider extends ServiceProvider {
 	 *
 	 * @return void
 	 */
-	protected function mapAdminRoutes() {
+	protected function mapCApiRoutes() {
 		Route::namespace ($this->namespace)
-			->group(base_path('routes/admin.php'));
+			->group(base_path('routes/c-api.php'));
 	}
 
 	/**
