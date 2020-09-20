@@ -5,7 +5,7 @@
  * @Date: 2019-01-03 20:14:16
  * @Description: 管理员管理
  * @LastEditors: 李志刚
- * @LastEditTime: 2020-09-20 20:01:06
+ * @LastEditTime: 2020-09-20 21:25:17
  * @FilePath: /CoinCMF/app/Http/Controllers/Console/Rbac/AdminController.php
  */
 
@@ -30,12 +30,19 @@ class AdminController extends ResponseController
         try {
             // 搜索关键字
             $key = $req->input('key','');
+            $page = $req->input('page', 1);
+            $size = $req->input('size', 10);
             $list = Admin::where(function($q) use($key){
                     if ($key != '') {
                         $q->where('name','like','%'.$key.'%');
                     }
-                })->orderBy('id','asc')->get();
-            return $this->resData(200,'获取用户数据成功...',$list);
+                })->limit($size)->offset(($page - 1) * $size)->orderBy('id','asc')->get();
+            $count = Admin::where(function ($q) use ($key) {
+                if ($key != '') {
+                    $q->where('name', 'like', '%' . $key . '%');
+                }
+            })->count();
+            return $this->resData(200,'获取用户数据成功...', ['list' => $list, 'count' => $count]);
         } catch (\Throwable $e) {
             return $this->resData(500,'获取数据失败，请稍后再试！',[]);
         }
@@ -66,6 +73,7 @@ class AdminController extends ResponseController
     // 创建用户
     public function postCreate(Request $req)
     {
+        DB::beginTransaction();
         try {
             $validator = Validator::make($req->input(), [
                 'section_id' => 'required|integer',
@@ -88,21 +96,24 @@ class AdminController extends ResponseController
                 // 如果有错误，提示第一条
                 return $this->resData(400,$validator->errors()->all()[0].'...');
             }
-            $crypt = str_random(10);
+            $crypt = Func::str_random(10);
             $pwd = Func::makepwd($req->input('password'),$crypt);
             $create = ['section_id'=>$req->input('section_id'),'name'=>$req->input('name'),'realname'=>$req->input('realname'),'phone'=>$req->input('phone'),'email'=>$req->input('email'),'password'=>$pwd,'crypt'=>$crypt];
             $admin = Admin::create($create);
-            $rids = $req->input('role_ids');
+            $rids = $req->input('role_ids',[]);
+            $rids = explode(',', $rids);
             if (is_array($rids)) {
                 $rdata = [];
                 foreach ($rids as $k) {
-                    $rdata[] = ['role_id'=>$k,'user_id'=>$admin->id];
+                    $rdata[] = ['role_id' => $k, 'user_id' => $admin->id];
                 }
+                RoleUser::insert($rdata);
             }
-            RoleUser::insert($rdata);
+            DB::commit();
             return $this->resData(200,'创建用户成功...');
         } catch (\Throwable $e) {
-            return $this->resData(500,'创建用户失败，请稍后再试...');
+            DB::rollback();
+            return $this->resData(500,'创建用户失败，请稍后再试...',$e->getMessage());
         }
     }
     // 修改资料
@@ -132,10 +143,11 @@ class AdminController extends ResponseController
             $id = $req->input('admin_id');
             $data = ['section_id'=>$req->input('section_id'),'realname'=>$req->input('realname'),'phone'=>$req->input('phone'),'email'=>$req->input('email')];
             Admin::where('id',$id)->update($data);
-            $rids = $req->input('role_ids');
+            $rids = $req->input('role_ids','');
             // 先删除再添加
             RoleUser::where('user_id',$id)->delete();
-            if (is_array($rids)) {
+            $rids = explode(',', $rids);
+            if(is_array($rids)){
                 $rdata = [];
                 foreach ($rids as $k) {
                     $rdata[] = ['role_id'=>$k,'user_id'=>$id];
@@ -197,7 +209,7 @@ class AdminController extends ResponseController
                 return $this->resData(400,$validator->errors()->all()[0].'...');
             }
             $id = $req->input('admin_id');
-            $crypt = str_random(10);
+            $crypt = Func::str_random(10);
             $pwd = Func::makepwd($req->input('password'),$crypt);
             $data = ['password'=>$pwd,'crypt'=>$crypt];
             Admin::where('id',$id)->update($data);
@@ -226,13 +238,13 @@ class AdminController extends ResponseController
                 return $this->resData(400,$validator->errors()->all()[0].'...');
             }
             $id = $req->input('admin_id');
-            $crypt = str_random(10);
+            $crypt = Func::str_random(10);
             $pwd = Func::makepwd($req->input('password'),$crypt);
             $data = ['password'=>$pwd,'crypt'=>$crypt];
             Admin::where('id',$id)->update($data);
             return $this->resData(200,'更新用户密码成功...');
         } catch (\Throwable $e) {
-            return $this->resData(500,'更新用户密码失败，请稍后再试...');
+            return $this->resData(500, '更新用户密码失败，请稍后再试...');
         }
     }
     // 修改状态

@@ -236,6 +236,7 @@ export default {
       this.$api.type.sort({ type_id: id, sort: sort }).then(res => {
         if (res.code == 200) {
           this.$Message.success(res.message);
+          this.getTableList();
         }
       });
     }

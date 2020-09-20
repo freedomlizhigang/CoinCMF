@@ -38,16 +38,26 @@ class Func
         return md5(md5($pwd.'.'.$crypt));
     }
     /**
-    * 产生随机字符串
-    *
-    * @param    int        $length  输出长度
-    * @param    string     $chars   可选的 ，默认为 0123456789
-    * @return   string     字符串
-    */
-    public static function random($length, $chars = '0123456789') {
+     * 产生随机字符串
+     *
+     * @param    int        $length  输出长度
+     * @param    string     $chars   可选的 ，默认为 0123456789
+     * @return   string     字符串
+     */
+    public static function num_random($length, $chars = '0123456789')
+    {
         $hash = '';
         $max = strlen($chars) - 1;
-        for($i = 0; $i < $length; $i++) {
+        for ($i = 0; $i < $length; $i++) {
+            $hash .= $chars[mt_rand(0, $max)];
+        }
+        return $hash;
+    }
+    public static function str_random($length, $chars = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789')
+    {
+        $hash = '';
+        $max = strlen($chars) - 1;
+        for ($i = 0; $i < $length; $i++) {
             $hash .= $chars[mt_rand(0, $max)];
         }
         return $hash;

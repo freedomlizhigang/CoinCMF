@@ -5,7 +5,7 @@
  * @Date: 2019-01-03 20:14:16
  * @Description: 角色管理
  * @LastEditors: 李志刚
- * @LastEditTime: 2020-09-20 20:04:17
+ * @LastEditTime: 2020-09-20 21:12:36
  * @FilePath: /CoinCMF/app/Http/Controllers/Console/Rbac/RoleController.php
  */
 
@@ -31,12 +31,19 @@ class RoleController extends ResponseController
         try {
             // 搜索关键字
             $key = $req->input('key','');
+            $page = $req->input('page', 1);
+            $size = $req->input('size', 10);
             $list = Role::where(function($q) use($key){
                     if ($key != '') {
                         $q->where('name','like','%'.$key.'%');
                     }
-                })->orderBy('id','asc')->get();
-            return $this->resData(200,'获取角色数据成功...',$list);
+                })->limit($size)->offset(($page - 1) * $size)->orderBy('id','asc')->get();
+            $count = Role::where(function ($q) use ($key) {
+                if ($key != '') {
+                    $q->where('name', 'like', '%' . $key . '%');
+                }
+            })->count();
+            return $this->resData(200,'获取角色数据成功...', ['list' => $list, 'count' => $count]);
         } catch (\Throwable $e) {
             return $this->resData(500,'获取数据失败，请稍后再试！',[]);
         }
@@ -227,14 +234,15 @@ class RoleController extends ResponseController
             $rid = $req->input('role_id');
             Priv::where('role_id',$rid)->delete();
             // 所有选中的菜单url，以此查找出所有url label
-            $ids = $req->input('menu_id',[]);
+            $ids = $req->input('menu_id','');
+            $ids = explode(',',$ids);
             $all = Menu::whereIn('id',$ids)->get();
             // 将查出来的数据组成数组插入到role_privs表里
             if (!is_null($all) && count($all) > 0) {
                 foreach ($all as $v) {
-                    $insertArr = array('menu_id'=>$v->id,'role_id'=>$rid,'url'=>$v->url,'label'=>$v->label);
-                    Priv::create($insertArr);
+                    $insertArr[] = ['role_id' => $rid, 'menu_id' => $v->id, 'name' => $v->name, 'url' => $v->url, 'label' => $v->label, 'created_at' => date('Y-m-d H:i:s'), 'updated_at' => date('Y-m-d H:i:s')];
                 }
+                Priv::insert($insertArr);
             }
             DB::commit();
             return $this->resData(200,'更新权限菜单成功...');

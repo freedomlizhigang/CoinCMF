@@ -81,23 +81,23 @@ export default {
     this.getMenuData();
     // 初始化面包屑及标题+按钮组
     var params = { 'label': this.$route.name };
-    // this.$api.common.breadcrumb(params).then(res => {
-    //   this.breadCrumbList = res.result.breadcrumb;
-    //   this.title = res.result.title;
-    //   this.btns = res.result.btns;
-    // });
+    this.$api.common.breadcrumb(params).then(res => {
+      this.breadCrumbList = res.result.breadcrumb;
+      this.title = res.result.title;
+      this.btns = res.result.btns;
+    });
     // 路由结束后更新面包屑及标题+按钮组
-    // console_router.afterEach((to, from) => {
-    //   var params = { 'label': to.name };
-    //   // 这里是个大坑，不判断登录页面会在退出时让登录页面进入死循环，全局的钩子还是要少加为好
-    //   if (to.name !== 'login') {
-    //     this.$api.common.breadcrumb(params).then(res => {
-    //       this.breadCrumbList = res.result.breadcrumb;
-    //       this.title = res.result.title;
-    //       this.btns = res.result.btns;
-    //     });
-    //   }
-    // })
+    console_router.afterEach((to, from) => {
+      var params = { 'label': to.name };
+      // 这里是个大坑，不判断登录页面会在退出时让登录页面进入死循环，全局的钩子还是要少加为好
+      if (to.name !== 'login') {
+        this.$api.common.breadcrumb(params).then(res => {
+          this.breadCrumbList = res.result.breadcrumb;
+          this.title = res.result.title;
+          this.btns = res.result.btns;
+        });
+      }
+    })
   },
   methods: {
     handleDropDownClick: function(name) {

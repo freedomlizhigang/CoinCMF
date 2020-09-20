@@ -11,8 +11,8 @@
 namespace App\Http\Middleware;
 
 use App\Customize\Sign;
-use App\Models\Console\Log;
-use App\Models\Console\Menu;
+use App\Models\Rbac\Log;
+use App\Models\Rbac\Menu;
 use Closure;
 use Illuminate\Support\Facades\Redis as Redis;
 

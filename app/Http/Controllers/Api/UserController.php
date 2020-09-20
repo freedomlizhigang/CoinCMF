@@ -29,7 +29,7 @@ class UserController extends Controller
             $validator = Validator::make($req->input(), [
                 'code' => 'required|max:255',
             ]);
-             $attrs = array(
+            $attrs = array(
                 'code' => '微信授权code参数',
             );
             $validator->setAttributeNames($attrs);
@@ -102,7 +102,7 @@ class UserController extends Controller
 	        'password' => 'required|between:6,20',
 	        'email' => 'required|email',
 	    ]);
-	     $attrs = array(
+	    $attrs = array(
             'username' => '用户名',
             'password' => '密码',
             'email' => '邮箱',

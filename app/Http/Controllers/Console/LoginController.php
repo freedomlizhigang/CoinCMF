@@ -5,7 +5,7 @@
  * @Date: 2019-01-03 20:14:16
  * @Description: 管理员登录
  * @LastEditors: 李志刚
- * @LastEditTime: 2020-09-20 19:52:27
+ * @LastEditTime: 2020-09-20 21:13:15
  * @FilePath: /CoinCMF/app/Http/Controllers/Console/LoginController.php
  */
 
@@ -14,7 +14,7 @@ namespace App\Http\Controllers\Console;
 use Validator;
 use App\Customize\Func;
 use App\Customize\Sign;
-use App\Models\Console\Priv;
+use App\Models\Rbac\Priv;
 use Illuminate\Http\Request;
 use App\Models\Rbac\Admin;
 use App\Models\Rbac\RoleUser;
@@ -65,7 +65,7 @@ class LoginController extends ResponseController {
 				return $this->resData(200, '登录成功！', $res);
 			}
 		} catch (\Throwable $e) {
-			return $this->resData(500, '获取失败，请稍后再试...' . $e->getLine() . $e->getMessage());
+			return $this->resData(500, '获取失败，请稍后再试...');
 		}
 	}
 }

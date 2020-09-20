@@ -5,7 +5,7 @@
  * @Date: 2019-01-03 20:14:16
  * @Description: 统一返回
  * @LastEditors: 李志刚
- * @LastEditTime: 2020-09-20 19:49:17
+ * @LastEditTime: 2020-09-20 20:50:02
  * @FilePath: /CoinCMF/app/Http/Controllers/Console/ResponseController.php
  */
 
@@ -18,6 +18,6 @@ class ResponseController extends Controller
     // 正常的接口返回
     public function resData($code = 200,$msg = '',$data = [])
     {
-        return ['code'=>$code,'msg'=>$msg,'result'=>$data];
+        return ['code'=>$code,'message'=>$msg,'result'=>$data];
     }
 }

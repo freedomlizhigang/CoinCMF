@@ -5,7 +5,7 @@
  * @Date: 2019-01-03 20:14:16
  * @Description: 系统配置修改
  * @LastEditors: 李志刚
- * @LastEditTime: 2020-09-20 20:06:13
+ * @LastEditTime: 2020-09-20 20:37:41
  * @FilePath: /CoinCMF/app/Http/Controllers/Console/Common/ConfigController.php
  */
 
@@ -13,7 +13,7 @@ namespace App\Http\Controllers\Console\Common;
 
 use Validator;
 use Illuminate\Http\Request;
-use App\Models\Console\Config;
+use App\Models\Common\Config;
 use App\Http\Controllers\Console\ResponseController;
 
 class ConfigController extends ResponseController

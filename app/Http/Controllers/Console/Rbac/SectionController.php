@@ -5,7 +5,7 @@
  * @Date: 2019-01-03 20:14:16
  * @Description: 部门管理
  * @LastEditors: 李志刚
- * @LastEditTime: 2020-09-20 20:05:05
+ * @LastEditTime: 2020-09-20 21:01:07
  * @FilePath: /CoinCMF/app/Http/Controllers/Console/Rbac/SectionController.php
  */
 
@@ -28,12 +28,19 @@ class SectionController extends ResponseController
         try {
             // 搜索关键字
             $key = $req->input('key','');
+            $page = $req->input('page', 1);
+            $size = $req->input('size', 10);
             $list = Section::where(function($q) use($key){
                     if ($key != '') {
                         $q->where('name','like','%'.$key.'%');
                     }
-                })->orderBy('id','asc')->get();
-            return $this->resData(200,'获取部门数据成功...',$list);
+                })->limit($size)->offset(($page - 1) * $size)->orderBy('id','asc')->get();
+            $count = Section::where(function ($q) use ($key) {
+                if ($key != '') {
+                    $q->where('name', 'like', '%' . $key . '%');
+                }
+            })->count();
+            return $this->resData(200,'获取部门数据成功...', ['list' => $list, 'count' => $count]);
         } catch (\Throwable $e) {
             return $this->resData(500,'获取数据失败，请稍后再试！',[]);
         }

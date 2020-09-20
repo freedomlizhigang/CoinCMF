@@ -335,11 +335,11 @@ export default {
             if (res.code == 200) {
               this.adminInfo.name = '';
               this.adminInfo.section_id = 0;
+              this.showCreateStatus = !this.showCreateStatus;
               this.getTableList();
             }
             this.loading = false;
             this.$nextTick(() => { this.loading = true; });
-            this.showCreateStatus = !this.showCreateStatus;
           }).finally(res => {
             this.loading = false;
             this.$nextTick(() => { this.loading = true; });
@@ -378,6 +378,7 @@ export default {
           this.$api.admin.editinfo({ admin_id: this.admin_id, section_id: this.adminInfo.section_id, role_ids: this.role_ids, realname: this.adminInfo.realname, phone: this.adminInfo.phone, email: this.adminInfo.email }).then(res => {
             if (res.code == 200) {
               this.$Message.success(res.message);
+              this.getTableList();
             }
             this.loading = false;
             this.showEditInfoStatus = !this.showEditInfoStatus;
