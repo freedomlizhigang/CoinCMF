@@ -14,7 +14,7 @@ use App\Customize\Sign;
 use App\Models\Console\Log;
 use App\Models\Console\Menu;
 use Closure;
-use Redis;
+use Illuminate\Support\Facades\Redis as Redis;
 
 class ConsoleJwt {
 	/**
@@ -27,10 +27,12 @@ class ConsoleJwt {
 	public function handle($request, Closure $next) {
 		try {
 			// 先验证签名
-			$res = Sign::checkSign($request->all());
+			$res = Sign::aes_decrypt($request->all());
 			if ($res['code'] != 200) {
 				return response()->json(['code' => 403, 'msg' => $res['msg'] . '...', 'data' => []]);
 			}
+			// 合并解析到的参数进请求中
+			$request->merge($res['data']);
 			// 验证 token
 			$token = $request->header('Authorization');
 			if (is_null($token) || $token == '') {
@@ -55,17 +57,19 @@ class ConsoleJwt {
 			// 在这里进行一部分权限判断，主要是判断打开的页面是否有权限，所有角色ID，所有角色权限累加
 			if (in_array(1, $user->allRole) || in_array($priv, (array) $user->allPriv)) {
 				// 日志记录，只记录post或者del操作(通过比较url来得出结果)
+				$request->admin_id = $user->id;
+				$response = $next($request);
+				// 此处记录请求及响应
 				if (!$request->isMethod('get')) {
 					$action_name = Menu::where('label', $priv)->value('name');
 					Log::create(['admin_id' => $user->id, 'method' => $request->method(), 'url' => $request->fullUrl(), 'action_name' => $action_name, 'user' => $user->name, 'data' => json_encode($request->all()), 'created_at' => date('Y-m-d H:i:s')]);
 				}
-				$request->admin_id = $user->id;
-				return $next($request);
+				return $response;
 			} else {
 				return response()->json(['code' => 402, 'msg' => '无权调用此接口数据...', 'data' => []]);
 			}
 		} catch (\Throwable $e) {
-			return response()->json(['code' => 401, 'msg' => '验证权限失败...', 'data' => []]);
+			return response()->json(['code' => 401, 'msg' => '验证权限失败...', 'data' => '']);
 		}
 	}
 }

@@ -1,0 +1,174 @@
+{
+    "30": {
+        "id": 75,
+        "parentid": 0,
+        "name": "内容",
+        "url": "content/index",
+        "icon": "",
+        "label": "content-index",
+        "submenu": {
+            "3": {
+                "id": 22,
+                "parentid": 75,
+                "name": "内容管理",
+                "url": "content/manage",
+                "icon": "ios-bookmarks-outline",
+                "label": "content-manage",
+                "there": {
+                    "4": {
+                        "id": 23,
+                        "parentid": 22,
+                        "name": "栏目管理",
+                        "url": "cate/list",
+                        "icon": null,
+                        "label": "cate-list"
+                    },
+                    "6": {
+                        "id": 30,
+                        "parentid": 22,
+                        "name": "文章管理",
+                        "url": "article/list",
+                        "icon": null,
+                        "label": "article-list"
+                    },
+                    "12": {
+                        "id": 242,
+                        "parentid": 22,
+                        "name": "广告管理",
+                        "url": "ad/list",
+                        "icon": "",
+                        "label": "ad-list"
+                    },
+                    "13": {
+                        "id": 300,
+                        "parentid": 22,
+                        "name": "广告位管理",
+                        "url": "adpos/list",
+                        "icon": "",
+                        "label": "adpos-list"
+                    },
+                    "27": {
+                        "id": 28,
+                        "parentid": 22,
+                        "name": "友情链接管理",
+                        "url": "link/list",
+                        "icon": "",
+                        "label": "link-list"
+                    }
+                }
+            }
+        }
+    },
+    "31": {
+        "id": 5,
+        "parentid": 0,
+        "name": "系统",
+        "url": "sys/index",
+        "icon": null,
+        "label": "sys-index",
+        "submenu": {
+            "15": {
+                "id": 367,
+                "parentid": 5,
+                "name": "系统设置",
+                "url": "system/index",
+                "icon": "ios-cog-outline",
+                "label": "system-index",
+                "there": {
+                    "11": {
+                        "id": 205,
+                        "parentid": 367,
+                        "name": "系统配置",
+                        "url": "config/index",
+                        "icon": "icon-brightnesshigh",
+                        "label": "config-index"
+                    },
+                    "25": {
+                        "id": 151,
+                        "parentid": 367,
+                        "name": "分类管理",
+                        "url": "type/list",
+                        "icon": null,
+                        "label": "type-list"
+                    }
+                }
+            },
+            "29": {
+                "id": 10,
+                "parentid": 5,
+                "name": "管理员管理",
+                "url": "admin/manage",
+                "icon": "ios-people-outline",
+                "label": "admin-manage",
+                "there": {
+                    "0": {
+                        "id": 11,
+                        "parentid": 10,
+                        "name": "用户管理",
+                        "url": "admin/list",
+                        "icon": null,
+                        "label": "admin-list"
+                    },
+                    "1": {
+                        "id": 16,
+                        "parentid": 10,
+                        "name": "角色管理",
+                        "url": "role/list",
+                        "icon": null,
+                        "label": "role-list"
+                    },
+                    "10": {
+                        "id": 170,
+                        "parentid": 10,
+                        "name": "部门管理",
+                        "url": "section/list",
+                        "icon": null,
+                        "label": "section-list"
+                    },
+                    "24": {
+                        "id": 6,
+                        "parentid": 10,
+                        "name": "权限菜单管理",
+                        "url": "menu/tree",
+                        "icon": null,
+                        "label": "menu-tree"
+                    },
+                    "26": {
+                        "id": 67,
+                        "parentid": 10,
+                        "name": "操作日志",
+                        "url": "log/list",
+                        "icon": null,
+                        "label": "log-list"
+                    }
+                }
+            },
+            "32": {
+                "id": 143,
+                "parentid": 5,
+                "name": "资料",
+                "url": "admin/info",
+                "icon": "ios-outlet-outline",
+                "label": "admin-info",
+                "there": {
+                    "8": {
+                        "id": 144,
+                        "parentid": 143,
+                        "name": "修改个人资料",
+                        "url": "admin/selfeditinfo",
+                        "icon": null,
+                        "label": "admin-selfeditinfo"
+                    },
+                    "9": {
+                        "id": 145,
+                        "parentid": 143,
+                        "name": "修改个人密码",
+                        "url": "admin/selfeditpassword",
+                        "icon": null,
+                        "label": "admin-selfeditpassword"
+                    }
+                }
+            }
+        }
+    }
+}

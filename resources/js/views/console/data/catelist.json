@@ -1,0 +1,50 @@
+[
+    {
+        "id": 2,
+        "parentid": 0,
+        "arrparentid": "0",
+        "name": "21322",
+        "sort": 2,
+        "type": true,
+        "link_flag": false,
+        "childs": [{
+            "id": 3,
+            "parentid": 2,
+            "arrparentid": "0,2",
+            "name": "3333333",
+            "sort": 0,
+            "type": true,
+            "link_flag": false,
+            "childs": [
+
+            ]
+        }],
+        "left": 0
+    },
+    {
+        "id": 3,
+        "parentid": 2,
+        "arrparentid": "0,2",
+        "name": "|—3333333",
+        "sort": 0,
+        "type": true,
+        "link_flag": false,
+        "childs": [
+
+        ],
+        "left": 20
+    },
+    {
+        "id": 1,
+        "parentid": 0,
+        "arrparentid": "0",
+        "name": "111",
+        "sort": 4,
+        "type": false,
+        "link_flag": false,
+        "childs": [
+
+        ],
+        "left": 0
+    }
+]

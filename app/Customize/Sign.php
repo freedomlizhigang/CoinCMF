@@ -5,16 +5,20 @@
  * @Date: 2020-02-29 21:40:40
  * @Description: 签名验证
  * @LastEditors: 李志刚
- * @LastEditTime: 2020-03-12 18:04:45
- * @FilePath: /ledger/app/Customize/Sign.php
+ * @LastEditTime: 2020-09-20 12:03:20
+ * @FilePath: /CoinCMF/app/Customize/Sign.php
  */
 
-declare (strict_types = 1);
+declare(strict_types=1);
 
 namespace App\Customize;
 
-class Sign {
-	public static function create($request) {
+use App\Customize\MyCrypt;
+
+class Sign
+{
+	public static function create($request)
+	{
 		try {
 			$appkey = config('sign.app_key');
 			$appsecrect = config('sign.app_secrect');
@@ -46,14 +50,17 @@ class Sign {
 		}
 	}
 	// 验证api签名
-	public static function checkSign($all) {
+	public static function checkSign($all)
+	{
 		try {
 			$sign = $all['sign'];
 			// 检查请求时间
 			if (time() - $all['timestamp'] >= 30) {
 				return ['code' => 404, 'msg' => '请求超时'];
 			}
+			$rsa = MyCrypt::privDecrypt($all['rsa']);
 			unset($all['sign']);
+			unset($all['rsa']);
 			// 参数排序
 			ksort($all);
 			// var_dump($all);
@@ -80,6 +87,26 @@ class Sign {
 			} else {
 				return ['code' => 404, 'msg' => '签名失败'];
 			}
+		} catch (\Throwable $th) {
+			return ['code' => 404, 'msg' => '验证签名失败'];
+		}
+	}
+	// 解密
+	public static function aes_decrypt($all)
+	{
+		try {
+			$data = MyCrypt::ssl_api_decrypt($all['sign']);
+			// 参数转数组
+			parse_str($data, $req);
+			// 检查请求时间
+			if (time() - $req['timestamp'] >= 30) {
+				return ['code' => 404, 'msg' => '请求超时'];
+			}
+			// 存在token且可以验证过
+			if ($req['token'] != MyCrypt::privApiDecrypt($all['rsa'])) {
+				return ['code' => 403, 'msg' => '加密验证失败'];
+			}
+			return ['code' => 200, 'data' => $req];
 		} catch (\Throwable $th) {
 			return ['code' => 404, 'msg' => '验证签名失败'];
 		}

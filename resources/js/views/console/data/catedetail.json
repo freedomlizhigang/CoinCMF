@@ -1,0 +1,22 @@
+{
+    "id":2,
+    "parentid":0,
+    "arrparentid":"0",
+    "child":1,
+    "arrchildid":"2,3",
+    "name":"21322",
+    "thumb":"http://www.hyperf.com/upload/20200229/20200229092233403.jpg",
+    "title":"333",
+    "keyword":"32121",
+    "describe":"",
+    "content":"qqqqqqqqqq",
+    "link_flag":false,
+    "url":"299a9817-f0fc-0ca3-6352-05982d36587e",
+    "cate_tpl":"list",
+    "art_tpl":"show",
+    "display":true,
+    "type":true,
+    "sort":2,
+    "created_at":"2020-02-26 21:19:56",
+    "updated_at":"2020-02-29 21:22:35"
+}

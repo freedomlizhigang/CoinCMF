@@ -10,18 +10,26 @@
  */
 namespace App\Http\Controllers\Admin;
 
-use App\Customize\Func;
-use App\Models\Console\Admin;
-use App\Models\Console\Priv;
-use App\Models\Console\RoleUser;
-use Illuminate\Http\Request;
-use Redis;
 use Validator;
+use App\Customize\Func;
+use App\Customize\Sign;
+use App\Models\Console\Priv;
+use Illuminate\Http\Request;
+use App\Models\Console\Admin;
+use App\Models\Console\RoleUser;
+use Illuminate\Support\Facades\Redis;
 
 class LoginController extends ResponseController {
 	// 登录
 	public function postLogin(Request $req) {
 		try {
+			// 先验证签名
+			$res = Sign::aes_decrypt($req->all());
+			if ($res['code'] != 200) {
+				return $this->resData(['code' => 403, 'msg' => $res['msg'] . '...', 'data' => []]);
+			}
+			// 合并解析到的参数进请求中
+			$req->merge($res['data']);
 			$validator = Validator::make($req->input(), [
 				'name' => 'required|min:2|max:15',
 				'password' => 'required|min:6|max:15',

@@ -13,7 +13,7 @@ namespace App\Http\Controllers\Admin;
 use App\Models\Console\Menu;
 use DB;
 use Illuminate\Http\Request;
-use Redis;
+use Illuminate\Support\Facades\Redis;
 use Validator;
 
 class MenuController extends ResponseController {

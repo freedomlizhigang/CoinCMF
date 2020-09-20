@@ -15,7 +15,7 @@ use App\Models\User\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Validator;
-use Redis;
+use Illuminate\Support\Facades\Redis;
 
 class UserController extends Controller
 {

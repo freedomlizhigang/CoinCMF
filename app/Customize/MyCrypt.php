@@ -5,7 +5,7 @@
  * @Date: 2019-01-03 20:14:16
  * @Description: AES/RSA 加解密
  * @LastEditors: 李志刚
- * @LastEditTime: 2020-09-19 21:48:03
+ * @LastEditTime: 2020-09-20 12:05:17
  * @FilePath: /CoinCMF/app/Customize/MyCrypt.php
  */
 
@@ -23,7 +23,16 @@ class MyCrypt
     {
         $iv = config('rsa.aes_iv');
         $key = config('rsa.aes_key');
-        return openssl_decrypt(base64_decode($data), "AES-128-CBC", $key, true, $iv);
+        $res = openssl_decrypt(base64_decode($data), "AES-128-CBC", $key, true, $iv);
+        return $res;
+    }
+    public static function ssl_api_decrypt($data)
+    {
+        $iv = config('rsa.aes_iv');
+        $key = config('rsa.aes_key');
+        $str = hex2bin($data);
+        $res = openssl_decrypt($str, "AES-128-CBC", $key, true, $iv);
+        return $res;
     }
     /**
      * 加密字符串
@@ -89,6 +98,17 @@ class MyCrypt
         $privateKey = config('rsa.rsa_private_key');
         $privateKey = openssl_pkey_get_private($privateKey);
         $res = openssl_private_decrypt(base64_decode($encrypted), $decrypted, $privateKey);
+        return $res ? $decrypted : null;
+    }
+    public static function privApiDecrypt($encrypted)
+    {
+        if (!is_string($encrypted)) {
+            return null;
+        }
+        $privateKey = config('rsa.rsa_private_key');
+        $privateKey = openssl_pkey_get_private($privateKey);
+        $str = hex2bin($encrypted);
+        $res = openssl_private_decrypt(base64_decode($str), $decrypted, $privateKey);
         return $res ? $decrypted : null;
     }
 }
