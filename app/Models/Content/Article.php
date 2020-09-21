@@ -5,7 +5,7 @@
  * @Date: 2019-01-03 20:14:16
  * @Description: 文章表
  * @LastEditors: 李志刚
- * @LastEditTime: 2020-09-20 19:54:17
+ * @LastEditTime: 2020-09-21 11:29:10
  * @FilePath: /CoinCMF/app/Models/Content/Article.php
  */
 
@@ -39,7 +39,20 @@ class Article extends Model
      * @var bool
      */
     public $timestamps = true;
-
+    /**
+     * The attributes that should be cast to native types.
+     *
+     * @var array
+     */
+    protected $casts = [
+        'id' => 'integer',
+        'cate_id' => 'integer',
+        'push_flag' => 'boolean',
+        'link_flag' => 'boolean',
+        'sort' => 'integer',
+        'hits' => 'integer',
+        'del_flag' => 'integer'
+    ];
     // 关联categorys
     public function cate()
     {

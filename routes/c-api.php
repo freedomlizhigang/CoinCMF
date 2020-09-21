@@ -12,12 +12,17 @@
 */
 
 // 管理中心API
-Route::group(['prefix'=>'c-api','namespace' => 'Console'],function(){
+Route::group(['prefix'=>'c-api','namespace' =>'Console', 'middleware' => ['c-log']],function(){
     // 登录
     Route::post('login', 'LoginController@postLogin');
 });
+// 文件上传
+Route::group(['prefix' => 'common', 'namespace' => 'Common'], function () {
+    Route::post('/upload/file', 'FileController@postFile');
+    Route::post('/upload/base64', 'FileController@postBase64');
+});
 // 管理中心API
-Route::group(['prefix'=>'c-api','namespace' => 'Console','middleware'=>['c-api']],function(){
+Route::group(['prefix'=>'c-api','namespace' => 'Console','middleware'=>['c-api', 'c-log']],function(){
     // 友情链接管理
     Route::group(['prefix' => 'link','namespace' => 'Content'], function (){
         Route::get('/list', 'LinkController@getList');

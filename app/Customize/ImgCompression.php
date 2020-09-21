@@ -5,16 +5,14 @@
  * @Date: 2020-02-19 21:55:28
  * @Description: 图片压缩
  * @LastEditors: 李志刚
- * @LastEditTime: 2020-02-19 22:06:39
- * @FilePath: /hyperf/app/Customize/ImgCompression.php
+ * @LastEditTime: 2020-09-21 11:09:10
+ * @FilePath: /CoinCMF/app/Customize/ImgCompression.php
  */
-
-declare(strict_types=1);
 
 namespace App\Customize;
 
- class ImgCompression
- {
+class ImgCompression
+{
     // 压缩一下
     public static function compression($file, $new_width = 1024, $new_height = 0)
     {
@@ -127,4 +125,4 @@ namespace App\Customize;
             $files[] =  $path;
         }
     }
- }
+}

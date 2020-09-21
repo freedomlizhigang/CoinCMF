@@ -67,7 +67,6 @@
 <script>
 import UploadThumb from '../../.././components/thumb'
 import TinymceEditor from '../../.././components/tinymce'
-import cateselect from ".././data/cateselect.json";
 export default {
     name: 'CateAdd',
     data() {
@@ -143,8 +142,6 @@ export default {
                 if (!valid) {
                     this.$Message.error('请检查输入的信息是否正确！');
                 } else {
-                    this.$router.push('/cate/list');
-                    return;
                     // 图片
                     if (this.$refs['uploadthumb'].uploadList.length) {
                         this.formItem.thumb = this.$refs['uploadthumb'].uploadList[0].url;
@@ -167,12 +164,11 @@ export default {
         },
         getData1: function() {
             var self = this;
-            self.cateSelect = cateselect
-            // this.$api.cate.select().then(res => {
-            //     if (res.code == 200) {
-            //         self.cateSelect = res.result;
-            //     }
-            // });
+            this.$api.cate.select().then(res => {
+                if (res.code == 200) {
+                    self.cateSelect = res.result;
+                }
+            });
             return;
         },
     }

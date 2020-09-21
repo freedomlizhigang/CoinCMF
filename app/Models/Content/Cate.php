@@ -5,7 +5,7 @@
  * @Date: 2018-06-26 10:19:48
  * @Description: 栏目表
  * @LastEditors: 李志刚
- * @LastEditTime: 2020-09-20 19:54:51
+ * @LastEditTime: 2020-09-21 10:07:11
  * @FilePath: /CoinCMF/app/Models/Content/Cate.php
  */
 
@@ -44,5 +44,19 @@ class Cate extends Model
     {
         return $this->hasMany('\App\Models\Content\Article','cate_id','id');
     }
+    /**
+     * 这个属性应该被转换为原生类型.
+     *
+     * @var array
+     */
+    protected $casts = [
+        'id' => 'integer',
+        'parentid' => 'integer',
+        'child' => 'integer',
+        'link_flag' => 'boolean',
+        'display' => 'boolean',
+        'type' => 'boolean',
+        'sort' => 'integer'
+    ];
 
 }

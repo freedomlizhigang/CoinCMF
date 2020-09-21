@@ -153,6 +153,7 @@ export default {
             if (res.code == 200) {
               this.$Message.success(res.message);
               this.tablelist.splice(index, 1);
+              this.getTableList();
             }
           });
         }
@@ -160,6 +161,7 @@ export default {
     },
     sort: function(index) {
       console.log('sort:' + index)
+      this.getTableList();
     },
     // 选择文章id
     changeData: function(index) {

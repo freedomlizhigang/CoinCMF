@@ -1,13 +1,14 @@
 <?php
 /*
- * @package [App\Http\Controllers\Common]
- * @author [李志刚]
- * @createdate  [2018-06-26]
- * @copyright [2018-2020 衡水希夷信息技术工作室]
- * @version [1.0.0]
- * @directions 文件上传公用功能
- *
+ * @Author: 李志刚
+ * @CopyRight: 2020-2030 衡水山木枝技术服务有限公司
+ * @Date: 2018-06-26 09:27:34
+ * @Description: 旧版的文件上传功能
+ * @LastEditors: 李志刚
+ * @LastEditTime: 2020-09-21 11:23:19
+ * @FilePath: /CoinCMF/app/Http/Controllers/Common/UploaderController.php
  */
+
 namespace App\Http\Controllers\Common;
 
 use App\Customize\Ueditor;

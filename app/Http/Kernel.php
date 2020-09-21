@@ -63,6 +63,7 @@ class Kernel extends HttpKernel {
 
 		// 后台认证
 		'c-api' => \App\Http\Middleware\ConsoleJwt::class,
+		'c-log' => \App\Http\Middleware\ConsoleLog::class,
 		// 网站用户认证
 		'member' => \App\Http\Middleware\Member::class,
 		// APP用户认证

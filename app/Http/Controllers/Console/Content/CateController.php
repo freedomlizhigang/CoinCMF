@@ -5,15 +5,15 @@
  * @Date: 2019-01-03 20:14:16
  * @Description: 栏目管理
  * @LastEditors: 李志刚
- * @LastEditTime: 2020-09-20 20:11:19
+ * @LastEditTime: 2020-09-21 10:23:31
  * @FilePath: /CoinCMF/app/Http/Controllers/Console/Content/CateController.php
  */
 
 namespace App\Http\Controllers\Console\Content;
 
-use App\Http\Controllers\Admin\ResponseController;
-use App\Models\Common\Article;
-use App\Models\Common\Cate;
+use App\Http\Controllers\Console\ResponseController;
+use App\Models\Content\Article;
+use App\Models\Content\Cate;
 use DB;
 use Illuminate\Http\Request;
 use Validator;
@@ -100,7 +100,7 @@ class CateController extends ResponseController
     }
     //添加栏目
     public function postCreate(Request $request){
-       try{
+        try{
             $validator = Validator::make($request->input(), [
                 'name'          => 'required|max:255',
                 'keyword'       => 'max:255',
@@ -116,10 +116,9 @@ class CateController extends ResponseController
                 // 如果有错误，提示第一条
                 return $this->resData(400,$validator->errors()->all()[0].'...');
             }
-            $data['name']       = $request->input('name');
-            $data['keyword']    = $request->input('keyword');
-            $data['sort']       = $request->input('sort');
-            $data['parentid']   = $request->input('parentid',0);
+            $all = $request->all();
+            $data = ['name' => $all['name'], 'parentid' => $all['parentid'], 'thumb' => $all['thumb'], 'title' => $all['title'], 'keyword' => $all['keyword'], 'describe' => $all['describe'], 'content' => $all['content'], 'link_flag' => $all['link_flag'] == 'true' ? 1 : 0, 'cate_tpl' => $all['cate_tpl'], 'art_tpl' => $all['art_tpl'], 'display' => $all['display'] == 'true' ? 1 : 0, 'type' => $all['type'] == 'true' ? 1 : 0, 'sort' => $all['sort']];
+            if ($all['link_flag'] == 'true') $data['url'] = $all['url'];
             Cate::create($data);
             app('com')->updateCache(new Cate(),'cateCache',1);
             return $this->resData(200,'添加成功...');
@@ -131,18 +130,18 @@ class CateController extends ResponseController
     public function getDetail(Request $request){
         try{
             $validator = Validator::make($request->input(),[
-                'cate_id'       => 'required|integer',
+                'category_id'       => 'required|integer',
             ]);
             $attrs = array(
-                'cate_id'       => '栏目ID',
+                'category_id'       => '栏目ID',
             );
             $validator->setAttributeNames($attrs);
             if ($validator->fails()) {
                 // 如果有错误，提示第一条
                 return $this->resData(400,$validator->errors()->all()[0].'...');
             }
-            $id = $request->input('cate_id');
-            $info = Cate::find($id,['id','name','keyword','sort','parentid']);
+            $id = $request->input('category_id');
+            $info = Cate::find($id);
             return $this->resData(200,'获取信息成功...',$info);
         }catch (\Throwable $e){
             return $this->resData(500,'获取信息失败，请重新操作...');
@@ -152,13 +151,13 @@ class CateController extends ResponseController
     public function postEdit(Request $request){
         try{
             $validator = Validator::make($request->input(), [
-                'cate_id'       => 'required|integer',
+                'category_id'       => 'required|integer',
                 'name'          => 'required|max:255',
                 'keyword'       => 'max:255',
                 'sort'          => 'required|integer',
             ]);
             $attrs = array(
-                'cate_id'       => '栏目ID',
+                'category_id'       => '栏目ID',
                 'name'          => '名称',
                 'keyword'       => '关键字',
                 'sort'          => '排序',
@@ -168,12 +167,11 @@ class CateController extends ResponseController
                 // 如果有错误，提示第一条
                 return $this->resData(400,$validator->errors()->all()[0].'...');
             }
-            $data['name']       = $request->input('name');
-            $data['keyword']    = $request->input('keyword');
-            $data['sort']       = $request->input('sort');
-            $data['parentid']   = $request->input('parentid',0);
-            $id                 = $request->input('cate_id');
-            Cate::where('id',$id)->update($data);
+            $id                 = $request->input('category_id');
+            $all = $request->all();
+            $update = ['name' => $all['name'], 'parentid' => $all['parentid'], 'thumb' => $all['thumb'], 'title' => $all['title'], 'keyword' => $all['keyword'], 'describe' => $all['describe'], 'content' => $all['content'], 'link_flag' => $all['link_flag'] == 'true' ? 1 : 0, 'cate_tpl' => $all['cate_tpl'], 'art_tpl' => $all['art_tpl'], 'display' => $all['display'] == 'true' ? 1 : 0, 'type' => $all['type'] == 'true' ? 1 : 0, 'sort' => $all['sort']];
+            if ($all['link_flag'] == 'true') $update['url'] = $all['url'];
+            Cate::where('id',$id)->update($update);
             app('com')->updateCache(new Cate(),'cateCache',1);
             return $this->resData(200,'编辑成功...');
         }catch (\Throwable $e){
@@ -231,7 +229,7 @@ class CateController extends ResponseController
                 'cate_id' => 'required|integer',
                 'sort' => 'required|integer|min:0',
             ]);
-             $attrs = array(
+            $attrs = array(
                 'cate_id' => '分类ID',
                 'sort' => '排序',
             );

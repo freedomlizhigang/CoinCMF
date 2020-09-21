@@ -67,8 +67,6 @@
 <script>
 import UploadThumb from '../../.././components/thumb'
 import TinymceEditor from '../../.././components/tinymce'
-import catedetail from ".././data/catedetail.json";
-import cateselect from ".././data/cateselect.json";
 export default {
     name: 'CateEdit',
     data() {
@@ -147,8 +145,6 @@ export default {
                 if (!valid) {
                     this.$Message.error('请检查输入的信息是否正确！');
                 } else {
-                    this.$router.push('/cate/list');
-                    return;
                     // 图片
                     if (this.$refs['uploadthumb'].uploadList.length) {
                         this.formItem.thumb = this.$refs['uploadthumb'].uploadList[0].url;
@@ -160,7 +156,8 @@ export default {
                     this.formItem.content = this.$refs['editContent'].tinymce_value
                     const params = this.formItem
                     params.category_id = this.cate_id;
-                    this.$api.cate.edit(this.formItem).then(res => {
+                    // console.log(params)
+                    this.$api.cate.edit(params).then(res => {
                         // console.log(res)
                         if (res.code == 200) {
                             this.$Message.success(res.message);
@@ -173,29 +170,23 @@ export default {
         },
         getData1: function() {
             var self = this;
-            self.cateSelect = cateselect
-            this.formItem = catedetail;
-            this.linkshow = this.formItem.link_flag
             // 更新编辑器
-            this.$nextTick(function(){
-                self.$refs.editContent.tinymce_value = catedetail.content
-            })
-            // this.$api.cate.select().then(res => {
-            //     if (res.code == 200) {
-            //         self.cateSelect = res.result;
-            //     }
-            // });
-            // this.$api.cate.detail({ 'category_id': this.cate_id }).then(res => {
-            //     if (res.code == 200) {
-            //         this.formItem = res.result;
-            //         if (res.result.thumb != '' && res.result.thumb != null) {
-            //             this.thumblist.push({ 'name': '图片文件', 'url': res.result.thumb, 'status': 'finished' });
-            //         }
-            //         this.linkshow = this.formItem.link_flag
-            //         // 更新编辑器
-            //         this.$refs['editContent'].tinymce_value = res.result.content
-            //     }
-            // });
+            this.$api.cate.select().then(res => {
+                if (res.code == 200) {
+                    self.cateSelect = res.result;
+                }
+            });
+            this.$api.cate.detail({ 'category_id': this.cate_id }).then(res => {
+                if (res.code == 200) {
+                    this.formItem = res.result;
+                    if (res.result.thumb != '' && res.result.thumb != null) {
+                        this.thumblist.push({ 'name': '图片文件', 'url': res.result.thumb, 'status': 'finished' });
+                    }
+                    this.linkshow = this.formItem.link_flag
+                    // 更新编辑器
+                    this.$refs['editContent'].tinymce_value = res.result.content
+                }
+            });
             return;
         },
     }

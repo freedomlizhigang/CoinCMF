@@ -1,16 +1,11 @@
 <template>
   <div class="cate-list">
-    <div class="right_top clearfix">
-        <div class="f-r">
-          <Button class="right_top_btns" to="/cate/create">添加栏目</Button>
-        </div>
-      </div>
     <Table border height="600" :columns="columns" ref="tableList" :data="tablelist" :loading="dataloading" class="mt10"></Table>
   </div>
 </template>
 
 <script>
-import catelist from ".././data/catelist.json";
+// import catelist from ".././data/catelist.json";
 export default {
   name: 'CateList',
   data() {
@@ -137,17 +132,17 @@ export default {
   },
   methods: {
     getTableList: function() {
-      // this.$api.cate.list().then(res => {
-      //   // console.log(res)
-      //   this.dataloading = false;
-      //   if (res.code == 200) {
-      //     this.tablelist = res.result;
-      //     this.$Message.success(res.message);
-      //   }
-      // });
-      this.dataloading = false;
-      this.tablelist = catelist;
-      this.$Message.success("获取成功");
+      this.$api.cate.list().then(res => {
+        // console.log(res)
+        this.dataloading = false;
+        if (res.code == 200) {
+          this.tablelist = res.result;
+          this.$Message.success(res.message);
+        }
+      });
+      // this.dataloading = false;
+      // this.tablelist = catelist;
+      // this.$Message.success("获取成功");
       return;
     },
     edit: function(index) {
@@ -160,21 +155,22 @@ export default {
         title: '警告',
         content: '<p>此操作不可恢复，三思而后行...</p>',
         onOk: () => {
-          // this.$api.cate.remove({ cate_id: id }).then(res => {
-          //   if (res.code == 200) {
-          //     this.$Message.success(res.message);
-          //     this.getTableList();
-          //   }
-          // });
+          this.$api.cate.remove({ cate_id: id }).then(res => {
+            if (res.code == 200) {
+              this.$Message.success(res.message);
+              this.getTableList();
+            }
+          });
         }
       });
     },
     sort: function(id, sort) {
-      // this.$api.cate.sort({ cate_id: id, sort: sort }).then(res => {
-      //   if (res.code == 200) {
-      //     this.$Message.success(res.message);
-      //   }
-      // });
+      this.$api.cate.sort({ cate_id: id, sort: sort }).then(res => {
+        if (res.code == 200) {
+          this.$Message.success(res.message);
+          this.getTableList();
+        }
+      });
     }
   }
 }

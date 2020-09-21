@@ -29,8 +29,8 @@ export default {
       videoList: [],
       postData: {
         'thumb': 0,
-        'thumbWidth': '200px',
-        'thumbWidth': '200px'
+        'thumbWidth': '200',
+        'thumbWidth': '200'
       }
     }
   },

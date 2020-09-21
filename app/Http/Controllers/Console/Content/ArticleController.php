@@ -5,15 +5,17 @@
  * @Date: 2019-01-03 20:14:16
  * @Description: 文章管理
  * @LastEditors: 李志刚
- * @LastEditTime: 2020-09-20 20:10:01
+ * @LastEditTime: 2020-09-21 11:33:49
  * @FilePath: /CoinCMF/app/Http/Controllers/Console/Content/ArticleController.php
  */
 
 namespace App\Http\Controllers\Console\Content;
 
-use App\Models\Common\Article;
-use Illuminate\Http\Request;
 use Validator;
+use App\Customize\Func;
+use Illuminate\Http\Request;
+use App\Models\Content\Article;
+use App\Http\Controllers\Console\ResponseController;
 
 class ArticleController extends ResponseController {
 	/**
@@ -106,14 +108,11 @@ class ArticleController extends ResponseController {
 				// 如果有错误，提示第一条
 				return $this->resData(400, $validator->errors()->all()[0] . '...');
 			}
-			$data['cate_id'] = $request->input('cate_id');
-			$data['title'] = $request->input('title');
-			$data['thumb'] = $request->input('thumb', '');
-			$data['video'] = $request->input('video', '');
-			$data['describe'] = $request->input('describe');
-			$data['content'] = $request->input('content');
-			$data['sort'] = $request->input('sort', 0);
-			Article::create($data);
+			$all = $request->all();
+			$url = $all['link_flag'] == 1 ? $all['url'] : Func::createUuid();
+			$create = ['cate_id' => $all['cate_id'], 'title' => $all['title'], 'content' => $all['content'], 'describe' => $all['describe'], 'keywords' => $all['keywords'], 'thumb' => $all['thumb'], 'tpl' => $all['tpl'], 'push_flag' => $all['push_flag'] == 'true' ? 1 : 0, 'source' => $all['source'], 'link_flag' => $all['link_flag'] == 'true' ? 1 : 0, 'url' => $url, 'sort' => $all['sort']];
+			$create['publish_at'] = $all['publish_at'] == '' ? date('Y-m-d H:i:s') : date('Y-m-d H:i:s', strtotime($all['publish_at']));
+			Article::create($create);
 			return $this->resData(200, '添加成功...');
 		} catch (\Throwable $e) {
 			return $this->resData(500, '添加文章失败，请重新操作...');
@@ -163,14 +162,11 @@ class ArticleController extends ResponseController {
 				return $this->resData(400, $validator->errors()->all()[0] . '...');
 			}
 			$id = $request->input('article_id');
-			$data['cate_id'] = $request->input('cate_id');
-			$data['title'] = $request->input('title');
-			$data['thumb'] = $request->input('thumb', '');
-			$data['video'] = $request->input('video', '');
-			$data['describe'] = $request->input('describe');
-			$data['content'] = $request->input('content');
-			$data['sort'] = $request->input('sort', 0);
-			Article::where('id', $id)->update($data);
+			$all = $request->all();
+			$update = ['cate_id' => $all['cate_id'], 'title' => $all['title'], 'content' => $all['content'], 'describe' => $all['describe'], 'keywords' => $all['keywords'], 'thumb' => $all['thumb'], 'tpl' => $all['tpl'], 'push_flag' => $all['push_flag'] == 'true' ? 1 : 0, 'source' => $all['source'], 'link_flag' => $all['link_flag'] == 'true' ? 1 : 0, 'sort' => $all['sort']];
+			$update['publish_at'] = $all['publish_at'] == '' ? date('Y-m-d H:i:s') : date('Y-m-d H:i:s', strtotime($all['publish_at']));
+			if ($all['link_flag'] == 'true') $update['url'] = $all['url'];
+			Article::where('id', $id)->update($update);
 			return $this->resData(200, '编辑成功...');
 		} catch (\Throwable $e) {
 			return $this->resData(500, '编辑失败，请重新操作...');
@@ -192,7 +188,7 @@ class ArticleController extends ResponseController {
 				return $this->resData(400, $validator->errors()->all()[0] . '...');
 			}
 			$id = $request->input('article_id');
-			Article::where('id', $id)->delete();
+			Article::where('id', $id)->update(['del_flag' => 1]);
 			return $this->resData(200, '删除成功...');
 		} catch (\Throwable $e) {
 			return $this->resData(500, '删除失败，请重新操作...');
@@ -207,7 +203,8 @@ class ArticleController extends ResponseController {
 	public function postDeleteAll(Request $req) {
 		try {
 			$ids = $req->input('ids');
-			Article::whereIn('id', $ids)->delete();
+			$ids = explode(',',$ids);
+			Article::whereIn('id', $ids)->update(['del_flag' => 1]);
 			return $this->resData(200, '删除成功！');
 		} catch (\Throwable $e) {
 			return $this->resData(500, '删除失败，请稍后再试！');
