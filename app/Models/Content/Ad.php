@@ -5,12 +5,13 @@
  * @Date: 2018-06-26 09:06:52
  * @Description: 广告表
  * @LastEditors: 李志刚
- * @LastEditTime: 2020-09-20 19:53:33
+ * @LastEditTime: 2020-09-21 15:04:24
  * @FilePath: /CoinCMF/app/Models/Content/Ad.php
  */
 
 namespace App\Models\Content;
 
+use App\Models\Content\Adpos;
 use Illuminate\Database\Eloquent\Model;
 
 class Ad extends Model
@@ -37,4 +38,20 @@ class Ad extends Model
      * @var bool
      */
     public $timestamps = true;
+    /**
+     * The attributes that should be cast to native types.
+     *
+     * @var array
+     */
+    protected $casts = [
+        'id' => 'integer',
+        'pos_id' => 'integer',
+        'sort' => 'integer',
+        'status' => 'boolean'
+    ];
+    // 关联
+    public function ad_pos()
+    {
+        return $this->belongsTo(Adpos::class, 'pos_id', 'id');
+    }
 }

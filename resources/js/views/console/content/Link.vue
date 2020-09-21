@@ -27,7 +27,7 @@
             <Tag color="volcano" v-if="row.status == false">关闭</Tag>
         </template>
         <template slot-scope="{ row, index }" slot="action">
-            <Button type="info" size="small" style="margin-right: 5px" @click="showEditLink(row.id)">编辑</Button>
+            <Button type="info" size="small" style="margin-right: 5px;float:left" @click="showEditLink(row.id)">编辑</Button>
             <Button type="error" size="small" @click="remove(index,row.id)">删除</Button>
         </template>
     </Table>
@@ -211,8 +211,8 @@ export default {
                 if (this.$refs['uploadthumb'].uploadList.length) {
                     this.link.thumb = this.$refs['uploadthumb'].uploadList[0].url;
                 } else {
-                    this.$Message.error('请上传图片！');
-                    return;
+                    // this.$Message.error('请上传图片！');
+                    // return;
                 }
                 this.$api.link.create(this.link).then(res => {
                     if (res.code == 200) {
@@ -238,6 +238,7 @@ export default {
             if (res.code == 200) {
                 this.link = res.result
             }
+            this.thumblist = [];
             if (res.result.thumb != '' && res.result.thumb != null) {
                 this.thumblist.push({ 'name': '图片文件', 'url': res.result.thumb, 'status': 'finished' });
             }
@@ -251,8 +252,8 @@ export default {
                 if (this.$refs['uploadthumb_edit'].uploadList.length) {
                     this.link.thumb = this.$refs['uploadthumb_edit'].uploadList[0].url;
                 } else {
-                    this.$Message.error('请上传图片！');
-                    return;
+                    // this.$Message.error('请上传图片！');
+                    // return;
                 }
                 this.link.link_id = this.link_id
                 this.$api.link.edit(this.link).then(res => {

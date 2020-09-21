@@ -28,7 +28,7 @@
             <Tag color="volcano" v-if="row.status == false">关闭</Tag>
         </template>
         <template slot-scope="{ row, index }" slot="action">
-            <Button type="info" size="small" style="margin-right: 5px" @click="showEditAd(row.id)">编辑</Button>
+            <Button type="info" size="small" style="margin-right: 5px;float:left" @click="showEditAd(row.id)">编辑</Button>
             <Button type="error" size="small" @click="remove(index,row.id)">删除</Button>
         </template>
     </Table>
@@ -250,8 +250,13 @@ export default {
                 if (this.$refs['uploadthumb'].uploadList.length) {
                     this.ad.thumb = this.$refs['uploadthumb'].uploadList[0].url;
                 }
-                console.log(this.ad)
-                console.log(this.$refs['uploadthumb'].uploadList)
+                else{
+                    this.loading = false;
+                    this.$Message.error('请上传图片！');
+                    return;
+                }
+                // console.log(this.ad)
+                // console.log(this.$refs['uploadthumb'].uploadList)
                 this.$api.ad.create(this.ad).then(res => {
                     if (res.code == 200) {
                         this.getTableList();
@@ -275,6 +280,7 @@ export default {
         this.$api.ad.detail({ad_id:id}).then(res => {
             if (res.code == 200) {
                 this.ad = res.result
+                this.thumblist = [];
                 if (res.result.thumb != '' && res.result.thumb != null) {
                     this.thumblist.push({ 'name': '图片文件', 'url': res.result.thumb, 'status': 'finished' });
                 }
@@ -288,6 +294,11 @@ export default {
                 // 图片
                 if (this.$refs['uploadthumb_edit'].uploadList.length) {
                     this.ad.thumb = this.$refs['uploadthumb_edit'].uploadList[0].url;
+                }
+                else{
+                    this.loading = false;
+                    this.$Message.error('请上传图片！');
+                    return;
                 }
                 this.ad.ad_id = this.ad_id
                 this.$api.ad.edit(this.ad).then(res => {

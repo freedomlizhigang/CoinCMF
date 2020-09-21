@@ -5,11 +5,11 @@
  * @Date: 2020-02-29 08:53:37
  * @Description: 友情链接模型
  * @LastEditors: 李志刚
- * @LastEditTime: 2020-09-20 19:55:53
+ * @LastEditTime: 2020-09-21 15:03:47
  * @FilePath: /CoinCMF/app/Models/Content/Link.php
  */
 
-namespace App\Model\Content;
+namespace App\Models\Content;
 
 use Illuminate\Database\Eloquent\Model;
 

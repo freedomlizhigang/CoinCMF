@@ -5,16 +5,16 @@
  * @Date: 2018-07-25 11:39:58
  * @Description: 广告管理
  * @LastEditors: 李志刚
- * @LastEditTime: 2020-09-20 20:08:59
+ * @LastEditTime: 2020-09-21 15:22:34
  * @FilePath: /CoinCMF/app/Http/Controllers/Console/Content/AdController.php
  */
 
 namespace App\Http\Controllers\Console\Content;
 
-use App\Models\Common\Ad;
-use App\Models\Common\Adpos;
+use App\Models\Content\Ad;
+use App\Models\Content\Adpos;
 use Illuminate\Http\Request;
-use App\Http\Requests\Common\AdRequest;
+use Validator;
 use App\Http\Controllers\Console\ResponseController;
 
 class AdController extends ResponseController
@@ -23,124 +23,191 @@ class AdController extends ResponseController
      * 广告管理
      * @return [type] [description]
      */
-    public function getIndex(Request $req)
+    public function getList(Request $request)
     {
         try {
-            $title = '广告管理';
-            // 搜索关键字
-            $key = trim($req->input('q',''));
-            $starttime = $req->input('starttime');
-            $endtime = $req->input('endtime');
-            $status = $req->input('status');
-            $list = Ad::where(function($q) use($key){
-                    if ($key != '') {
-                        $q->where('title','like','%'.$key.'%');
-                    }
-                })->where(function($q) use($starttime,$endtime){
-                    if ($starttime != '' && $endtime != '') {
-                        $q->where('created_at','>=',$starttime)->where('created_at','<=',$endtime);
-                    }
-                })->where(function($q) use($status){
-                    if ($status != '') {
-                        $q->where('status',$status);
-                    }
-                })->orderBy('id','desc')->paginate(10);
-            return view('admin.console.ad.index',compact('title','list','key','starttime','endtime','status'));
+            $key = $request->input('key', '');
+            $starttime = $request->input('starttime', '');
+            $endtime = $request->input('endtime', '');
+            $status = $request->input('status', '');
+            $page = $request->input('page', 1);
+            $size = $request->input('size', 10);
+            $list = Ad::with('ad_pos')->where(function ($q) use ($key) {
+                if ($key != '') {
+                    $q->where('title', 'like', '%' . $key . '%');
+                }
+            })->where(function ($q) use ($starttime, $endtime) {
+                if ($starttime != '' && $endtime != '') {
+                    $q->where('created_at', '>=', $starttime)->where('created_at', '<=', $endtime);
+                }
+            })->where(function ($q) use ($status) {
+                if ($status != '') {
+                    $q->where('status', $status);
+                }
+            })->where('is_del', 0)->limit($size)->offset(($page - 1) * $size)->orderBy('id', 'desc')->get();
+            $count = Ad::where(function ($q) use ($key) {
+                if ($key != '') {
+                    $q->where('title', 'like', '%$key%');
+                }
+            })->where(function ($q) use ($starttime, $endtime) {
+                if ($starttime != '' && $endtime != '') {
+                    $q->where('created_at', '>=', $starttime)->where('created_at', '<=', $endtime);
+                }
+            })->where(function ($q) use ($status) {
+                if ($status != '') {
+                    $q->where('status', $status);
+                }
+            })->where('is_del', 0)->count();
+            $res = ['list' => $list, 'count' => $count];
+            return $this->resData(200, '获取数据成功...', $res);
         } catch (\Throwable $e) {
-            return view('errors.500');
+            return $this->resData(500, '获取数据失败，请稍后再试...');
         }
     }
     // 添加广告
-    public function getAdd($id = '')
+    public function postCreate(Request $request)
     {
         try {
-            $title = '添加广告';
-            $pos = Adpos::orderBy('id','asc')->get();
-            return view('admin.console.ad.add',compact('title','id','pos'));
+            $validator = Validator::make($request->input(), [
+                'pos_id' => 'required|integer',
+                'title' => 'required|max:255',
+                'thumb' => 'required|max:255',
+                'url' => 'required|max:255',
+                'starttime' => 'required|date',
+                'endtime' => 'required|date',
+                'sort' => 'required|integer|min:0',
+                'status' => 'required|in:0,1,true,false',
+            ]);
+            $attrs = array(
+                'pos_id' => ' 广告位',
+                'title' => '标题',
+                'thumb' => '图片',
+                'url' => '链接地址',
+                'starttime' => '开始时间',
+                'endtime' => '结束时间',
+                'sort' => '排序',
+                'status' => '状态',
+            );
+            $validator->setAttributeNames($attrs);
+            if ($validator->fails()) {
+                // 如果有错误，提示第一条
+                return $this->resData(400, $validator->errors()->all()[0] . '...');
+            }
+            $data = $request->all();
+            $create = ['pos_id' => $data['pos_id'], 'title' => $data['title'], 'thumb' => $data['thumb'], 'url' => $data['url'], 'sort' => $data['sort'], 'status' => $data['status'] == 'true' ? 1 : 0];
+            $create['starttime'] = $data['starttime'] == '' ? date('Y-m-d H:i:s') : date('Y-m-d H:i:s', strtotime($data['starttime']));
+            $create['endtime'] = $data['endtime'] == '' ? date('Y-m-d H:i:s') : date('Y-m-d H:i:s', strtotime($data['endtime']));
+            Ad::create($create);
+            return $this->resData(200, '添加成功...');
         } catch (\Throwable $e) {
-            return view('errors.500');
+            return $this->resData(500, '添加失败，请稍后再试...');
         }
     }
-    public function postAdd(AdRequest $req,$id = '')
+    // 广告
+    public function postDetail(Request $request)
     {
         try {
-            $data = $req->input('data');
-            Ad::create($data);
-            return $this->adminJson(1,'添加成功！',url('/console/ad/index'));
+            $validator = Validator::make($request->input(), [
+                'ad_id' => 'required|integer'
+            ]);
+            $attrs = array(
+                'ad_id' => '广告 ID',
+            );
+            $validator->setAttributeNames($attrs);
+            if ($validator->fails()) {
+                // 如果有错误，提示第一条
+                return $this->resData(400, $validator->errors()->all()[0] . '...');
+            }
+            $id = $request->input('ad_id');
+            $ad = Ad::findOrFail($id);
+            return $this->resData(200, '查询成功', $ad);
         } catch (\Throwable $e) {
-            return $this->adminJson(0,'添加失败！');
+            return $this->resData(500, '获取数据失败，请稍后再试...');
         }
     }
-    // 修改广告
-    public function getEdit($id = '')
+    public function postEdit(Request $request)
     {
         try {
-            $title = '修改广告';
-            $pos = Adpos::orderBy('id','asc')->get();
-            $info = Ad::findOrFail($id);
-            return view('admin.console.ad.edit',compact('title','info','pos'));
+            $validator = Validator::make($request->input(), [
+                'ad_id' => 'required|integer',
+                'pos_id' => 'required|integer',
+                'title' => 'required|max:255',
+                'thumb' => 'required|max:255',
+                'url' => 'required|max:255',
+                'starttime' => 'required|date',
+                'endtime' => 'required|date',
+                'sort' => 'required|integer|min:0',
+                'status' => 'required|in:0,1,true,false',
+            ]);
+            $attrs = array(
+                'ad_id' => '广告 ID',
+                'pos_id' => ' 广告位',
+                'title' => '标题',
+                'thumb' => '图片',
+                'url' => '链接地址',
+                'starttime' => '开始时间',
+                'endtime' => '结束时间',
+                'sort' => '排序',
+                'status' => '状态',
+            );
+            $validator->setAttributeNames($attrs);
+            if ($validator->fails()) {
+                // 如果有错误，提示第一条
+                return $this->resData(400, $validator->errors()->all()[0] . '...');
+            }
+            $data = $request->all();
+            $id = $data['ad_id'];
+            $update = ['pos_id' => $data['pos_id'], 'title' => $data['title'], 'thumb' => $data['thumb'], 'url' => $data['url'], 'sort' => $data['sort'], 'status' => $data['status'] == 'true' ? 1 : 0];
+            $update['starttime'] = $data['starttime'] == '' ? date('Y-m-d H:i:s') : date('Y-m-d H:i:s', strtotime($data['starttime']));
+            $update['endtime'] = $data['endtime'] == '' ? date('Y-m-d H:i:s') : date('Y-m-d H:i:s', strtotime($data['endtime']));
+            Ad::where('id', $id)->update($update);
+            return $this->resData(200, '修改成功');
         } catch (\Throwable $e) {
-            return view('errors.500');
-        }
-    }
-    public function postEdit(AdRequest $req,$id = '')
-    {
-        try {
-        	$data = $req->input('data');
-        	Ad::where('id',$id)->update($data);
-            return $this->adminJson(1,'修改成功！');
-        } catch (\Throwable $e) {
-            return $this->adminJson(0,'修改失败！');
+            return $this->resData(500, '修改失败，请稍后再试...');
         }
     }
     // 删除
-    public function getDel($id = '')
+    public function postRemove($id = '')
     {
         try {
-        	Ad::where('id',$id)->delete();
-            return back()->with('message','删除成功！');
+            $validator = Validator::make($request->input(), [
+                'ad_id' => 'required|integer'
+            ]);
+            $attrs = array(
+                'ad_id' => '广告 ID',
+            );
+            $validator->setAttributeNames($attrs);
+            if ($validator->fails()) {
+                // 如果有错误，提示第一条
+                return $this->resData(400, $validator->errors()->all()[0] . '...');
+            }
+            $id = $request->input('ad_id');
+            Ad::where('id', $id)->update(['is_del' => 1]);
+            return $this->resData(200, '删除成功！');
         } catch (\Throwable $e) {
-        	return back()->with('message','删除失败！');
+            return $this->resData(500, '删除失败，请稍后再试...');
         }
     }
     // 排序
-    public function postSort(Request $req)
+    public function postSort(Request $request)
     {
         try {
-            $ids = $req->input('sids');
-            $sort = $req->input('sort');
-            if (is_array($ids))
-            {
-                foreach ($ids as $v) {
-                    Ad::where('id',$v)->update(['sort'=>(int) $sort[$v]]);
-                }
-                return back()->with('message', '排序成功！');
+            $validator = Validator::make($request->input(), [
+                'ad_id' => 'required|integer'
+            ]);
+            $attrs = array(
+                'ad_id' => '广告 ID',
+            );
+            $validator->setAttributeNames($attrs);
+            if ($validator->fails()) {
+                // 如果有错误，提示第一条
+                return $this->resData(400, $validator->errors()->all()[0] . '...');
             }
-            else
-            {
-                return back()->with('message', '请先选择广告！');
-            }
+            $id = $request->input('ad_id');
+            Ad::where('id', $id)->update(['sort' => $request->input('sort', 0)]);
+            return $this->resData(200, '排序成功！');
         } catch (\Throwable $e) {
-            return back()->with('message','排序失败！');
-        }
-    }
-    // 批量删除
-    public function postAlldel(Request $req)
-    {
-        try {
-            $ids = $req->input('sids');
-            // 是数组更新数据，不是返回
-            if(is_array($ids))
-            {
-                Ad::whereIn('id',$ids)->delete();
-                return back()->with('message', '批量删除完成！');
-            }
-            else
-            {
-                return back()->with('message','请选择广告！');
-            }
-        } catch (\Throwable $e) {
-            return back()->with('message','批量删除失败！');
+            return $this->resData(500, '排序失败，请稍后再试...');
         }
     }
 }

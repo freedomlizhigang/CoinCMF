@@ -21,7 +21,7 @@
             <Tag color="blue" v-if="row.is_mobile == false">电脑</Tag>
         </template>
         <template slot-scope="{ row, index }" slot="action">
-            <Button type="info" size="small" style="margin-right: 5px" @click="showEditAdpos(row.id)">编辑</Button>
+            <Button type="info" size="small" style="margin-right: 5px;float:left" @click="showEditAdpos(row.id)">编辑</Button>
             <Button type="error" size="small" @click="remove(index,row.id)">删除</Button>
         </template>
     </Table>
