@@ -11,7 +11,7 @@
 |
  */
 
-Route::get('/', 'Admin\IndexController@getIndex');
+Route::get('/', 'Console\IndexController@getIndex');
 
 // Home PC版
 Route::group(['namespace' => 'Home'], function () {

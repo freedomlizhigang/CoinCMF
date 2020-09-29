@@ -54,7 +54,6 @@
 <script>
 import console_router from '../.././router/console'
 import { LOGOUT } from '../.././store/mutation_types'
-import menuD from './data/menuData.json'
 export default {
   data() {
     return {
@@ -109,12 +108,9 @@ export default {
     },
     getMenuData: function() {
       var self = this
-      this.menuData = menuD
-      // this.$api.menu.left().then(res => {
-      //   // this.menuData = res.result
-      //   console.log(res.result)
-      // });
-      return self.menuData;
+      this.$api.menu.left().then(res => {
+        self.menuData = res.result
+      });
     }
   }
 }
