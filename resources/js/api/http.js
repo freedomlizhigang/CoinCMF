@@ -4,7 +4,7 @@
  * @Date: 2019-01-03 20:14:16
  * @Description: axios封装,请求拦截、响应拦截、错误统一处理，AES/RSA加密解密，base64在url里转义是个坑，需要转成16位
  * @LastEditors: 李志刚
- * @LastEditTime: 2020-09-20 12:06:45
+ * @LastEditTime: 2021-01-19 14:56:36
  * @FilePath: /CoinCMF/resources/js/api/http.js
  */
 import axios from 'axios';
@@ -177,28 +177,24 @@ instance.interceptors.request.use(
         if (!token) {
             token = 'token'
         }
-        // GET、POST 的取参数方式不同，坑死
+        // GET、POST 的取参数方式不同，坑死，对应的富文本内容也会被过滤，所以只签名了token+time两个字段
         let a = RSAencrypted(token)
         // console.log(a)
+        let sign_str = {
+            token: token,
+            timestamp: (new Date()).getTime()
+        }
+        const sign = getSign(sign_str);
         if (config.method == 'get') {
             config.params = {
                 ...config.params,
-                token: token,
-                timestamp: (new Date()).getTime()
-            }
-            const sign = getSign(config.params);
-            config.params = {
-                // ...config.params,
                 rsa: a,
                 sign: sign
             }
             // console.log(config.params)
         }
         else {
-            token && (config.data += '&token=' + token);
-            config.data = config.data + '&timestamp=' + (new Date()).getTime();
-            const sign = postSign(config.data);
-            config.data = 'sign=' + sign + '&rsa=' + a;
+            config.data = config.data + '&sign=' + sign + '&rsa=' + a;
         }
         // console.log(config)
         return config;

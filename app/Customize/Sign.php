@@ -5,7 +5,7 @@
  * @Date: 2020-02-29 21:40:40
  * @Description: 签名验证
  * @LastEditors: 李志刚
- * @LastEditTime: 2020-09-20 12:03:20
+ * @LastEditTime: 2021-01-19 14:25:10
  * @FilePath: /CoinCMF/app/Customize/Sign.php
  */
 
