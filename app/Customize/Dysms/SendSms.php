@@ -23,12 +23,12 @@ class SendSms
             $params = array ();
             // *** 需用户填写部分 ***
             // fixme 必填: 请参阅 https://ak-console.aliyun.com/ 取得您的AK信息
-            $accessKeyId = "LTAIOu2pSGS9WGYG";
-            $accessKeySecret = "Io0Ux35D0GxlXq9Qnif803xK4NCKOe";
+            $accessKeyId = "";
+            $accessKeySecret = "";
             // fixme 必填: 短信接收号码
             $params["PhoneNumbers"] = $phone;
             // fixme 必填: 短信签名，应严格按"签名名称"填写，请参考: https://dysms.console.aliyun.com/dysms.htm#/develop/sign
-            $params["SignName"] = "弘盛果蔬好";
+            $params["SignName"] = "";
             // fixme 必填: 短信模板Code，应严格按"模板CODE"填写, 请参考: https://dysms.console.aliyun.com/dysms.htm#/develop/template
             $params["TemplateCode"] = $tpl;
             // fixme 可选: 设置模板参数, 假如模板中存在变量需要替换则为必填项
