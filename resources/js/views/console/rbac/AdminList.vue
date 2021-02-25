@@ -23,76 +23,92 @@
         </div>
     </div>
     <!-- 添加的弹出 -->
-    <Modal v-model="showCreateStatus" title="添加管理员" @on-ok="createAdmin('adminCreateValidate')" :loading="loading">
-        <Form :model="adminInfo" ref="adminCreateValidate" :rules="adminCreateValidate" action="javascript:void(0)">
-            <FormItem label="部门" prop="section_id">
-                <Select v-model="adminInfo.section_id">
-                    <Option v-for="item in sectionList" :value="item.id" :key="item.id">{{ item.name }}</Option>
-                </Select>
-            </FormItem>
-            <FormItem label="角色">
-                <CheckboxGroup v-model="adminInfo.role_ids" @on-change="roleCheck">
-                    <Checkbox v-for="item in roleList" :key="item.id" :label="item.id">{{ item.name }}</Checkbox>
-                </CheckboxGroup>
-            </FormItem>
-            <FormItem label="用户名" prop="name">
-                <Input v-model="adminInfo.name" placeholder="输入用户名..."></Input>
-            </FormItem>
-            <FormItem label="姓名" prop="realname">
-                <Input v-model="adminInfo.realname" placeholder="输入姓名..."></Input>
-            </FormItem>
-            <FormItem label="手机号">
-                <Input v-model="adminInfo.phone" placeholder="输入手机号..."></Input>
-            </FormItem>
-            <FormItem label="邮箱">
-                <Input v-model="adminInfo.email" placeholder="输入邮箱..."></Input>
-            </FormItem>
-            <FormItem label="密码" prop="password">
-                <Input v-model="adminInfo.password" type="password" placeholder="输入密码..."></Input>
-            </FormItem>
-            <FormItem label="确认密码">
-                <Input v-model="adminInfo.password_confirmation" type="password" placeholder="确认密码..."></Input>
-            </FormItem>
-        </Form>
-    </Modal>
+    <!-- 需要全屏时添加这句 :mask="false" class-name="idw100" -->
+    <Drawer :closable="false" :mask-closable="false" :scrollable="true" title="添加管理员" width="640" v-model="showCreateStatus">
+      <Spin size="large" fix v-if="loading"></Spin>
+      <Form :label-width="80" :model="adminInfo" ref="adminCreateValidate" :rules="adminCreateValidate" action="javascript:void(0)">
+        <FormItem label="部门" prop="section_id">
+            <Select v-model="adminInfo.section_id">
+                <Option v-for="item in sectionList" :value="item.id" :key="item.id">{{ item.name }}</Option>
+            </Select>
+        </FormItem>
+        <FormItem label="角色">
+            <CheckboxGroup v-model="adminInfo.role_ids" @on-change="roleCheck">
+                <Checkbox v-for="item in roleList" :key="item.id" :label="item.id">{{ item.name }}</Checkbox>
+            </CheckboxGroup>
+        </FormItem>
+        <FormItem label="用户名" prop="name">
+            <Input v-model="adminInfo.name" placeholder="输入用户名..."></Input>
+        </FormItem>
+        <FormItem label="姓名" prop="realname">
+            <Input v-model="adminInfo.realname" placeholder="输入姓名..."></Input>
+        </FormItem>
+        <FormItem label="手机号">
+            <Input v-model="adminInfo.phone" placeholder="输入手机号..."></Input>
+        </FormItem>
+        <FormItem label="邮箱">
+            <Input v-model="adminInfo.email" placeholder="输入邮箱..."></Input>
+        </FormItem>
+        <FormItem label="密码" prop="password">
+            <Input v-model="adminInfo.password" type="password" placeholder="输入密码..."></Input>
+        </FormItem>
+        <FormItem label="确认密码">
+            <Input v-model="adminInfo.password_confirmation" type="password" placeholder="确认密码..."></Input>
+        </FormItem>
+        <FormItem>
+          <Button style="margin-right: 8px" @click="showCreateStatus = false">取消</Button>
+          <Button type="primary" @click="createAdmin('adminCreateValidate')">提交</Button>
+        </FormItem>
+      </Form>
+    </Drawer>
     <!-- 修改资料 -->
-    <Modal v-model="showEditInfoStatus" title="修改资料" @on-ok="updateAdmin('adminEditValidate')" :loading="loading">
-        <Form :model="adminInfo" ref="adminEditValidate" :rules="adminEditValidate" action="javascript:void(0)">
-            <FormItem label="部门" prop="section_id">
-                <Select v-model="adminInfo.section_id">
-                    <Option v-for="item in sectionList" :value="item.id" :key="item.id">{{ item.name }}</Option>
-                </Select>
-            </FormItem>
-            <FormItem label="角色">
-                <CheckboxGroup v-model="adminInfo.role_ids" @on-change="roleCheck">
-                    <Checkbox v-for="item in roleList" :key="item.id" :label="item.id">{{ item.name }}</Checkbox>
-                </CheckboxGroup>
-            </FormItem>
-            <FormItem label="用户名" prop="name">
-                <Input v-model="adminInfo.name" disabled placeholder="输入用户名..."></Input>
-            </FormItem>
-            <FormItem label="姓名" prop="realname">
-                <Input v-model="adminInfo.realname" placeholder="输入姓名..."></Input>
-            </FormItem>
-            <FormItem label="手机号">
-                <Input v-model="adminInfo.phone" placeholder="输入手机号..."></Input>
-            </FormItem>
-            <FormItem label="邮箱">
-                <Input v-model="adminInfo.email" placeholder="输入邮箱..."></Input>
-            </FormItem>
-        </Form>
-    </Modal>
+    <Drawer :closable="false" :mask-closable="false" :scrollable="true" title="修改资料" width="640" v-model="showEditInfoStatus">
+      <Spin size="large" fix v-if="loading"></Spin>
+      <Form :label-width="80" :model="adminInfo" ref="adminEditValidate" :rules="adminEditValidate" action="javascript:void(0)">
+          <FormItem label="部门" prop="section_id">
+              <Select v-model="adminInfo.section_id">
+                  <Option v-for="item in sectionList" :value="item.id" :key="item.id">{{ item.name }}</Option>
+              </Select>
+          </FormItem>
+          <FormItem label="角色">
+              <CheckboxGroup v-model="adminInfo.role_ids" @on-change="roleCheck">
+                  <Checkbox v-for="item in roleList" :key="item.id" :label="item.id">{{ item.name }}</Checkbox>
+              </CheckboxGroup>
+          </FormItem>
+          <FormItem label="用户名" prop="name">
+              <Input v-model="adminInfo.name" disabled placeholder="输入用户名..."></Input>
+          </FormItem>
+          <FormItem label="姓名" prop="realname">
+              <Input v-model="adminInfo.realname" placeholder="输入姓名..."></Input>
+          </FormItem>
+          <FormItem label="手机号">
+              <Input v-model="adminInfo.phone" placeholder="输入手机号..."></Input>
+          </FormItem>
+          <FormItem label="邮箱">
+              <Input v-model="adminInfo.email" placeholder="输入邮箱..."></Input>
+          </FormItem>
+          <FormItem>
+            <Button style="margin-right: 8px" @click="showEditInfoStatus = false">取消</Button>
+            <Button type="primary" @click="updateAdmin('adminEditValidate')">提交</Button>
+          </FormItem>
+      </Form>
+    </Drawer>
     <!-- 修改密码 -->
-    <Modal v-model="showEditPwdStatus" title="修改密码" @on-ok="updatePassword('adminPasswordValidate')" :loading="loading">
-        <Form :model="adminPwd" ref="adminPasswordValidate" :rules="adminPasswordValidate" action="javascript:void(0)">
-            <FormItem label="密码" prop="password">
-                <Input v-model="adminPwd.password" type="password" placeholder="输入密码..."></Input>
-            </FormItem>
-            <FormItem label="确认密码">
-                <Input v-model="adminPwd.password_confirmation" type="password" placeholder="确认密码..."></Input>
-            </FormItem>
-        </Form>
-    </Modal>
+    <Drawer :closable="false" :mask-closable="false" :scrollable="true" title="修改资料" width="640" v-model="showEditPwdStatus">
+      <Spin size="large" fix v-if="loading"></Spin>
+      <Form :label-width="80" :model="adminPwd" ref="adminPasswordValidate" :rules="adminPasswordValidate" action="javascript:void(0)">
+          <FormItem label="密码" prop="password">
+              <Input v-model="adminPwd.password" type="password" placeholder="输入密码..."></Input>
+          </FormItem>
+          <FormItem label="确认密码">
+              <Input v-model="adminPwd.password_confirmation" type="password" placeholder="确认密码..."></Input>
+          </FormItem>
+          <FormItem>
+            <Button style="margin-right: 8px" @click="showEditPwdStatus = false">取消</Button>
+            <Button type="primary" @click="updatePassword('adminPasswordValidate')">提交</Button>
+          </FormItem>
+      </Form>
+    </Drawer>
   </div>
 </template>
 
@@ -101,7 +117,7 @@ export default {
   name: 'AdminList',
   data() {
     return {
-      loading: true,
+      loading: false,
       dataloading: true,
       admin_id: 0,
       formItem: {
@@ -331,6 +347,7 @@ export default {
     createAdmin(name) {
       this.$refs[name].validate((valid) => {
         if (valid) {
+          this.loading = true;
           this.$api.admin.create({ section_id: this.adminInfo.section_id, role_ids: this.role_ids, name: this.adminInfo.name, realname: this.adminInfo.realname, phone: this.adminInfo.phone, email: this.adminInfo.email, password: this.adminInfo.password, password_confirmation: this.adminInfo.password_confirmation }).then(res => {
             if (res.code == 200) {
               this.adminInfo.name = '';
@@ -339,15 +356,12 @@ export default {
               this.getTableList();
             }
             this.loading = false;
-            this.$nextTick(() => { this.loading = true; });
           }).finally(res => {
             this.loading = false;
-            this.$nextTick(() => { this.loading = true; });
           });
         } else {
           this.$Message.error('请检查输入的信息是否正确！');
           this.loading = false
-          this.$nextTick(() => { this.loading = true; });
         }
       })
     },
@@ -355,6 +369,7 @@ export default {
     showEditInfo(value) {
       this.admin_id = value;
       this.showEditInfoStatus = !this.showEditInfoStatus;
+      this.loading = true;
       // 取信息
       this.$api.admin.detail({ admin_id: value }).then(res => {
         if (res.code == 200) {
@@ -363,7 +378,6 @@ export default {
           this.$Message.success(res.message);
         }
         this.loading = false;
-        this.$nextTick(() => { this.loading = true; });
       });
     },
     // 展开修改密码
@@ -375,22 +389,20 @@ export default {
     updateAdmin: function(name) {
       this.$refs[name].validate((valid) => {
         if (valid) {
+          this.loading = true;
           this.$api.admin.editinfo({ admin_id: this.admin_id, section_id: this.adminInfo.section_id, role_ids: this.role_ids, realname: this.adminInfo.realname, phone: this.adminInfo.phone, email: this.adminInfo.email }).then(res => {
             if (res.code == 200) {
               this.$Message.success(res.message);
+              this.showEditInfoStatus = !this.showEditInfoStatus;
               this.getTableList();
             }
             this.loading = false;
-            this.showEditInfoStatus = !this.showEditInfoStatus;
-            this.$nextTick(() => { this.loading = true; });
           }).finally(res => {
             this.loading = false;
-            this.$nextTick(() => { this.loading = true; });
           });
         } else {
           this.$Message.error('请检查输入的信息是否正确！');
           this.loading = false
-          this.$nextTick(() => { this.loading = true; });
         }
       })
     },
@@ -398,21 +410,19 @@ export default {
     updatePassword: function(name) {
       this.$refs[name].validate((valid) => {
         if (valid) {
+          this.loading = true;
           this.$api.admin.editpassword({ admin_id: this.admin_id, password: this.adminPwd.password, password_confirmation: this.adminPwd.password_confirmation }).then(res => {
             if (res.code == 200) {
               this.$Message.success(res.message);
+              this.showEditPwdStatus = !this.showEditPwdStatus;
             }
             this.loading = false;
-            this.$nextTick(() => { this.loading = true; });
-            this.showEditPwdStatus = !this.showEditPwdStatus;
           }).finally(res => {
             this.loading = false;
-            this.$nextTick(() => { this.loading = true; });
           });
         } else {
           this.$Message.error('请检查输入的信息是否正确！');
           this.loading = false
-          this.$nextTick(() => { this.loading = true; });
         }
       })
     },

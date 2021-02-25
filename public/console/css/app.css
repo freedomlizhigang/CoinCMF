@@ -146,7 +146,31 @@
 .layout-footer-center{
     text-align: center;
 }
-
+/* drawer-footer */
+.ivu-drawer-body {
+    padding-bottom: 85px;
+}
+.drawer-footer {
+    width: 640px;
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    border-top: 1px solid #e8e8e8;
+    padding: 10px 16px;
+    text-align: left;
+    background: #fff;
+}
+.idw100 .ivu-drawer {
+    width: calc(100% - 240px) !important;
+    top: 130px;
+    right:20px;
+}
+.idw100 .ivu-drawer-content {
+    border-radius: 5px 5px 0 0;
+}
+.idw100 .drawer-footer {
+    width: calc(100% - 200px);
+}
 
 
 
