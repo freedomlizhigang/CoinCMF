@@ -1,22 +1,29 @@
 <template>
   <div class="type-list">
-    <Row>
-        <Col :xs="24">
-            <Button @click="showCreate(0)" type="success" class="f-r">添加分类</Button>
-        </Col>
-    </Row>
-    <Table border height="600" :columns="columns" ref="tableList" :data="tablelist" :loading="dataloading" class="mt10"></Table>
-    <!-- 添加的弹出 -->
-    <Modal v-model="showModalStatus" title="添加分类" @on-ok="typeCreateEdit('typeValidate')" :loading="loading">
-        <Form :model="type" ref="typeValidate" :rules="typeValidate" action="javascript:void(0)">
+    <div class="action-btn">
+      <Button size="small" @click="showCreate(0)" type="success">添加分类</Button>
+    </div>
+    <Table border height="650" ref="tableList" row-key="type_id" :columns="list" :data="tablelist" :loading="dataloading">
+      <template slot-scope="{ row }" slot="sort">
+        <InputNumber v-model="row.sort" size="small" :min="0" @on-change="sortDetail(row.type_id,$event)" />
+      </template>
+    </Table>
+    <!-- 需要全屏时添加这句 :mask="false" class-name="idw100" -->
+    <Drawer :closable="false" :mask-closable="false" :scrollable="true" title="分类管理" width="640" v-model="showModalStatus">
+      <Spin size="large" fix v-if="loading"></Spin>
+      <Form :label-width="80" :model="type" ref="typeValidate" :rules="typeValidate" action="javascript:void(0)">
             <FormItem label="分类名称" prop="name">
                 <Input v-model="type.name" placeholder="输入分类名称..."></Input>
             </FormItem>
             <FormItem label="排序">
                 <InputNumber :max="9999" :min="0" v-model="type.sort"></InputNumber>
             </FormItem>
+            <FormItem>
+              <Button style="margin-right: 8px" @click="showModalStatus = false">取消</Button>
+              <Button type="primary" @click="typeCreateEdit('typeValidate')">提交</Button>
+          </FormItem>
         </Form>
-    </Modal>
+    </Drawer>
   </div>
 </template>
 
@@ -27,17 +34,17 @@ export default {
     return {
       loading: true,
       dataloading: true,
-      columns: [
+      list: [
         {
-          title: 'Id',
-          key: 'id',
-          width: 80,
-          fixed: 'left'
+          title: 'ID',
+          key: 'type_id',
+          width: 60,
         },
         {
           title: '名称',
           minWidth: 300,
           key: 'name',
+          tree: true,
           render: (h, params) => {
             return h('span', {
               style: {
@@ -48,31 +55,13 @@ export default {
         },
         {
           title: '排序',
-          key: 'sort',
+          slot: 'sort',
           width: 150,
-          render: (h, params) => {
-            return h('div', [
-              h('InputNumber', {
-                props: {
-                  min: 0,
-                  value: params.row.sort,
-                  size: 'small',
-                  number: true,
-                  activeChange: false
-                },
-                on: {
-                  'on-change': (value) => {
-                    this.sort(params.row.id, value)
-                  }
-                }
-              }, '排序')
-            ]);
-          }
         },
         {
           title: '操作',
           key: 'action',
-          width: 200,
+          width: 180,
           align: 'left',
           render: (h, params) => {
             return h('div', [
@@ -86,7 +75,7 @@ export default {
                 },
                 on: {
                   click: () => {
-                    this.showCreate(params.row.id)
+                    this.showCreate(params.row.type_id)
                   }
                 }
               }, '添加'),
@@ -100,7 +89,7 @@ export default {
                 },
                 on: {
                   click: () => {
-                    this.showEdit(params.row.id)
+                    this.showEdit(params.row.type_id)
                   }
                 }
               }, '修改'),
@@ -111,7 +100,7 @@ export default {
                 },
                 on: {
                   click: () => {
-                    this.remove(params.row.id)
+                    this.remove(params.row.type_id)
                   }
                 }
               }, '删除')
@@ -162,11 +151,13 @@ export default {
       this.type.type_id = 0;
       this.type.name = '';
       this.type.sort = 0;
+      this.loading = false;
     },
     // 添加||修改
     typeCreateEdit(name) {
       this.$refs[name].validate((valid) => {
         if (valid) {
+          this.loading = true;
           // 判断是添加还是修改
           if (this.type.type_id === 0) {
             this.$api.type.create({ parentid: this.type.parentid, name: this.type.name, sort: this.type.sort }).then(res => {
@@ -212,7 +203,7 @@ export default {
           this.type = res.result;
           this.type.type_id = res.result.id;
           this.loading = false;
-          this.$nextTick(() => { this.loading = true; });
+          // this.$nextTick(() => { this.loading = true; });
         }
       });
     },
@@ -232,7 +223,7 @@ export default {
         }
       });
     },
-    sort: function(id, sort) {
+    sortDetail: function(id, sort) {
       this.$api.type.sort({ type_id: id, sort: sort }).then(res => {
         if (res.code == 200) {
           this.$Message.success(res.message);

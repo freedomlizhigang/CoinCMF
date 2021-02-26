@@ -5,7 +5,7 @@
  * @Date: 2019-01-03 20:14:16
  * @Description: 通用无限级分类
  * @LastEditors: 李志刚
- * @LastEditTime: 2020-09-20 20:07:15
+ * @LastEditTime: 2021-02-26 11:02:29
  * @FilePath: /CoinCMF/app/Http/Controllers/Console/Common/TypeController.php
  */
 
@@ -26,52 +26,27 @@ class TypeController extends ResponseController
             // 所有分类，后端循环出三级来
             $all = Type::select('id','parentid','arrparentid','name','sort')->orderBy('sort','asc')->orderBy('id','asc')->get();
             $tree = $this->toTree($all,'0');
-            $list = $this->toTableTree($tree,'0');
-            return $this->resData(200,'获取成功...',$list);
+            return $this->resData(200,'获取成功...',$tree);
         } catch (\Throwable $e) {
             return $this->resData(500,'获取失败，请稍后再试...');
         }
     }
-    // 转成树形数组
-    private function toTree($data,$pid)
+    // 转成树形菜单数组
+    private function toTree($data, $pid)
     {
         $tree = [];
-        if ($data->count() > 0) {
-            foreach($data as $v)
-            {
-                if ($v->parentid == $pid) {
-                    $v = $v->toArray();
-                    $v['childs'] = $this->toTree($data,$v['id']);
+        if ($data->count() > 0
+        ) {
+            foreach ($data as $v) {
+                if ($v->parentid == $pid
+                ) {
+                    $v = ['type_id' => $v->id, 'name' => $v->name, 'sort' => $v->sort, '_showChildren' => true];
+                    $v['children'] = $this->toTree($data, $v['type_id']);
                     $tree[] = $v;
                 }
             }
         }
         return $tree;
-    }
-    // 转成树形表格用的数据，这个有点坑，必须定义一个循环外的变量来返回，循环内变量会被覆盖导致数据出错
-    private $res = [];
-    private function toTableTree($data,$pid = 0)
-    {
-        if (is_null($data) || $data == '') {
-            return $res;
-        }
-        foreach ($data as $v) {
-            // 计算level
-            $left = 0;
-            $level = count(explode(',',$v['arrparentid']));
-            $str = '';
-            if($level > 1)
-            {
-                $str .= '|—';
-                $left = 10 * $level;
-            }
-            $this->res[] = ['id'=>$v['id'],'name'=>$str.$v['name'],'sort'=>$v['sort'],'left'=>$left];
-            if ($v['childs'] != '')
-            {
-                $this->toTableTree($v['childs'],$pid);
-            }
-        }
-        return $this->res;
     }
     // 取单条信息
     public function postDetail(Request $req)

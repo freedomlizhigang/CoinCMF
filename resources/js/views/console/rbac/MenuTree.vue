@@ -1,24 +1,22 @@
 <template>
   <div class="menutree">
-      <!-- 批量操作 -->
+    <!-- 批量操作 -->
     <div class="action-btn">
       <Button size="small" @click="addMenu" type="success">添加一级菜单</Button>
     </div>
-    <div class="menutree-left">
-        <Table border height="650" ref="roleList" row-key="menu_id" :columns="list" :data="menutree" :loading="dataloading">
-          <template slot-scope="{ row }" slot="sort">
-            <InputNumber v-model="row.sort" size="small" :min="0" @on-change="sortDetail(row.menu_id,$event)" />
-          </template>
-          <template slot-scope="{ row }" slot="display">
-            <Tag v-if="row.display" color="cyan">显示</Tag>
-            <Tag v-if="!row.display" color="orange">隐藏</Tag>
-          </template>
-        </Table>
-    </div>
+    <Table border height="650" ref="roleList" row-key="menu_id" :columns="list" :data="menutree" :loading="dataloading">
+      <template slot-scope="{ row }" slot="sort">
+        <InputNumber v-model="row.sort" size="small" :min="0" @on-change="sortDetail(row.menu_id,$event)" />
+      </template>
+      <template slot-scope="{ row }" slot="display">
+        <Tag v-if="row.display" color="cyan">显示</Tag>
+        <Tag v-if="!row.display" color="orange">隐藏</Tag>
+      </template>
+    </Table>
     <!-- 需要全屏时添加这句 :mask="false" class-name="idw100" -->
     <Drawer :closable="false" :mask-closable="false" :scrollable="true" title="添加角色" width="640" v-model="showModalStatus">
       <Spin size="large" fix v-if="loading"></Spin>
-      <Form ref="menuData" :model="menuData" :rules="menuValidate" action="javascript:void(0)">
+      <Form :label-width="80" ref="menuData" :model="menuData" :rules="menuValidate" action="javascript:void(0)">
         <FormItem label="父级菜单" prop="parentid">
             <Select clearable v-model="menuData.parentid">
               <Option value="0" key="0">一级菜单</Option>
