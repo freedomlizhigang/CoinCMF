@@ -11,16 +11,16 @@
                 </FormItem>
             </Form>
         </Col>
-        <Col :xs="24" :sm="12">
-            <Button @click="showCreate" type="success" class="f-r">添加管理员</Button>
-        </Col>
     </Row>
-    <Table border :columns="list" ref="roleList" :data="tablelist" :loading="dataloading"></Table>
+    <!-- 批量操作 -->
+    <div class="action-btn">
+      <Button size="small" @click="deleteData" style="margin-right: 8px" type="error">批量删除</Button>
+      <Button size="small" @click="showCreate" type="success">添加管理员</Button>
+    </div>
+    <Table border :columns="list" ref="roleList" :data="tablelist" @on-selection-change="changeData" :loading="dataloading"></Table>
     <!-- 分页 -->
-    <div style="margin: 10px;overflow: hidden">
-        <div style="float: right;">
-            <Page ref="listPage" :total="pages.total" :current="pages.current" :page-size="pages.size" show-elevator show-total @on-change="changePage"></Page>
-        </div>
+    <div class="table-page">
+      <Page size="small" ref="listPage" :total="pages.total" :current="pages.current" :page-size="pages.size" show-elevator show-total @on-change="changePage"></Page>
     </div>
     <!-- 添加的弹出 -->
     <!-- 需要全屏时添加这句 :mask="false" class-name="idw100" -->
@@ -28,7 +28,7 @@
       <Spin size="large" fix v-if="loading"></Spin>
       <Form :label-width="80" :model="adminInfo" ref="adminCreateValidate" :rules="adminCreateValidate" action="javascript:void(0)">
         <FormItem label="部门" prop="section_id">
-            <Select v-model="adminInfo.section_id">
+            <Select clearable v-model="adminInfo.section_id">
                 <Option v-for="item in sectionList" :value="item.id" :key="item.id">{{ item.name }}</Option>
             </Select>
         </FormItem>
@@ -66,7 +66,7 @@
       <Spin size="large" fix v-if="loading"></Spin>
       <Form :label-width="80" :model="adminInfo" ref="adminEditValidate" :rules="adminEditValidate" action="javascript:void(0)">
           <FormItem label="部门" prop="section_id">
-              <Select v-model="adminInfo.section_id">
+              <Select clearable v-model="adminInfo.section_id">
                   <Option v-for="item in sectionList" :value="item.id" :key="item.id">{{ item.name }}</Option>
               </Select>
           </FormItem>
@@ -125,14 +125,14 @@ export default {
       },
       pages: {
         current: 1,
-        total: 0
+        total: 0,
+        size:10
       },
       list: [
         {
-          title: 'Id',
-          key: 'id',
-          width: 80,
-          fixed: 'left'
+            type: 'selection',
+            width: 60,
+            align: 'center'
         },
         {
           title: '用户名',
@@ -146,17 +146,17 @@ export default {
         },
         {
           title: '电话',
-          width: 120,
+          width: 150,
           key: 'phone'
         },
         {
           title: '邮箱',
-          width: 120,
+          width: 180,
           key: 'email'
         },
         {
           title: '最后登录时间',
-          width: 160,
+          width: 180,
           key: 'lasttime'
         },
         {
@@ -285,7 +285,8 @@ export default {
           { type: 'string', min: 6, max: 15, message: '密码 6 - 15 位长度', trigger: 'blur' }
         ]
       },
-      role_ids: []
+      role_ids: [],
+      selectData:[],
     }
   },
   created: function() {
@@ -298,8 +299,12 @@ export default {
       this.pages.current = this.$refs['listPage'].currentPage;
       this.getTableList();
     },
+    // 选择id
+    changeData: function(index) {
+      this.selectData = index
+    },
     getTableList: function() {
-      var params = { page: this.pages.current};
+      var params = { page: this.pages.current,size:this.pages.size};
       this.$api.admin.list(params).then(res => {
         this.dataloading = false;
         if (res.code == 200) {
@@ -433,10 +438,30 @@ export default {
         title: '警告',
         content: '<p>此操作不可恢复，三思而后行...</p>',
         onOk: () => {
-          this.$api.admin.remove({ admin_id: id }).then(res => {
+          this.$api.admin.remove({ admin_id: [id] }).then(res => {
             if (res.code == 200) {
               this.$Message.success(res.message);
               this.tablelist.splice(index, 1);
+            }
+          });
+        }
+      });
+    },
+    // 批量删除
+    deleteData: function() {
+      // 弹出确认框
+      this.$Modal.confirm({
+        title: '警告',
+        content: '<p>此操作不可恢复，三思而后行...</p>',
+        onOk: () => {
+          var ids = [];
+          this.selectData.forEach((item, index) => {
+            ids.push(item.id);
+          })
+          this.$api.admin.remove({ admin_id: ids }).then(res => {
+            if (res.code == 200) {
+              this.$Message.success(res.message);
+              this.getTableList();
             }
           });
         }
@@ -454,11 +479,11 @@ export default {
     renderTable: function(name) {
       this.dataloading = true;
       this.pages.current = 1;
-      var ps = { 'key': this.formItem.key,'page':1};
+      var ps = { 'key': this.formItem.key,'page':1,size:this.pages.size};
       this.$api.admin.list(ps).then(res => {
         if (res.code == 200) {
           this.tablelist = res.result.list;
-          this.pages.total = res.result.total
+          this.pages.total = res.result.count
           this.$Message.success(res.message);
         }
         this.dataloading = false;

@@ -5,7 +5,7 @@
  * @Date: 2019-01-03 20:14:16
  * @Description: 权限菜单管理
  * @LastEditors: 李志刚
- * @LastEditTime: 2020-09-20 20:02:57
+ * @LastEditTime: 2021-02-26 10:32:36
  * @FilePath: /CoinCMF/app/Http/Controllers/Console/Rbac/MenuController.php
  */
 
@@ -122,7 +122,7 @@ class MenuController extends ResponseController {
 	public function getTree() {
 		try {
 			// 所有菜单
-			$all = Menu::select('id', 'parentid', 'name', 'url')->orderBy('sort', 'asc')->orderBy('id', 'asc')->get();
+			$all = Menu::select('id', 'parentid', 'name', 'url', 'display','sort')->orderBy('sort', 'asc')->orderBy('id', 'asc')->get();
 			$tree = $this->toTree($all, 0);
 			return $this->resData(200, '获取成功...', $tree);
 		} catch (\Throwable $e) {
@@ -135,7 +135,7 @@ class MenuController extends ResponseController {
 		if ($data->count() > 0) {
 			foreach ($data as $v) {
 				if ($v->parentid == $pid) {
-					$v = ['menu_id' => $v->id, 'title' => $v->name, 'expand' => true];
+					$v = ['menu_id' => $v->id, 'title' => $v->name, 'sort' => $v->sort, 'display' => $v->display , '_showChildren' => true];
 					$v['children'] = $this->toTree($data, $v['menu_id']);
 					$tree[] = $v;
 				}
@@ -233,6 +233,31 @@ class MenuController extends ResponseController {
 			return $this->resData(200, '获取成功...', $detail);
 		} catch (\Throwable $e) {
 			return $this->resData(500, '获取失败，请稍后再试...');
+		}
+	}
+	// 取单条信息
+	public function postSort(Request $req)
+	{
+		try {
+			$validator = Validator::make($req->input(), [
+				'menu_id' => 'required|integer',
+				'sort' => 'required|integer',
+			]);
+			$attrs = array(
+				'menu_id' => '菜单ID',
+				'sort' => '排序',
+			);
+			$validator->setAttributeNames($attrs);
+			if ($validator->fails()) {
+				// 如果有错误，提示第一条
+				return $this->resData(400, $validator->errors()->all()[0] . '...');
+			}
+			$menu_id = $req->input('menu_id');
+			$sort = $req->input('sort');
+			Menu::where('id',$menu_id)->update(['sort'=>$sort]);
+			return $this->resData(200, '排序成功...');
+		} catch (\Throwable $e) {
+			return $this->resData(500, '排序失败，请稍后再试...');
 		}
 	}
 	// 删除一条，同时删除子菜单

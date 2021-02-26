@@ -5,7 +5,7 @@
  * @Date: 2019-01-03 20:14:16
  * @Description: 角色管理
  * @LastEditors: 李志刚
- * @LastEditTime: 2020-09-20 21:12:36
+ * @LastEditTime: 2021-02-26 08:45:54
  * @FilePath: /CoinCMF/app/Http/Controllers/Console/Rbac/RoleController.php
  */
 
@@ -73,6 +73,27 @@ class RoleController extends ResponseController
             return $this->resData(500,'创建角色失败，请稍后再试...');
         }
     }
+    // 查看单条信息
+    public function postDetail(Request $req)
+    {
+        try {
+            $validator = Validator::make($req->input(), [
+                'role_id' => 'required|integer',
+            ]);
+            $attrs = array(
+                'role_id' => '角色ID',
+            );
+            $validator->setAttributeNames($attrs);
+            if ($validator->fails()) {
+                // 如果有错误，提示第一条
+                return $this->resData(400, $validator->errors()->all()[0] . '...');
+            }
+            $role = Role::findOrFail($req->input('role_id'));
+            return $this->resData(200, '查询成功...', $role);
+        } catch (\Throwable $e) {
+            return $this->resData(500, '查询失败，请稍后再试...');
+        }
+    }
     // 修改名称
     public function postEdit(Request $req)
     {
@@ -80,10 +101,12 @@ class RoleController extends ResponseController
             $validator = Validator::make($req->input(), [
                 'role_id' => 'required|integer',
                 'name' => 'required|max:255',
+                'status' => 'required|in:true,false',
             ]);
             $attrs = array(
                 'role_id' => '角色ID',
                 'name' => '名称',
+                'status' => '状态',
             );
             $validator->setAttributeNames($attrs);
             if ($validator->fails()) {
@@ -91,7 +114,8 @@ class RoleController extends ResponseController
                 return $this->resData(400,$validator->errors()->all()[0].'...');
             }
             $name = $req->input('name');
-            Role::where('id',$req->input('role_id'))->update(['name'=>$name]);
+            $status = $req->input('status') == 'true' ? 1 : 0;
+            Role::where('id',$req->input('role_id'))->update(['name'=>$name,'status'=> $status]);
             return $this->resData(200,'更新角色名称成功...');
         } catch (\Throwable $e) {
             return $this->resData(500,'更新角色名称失败，请稍后再试...');
@@ -126,7 +150,7 @@ class RoleController extends ResponseController
     {
         try {
             $validator = Validator::make($req->input(), [
-                'role_id' => 'required|integer',
+                'role_id' => 'required|array',
             ]);
             $attrs = array(
                 'role_id' => '角色ID',
@@ -137,7 +161,7 @@ class RoleController extends ResponseController
                 return $this->resData(400,$validator->errors()->all()[0].'...');
             }
             $rid = $req->input('role_id');
-            if ($rid === 1) {
+            if (in_array(1, $rid)) {
                 return $this->resData(403,'超级管理员组不能删除...');
             }
             // 查询下属用户
@@ -147,7 +171,7 @@ class RoleController extends ResponseController
                 DB::beginTransaction();
                 try {
                     // 同时删除关联的用户关系
-                    Role::destroy($rid);
+                    Role::whereIn('id',$rid)->delete();
                     Priv::where('role_id',$rid)->delete();
                     // 没出错，提交事务
                     DB::commit();
@@ -160,7 +184,7 @@ class RoleController extends ResponseController
             }
             else
             {
-                return $this->resData(403,'此角色下有用户...');
+                return $this->resData(403,'角色下有用户，请先确认所有用户身份已更改完成...');
             }
         } catch (\Throwable $e) {
             return $this->resData(500,'删除角色失败，请稍后再试...');
@@ -234,8 +258,7 @@ class RoleController extends ResponseController
             $rid = $req->input('role_id');
             Priv::where('role_id',$rid)->delete();
             // 所有选中的菜单url，以此查找出所有url label
-            $ids = $req->input('menu_id','');
-            $ids = explode(',',$ids);
+            $ids = $req->input('menu_id',[]);
             $all = Menu::whereIn('id',$ids)->get();
             // 将查出来的数据组成数组插入到role_privs表里
             if (!is_null($all) && count($all) > 0) {
@@ -247,7 +270,7 @@ class RoleController extends ResponseController
             DB::commit();
             return $this->resData(200,'更新权限菜单成功...');
         } catch (\Throwable $e) {
-            return $this->resData(500,'更新权限菜单失败，请稍后再试...');
+            return $this->resData(500,'更新权限菜单失败，请稍后再试...',$e->getMessage());
         }
     }
 }

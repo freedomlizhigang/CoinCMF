@@ -28,6 +28,10 @@ const section = {
   // 删除
   remove(params) {
     return axios.post(api + 'section/remove', qs.stringify(params))
+  },
+  // 单条信息
+  detail(params) {
+    return axios.post(api + 'section/detail', qs.stringify(params))
   }
 }
 

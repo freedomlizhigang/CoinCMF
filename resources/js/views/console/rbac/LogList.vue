@@ -4,7 +4,7 @@
         <Col :xs="24" :sm="12">
             <Form :model="formItem" ref="formItem" :inline="true" action="javascript:void(0)">
                 <FormItem>
-                    <Select v-model="formItem.admin_id" :style="{'width':'180px'}">
+                    <Select clearable v-model="formItem.admin_id" :style="{'width':'180px'}">
                         <Option v-for="item in adminList" :value="item.id" :key="item.id">{{ item.name }}</Option>
                     </Select>
                 </FormItem>

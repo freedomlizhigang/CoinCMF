@@ -5,7 +5,7 @@
  * @Date: 2019-01-03 20:14:16
  * @Description: 管理员管理
  * @LastEditors: 李志刚
- * @LastEditTime: 2020-09-20 21:25:17
+ * @LastEditTime: 2021-02-26 08:03:45
  * @FilePath: /CoinCMF/app/Http/Controllers/Console/Rbac/AdminController.php
  */
 
@@ -277,7 +277,7 @@ class AdminController extends ResponseController
         DB::beginTransaction();
         try {
             $validator = Validator::make($req->input(), [
-                'admin_id' => 'required|integer',
+                'admin_id' => 'required|array',
             ]);
             $attrs = array(
                 'admin_id' => '用户ID',
@@ -288,7 +288,7 @@ class AdminController extends ResponseController
                 return $this->resData(400,$validator->errors()->all()[0].'...');
             }
             $id = $req->input('admin_id');
-            Admin::destroy($id);
+            Admin::whereIn('id',$id)->delete();
             RoleUser::where('user_id',$id)->delete();
             DB::commit();
             return $this->resData(200,'删除用户成功...');

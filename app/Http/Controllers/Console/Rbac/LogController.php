@@ -5,7 +5,7 @@
  * @Date: 2019-01-03 20:14:16
  * @Description: 所有非get请求的日志
  * @LastEditors: 李志刚
- * @LastEditTime: 2020-09-23 08:42:11
+ * @LastEditTime: 2021-02-26 10:46:34
  * @FilePath: /CoinCMF/app/Http/Controllers/Console/Rbac/LogController.php
  */
 
@@ -28,14 +28,17 @@ class LogController extends ResponseController
             $req_user = $req->req_user;
             // 超级管理员可以查看所有用户日志，其它人只能看自己的
             if ($req_user->id == '1') {
-                $admin_id = $req_user->id;
-                if ($admin_id != 0) {
-                    $list = Log::where('admin_id', $admin_id)->offset(($page - 1) * $size)->limit($size)->orderBy('id', 'desc')->get();
-                    $total = Log::where('admin_id', $admin_id)->count();
-                } else {
-                    $list = Log::offset(($page - 1) * $size)->limit($size)->orderBy('id', 'desc')->get();
-                    $total = Log::count();
-                }
+                $admin_id = $req->input('admin_id',0);
+                $list = Log::where(function ($q) use ($admin_id) {
+                    if ($admin_id != '0') {
+                        $q->where('admin_id', $admin_id);
+                    }
+                })->offset(($page - 1) * $size)->limit($size)->orderBy('id', 'desc')->get();
+                $total = Log::where(function ($q) use ($admin_id) {
+                    if ($admin_id != '0') {
+                        $q->where('admin_id', $admin_id);
+                    }
+                })->count();
             } else {
                 $list = Log::where('admin_id', $req_user->id)->offset(($page - 1) * $size)->limit($size)->orderBy('id', 'desc')->get();
                 $total = Log::where('admin_id', $req_user->id)->count();

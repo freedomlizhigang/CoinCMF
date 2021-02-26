@@ -36,7 +36,11 @@ const menu = {
   // 删除
   remove(params) {
     return axios.post(api + 'menu/remove', qs.stringify(params))
-  }
+  },
+  // 排序
+  sort(params) {
+    return axios.post(api + 'menu/sort', qs.stringify(params))
+  },
 }
 
 

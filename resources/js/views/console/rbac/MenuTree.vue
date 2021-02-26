@@ -1,70 +1,65 @@
 <template>
-    <div class="menutree">
-        <Row>
-            <Col :xs="24" :sm="8">
-            <div class="menutree-left">
-                <Button type="default" long @click="addMenu">添加一级菜单</Button>
-                <Tree :data="menutree" ref="menutree" :render="renderMenu" class="mt10"></Tree>
-            </div>
-            </Col>
-            <Col :xs="0" :sm="1" >
-                <div class="menutree-border"></div>
-            </Col>
-            <Col :xs="24" :sm="15">
-                <Form ref="menuData" :model="menuData" :rules="menuValidate" action="javascript:void(0)">
-                    <FormItem label="父级菜单" prop="parentid">
-                        <Select v-model="menuData.parentid">
-                          <Option value="0" key="0">一级菜单</Option>
-                          <Option v-for="item in menuSelect" :value="item.value" :key="item.value">{{ item.label }}</Option>
-                        </Select>
-                    </FormItem>
-                    <FormItem label="菜单名称" prop="name">
-                        <Input v-model="menuData.name" placeholder="请输入权限菜单名称..."></Input>
-                    </FormItem>
-                    <FormItem label="菜单URL" prop="url">
-                        <Input v-model="menuData.url" placeholder="请输入权限菜单URL..."></Input>
-                    </FormItem>
-                    <FormItem label="菜单标签" prop="label">
-                        <Input v-model="menuData.label" placeholder="请输入权限菜单标签..."></Input>
-                    </FormItem>
-                    <FormItem label="菜单图标">
-                        <Input v-model="menuData.icon" placeholder="请输入权限菜单图标..."></Input>
-                    </FormItem>
-                    <FormItem label="显示状态">
-                        <i-switch v-model="menuData.display">
-                            <span slot="on">显示</span>
-                            <span slot="off">隐藏</span>
-                        </i-switch>
-                    </FormItem>
-                    <FormItem label="排序">
-                        <InputNumber :max="9999" :min="0" v-model="menuData.sort"></InputNumber>
-                    </FormItem>
-                    <FormItem>
-                        <Button type="primary" @click="handleSubmit('menuData')">提交</Button>
-                        <Button style="margin-left: 8px" @click="handleReset('menuData')">重置</Button>
-                    </FormItem>
-                </Form>
-            </Col>
-        </Row>
+  <div class="menutree">
+      <!-- 批量操作 -->
+    <div class="action-btn">
+      <Button size="small" @click="addMenu" type="success">添加一级菜单</Button>
     </div>
+    <div class="menutree-left">
+        <Table border height="650" ref="roleList" row-key="menu_id" :columns="list" :data="menutree" :loading="dataloading">
+          <template slot-scope="{ row }" slot="sort">
+            <InputNumber v-model="row.sort" size="small" :min="0" @on-change="sortDetail(row.menu_id,$event)" />
+          </template>
+          <template slot-scope="{ row }" slot="display">
+            <Tag v-if="row.display" color="cyan">显示</Tag>
+            <Tag v-if="!row.display" color="orange">隐藏</Tag>
+          </template>
+        </Table>
+    </div>
+    <!-- 需要全屏时添加这句 :mask="false" class-name="idw100" -->
+    <Drawer :closable="false" :mask-closable="false" :scrollable="true" title="添加角色" width="640" v-model="showModalStatus">
+      <Spin size="large" fix v-if="loading"></Spin>
+      <Form ref="menuData" :model="menuData" :rules="menuValidate" action="javascript:void(0)">
+        <FormItem label="父级菜单" prop="parentid">
+            <Select clearable v-model="menuData.parentid">
+              <Option value="0" key="0">一级菜单</Option>
+              <Option v-for="item in menuSelect" :value="item.value" :key="item.value">{{ item.label }}</Option>
+            </Select>
+        </FormItem>
+        <FormItem label="菜单名称" prop="name">
+            <Input v-model="menuData.name" placeholder="请输入权限菜单名称..."></Input>
+        </FormItem>
+        <FormItem label="菜单URL" prop="url">
+            <Input v-model="menuData.url" placeholder="请输入权限菜单URL..."></Input>
+        </FormItem>
+        <FormItem label="菜单标签" prop="label">
+            <Input v-model="menuData.label" placeholder="请输入权限菜单标签..."></Input>
+        </FormItem>
+        <FormItem label="菜单图标">
+            <Input v-model="menuData.icon" placeholder="请输入权限菜单图标..."></Input>
+        </FormItem>
+        <FormItem label="显示状态">
+            <i-switch v-model="menuData.display">
+                <span slot="on">显示</span>
+                <span slot="off">隐藏</span>
+            </i-switch>
+        </FormItem>
+        <FormItem label="排序">
+            <InputNumber :max="9999" :min="0" v-model="menuData.sort"></InputNumber>
+        </FormItem>
+        <FormItem>
+            <Button style="margin-right: 8px" @click="handleReset('menuData')">取消</Button>
+            <Button type="primary" @click="handleSubmit('menuData')">提交</Button>
+        </FormItem>
+    </Form>
+    </Drawer>
+  </div>
 </template>
-
-<style>
-    .menutree-left {
-        overflow-x: hidden;
-    }
-    .menutree-border {
-        border-left: #EEEEEE dashed 2px;
-        width: 0px;
-        margin:0 auto;
-        min-height: 70vh;
-    }
-</style>
 
 <script>
 export default {
   data() {
     return {
+      dataloading: true,
       menuData: {
         id: 0,
         parentid: 0,
@@ -87,19 +82,76 @@ export default {
         ]
       },
       menutree: [],
-      btnDetail: {
-        type: 'info',
-        size: 'small'
-      },
-      btnEdit: {
-        type: 'primary',
-        size: 'small'
-      },
-      btnRemove: {
-        type: 'default',
-        size: 'small'
-      },
-      menuSelect: []
+      list: [
+        {
+          title: '名称',
+          minWidth: 300,
+          key: 'title',
+          tree: true,
+        },
+        {
+          title: '排序',
+          width: 100,
+          slot: 'sort',
+        },
+        {
+          title: '显示',
+          width: 100,
+          slot: 'display',
+        },
+        {
+          title: '操作',
+          key: 'action',
+          width: 200,
+          align: 'left',
+          render: (h, params) => {
+            return h('div', [
+              h('Button', {
+                style: {
+                  marginRight: '8px'
+                },
+                props: {
+                  type: 'primary',
+                  size: 'small'
+                },
+                on: {
+                  click: () => {
+                    this.append(params.row)
+                  }
+                }
+              }, '子菜单'),
+              h('Button', {
+                style: {
+                  marginRight: '8px',
+                },
+                props: {
+                  type: 'info',
+                  size: 'small'
+                },
+                on: {
+                  click: () => {
+                    this.detail(params.row)
+                  }
+                }
+              }, '修改'),
+              h('Button', {
+                props: {
+                  type: 'error',
+                  size: 'small'
+                },
+                on: {
+                  click: () => {
+                    this.remove(params.row)
+                  }
+                }
+              }, '删除')
+            ]);
+          }
+        }
+      ],
+      menuSelect: [],
+      showModalStatus: false,
+      loading: false,
     }
   },
   created: function() {
@@ -109,6 +161,7 @@ export default {
     handleSubmit(name) {
       this.$refs[name].validate((valid) => {
         if (valid) {
+          this.loading = true;
           // 判断是添加还是修改
           if (this.menuData.id == 0) {
             this.$api.menu.create(this.menuData).then(res => {
@@ -116,8 +169,11 @@ export default {
                 this.menuData = res.result;
                 // 更新左侧的树
                 this.getMenuTree();
+                this.loading = false;
                 this.$Message.success('添加权限菜单成功...');
+                this.showModalStatus = !this.showModalStatus
               } else {
+                this.loading = false;
                 this.$Message.error(res.message);
               }
             });
@@ -127,8 +183,11 @@ export default {
               if (res.code == 200) {
                 // 更新左侧的树
                 this.getMenuTree();
+                this.loading = false;
                 this.$Message.success('修改权限菜单成功...');
+                this.showModalStatus = !this.showModalStatus
               } else {
+                this.loading = false;
                 this.$Message.error(res.message);
               }
             });
@@ -137,75 +196,19 @@ export default {
       })
     },
     handleReset(name) {
+      this.showModalStatus = !this.showModalStatus
       this.$refs[name].resetFields();
     },
     getMenuTree: function() {
       var self = this
       this.$api.menu.tree().then(res => {
         this.menutree = res.result
+        this.dataloading = false
       });
-    },
-    // 追加一个添加子栏目的按钮，和删除子栏目的按钮
-    renderMenu(h, { root, node, data }) {
-      return h('span', {
-        style: {
-          display: 'inline-block',
-          width: '100%'
-        }
-      }, [
-        h('span', [
-            h('Icon', {
-                props: {
-                    type: 'ios-paper-outline'
-                },
-                style: {
-                    marginRight: '8px'
-                }
-            }),
-            h('span', data.title)
-        ]),
-        h('span', {
-            style: {
-                display: 'inline-block',
-                float: 'right',
-                marginRight: '20px'
-            }
-        }, [
-          h('Button', {
-            props: Object.assign({}, this.btnDetail, {
-              icon: 'ios-build-outline'
-            }),
-            style: {
-              marginRight: '8px'
-            },
-            on: {
-              click: () => { this.detail(data) }
-            }
-          }),
-          h('Button', {
-            props: Object.assign({}, this.btnEdit, {
-              icon: 'ios-add'
-            }),
-            style: {
-              marginRight: '8px'
-            },
-            on: {
-              click: () => { this.append(data) }
-            }
-          }),
-          h('Button', {
-            props: Object.assign({}, this.btnRemove, {
-              icon: 'ios-remove'
-            }),
-            on: {
-              click: () => { this.remove(root, node, data) }
-            }
-          })
-        ])
-      ]);
     },
     // 单条选中
     detail(data) {
+      this.showModalStatus = !this.showModalStatus
       this.$api.menu.select().then(res => {
         if (res.code == 200) {
           this.menuSelect = res.result;
@@ -222,6 +225,7 @@ export default {
     },
     // 添加
     append(data) {
+      this.showModalStatus = !this.showModalStatus
       // 取到parentid，其它置空
       this.menuData = {
         id: 0,
@@ -233,10 +237,10 @@ export default {
         display: true,
         sort: 0
       };
-      this.$Message.success('在右侧输入内容并提交...');
     },
     // 添加一级菜单
     addMenu() {
+      this.showModalStatus = !this.showModalStatus;
       // 取到parentid，其它置空
       this.menuData = {
         id: 0,
@@ -248,10 +252,9 @@ export default {
         display: true,
         sort: 0
       };
-      this.$Message.success('在右侧输入内容并提交...');
     },
     // 修改
-    remove(root, node, data) {
+    remove(data) {
       // 弹出提示
       this.$Modal.confirm({
         title: '警告',
@@ -259,6 +262,7 @@ export default {
         onOk: () => {
           this.$api.menu.remove({ 'menu_id': data.menu_id }).then(res => {
             if (res.code == 200) {
+              this.$Message.success(res.message);
               // 更新左侧的树
               this.getMenuTree();
             } else {
@@ -267,6 +271,14 @@ export default {
           });
         },
         onCancel: () => {
+        }
+      });
+    },
+    sortDetail(id,value){
+      this.$api.menu.sort({ menu_id: id, sort: value }).then(res => {
+        if (res.code == 200) {
+          this.$Message.success(res.message);
+          this.getMenuTree();
         }
       });
     }

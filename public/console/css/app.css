@@ -142,6 +142,24 @@
 .ivu-layout-content {
 	margin: -80px 20px 20px 20px;  position: relative; z-index:800; border-radius: 3px
 }
+.action-btn {
+    padding:10px;
+    border:#e8eaec solid 1px;
+    border-bottom: 0;
+    background: #f8f8f9;
+}
+.table-page {
+    padding:10px;
+    border:#e8eaec solid 1px;
+    border-top: 0;
+    background: #f8f8f9;
+}
+.ivu-table-border td, .ivu-table-border th {
+    border-right: 0;
+}
+.ivu-table-wrapper-with-border {
+    border-bottom: 0;
+}
 /* 版权 */
 .layout-footer-center{
     text-align: center;

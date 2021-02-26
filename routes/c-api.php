@@ -109,6 +109,7 @@ Route::group(['prefix'=>'c-api','namespace' => 'Console','middleware'=>['c-api',
     Route::group(['prefix' => 'role', 'namespace' => 'Rbac'], function () {
         Route::get('list', 'RoleController@getList');
         Route::post('create', 'RoleController@postCreate');
+        Route::post('detail', 'RoleController@postDetail');
         Route::post('edit', 'RoleController@postEdit');
         Route::post('remove', 'RoleController@postRemove');
         Route::post('status', 'RoleController@postStatus');
@@ -119,6 +120,7 @@ Route::group(['prefix'=>'c-api','namespace' => 'Console','middleware'=>['c-api',
     Route::group(['prefix' => 'section', 'namespace' => 'Rbac'], function () {
         Route::get('list', 'SectionController@getList');
         Route::post('create', 'SectionController@postCreate');
+        Route::post('detail', 'SectionController@postDetail');
         Route::post('edit', 'SectionController@postEdit');
         Route::post('remove', 'SectionController@postRemove');
         Route::post('status', 'SectionController@postStatus');
@@ -131,6 +133,7 @@ Route::group(['prefix'=>'c-api','namespace' => 'Console','middleware'=>['c-api',
         Route::post('detail', 'MenuController@postDetail');
         Route::post('create', 'MenuController@postCreate');
         Route::post('edit', 'MenuController@postEdit');
+        Route::post('sort', 'MenuController@postSort');
         Route::post('remove', 'MenuController@postRemove');
     });
     // 直接用正则控制所有错误请求到一个地址
