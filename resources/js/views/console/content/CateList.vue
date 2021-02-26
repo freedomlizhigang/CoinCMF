@@ -1,27 +1,51 @@
 <template>
   <div class="cate-list">
-    <Table border height="600" :columns="columns" ref="tableList" :data="tablelist" :loading="dataloading" class="mt10"></Table>
+    <div class="action-btn">
+      <Button size="small" @click="showCreate(0)" type="success">添加分类</Button>
+    </div>
+    <Table border height="650" ref="tableList" row-key="cate_id" :columns="list" :data="tablelist" :loading="dataloading">
+      <template slot-scope="{ row }" slot="type">
+        <Tag v-if="row.type" color="purple">单页</Tag>
+        <Tag v-if="!row.type" color="blue">栏目</Tag>
+      </template>
+      <template slot-scope="{ row }" slot="link_flag">
+        <Tag v-if="row.link_flag" color="cyan">是</Tag>
+        <Tag v-if="!row.link_flag" color="orange">否</Tag>
+      </template>
+      <template slot-scope="{ row }" slot="sort">
+        <InputNumber v-model="row.sort" size="small" :min="0" @on-change="sortDetail(row.cate_id,$event)" />
+      </template>
+    </Table>
+    <!-- 需要全屏时添加这句 :mask="false" class-name="idw100" -->
+    <Drawer :mask="false" class-name="idw100" :closable="false" :mask-closable="false" :scrollable="true" title="分类管理" width="640" v-model="showModalStatus">
+      <cate-add ref="cateAdd" @childChangeShow="showCreate"></cate-add>
+      <div class="drawer-footer">
+          <Button style="margin-right: 8px" @click="showModalStatus = false">取消</Button>
+          <Button type="primary" @click="cateCreate('cateValidate')">提交</Button>
+      </div>
+    </Drawer>
   </div>
 </template>
 
 <script>
 // import catelist from ".././data/catelist.json";
+import CateAdd from './CateAdd'
 export default {
   name: 'CateList',
   data() {
     return {
       dataloading: true,
-      columns: [
+      list: [
         {
-          title: 'Id',
-          key: 'id',
-          width: 80,
-          fixed: 'left'
+          title: 'ID',
+          key: 'cate_id',
+          width: 60,
         },
         {
           title: '名称',
           minWidth: 300,
           key: 'name',
+          tree: true,
           render: (h, params) => {
             return h('span', {
               style: {
@@ -32,47 +56,23 @@ export default {
         },
         {
           title: '类型',
-          width: 75,
-          key: 'type',
-          render: (h, params) => {
-            return h('span', {}, params.row.type ? '单页' : '栏目')
-          }
+          slot: 'type',
+          width: 100,
         },
         {
           title: '外链',
-          width: 75,
-          key: 'link_flag',
-          render: (h, params) => {
-            return h('span', {}, params.row.link_flag ? '是' : '否')
-          }
+          slot: 'link_flag',
+          width: 100,
         },
         {
           title: '排序',
-          key: 'sort',
+          slot: 'sort',
           width: 150,
-          render: (h, params) => {
-            return h('div', [
-              h('InputNumber', {
-                props: {
-                  min: 0,
-                  value: params.row.sort,
-                  size: 'small',
-                  number: true,
-                  activeChange:false
-                },
-                on: {
-                  'on-change': (value) => {
-                    this.sort(params.row.id, value)
-                  }
-                }
-              }, '排序')
-            ]);
-          }
         },
         {
           title: '操作',
           key: 'action',
-          width: 130,
+          width: 180,
           align: 'left',
           render: (h, params) => {
             return h('div', [
@@ -86,7 +86,7 @@ export default {
                 },
                 on: {
                   click: () => {
-                    this.edit(params.row.id)
+                    this.showEdit(params.row.cate_id)
                   }
                 }
               }, '修改'),
@@ -97,7 +97,7 @@ export default {
                 },
                 on: {
                   click: () => {
-                    this.remove(params.row.id)
+                    this.remove(params.row.cate_id)
                   }
                 }
               }, '删除')
@@ -114,12 +114,34 @@ export default {
       },
       showModalStatus: false,
       cateValidate: {
-        name: [
-          { required: true, message: '名称必须填写', trigger: 'blur' }
-        ]
-      }
+                parentid: [
+                    { required: true, type:'integer', message: '栏目必须填写', trigger: 'change' }
+                ],
+                name: [
+                    { required: true, message: '名称必须填写', trigger: 'blur' }
+                ],
+                title: [
+                    { required: true, message: '标题必须填写', trigger: 'blur' }
+                ],
+                describe: [
+                    { required: false, message: '描述不能超过255个字符', max: 255, trigger: 'blur' }
+                ],
+                cate_tpl: [
+                    { required: true, message: '栏目模板必须填写', trigger: 'blur' }
+                ],
+                art_tpl: [
+                    { required: true, message: '文章模板必须填写', trigger: 'blur' }
+                ],
+                sort: [
+                    { required: true, type: 'integer', message: '排序必须填写', trigger: 'blur' }
+                ],
+            },
     }
   },
+  // 组件
+    components: {
+        CateAdd
+    },
   // 计算
   computed: {
   },
@@ -145,6 +167,14 @@ export default {
       // this.$Message.success("获取成功");
       return;
     },
+    // 展开添加
+    showCreate(parentid) {
+      this.showModalStatus = !this.showModalStatus;
+    },
+    cateCreate(name){
+      this.$refs['cateAdd'].submitAdd('articleAdd');
+      // this.showModalStatus = !this.showModalStatus;
+    },
     edit: function(index) {
       this.$router.push('/cate/edit/' + index);
     },
@@ -164,7 +194,7 @@ export default {
         }
       });
     },
-    sort: function(id, sort) {
+    sortDetail: function(id, sort) {
       this.$api.cate.sort({ cate_id: id, sort: sort }).then(res => {
         if (res.code == 200) {
           this.$Message.success(res.message);

@@ -188,6 +188,10 @@
 }
 .idw100 .drawer-footer {
     width: calc(100% - 200px);
+    padding-left: 45px;
+}
+.pb60 {
+    padding-bottom: 60px;
 }
 
 

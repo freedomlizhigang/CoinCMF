@@ -1,5 +1,5 @@
 <template>
-<div class="article-add">
+<div class="article-add pb60">
     <Form :model="formItem" ref="articleAdd" label-position="right" :rules="artValidate" :label-width="80" action="javascript:void(0)">
         <FormItem label="父栏目" prop="parentid">
             <Select v-model="formItem.parentid" :style="{'width':'240px'}">
@@ -57,8 +57,6 @@
             <InputNumber :max="9999" :min="0" v-model="formItem.sort"></InputNumber>
         </FormItem>
         <FormItem>
-        <Button>重置</Button>
-        <Button type="primary" @click="submitAdd('articleAdd')" style="margin-left: 8px">提交</Button>
     </FormItem>
 </Form>
 </div>
@@ -155,7 +153,8 @@ export default {
                         // console.log(res)
                         if (res.code == 200) {
                             this.$Message.success(res.message);
-                            this.$router.push('/cate/list');
+                            // 关掉弹出
+                            this.$emit('showCreate',false);
                         }
                     });
                     return;
