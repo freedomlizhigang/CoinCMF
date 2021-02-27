@@ -17,11 +17,18 @@
       </template>
     </Table>
     <!-- 需要全屏时添加这句 :mask="false" class-name="idw100" -->
-    <Drawer :mask="false" class-name="idw100" :closable="false" :mask-closable="false" :scrollable="true" title="分类管理" width="640" v-model="showModalStatus">
-      <cate-add ref="cateAdd" @childChangeShow="showCreate"></cate-add>
+    <Drawer :mask="false" class-name="idw100" :closable="false" :mask-closable="false" :scrollable="true" title="添加分类" width="640" v-model="showModalStatus">
+      <cate-add ref="cateAdd" @showCreate="showCreate($event)"></cate-add>
       <div class="drawer-footer">
           <Button style="margin-right: 8px" @click="showModalStatus = false">取消</Button>
-          <Button type="primary" @click="cateCreate('cateValidate')">提交</Button>
+          <Button type="primary" :loading="loading" @click="cateCreate()">提交</Button>
+      </div>
+    </Drawer>
+    <Drawer :mask="false" class-name="idw100" :closable="false" :mask-closable="false" :scrollable="true" title="修改分类" width="640" v-model="showEditModalStatus">
+      <cate-edit ref="cateEdit" @showEdit="showEdit($event)"></cate-edit>
+      <div class="drawer-footer">
+          <Button style="margin-right: 8px" @click="showEditModalStatus = false">取消</Button>
+          <Button type="primary" :loading="loading" @click="cateEdit()">提交</Button>
       </div>
     </Drawer>
   </div>
@@ -30,11 +37,13 @@
 <script>
 // import catelist from ".././data/catelist.json";
 import CateAdd from './CateAdd'
+import CateEdit from './CateEdit'
 export default {
   name: 'CateList',
   data() {
     return {
       dataloading: true,
+      loading:false,
       list: [
         {
           title: 'ID',
@@ -86,7 +95,7 @@ export default {
                 },
                 on: {
                   click: () => {
-                    this.showEdit(params.row.cate_id)
+                    this.showEdit(0,params.row.cate_id)
                   }
                 }
               }, '修改'),
@@ -113,34 +122,13 @@ export default {
         sort: 0
       },
       showModalStatus: false,
-      cateValidate: {
-                parentid: [
-                    { required: true, type:'integer', message: '栏目必须填写', trigger: 'change' }
-                ],
-                name: [
-                    { required: true, message: '名称必须填写', trigger: 'blur' }
-                ],
-                title: [
-                    { required: true, message: '标题必须填写', trigger: 'blur' }
-                ],
-                describe: [
-                    { required: false, message: '描述不能超过255个字符', max: 255, trigger: 'blur' }
-                ],
-                cate_tpl: [
-                    { required: true, message: '栏目模板必须填写', trigger: 'blur' }
-                ],
-                art_tpl: [
-                    { required: true, message: '文章模板必须填写', trigger: 'blur' }
-                ],
-                sort: [
-                    { required: true, type: 'integer', message: '排序必须填写', trigger: 'blur' }
-                ],
-            },
+      showEditModalStatus: false,
     }
   },
   // 组件
     components: {
-        CateAdd
+        CateAdd,
+        CateEdit
     },
   // 计算
   computed: {
@@ -155,28 +143,56 @@ export default {
   methods: {
     getTableList: function() {
       this.$api.cate.list().then(res => {
-        // console.log(res)
         this.dataloading = false;
         if (res.code == 200) {
           this.tablelist = res.result;
           this.$Message.success(res.message);
         }
       });
-      // this.dataloading = false;
-      // this.tablelist = catelist;
-      // this.$Message.success("获取成功");
       return;
     },
-    // 展开添加
-    showCreate(parentid) {
-      this.showModalStatus = !this.showModalStatus;
+    // 展开添加，0打开编辑，1开loading，2 关loading，3全关闭，
+    showCreate(show) {
+      if (show == 0) {
+        this.showModalStatus = !this.showModalStatus;
+      }
+      if (show == 1) {
+        this.loading = true;
+      }
+      if (show == 2) {
+        this.loading = false;
+      }
+      if (show == 3) {
+        this.loading = false;
+        this.showModalStatus = !this.showModalStatus;
+        this.getTableList();
+      }
     },
-    cateCreate(name){
-      this.$refs['cateAdd'].submitAdd('articleAdd');
-      // this.showModalStatus = !this.showModalStatus;
+    // 提交创建
+    cateCreate(){
+      this.$refs['cateAdd'].submitAdd('cateAdd');
     },
-    edit: function(index) {
-      this.$router.push('/cate/edit/' + index);
+    // 展开添加，0打开编辑，1开loading，2 关loading，3全关闭，
+    showEdit(show,cate_id) {
+      if (show == 0) {
+        this.$refs['cateEdit'].getData(cate_id);
+        this.showEditModalStatus = !this.showEditModalStatus;
+      }
+      if (show == 1) {
+        this.loading = true;
+      }
+      if (show == 2) {
+        this.loading = false;
+      }
+      if (show == 3) {
+        this.loading = false;
+        this.showEditModalStatus = !this.showEditModalStatus;
+        this.getTableList();
+      }
+    },
+    // 提交创建
+    cateEdit(){
+      this.$refs['cateEdit'].submitAdd('cateEdit');
     },
     // 删除
     remove: function(id) {

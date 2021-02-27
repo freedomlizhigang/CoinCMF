@@ -1,6 +1,6 @@
 <template>
 <div class="article-add pb60">
-    <Form :model="formItem" ref="articleAdd" label-position="right" :rules="artValidate" :label-width="80" action="javascript:void(0)">
+    <Form :model="formItem" ref="cateAdd" label-position="right" :rules="artValidate" :label-width="80" action="javascript:void(0)">
         <FormItem label="父栏目" prop="parentid">
             <Select v-model="formItem.parentid" :style="{'width':'240px'}">
                 <Option :value="0" :key="0">一级栏目</Option>
@@ -136,9 +136,11 @@ export default {
         },
         // 提交保存
         submitAdd(name) {
+            this.$emit('showCreate',1);
             this.$refs[name].validate((valid) => {
                 if (!valid) {
                     this.$Message.error('请检查输入的信息是否正确！');
+                    this.$emit('showCreate',2);
                 } else {
                     // 图片
                     if (this.$refs['uploadthumb'].uploadList.length) {
@@ -154,8 +156,9 @@ export default {
                         if (res.code == 200) {
                             this.$Message.success(res.message);
                             // 关掉弹出
-                            this.$emit('showCreate',false);
+                            this.$emit('showCreate',3);
                         }
+                        this.$emit('showCreate',2);
                     });
                     return;
                 }

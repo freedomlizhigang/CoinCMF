@@ -1,64 +1,62 @@
 <template>
-<div class="article-add">
-    <Form :model="formItem" ref="articleAdd" label-position="right" :rules="artValidate" :label-width="80" action="javascript:void(0)">
+<div class="cate-edit pb60">
+    <Form :model="formItemEdit" ref="cateEdit" label-position="right" :rules="cateEditValidate" :label-width="80" action="javascript:void(0)">
         <FormItem label="父栏目" prop="parentid">
-            <Select v-model="formItem.parentid" clearable :style="{'width':'240px'}">
+            <Select v-model="formItemEdit.parentid" clearable :style="{'width':'240px'}">
                 <Option :value="0" :key="0">一级栏目</Option>
                 <Option v-for="item in cateSelect" :value="item.value" :key="item.value">{{ item.label }}</Option>
             </Select>
         </FormItem>
         <FormItem label="栏目名称" prop="name">
-            <Input v-model="formItem.name"></Input>
+            <Input v-model="formItemEdit.name"></Input>
         </FormItem>
         <FormItem label="标题" prop="title">
-            <Input v-model="formItem.title"></Input>
+            <Input v-model="formItemEdit.title"></Input>
         </FormItem>
         <FormItem label="关键字" prop="keyword">
-            <Input v-model="formItem.keyword"></Input>
+            <Input v-model="formItemEdit.keyword"></Input>
         </FormItem>
         <FormItem label="描述" prop="describe">
-            <Input type="textarea" v-model="formItem.describe" :autosize="{minRows:4,maxRows:8}"></Input>
+            <Input type="textarea" v-model="formItemEdit.describe" :autosize="{minRows:4,maxRows:8}"></Input>
         </FormItem>
         <!-- 上传 -->
         <FormItem label="缩略图">
-            <upload-thumb v-model="formItem.thumb" ref="uploadthumb" :defaultList="thumblist"></upload-thumb>
+            <upload-thumb v-model="formItemEdit.thumb" ref="uploadthumb" :defaultList="thumblist"></upload-thumb>
         </FormItem>
         <FormItem label="栏目内容">
             <tinymce-editor ref="editContent"></tinymce-editor>
         </FormItem>
         <FormItem label="单页面">
-            <i-switch v-model="formItem.type" size="large" @on-change="typeChange">
+            <i-switch v-model="formItemEdit.type" size="large" @on-change="typeChange">
                 <span slot="open">是</span>
                 <span slot="close">否</span>
             </i-switch>
         </FormItem>
         <FormItem label="栏目模板">
-            <Input v-model="formItem.cate_tpl"></Input>
+            <Input v-model="formItemEdit.cate_tpl"></Input>
         </FormItem>
         <FormItem label="文章模板">
-            <Input v-model="formItem.art_tpl"></Input>
+            <Input v-model="formItemEdit.art_tpl"></Input>
         </FormItem>
         <FormItem label="是否显示">
-            <i-switch v-model="formItem.display" size="large" @on-change="displayChange">
+            <i-switch v-model="formItemEdit.display" size="large" @on-change="displayChange">
                 <span slot="open">是</span>
                 <span slot="close">否</span>
             </i-switch>
         </FormItem>
         <FormItem label="是否外链">
-            <i-switch v-model="formItem.link_flag" size="large" @on-change="linkChange">
+            <i-switch v-model="formItemEdit.link_flag" size="large" @on-change="linkChange">
                 <span slot="open">是</span>
                 <span slot="close">否</span>
             </i-switch>
         </FormItem>
         <FormItem label="外链" v-if="linkshow">
-            <Input v-model="formItem.url" placeholder="输入外部链接地址..."></Input>
+            <Input v-model="formItemEdit.url" placeholder="输入外部链接地址..."></Input>
         </FormItem>
         <FormItem label="排序" prop="sort">
-            <InputNumber :max="9999" :min="0" v-model="formItem.sort"></InputNumber>
+            <InputNumber :max="9999" :min="0" v-model="formItemEdit.sort"></InputNumber>
         </FormItem>
         <FormItem>
-        <Button>重置</Button>
-        <Button type="primary" @click="submitAdd('articleAdd')" style="margin-left: 8px">提交</Button>
     </FormItem>
 </Form>
 </div>
@@ -74,7 +72,7 @@ export default {
             cate_id: 0,
             cateSelect: [
             ],
-            formItem: {
+            formItemEdit: {
                 'parentid': 0,
                 'name': '',
                 'title': '',
@@ -93,7 +91,7 @@ export default {
             linkshow:false,
             // 有文件时用的
             thumblist: [],
-            artValidate: {
+            cateEditValidate: {
                 parentid: [
                     { required: true,type:'integer', message: '栏目必须填写', trigger: 'change' }
                 ],
@@ -124,65 +122,66 @@ export default {
         TinymceEditor
     },
     created: function() {
-        // 取数据
-        this.cate_id = this.$route.params.id;
-        this.getData1();
     },
     methods: {
         typeChange (status) {
-            this.formItem.type = status;
+            this.formItemEdit.type = status;
         },
         displayChange (status) {
-            this.formItem.display = status;
+            this.formItemEdit.display = status;
         },
         linkChange(status){
-            this.formItem.link_flag = status;
+            this.formItemEdit.link_flag = status;
             this.linkshow = status
         },
         // 提交保存
         submitAdd(name) {
             this.$refs[name].validate((valid) => {
+                this.$emit('showEdit',1);
                 if (!valid) {
                     this.$Message.error('请检查输入的信息是否正确！');
+                    this.$emit('showEdit',2);
                 } else {
                     // 图片
                     if (this.$refs['uploadthumb'].uploadList.length) {
-                        this.formItem.thumb = this.$refs['uploadthumb'].uploadList[0].url;
+                        this.formItemEdit.thumb = this.$refs['uploadthumb'].uploadList[0].url;
                     } else {
                         // this.$Message.error('请上传图片！');
                         // return;
                     }
                     // 富文本
-                    this.formItem.content = this.$refs['editContent'].tinymce_value
-                    const params = this.formItem
+                    this.formItemEdit.content = this.$refs['editContent'].tinymce_value
+                    const params = this.formItemEdit
                     params.category_id = this.cate_id;
                     // console.log(params)
                     this.$api.cate.edit(params).then(res => {
                         // console.log(res)
                         if (res.code == 200) {
                             this.$Message.success(res.message);
-                            this.$router.push('/cate/list');
+                            this.$emit('showEdit',3);
                         }
+                        this.$emit('showEdit',2);
                     });
                     return;
                 }
             })
         },
-        getData1: function() {
+        getData: function(cate_id) {
             var self = this;
+            self.cate_id = cate_id;
             // 更新编辑器
             this.$api.cate.select().then(res => {
                 if (res.code == 200) {
                     self.cateSelect = res.result;
                 }
             });
-            this.$api.cate.detail({ 'category_id': this.cate_id }).then(res => {
+            this.$api.cate.detail({ 'category_id': cate_id }).then(res => {
                 if (res.code == 200) {
-                    this.formItem = res.result;
+                    this.formItemEdit = res.result;
                     if (res.result.thumb != '' && res.result.thumb != null) {
                         this.thumblist.push({ 'name': '图片文件', 'url': res.result.thumb, 'status': 'finished' });
                     }
-                    this.linkshow = this.formItem.link_flag
+                    this.linkshow = this.formItemEdit.link_flag
                     // 更新编辑器
                     this.$refs['editContent'].tinymce_value = res.result.content
                 }
