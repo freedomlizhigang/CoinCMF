@@ -1,5 +1,5 @@
 <template>
-  <div class="article-add">
+  <div class="article-add pb60">
     <Form :model="formItem" ref="articleAdd" label-position="right" :rules="artValidate" :label-width="80" action="javascript:void(0)">
         <FormItem label="选择栏目" prop="cate_id">
             <Select v-model="formItem.cate_id" :style="{'width':'240px'}">
@@ -48,10 +48,6 @@
         </FormItem>
         <FormItem label="发布时间">
             <DatePicker v-model="formItem.publish_at" format="yyyy-MM-dd HH:mm:ss" type="datetime" placeholder="发布时间..." style="width: 200px"></DatePicker>
-        </FormItem>
-        <FormItem>
-            <Button>重置</Button>
-            <Button type="primary" @click="submitAdd('articleAdd')" style="margin-left: 8px">提交</Button>
         </FormItem>
     </Form>
   </div>
@@ -105,7 +101,7 @@ export default {
   },
   created: function() {
     // 取数据
-    this.getData1();
+    this.getData();
   },
   methods: {
     pushChange (status) {
@@ -117,9 +113,11 @@ export default {
     },
     // 提交保存
     submitAdd(name) {
+      this.$emit('showCreate',1);
       this.$refs[name].validate((valid) => {
         if (!valid) {
           this.$Message.error('请检查输入的信息是否正确！');
+          this.$emit('showCreate',2);
         } else {
           // 图片
           if (this.$refs['uploadthumb'].uploadList.length) {
@@ -131,14 +129,15 @@ export default {
             // console.log(res)
             if (res.code == 200) {
               this.$Message.success(res.message);
-              this.$router.push('/article/list');
+              this.$emit('showCreate',3);
             }
+            this.$emit('showCreate',2);
           });
           return;
         }
       })
     },
-    getData1: function() {
+    getData: function() {
       var self = this;
       this.$api.cate.select().then(res => {
         if (res.code == 200) {

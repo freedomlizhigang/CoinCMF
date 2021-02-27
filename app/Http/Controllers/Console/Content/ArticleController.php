@@ -5,7 +5,7 @@
  * @Date: 2019-01-03 20:14:16
  * @Description: 文章管理
  * @LastEditors: 李志刚
- * @LastEditTime: 2021-01-19 14:55:28
+ * @LastEditTime: 2021-02-27 11:02:12
  * @FilePath: /CoinCMF/app/Http/Controllers/Console/Content/ArticleController.php
  */
 
@@ -43,13 +43,13 @@ class ArticleController extends ResponseController {
 				}
 			})->where(function ($q) use ($starttime) {
 				if ($starttime != '') {
-					$q->where('created_at', '>', date('Y-m-d H:i:s', $starttime / 1000));
+					$q->where('created_at', '>', date('Y-m-d 00:00:00', $starttime / 1000));
 				}
 			})->where(function ($q) use ($endtime) {
 				if ($endtime != '') {
-					$q->where('created_at', '<', date('Y-m-d H:i:s', $endtime / 1000));
+					$q->where('created_at', '<', date('Y-m-d H:i:s', $endtime / 1000 + 86400));
 				}
-			})->select('id', 'title', 'cate_id', 'hits', 'publish_at', 'sort')->where('del_flag', 0)
+			})->select('id', 'title', 'cate_id', 'hits', 'publish_at', 'sort', 'push_flag')->where('del_flag', 0)
 				->offset(($page - 1) * $size)->limit($size)->orderBy('id', 'desc')->get();
 			$count = Article::with(['cate' => function ($q) {
 				$q->select('id', 'name');
@@ -67,13 +67,13 @@ class ArticleController extends ResponseController {
 				}
 			})->where(function ($q) use ($endtime) {
 				if ($endtime != '') {
-					$q->where('created_at', '<', date('Y-m-d H:i:s', $endtime / 1000));
+					$q->where('created_at', '<', date('Y-m-d H:i:s', $endtime / 1000 + 86400));
 				}
-			})->select('id', 'title', 'cate_id', 'hits', 'publish_at', 'sort')->where('del_flag', 0)
+			})->select('id')->where('del_flag', 0)
 				->orderBy('id', 'desc')->count();
 			$reslist = [];
 			foreach ($list as $v) {
-				$reslist[] = ['id' => $v->id, 'sort' => $v->sort, 'title' => $v->title, 'hits' => $v->hits, 'catename' => $v->cate->name];
+				$reslist[] = ['id' => $v->id, 'sort' => $v->sort, 'title' => $v->title, 'push_flag' => $v->push_flag, 'hits' => $v->hits, 'catename' => $v->cate->name];
 			}
 			$res = ['list' => $reslist, 'total' => $count];
 			return $this->resData(200, '获取数据成功...', $res);

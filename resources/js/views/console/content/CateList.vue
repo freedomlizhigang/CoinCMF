@@ -126,10 +126,10 @@ export default {
     }
   },
   // 组件
-    components: {
-        CateAdd,
-        CateEdit
-    },
+  components: {
+      CateAdd,
+      CateEdit
+  },
   // 计算
   computed: {
   },

@@ -1,6 +1,6 @@
 <template>
-  <div class="article-edit">
-     <Form :model="formItem" ref="articleAdd" label-position="right" :rules="artValidate" :label-width="80" action="javascript:void(0)">
+  <div class="article-edit pb60">
+     <Form :model="formItem" ref="articleEdit" label-position="right" :rules="articleEdit" :label-width="80" action="javascript:void(0)">
         <FormItem label="选择栏目" prop="cate_id">
             <Select v-model="formItem.cate_id" :style="{'width':'240px'}">
                 <Option v-for="item in cateSelect" :value="item.value" :key="item.value">{{ item.label }}</Option>
@@ -49,10 +49,6 @@
         <FormItem label="发布时间">
             <DatePicker v-model="formItem.publish_at" format="yyyy-MM-dd HH:mm:ss" type="datetime" placeholder="发布时间..." style="width: 200px"></DatePicker>
         </FormItem>
-        <FormItem>
-            <Button>重置</Button>
-            <Button type="primary" @click="submitAdd('articleAdd')" style="margin-left: 8px">提交</Button>
-        </FormItem>
     </Form>
   </div>
 </template>
@@ -84,7 +80,7 @@ export default {
       },
       // 有文件时用的
       thumblist: [],
-      artValidate: {
+      articleEdit: {
         cate_id: [
           { required: true, type: 'integer', message: '栏目必须填写', trigger: 'change' }
         ],
@@ -101,9 +97,6 @@ export default {
     TinymceEditor
   },
   created: function() {
-    this.art_id = this.$route.params.id;
-    // 取数据
-    this.getData();
   },
   methods: {
     pushChange (status) {
@@ -115,9 +108,11 @@ export default {
     },
     // 提交保存
     submitAdd(name) {
+      this.$emit('showEdit',1);
       this.$refs[name].validate((valid) => {
         if (!valid) {
           this.$Message.error('请检查输入的信息是否正确！');
+          this.$emit('showEdit',2);
         } else {
           // 图片
           if (this.$refs['uploadthumb'].uploadList.length) {
@@ -130,21 +125,23 @@ export default {
           this.$api.article.edit(params).then(res => {
             if (res.code == 200) {
               this.$Message.success(res.message);
-              this.$router.go(-1);
+              this.$emit('showEdit',3);
             }
+            this.$emit('showEdit',2);
           });
           return;
         }
       })
     },
-    getData: function() {
+    getData: function(art_id) {
       var self = this;
+      self.art_id = art_id;
       this.$api.cate.select().then(res => {
         if (res.code == 200) {
           self.cateSelect = res.result;
         }
       });
-      this.$api.article.detail({ 'article_id': this.art_id }).then(res => {
+      this.$api.article.detail({ 'article_id': art_id }).then(res => {
         if (res.code == 200) {
           self.formItem = res.result;
           if (res.result.thumb != '' && res.result.thumb != null) {
