@@ -5,7 +5,7 @@
  * @Date: 2019-01-03 20:14:16
  * @Description: 公用的控制方法
  * @LastEditors: 李志刚
- * @LastEditTime: 2020-09-20 20:05:39
+ * @LastEditTime: 2021-02-27 11:08:40
  * @FilePath: /CoinCMF/app/Http/Controllers/Console/Common/CommonController.php
  */
 
@@ -23,7 +23,6 @@ class CommonController extends ResponseController {
 			$self = Menu::where('label', $label)->select('id', 'arrparentid', 'name', 'url')->first();
 			$breadcrumb = [];
 			$title = '首页';
-			$btns = [];
 			$breadcrumb[] = ['name' => '首页', 'to' => '/console/index/index'];
 			if (!is_null($self)) {
 				$menuids = explode(',', $self->arrparentid);
@@ -41,10 +40,8 @@ class CommonController extends ResponseController {
 				// $breadcrumb[] = ['name' => $self->name, 'to' => '/console/' . $self->url];
 				// 标题
 				$title = $self->name;
-				// 下级按钮用的
-				$btns = Menu::select('id', 'name', 'url', 'icon')->where('parentid', $self->id)->where('display', 1)->orderBy('sort', 'asc')->get();
 			}
-			$res = ['title' => $title, 'breadcrumb' => $breadcrumb, 'btns' => $btns];
+			$res = ['title' => $title, 'breadcrumb' => $breadcrumb];
 			return $this->resData(200, '获取成功！', $res);
 		} catch (\Throwable $e) {
 			return $this->resData(500, '获取失败，请稍后再试！');

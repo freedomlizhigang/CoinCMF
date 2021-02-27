@@ -38,9 +38,6 @@
             <div class="right_top_bg clearfix">
                 <div class="right_top clearfix">
                     <h4 class="f-l right-titles">{{ title }}</h4>
-                    <div class="f-r">
-                        <Button :icon="item.icon" class="right_top_btns" :to="'/' + item.url" v-for="item in btns" :key="item.id">{{ item.name }}</Button>
-                    </div>
                 </div>
             </div>
             <Content :style="{ padding:'15px', background: '#fff'}">
@@ -61,7 +58,6 @@ export default {
       menuData: [], // 左侧菜单
       breadCrumbList: [], // 面包屑
       title: '首页', // 标题
-      btns: [] // 功能按钮组
     };
   },
   computed: {
@@ -83,7 +79,6 @@ export default {
     this.$api.common.breadcrumb(params).then(res => {
       this.breadCrumbList = res.result.breadcrumb;
       this.title = res.result.title;
-      this.btns = res.result.btns;
     });
     // 路由结束后更新面包屑及标题+按钮组
     console_router.afterEach((to, from) => {
@@ -93,7 +88,6 @@ export default {
         this.$api.common.breadcrumb(params).then(res => {
           this.breadCrumbList = res.result.breadcrumb;
           this.title = res.result.title;
-          this.btns = res.result.btns;
         });
       }
     })
