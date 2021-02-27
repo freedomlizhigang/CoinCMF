@@ -135,6 +135,11 @@ export default {
             align: 'center'
         },
         {
+          title: 'Id',
+          key: 'id',
+          width: 60,
+        },
+        {
           title: '用户名',
           minWidth: 120,
           key: 'name'

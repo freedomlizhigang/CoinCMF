@@ -82,6 +82,11 @@ export default {
       menutree: [],
       list: [
         {
+            title: 'Id',
+            key: 'menu_id',
+            width: 60,
+        },
+        {
           title: '名称',
           minWidth: 300,
           key: 'title',
