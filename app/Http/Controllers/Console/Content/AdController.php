@@ -5,7 +5,7 @@
  * @Date: 2018-07-25 11:39:58
  * @Description: 广告管理
  * @LastEditors: 李志刚
- * @LastEditTime: 2020-09-21 15:22:34
+ * @LastEditTime: 2021-02-27 15:54:45
  * @FilePath: /CoinCMF/app/Http/Controllers/Console/Content/AdController.php
  */
 
@@ -167,11 +167,11 @@ class AdController extends ResponseController
         }
     }
     // 删除
-    public function postRemove($id = '')
+    public function postRemove(Request $request,$id = '')
     {
         try {
             $validator = Validator::make($request->input(), [
-                'ad_id' => 'required|integer'
+                'ad_id' => 'required|array'
             ]);
             $attrs = array(
                 'ad_id' => '广告 ID',
@@ -181,8 +181,8 @@ class AdController extends ResponseController
                 // 如果有错误，提示第一条
                 return $this->resData(400, $validator->errors()->all()[0] . '...');
             }
-            $id = $request->input('ad_id');
-            Ad::where('id', $id)->update(['is_del' => 1]);
+            $id = $request->input('ad_id',[]);
+            Ad::whereIn('id', $id)->update(['is_del' => 1]);
             return $this->resData(200, '删除成功！');
         } catch (\Throwable $e) {
             return $this->resData(500, '删除失败，请稍后再试...');

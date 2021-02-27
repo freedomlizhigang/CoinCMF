@@ -17,6 +17,7 @@
       </FormItem>
     </Form>
     <div class="action-btn">
+      <Button size="small" @click="deleteData" style="margin-right: 8px" type="error">批量删除</Button>
       <Button size="small" @click="showCreate(0)" type="success">添加文章</Button>
     </div>
     <Table border :columns="columns1" ref="selection" @on-selection-change="changeData" :data="tablelist" :loading="dataloading">
@@ -68,7 +69,7 @@ export default {
       pages: {
         current: 1,
         total: 0,
-        size: 2
+        size: 10
       },
       columns1: [
         {

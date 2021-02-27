@@ -5,7 +5,7 @@
  * @Date: 2018-07-25 11:39:58
  * @Description: 广告位管理
  * @LastEditors: 李志刚
- * @LastEditTime: 2020-09-21 15:10:31
+ * @LastEditTime: 2021-02-27 15:59:23
  * @FilePath: /CoinCMF/app/Http/Controllers/Console/Content/AdposController.php
  */
 
@@ -124,7 +124,7 @@ class AdposController extends ResponseController
     {
         try {
             $validator = Validator::make($request->input(), [
-                'adpos_id' => 'required|integer'
+                'adpos_id' => 'required|array'
             ]);
             $attrs = array(
                 'adpos_id' => '广告位 ID',
@@ -134,15 +134,15 @@ class AdposController extends ResponseController
                 // 如果有错误，提示第一条
                 return $this->resData(400, $validator->errors()->all()[0] . '...');
             }
-            $id = $request->input('adpos_id');
+            $id = $request->input('adpos_id',[]);
         	// 先查广告位下有没有广告，没有直接删除
-            if (is_null(Ad::where('pos_id',$id)->first())) {
-                Adpos::where('id',$id)->delete();
+            if (is_null(Ad::whereIn('pos_id',$id)->first())) {
+                Adpos::whereIn('id',$id)->delete();
                 return $this->resData(200, '删除完成！');
             }
             else
             {
-                return $this->resData(400, '有广告，请先移除广告！');
+                return $this->resData(400, '广告位下有广告，请先移除广告！');
             }
         } catch (\Throwable $e) {
             return $this->resData(500, '获取数据失败，请稍后再试...');

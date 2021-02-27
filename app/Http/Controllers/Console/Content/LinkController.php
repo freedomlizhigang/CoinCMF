@@ -5,7 +5,7 @@
  * @Date: 2020-02-29 08:53:47
  * @Description: 友情链接管理
  * @LastEditors: 李志刚
- * @LastEditTime: 2020-09-21 14:54:06
+ * @LastEditTime: 2021-02-27 16:16:43
  * @FilePath: /CoinCMF/app/Http/Controllers/Console/Content/LinkController.php
  */
 
@@ -70,7 +70,7 @@ class LinkController extends ResponseController
             Link::create($create);
             return $this->resData(200, '添加成功！');
         } catch (\Throwable $e) {
-            return $this->resData(500, '添加失败，请稍后再试！');
+            return $this->resData(500, '添加失败，请稍后再试！',$e->getMessage());
         }
     }
     public function postDetail(Request $request)
@@ -131,7 +131,7 @@ class LinkController extends ResponseController
     {
         try {
             $validator = Validator::make($request->input(), [
-                'link_id' => 'required|integer'
+                'link_id' => 'required|array'
             ]);
             $attrs = array(
                 'link_id' => '链接 ID',
@@ -141,8 +141,8 @@ class LinkController extends ResponseController
                 // 如果有错误，提示第一条
                 return $this->resData(400, $validator->errors()->all()[0] . '...');
             }
-            $id = $request->input('link_id');
-            Link::where('id', $id)->update(['is_del'=>1]);
+            $id = $request->input('link_id',[]);
+            Link::whereIn('id', $id)->update(['is_del'=>1]);
             return $this->resData(200, '删除完成！');
         } catch (\Throwable $e) {
             return $this->resData(500, '删除失败，请稍后再试');
