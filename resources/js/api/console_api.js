@@ -4,7 +4,7 @@
 import common from './rbac/common.js'
 import login from './rbac/login.js'
 import menu from './rbac/menu.js'
-import section from './rbac/section.js'
+import department from './rbac/department.js'
 import role from './rbac/role.js'
 import admin from './rbac/admin.js'
 import log from './rbac/log.js'
@@ -28,7 +28,7 @@ const console_api = {
   common,
   login,
   menu,
-  section,
+  department,
   role,
   admin
 }

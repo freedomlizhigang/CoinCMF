@@ -17,7 +17,7 @@
       <Button size="small" @click="deleteData" style="margin-right: 8px" type="error">批量删除</Button>
       <Button size="small" @click="showCreate" type="success">添加管理员</Button>
     </div>
-    <Table border :columns="list" ref="roleList" :data="tablelist" @on-selection-change="changeData" :loading="dataloading"></Table>
+    <Table border :columns="list" ref="adminList" :data="tablelist" @on-selection-change="changeData" :loading="dataloading"></Table>
     <!-- 分页 -->
     <div class="table-page">
       <Page size="small" ref="listPage" :total="pages.total" :current="pages.current" :page-size="pages.size" show-elevator show-total @on-change="changePage"></Page>
@@ -27,10 +27,10 @@
     <Drawer :closable="false" :mask-closable="false" :scrollable="true" title="添加管理员" width="640" v-model="showCreateStatus">
       <Spin size="large" fix v-if="loading"></Spin>
       <Form :label-width="80" :model="adminInfo" ref="adminCreateValidate" :rules="adminCreateValidate" action="javascript:void(0)">
-        <FormItem label="部门" prop="section_id">
-            <Select clearable v-model="adminInfo.section_id">
-                <Option v-for="item in sectionList" :value="item.id" :key="item.id">{{ item.name }}</Option>
-            </Select>
+        <FormItem label="部门">
+            <CheckboxGroup v-model="adminInfo.department_ids" @on-change="departmentCheck">
+                <Checkbox v-for="item in departmentList" :key="item.id" :label="item.id">{{ item.name }}</Checkbox>
+            </CheckboxGroup>
         </FormItem>
         <FormItem label="角色">
             <CheckboxGroup v-model="adminInfo.role_ids" @on-change="roleCheck">
@@ -65,11 +65,11 @@
     <Drawer :closable="false" :mask-closable="false" :scrollable="true" title="修改资料" width="640" v-model="showEditInfoStatus">
       <Spin size="large" fix v-if="loading"></Spin>
       <Form :label-width="80" :model="adminInfo" ref="adminEditValidate" :rules="adminEditValidate" action="javascript:void(0)">
-          <FormItem label="部门" prop="section_id">
-              <Select clearable v-model="adminInfo.section_id">
-                  <Option v-for="item in sectionList" :value="item.id" :key="item.id">{{ item.name }}</Option>
-              </Select>
-          </FormItem>
+          <FormItem label="部门">
+            <CheckboxGroup v-model="adminInfo.department_ids" @on-change="departmentCheck">
+                <Checkbox v-for="item in departmentList" :key="item.id" :label="item.id">{{ item.name }}</Checkbox>
+            </CheckboxGroup>
+        </FormItem>
           <FormItem label="角色">
               <CheckboxGroup v-model="adminInfo.role_ids" @on-change="roleCheck">
                   <Checkbox v-for="item in roleList" :key="item.id" :label="item.id">{{ item.name }}</Checkbox>
@@ -240,9 +240,9 @@ export default {
       ],
       tablelist: [],
       roleList: [],
-      sectionList: [],
+      departmentList: [],
       adminInfo: {
-        section_id: 0,
+        department_ids: [],
         role_ids: [],
         name: '',
         realname: '',
@@ -267,9 +267,6 @@ export default {
           { required: true, message: '姓名必须填写', trigger: 'blur' },
           { type: 'string', min: 2, max: 15, message: '姓名 3 - 15 位长度', trigger: 'blur' }
         ],
-        section_id: [
-          { required: true, message: '部门必须选择', trigger: 'change', type: 'number' }
-        ],
         password: [
           { required: true, message: '密码必须填写', trigger: 'blur' },
           { type: 'string', min: 6, max: 15, message: '密码 6 - 15 位长度', trigger: 'blur' }
@@ -279,9 +276,6 @@ export default {
         realname: [
           { required: true, message: '姓名必须填写', trigger: 'blur' },
           { type: 'string', min: 2, max: 15, message: '姓名 3 - 15 位长度', trigger: 'blur' }
-        ],
-        section_id: [
-          { required: true, message: '部门必须选择', trigger: 'blur', type: 'number' }
         ]
       },
       adminPasswordValidate: {
@@ -291,13 +285,14 @@ export default {
         ]
       },
       role_ids: [],
+      department_ids: [],
       selectData:[],
     }
   },
   created: function() {
     // 取数据
     this.getTableList();
-    this.getSectionRole();
+    this.getDepartmentRole();
   },
   methods: {
     changePage() {
@@ -321,16 +316,16 @@ export default {
       return;
     },
     // 获取部门及角色列表
-    getSectionRole() {
+    getDepartmentRole() {
       var params = { page: this.pages.current,'size':10000};
       this.$api.role.list().then(res => {
         if (res.code == 200) {
           this.roleList = res.result.list;
         }
       });
-      this.$api.section.list().then(res => {
+      this.$api.department.list().then(res => {
         if (res.code == 200) {
-          this.sectionList = res.result.list;
+          this.departmentList = res.result;
         }
       });
     },
@@ -339,7 +334,7 @@ export default {
       this.showCreateStatus = !this.showCreateStatus;
       this.admin_id = 0;
       this.adminInfo = {
-        section_id: 0,
+        department_ids: [],
         role_ids: [],
         name: '',
         realname: '',
@@ -353,15 +348,17 @@ export default {
     roleCheck(data) {
       this.role_ids = data;
     },
+    departmentCheck(data) {
+      this.department_ids = data;
+    },
     // 添加
     createAdmin(name) {
       this.$refs[name].validate((valid) => {
         if (valid) {
           this.loading = true;
-          this.$api.admin.create({ section_id: this.adminInfo.section_id, role_ids: this.role_ids, name: this.adminInfo.name, realname: this.adminInfo.realname, phone: this.adminInfo.phone, email: this.adminInfo.email, password: this.adminInfo.password, password_confirmation: this.adminInfo.password_confirmation }).then(res => {
+          this.$api.admin.create({ department_ids: this.department_ids, role_ids: this.role_ids, name: this.adminInfo.name, realname: this.adminInfo.realname, phone: this.adminInfo.phone, email: this.adminInfo.email, password: this.adminInfo.password, password_confirmation: this.adminInfo.password_confirmation }).then(res => {
             if (res.code == 200) {
               this.adminInfo.name = '';
-              this.adminInfo.section_id = 0;
               this.showCreateStatus = !this.showCreateStatus;
               this.getTableList();
             }
@@ -385,6 +382,7 @@ export default {
         if (res.code == 200) {
           this.adminInfo = res.result;
           this.role_ids = res.result.role_ids;
+          this.department_ids = res.result.department_ids;
           this.$Message.success(res.message);
         }
         this.loading = false;
@@ -400,7 +398,7 @@ export default {
       this.$refs[name].validate((valid) => {
         if (valid) {
           this.loading = true;
-          this.$api.admin.editinfo({ admin_id: this.admin_id, section_id: this.adminInfo.section_id, role_ids: this.role_ids, realname: this.adminInfo.realname, phone: this.adminInfo.phone, email: this.adminInfo.email }).then(res => {
+          this.$api.admin.editinfo({ admin_id: this.admin_id, department_ids: this.department_ids, role_ids: this.role_ids, realname: this.adminInfo.realname, phone: this.adminInfo.phone, email: this.adminInfo.email }).then(res => {
             if (res.code == 200) {
               this.$Message.success(res.message);
               this.showEditInfoStatus = !this.showEditInfoStatus;

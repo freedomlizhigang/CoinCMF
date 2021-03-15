@@ -5,7 +5,7 @@
  * @Date: 2019-01-03 20:14:16
  * @Description: 系统管理员表
  * @LastEditors: 李志刚
- * @LastEditTime: 2020-09-20 19:57:05
+ * @LastEditTime: 2021-03-15 16:15:29
  * @FilePath: /CoinCMF/app/Models/Rbac/Admin.php
  */
 
@@ -55,12 +55,12 @@ class Admin extends Model
      */
     public function role()
     {
-        return $this->belongsToMany('\App\Models\Rbac\Role','role_users','user_id','role_id');
+        return $this->belongsToMany('\App\Models\Rbac\Role','role_admins','admin_id','role_id');
     }
 
     // 关联
-    public function section()
+    public function department()
     {
-        return $this->belongsTo('\App\Models\Rbac\Section','section_id','id');
+        return $this->belongsToMany('\App\Models\Rbac\Department','department_admins','admin_id', 'department_id');
     }
 }

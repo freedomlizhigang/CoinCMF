@@ -80,9 +80,10 @@ export default {
     // 移除的回调
     handleRemove(file) {
       // console.log(file)
-      const fileList = this.$refs['upload-thumb'].fileList;
-      this.$refs['upload-thumb'].fileList.splice(fileList.indexOf(file), 1);
-      this.defaultList.splice(fileList.indexOf(file), 1);
+      let fileList = this.$refs['upload-thumb'].fileList;
+      let fileIndex = fileList.indexOf(file);
+      this.$refs['upload-thumb'].fileList.splice(fileIndex, 1);
+      this.defaultList.splice(fileIndex, 1);
     },
     // 上传成功的回调
     handleSuccess(res, file) {

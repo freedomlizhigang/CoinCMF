@@ -69,6 +69,14 @@
         <Button type="primary" @click="updatePriv">提交</Button>
       </div>
     </Drawer>
+    <!-- 用户弹出 -->
+    <Drawer :closable="false" :mask-closable="false" :scrollable="true" title="修改权限" width="640" v-model="showAdminStatus">
+      <Spin size="large" fix v-if="loading"></Spin>
+      <Table border :columns="adminTableList" ref="adminList" :data="adminlist" :loading="dataloading"></Table>
+      <div class="drawer-footer">
+        <Button style="margin-right: 8px" @click="showAdminStatus = false">关闭</Button>
+      </div>
+    </Drawer>
   </div>
 </template>
 
@@ -126,10 +134,24 @@ export default {
         {
           title: '操作',
           key: 'action',
-          width: 190,
+          width: 240,
           align: 'left',
           render: (h, params) => {
             return h('div', [
+              h('Button', {
+                style: {
+                  marginRight: '8px'
+                },
+                props: {
+                  type: 'success',
+                  size: 'small'
+                },
+                on: {
+                  click: () => {
+                    this.showAdmin(params.row.id)
+                  }
+                }
+              }, '用户'),
               h('Button', {
                 style: {
                   marginRight: '8px'
@@ -140,10 +162,10 @@ export default {
                 },
                 on: {
                   click: () => {
-                    this.showEditModal(params.row.id)
+                    this.showPrivModal(params.row.id)
                   }
                 }
-              }, '修改'),
+              }, '权限'),
               h('Button', {
                 style: {
                   marginRight: '8px'
@@ -154,10 +176,10 @@ export default {
                 },
                 on: {
                   click: () => {
-                    this.showPrivModal(params.row.id)
+                    this.showEditModal(params.row.id)
                   }
                 }
-              }, '权限'),
+              }, '修改'),
               h('Button', {
                 props: {
                   type: 'error',
@@ -181,6 +203,7 @@ export default {
       showEditStatus: false,
       showModalStatus: false,
       showPrivStatus: false,
+      showAdminStatus: false,
       roleValidate: {
         name: [
           { required: true, message: '角色名称必须填写', trigger: 'blur' }
@@ -188,6 +211,38 @@ export default {
       },
       privTree: [],
       selectData: [],
+      adminlist:[],
+      adminTableList:[
+        {
+          title: '用户名',
+          key: 'name'
+        },
+        {
+          title: '手机号',
+          key: 'phone'
+        },
+        {
+          title: '操作',
+          key: 'action',
+          width: 80,
+          align: 'left',
+          render: (h, params) => {
+            return h('div', [
+              h('Button', {
+                props: {
+                  type: 'error',
+                  size: 'small'
+                },
+                on: {
+                  click: () => {
+                    this.removeAdmin(params.index, params.row.id)
+                  }
+                }
+              }, '移出')
+            ]);
+          }
+        }
+      ],
     }
   },
   created: function() {
@@ -357,6 +412,34 @@ export default {
             if (res.code == 200) {
               this.$Message.success(res.message);
               this.getTableList();
+            }
+          });
+        }
+      });
+    },
+    showAdmin: function(id){
+      this.showAdminStatus = !this.showAdminStatus;
+      this.$api.role.adminlist({role_id:id}).then(res => {
+        this.dataloading = false;
+        this.loading = false;
+        if (res.code == 200) {
+          this.adminlist = res.result;
+          this.$Message.success(res.message);
+        }
+      });
+      return;
+    },
+    // 删除
+    removeAdmin: function(index, id) {
+      // 弹出确认框
+      this.$Modal.confirm({
+        title: '警告',
+        content: '<p>此操作不可恢复，三思而后行...</p>',
+        onOk: () => {
+          this.$api.role.removeadmin({ admin_id: id }).then(res => {
+            if (res.code == 200) {
+              this.$Message.success(res.message);
+              this.adminlist.splice(index, 1);
             }
           });
         }

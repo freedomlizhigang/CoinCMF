@@ -115,15 +115,21 @@ Route::group(['prefix'=>'c-api','namespace' => 'Console','middleware'=>['c-api',
         Route::post('status', 'RoleController@postStatus');
         Route::get('priv', 'RoleController@getPriv');
         Route::post('priv', 'RoleController@postPriv');
+        Route::post('adminlist', 'RoleController@postAdminList');
+        Route::post('removeadmin', 'RoleController@postRemoveAdmin');
     });
     // 部门管理
-    Route::group(['prefix' => 'section', 'namespace' => 'Rbac'], function () {
-        Route::get('list', 'SectionController@getList');
-        Route::post('create', 'SectionController@postCreate');
-        Route::post('detail', 'SectionController@postDetail');
-        Route::post('edit', 'SectionController@postEdit');
-        Route::post('remove', 'SectionController@postRemove');
-        Route::post('status', 'SectionController@postStatus');
+    Route::group(['prefix' => 'department', 'namespace' => 'Rbac'], function () {
+        Route::get('list', 'DepartmentController@getList');
+        Route::get('tree', 'DepartmentController@getTree');
+        Route::get('select', 'DepartmentController@getSelect');
+        Route::post('create', 'DepartmentController@postCreate');
+        Route::post('detail', 'DepartmentController@postDetail');
+        Route::post('edit', 'DepartmentController@postEdit');
+        Route::post('remove', 'DepartmentController@postRemove');
+        Route::post('status', 'DepartmentController@postStatus');
+        Route::post('adminlist', 'DepartmentController@postAdminList');
+        Route::post('removeadmin', 'DepartmentController@postRemoveAdmin');
     });
     // 左侧导航菜单
     Route::group(['prefix' => 'menu', 'namespace' => 'Rbac'], function () {

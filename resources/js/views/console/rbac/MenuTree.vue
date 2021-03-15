@@ -114,7 +114,7 @@ export default {
                   marginRight: '8px'
                 },
                 props: {
-                  type: 'primary',
+                  type: 'info',
                   size: 'small'
                 },
                 on: {
@@ -128,7 +128,7 @@ export default {
                   marginRight: '8px',
                 },
                 props: {
-                  type: 'info',
+                  type: 'primary',
                   size: 'small'
                 },
                 on: {
@@ -229,17 +229,22 @@ export default {
     // 添加
     append(data) {
       this.showModalStatus = !this.showModalStatus
-      // 取到parentid，其它置空
-      this.menuData = {
-        id: 0,
-        parentid: data.menu_id,
-        name: '',
-        url: '',
-        label: '',
-        icon: '',
-        display: true,
-        sort: 0
-      };
+      this.$api.menu.select().then(res => {
+        if (res.code == 200) {
+          this.menuSelect = res.result;
+          // 取到parentid，其它置空
+          this.menuData = {
+            id: 0,
+            parentid: data.menu_id,
+            name: '',
+            url: '',
+            label: '',
+            icon: '',
+            display: true,
+            sort: 0
+          };
+        }
+      });
     },
     // 添加一级菜单
     addMenu() {

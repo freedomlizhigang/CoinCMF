@@ -5,7 +5,7 @@
  * @Date: 2019-01-03 20:14:16
  * @Description: 角色管理
  * @LastEditors: 李志刚
- * @LastEditTime: 2021-02-26 08:45:54
+ * @LastEditTime: 2021-03-15 17:54:53
  * @FilePath: /CoinCMF/app/Http/Controllers/Console/Rbac/RoleController.php
  */
 
@@ -17,8 +17,9 @@ use App\Models\Rbac\Menu;
 use App\Models\Rbac\Priv;
 use App\Models\Rbac\Role;
 use Illuminate\Http\Request;
-use App\Models\Rbac\RoleUser;
+use App\Models\Rbac\RoleAdmin;
 use App\Http\Controllers\Console\ResponseController;
+use App\Models\Rbac\Admin;
 
 class RoleController extends ResponseController
 {
@@ -165,7 +166,7 @@ class RoleController extends ResponseController
                 return $this->resData(403,'超级管理员组不能删除...');
             }
             // 查询下属用户
-            if(is_null(RoleUser::where('role_id',$rid)->first()))
+            if(is_null(RoleAdmin::where('role_id',$rid)->first()))
             {
                 // 开启事务
                 DB::beginTransaction();
@@ -271,6 +272,33 @@ class RoleController extends ResponseController
             return $this->resData(200,'更新权限菜单成功...');
         } catch (\Throwable $e) {
             return $this->resData(500,'更新权限菜单失败，请稍后再试...',$e->getMessage());
+        }
+    }
+    /**
+     * 角色下用户列表
+     * @return [type] [description]
+     */
+    public function postAdminList(Request $req)
+    {
+        try {
+            $admin_ids = RoleAdmin::where('role_id',$req->input('role_id'))->pluck('admin_id');
+            $list = Admin::whereIn('id',$admin_ids)->orderBy('id', 'asc')->get();
+            return $this->resData(200, '获取数据成功...', $list);
+        } catch (\Throwable $e) {
+            return $this->resData(500, '获取数据失败，请稍后再试！', []);
+        }
+    }
+    /**
+     * 移出角色下用户
+     * @return [type] [description]
+     */
+    public function postRemoveAdmin(Request $req)
+    {
+        try {
+            RoleAdmin::where('admin_id', $req->input('admin_id'))->delete();
+            return $this->resData(200, '操作成功...');
+        } catch (\Throwable $e) {
+            return $this->resData(500, '操作失败，请稍后再试！', []);
         }
     }
 }

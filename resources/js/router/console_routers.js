@@ -3,7 +3,7 @@ import Login from '.././views/console/Login.vue'
 import Iframe from '.././views/console/Iframe.vue'
 import Main from '.././views/console/rbac/Main.vue'
 import MenuTree from '.././views/console/rbac/MenuTree.vue'
-import SectionList from '.././views/console/rbac/SectionList.vue'
+import DepartmentList from '.././views/console/rbac/DepartmentList.vue'
 import RoleList from '.././views/console/rbac/RoleList.vue'
 import AdminList from '.././views/console/rbac/AdminList.vue'
 import LogList from '.././views/console/rbac/LogList.vue'
@@ -148,9 +148,9 @@ const console_routers = [
       },
       // 部门
       {
-        path: 'section/list',
-        name: 'section-list',
-        component: SectionList,
+        path: 'department/list',
+        name: 'department-list',
+        component: DepartmentList,
         meta: { requiresAuth: true }
       },
       // 权限菜单

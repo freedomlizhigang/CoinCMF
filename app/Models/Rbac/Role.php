@@ -5,7 +5,7 @@
  * @Date: 2019-01-03 20:14:16
  * @Description: 用户角色表
  * @LastEditors: 李志刚
- * @LastEditTime: 2020-09-20 19:58:19
+ * @LastEditTime: 2021-03-15 16:12:44
  * @FilePath: /CoinCMF/app/Models/Rbac/Role.php
  */
 
@@ -52,7 +52,7 @@ class Role extends Model {
 	 * 用户
 	 */
 	public function Admin() {
-		return $this->belongsToMany('\App\Models\Rbac\Admin', 'role_users', 'role_id', 'user_id');
+		return $this->belongsToMany('\App\Models\Rbac\Admin', 'role_admins', 'role_id', 'admin_id');
 	}
 
 	// 关联privs表

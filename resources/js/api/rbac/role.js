@@ -40,7 +40,13 @@ const role = {
   // 单条信息
   detail(params) {
     return axios.post(api + 'role/detail', qs.stringify(params))
-  }
+  },
+  adminlist(params) {
+    return axios.post(api + 'role/adminlist', qs.stringify(params))
+  },
+  removeadmin(params) {
+    return axios.post(api + 'role/removeadmin', qs.stringify(params))
+  },
 }
 
 

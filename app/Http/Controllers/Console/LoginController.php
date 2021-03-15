@@ -5,7 +5,7 @@
  * @Date: 2019-01-03 20:14:16
  * @Description: 管理员登录
  * @LastEditors: 李志刚
- * @LastEditTime: 2020-09-20 21:13:15
+ * @LastEditTime: 2021-03-15 16:15:49
  * @FilePath: /CoinCMF/app/Http/Controllers/Console/LoginController.php
  */
 
@@ -17,7 +17,7 @@ use App\Customize\Sign;
 use App\Models\Rbac\Priv;
 use Illuminate\Http\Request;
 use App\Models\Rbac\Admin;
-use App\Models\Rbac\RoleUser;
+use App\Models\Rbac\RoleAdmin;
 use Illuminate\Support\Facades\Redis;
 
 class LoginController extends ResponseController {
@@ -56,7 +56,7 @@ class LoginController extends ResponseController {
 				// 更新一些信息
 				Admin::where('id', $user->id)->update(['lasttime' => date('Y-m-d H:i:s'), 'lastip' => $req->ip()]);
 				$token = md5(md5($user->id . '-SMZ-' . $user->name));
-				$allRole = RoleUser::where('user_id', $user->id)->pluck('role_id')->unique()->toArray();
+				$allRole = RoleAdmin::where('admin_id', $user->id)->pluck('role_id')->unique()->toArray();
 				$allPriv = Priv::whereIn('role_id', $allRole)->pluck('label')->unique()->toArray();
 				// 放到redis里边，先删除旧的，有效期一天
 				Redis::del('c-token:' . $token);
@@ -65,7 +65,7 @@ class LoginController extends ResponseController {
 				return $this->resData(200, '登录成功！', $res);
 			}
 		} catch (\Throwable $e) {
-			return $this->resData(500, '获取失败，请稍后再试...');
+			return $this->resData(500, '获取失败，请稍后再试...',$e->getMessage());
 		}
 	}
 }

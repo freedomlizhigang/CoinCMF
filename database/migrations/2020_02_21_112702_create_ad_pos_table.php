@@ -25,7 +25,7 @@ class CreateAdPosTable extends Migration
             $table->bigIncrements('id');
             $table->boolean('is_mobile')->default(0)->comment('0:PC/1:MOB');
             $table->string('name', 100)->default('')->comment('名称');
-            $table->tinyInteger('is_del')->default(0)->comment('删除状态:1 已删除 ，0 正常');
+            $table->tinyInteger('del_flag')->default(0)->comment('删除状态:1 已删除 ，0 正常');
             $table->timestamps();
         });
     }

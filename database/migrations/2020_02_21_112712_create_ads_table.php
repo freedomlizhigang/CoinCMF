@@ -31,7 +31,7 @@ class CreateAdsTable extends Migration
             $table->dateTime('endtime')->nullable()->comment('结束时间');
             $table->integer('sort')->default(0)->comment('排序');
             $table->boolean('status')->default(1)->comment('状态，1正常0关闭');
-            $table->tinyInteger('is_del')->default(0)->comment('删除状态:1 已删除 ，0 正常');
+            $table->tinyInteger('del_flag')->default(0)->comment('删除状态:1 已删除 ，0 正常');
             $table->timestamps();
         });
     }

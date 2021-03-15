@@ -5,7 +5,7 @@
  * @Date: 2019-01-03 20:14:16
  * @Description: 管理员管理
  * @LastEditors: 李志刚
- * @LastEditTime: 2021-02-26 08:03:45
+ * @LastEditTime: 2021-03-15 17:22:12
  * @FilePath: /CoinCMF/app/Http/Controllers/Console/Rbac/AdminController.php
  */
 
@@ -16,8 +16,9 @@ use Validator;
 use App\Customize\Func;
 use App\Models\Rbac\Admin;
 use Illuminate\Http\Request;
-use App\Models\Rbac\RoleUser;
+use App\Models\Rbac\RoleAdmin;
 use App\Http\Controllers\Console\ResponseController;
+use App\Models\Rbac\DepartmentAdmin;
 
 class AdminController extends ResponseController
 {
@@ -63,7 +64,7 @@ class AdminController extends ResponseController
                 return $this->resData(400,$validator->errors()->all()[0].'...');
             }
             $admin = Admin::findOrFail($req->input('admin_id'));
-            $admin->section_id = $admin->section->id;
+            $admin->department_ids = $admin->department->pluck('id');
             $admin->role_ids = $admin->role->pluck('id');
             return $this->resData(200,'查询成功...',$admin);
         } catch (\Throwable $e) {
@@ -76,7 +77,6 @@ class AdminController extends ResponseController
         DB::beginTransaction();
         try {
             $validator = Validator::make($req->input(), [
-                'section_id' => 'required|integer',
                 'name' => 'required|max:255',
                 'realname' => 'required|max:255',
                 'phone' => 'nullable|regex:/^1[3456789]\d{9}$/',
@@ -84,7 +84,6 @@ class AdminController extends ResponseController
                 'password' => 'confirmed|min:6|max:15|alpha_dash',
             ]);
             $attrs = array(
-                'section_id' => '部门',
                 'name' => '名称',
                 'realname' => '姓名',
                 'phone' => '手机号',
@@ -98,22 +97,29 @@ class AdminController extends ResponseController
             }
             $crypt = Func::str_random(10);
             $pwd = Func::makepwd($req->input('password'),$crypt);
-            $create = ['section_id'=>$req->input('section_id'),'name'=>$req->input('name'),'realname'=>$req->input('realname'),'phone'=>$req->input('phone'),'email'=>$req->input('email'),'password'=>$pwd,'crypt'=>$crypt];
+            $create = ['name'=>$req->input('name'),'realname'=>$req->input('realname'),'phone'=>$req->input('phone'),'email'=>$req->input('email'),'password'=>$pwd,'crypt'=>$crypt];
             $admin = Admin::create($create);
             $rids = $req->input('role_ids',[]);
-            $rids = explode(',', $rids);
             if (is_array($rids)) {
                 $rdata = [];
                 foreach ($rids as $k) {
-                    $rdata[] = ['role_id' => $k, 'user_id' => $admin->id];
+                    $rdata[] = ['role_id' => $k, 'admin_id' => $admin->id];
                 }
-                RoleUser::insert($rdata);
+                RoleAdmin::insert($rdata);
+            }
+            $department_ids = $req->input('department_ids', []);
+            if (is_array($department_ids)) {
+                $rdata = [];
+                foreach ($department_ids as $k) {
+                    $rdata[] = ['department_id' => $k, 'admin_id' => $admin->id];
+                }
+                DepartmentAdmin::insert($rdata);
             }
             DB::commit();
             return $this->resData(200,'创建用户成功...');
         } catch (\Throwable $e) {
             DB::rollback();
-            return $this->resData(500,'创建用户失败，请稍后再试...',$e->getMessage());
+            return $this->resData(500,'创建用户失败，请稍后再试...');
         }
     }
     // 修改资料
@@ -123,14 +129,12 @@ class AdminController extends ResponseController
         try {
             $validator = Validator::make($req->input(), [
                 'admin_id' => 'required|integer',
-                'section_id' => 'required|integer',
                 'realname' => 'required|max:255',
                 'phone' => 'nullable|regex:/^1[3456789]\d{9}$/',
                 'email' => 'nullable|email',
             ]);
             $attrs = array(
                 'admin_id' => '用户ID',
-                'section_id' => '部门',
                 'realname' => '姓名',
                 'phone' => '手机号',
                 'email' => '邮箱',
@@ -141,18 +145,27 @@ class AdminController extends ResponseController
                 return $this->resData(400,$validator->errors()->all()[0].'...');
             }
             $id = $req->input('admin_id');
-            $data = ['section_id'=>$req->input('section_id'),'realname'=>$req->input('realname'),'phone'=>$req->input('phone'),'email'=>$req->input('email')];
+            $data = ['realname'=>$req->input('realname'),'phone'=>$req->input('phone'),'email'=>$req->input('email')];
             Admin::where('id',$id)->update($data);
-            $rids = $req->input('role_ids','');
+            $rids = $req->input('role_ids',[]);
             // 先删除再添加
-            RoleUser::where('user_id',$id)->delete();
-            $rids = explode(',', $rids);
+            RoleAdmin::where('admin_id',$id)->delete();
             if(is_array($rids)){
                 $rdata = [];
                 foreach ($rids as $k) {
-                    $rdata[] = ['role_id'=>$k,'user_id'=>$id];
+                    $rdata[] = ['role_id'=>$k,'admin_id'=>$id];
                 }
-                RoleUser::insert($rdata);
+                RoleAdmin::insert($rdata);
+            }
+            // 先删除再添加
+            DepartmentAdmin::where('admin_id', $id)->delete();
+            $department_ids = $req->input('department_ids', []);
+            if (is_array($department_ids)) {
+                $rdata = [];
+                foreach ($department_ids as $k) {
+                    $rdata[] = ['department_id' => $k, 'admin_id' => $id];
+                }
+                DepartmentAdmin::insert($rdata);
             }
             DB::commit();
             return $this->resData(200,'更新用户资料成功...');
@@ -289,7 +302,7 @@ class AdminController extends ResponseController
             }
             $id = $req->input('admin_id');
             Admin::whereIn('id',$id)->delete();
-            RoleUser::where('user_id',$id)->delete();
+            RoleAdmin::where('admin_id',$id)->delete();
             DB::commit();
             return $this->resData(200,'删除用户成功...');
         } catch (\Throwable $e) {
