@@ -3,7 +3,7 @@
 /*
  * This file is part of Psy Shell.
  *
- * (c) 2012-2018 Justin Hileman
+ * (c) 2012-2020 Justin Hileman
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -11,6 +11,7 @@
 
 namespace Psy;
 
+use Psy\Exception\ErrorException;
 use XdgBaseDir\Xdg;
 
 /**
@@ -136,7 +137,7 @@ class ConfigPaths
     {
         $xdg = new Xdg();
 
-        \set_error_handler(['Psy\Exception\ErrorException', 'throwException']);
+        \set_error_handler([ErrorException::class, 'throwException']);
 
         try {
             // XDG doesn't really work on Windows, sometimes complains about
@@ -151,30 +152,32 @@ class ConfigPaths
 
         \restore_error_handler();
 
-        return \strtr($runtimeDir, '\\', '/') . '/psysh';
+        return \strtr($runtimeDir, '\\', '/').'/psysh';
     }
 
     private static function getDirNames(array $baseDirs)
     {
         $dirs = \array_map(function ($dir) {
-            return \strtr($dir, '\\', '/') . '/psysh';
+            return \strtr($dir, '\\', '/').'/psysh';
         }, $baseDirs);
 
         // Add ~/.psysh
-        if ($home = \getenv('HOME')) {
-            $dirs[] = \strtr($home, '\\', '/') . '/.psysh';
+        if (isset($_SERVER['HOME']) && $_SERVER['HOME']) {
+            $dirs[] = \strtr($_SERVER['HOME'], '\\', '/').'/.psysh';
         }
 
         // Add some Windows specific ones :)
         if (\defined('PHP_WINDOWS_VERSION_MAJOR')) {
-            if ($appData = \getenv('APPDATA')) {
+            if (isset($_SERVER['APPDATA']) && $_SERVER['APPDATA']) {
                 // AppData gets preference
-                \array_unshift($dirs, \strtr($appData, '\\', '/') . '/PsySH');
+                \array_unshift($dirs, \strtr($_SERVER['APPDATA'], '\\', '/').'/PsySH');
             }
 
-            $dir = \strtr(\getenv('HOMEDRIVE') . '/' . \getenv('HOMEPATH'), '\\', '/') . '/.psysh';
-            if (!\in_array($dir, $dirs)) {
-                $dirs[] = $dir;
+            if (isset($_SERVER['HOMEDRIVE']) && isset($_SERVER['HOMEPATH'])) {
+                $dir = \strtr($_SERVER['HOMEDRIVE'].'/'.$_SERVER['HOMEPATH'], '\\', '/').'/.psysh';
+                if (!\in_array($dir, $dirs)) {
+                    $dirs[] = $dir;
+                }
             }
         }
 
@@ -186,7 +189,7 @@ class ConfigPaths
         $files = [];
         foreach ($dirNames as $dir) {
             foreach ($fileNames as $name) {
-                $file = $dir . '/' . $name;
+                $file = $dir.'/'.$name;
                 if (@\is_file($file)) {
                     $files[] = $file;
                 }
@@ -194,6 +197,31 @@ class ConfigPaths
         }
 
         return $files;
+    }
+
+    /**
+     * Ensure that $dir exists and is writable.
+     *
+     * Generates E_USER_NOTICE error if the directory is not writable or creatable.
+     *
+     * @param string $dir
+     *
+     * @return bool False if directory exists but is not writeable, or cannot be created
+     */
+    public static function ensureDir($dir)
+    {
+        if (!\is_dir($dir)) {
+            // Just try making it and see if it works
+            @\mkdir($dir, 0700, true);
+        }
+
+        if (!\is_dir($dir) || !\is_writable($dir)) {
+            \trigger_error(\sprintf('Writing to directory %s is not allowed.', $dir), \E_USER_NOTICE);
+
+            return false;
+        }
+
+        return true;
     }
 
     /**
@@ -212,21 +240,12 @@ class ConfigPaths
                 return $file;
             }
 
-            \trigger_error(\sprintf('Writing to %s is not allowed.', $file), E_USER_NOTICE);
+            \trigger_error(\sprintf('Writing to %s is not allowed.', $file), \E_USER_NOTICE);
 
             return false;
         }
 
-        $dir = \dirname($file);
-
-        if (!\is_dir($dir)) {
-            // Just try making it and see if it works
-            @\mkdir($dir, 0700, true);
-        }
-
-        if (!\is_dir($dir) || !\is_writable($dir)) {
-            \trigger_error(\sprintf('Writing to %s is not allowed.', $dir), E_USER_NOTICE);
-
+        if (!self::ensureDir(\dirname($file))) {
             return false;
         }
 

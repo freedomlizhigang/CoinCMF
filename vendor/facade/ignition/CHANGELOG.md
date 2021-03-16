@@ -2,13 +2,165 @@
 
 All notable changes to `ignition` will be documented in this file
 
-## 1.16.3 - 2020-07-13
+## 2.5.14 - 2021-03-03
 
-- do not use missing package solution provider by default (closes #179)
+- fix ignition not working when there is no argv
 
-## 1.16.2 - 2020-07-12
+## 2.5.13 - 2021-02-16
+
+- remove custom grouping
+
+## 2.5.12 - 2021-02-15
+
+- fix wrong config usage (#354)
+
+## 2.5.11 - 2021-02-05
+
+- fix memory leaks caused by log and query recorder (#344)
+
+## 2.5.10 - 2021-02-02
+
+- fix tinker logs not being sent to Flare
+
+## 2.5.9 - 2021-01-26
+
+- fix logged context not being sent to Flare
+
+## 2.5.8 - 2020-12-29
+
+- fix double `$` on PHP 8 (#338)
+
+## 2.5.7 - 2020-12-29
+
+- fix for breaking change in highlight.js (fixes 2.5.5)
+
+## 2.5.6 - 2020-12-29
+
+- revert to compiled js of 2.5.3
+
+## 2.5.5 - 2020-12-29
+
+- added compiled js of previous release
+
+## 2.5.4 - 2020-12-29
+
+- added support for Nova text editor (#343)
+
+## 2.5.3 - 2020-12-08
+
+- Use Livewire compatible compiler engine when using Livewire (#340)
+
+## 2.5.2 - 2020-11-14
+
+- fix `MakeViewVariableOptionalSolution` to disallow stream wrappers and files that do not end in ".blade.php" (#334)
+
+## 2.5.1 - 2020-11-13
+
+- add support for LiveWire component urls
+
+## 2.5.0 - 2020-10-27
+
+- add PHP 8.0-dev support
+- remove unnecessary `scrivo/highlight.php` dependency
+
+## 2.4.1 - 2020-10-14
+
+- fix copy casing
+
+## 2.4.0 - 2020-10-14
+
+- add livewire component discovery solution
+
+## 2.3.8 - 2020-10-02
+
+- Address Missing Mix Manifest Error (#317)
+
+## 2.3.7 - 2020-09-06
+
+- add loading state on share button (#309)
+- compatibility fix for L8
+
+## 2.3.6 - 2020-08-10
+
+- possible security vulnerability: bump elliptic version (#300)
+- possible XSS vulnerability: escape characters in stacktrace and exception title
+
+## 2.3.5 - 2020-08-01
+
+- catch exception in detectLineNumber for not existing blade files (#299)
+
+## 2.3.4 - 2020-07-27
+
+- fix an error that would throw a blank page when using third party extensions
+
+## 2.3.3 -2020-07-14
+
+- fix all psalm related issues
+
+## 2.3.2 - 2020-07-14
+
+- properly bind singleton (#291)
+
+## 2.3.1 - 2020-07-13
+
+- improve db name solution (#289)
+
+## 2.3.0 - 2020-07-13
+
+- allow override of Dumper via `$_SERVER variable` (#271)
+- make DumpHandler instance manually in DumpRecorder (#286)
+- only setup queues when queue is available (#287)
+
+## 2.2.0 - 2020-07-13
+
+- add `ignition:make:solution-provider` command
+
+## 2.1.0 - 2020-07-13
+
+- add "Undefined Property" solution (#264)
+
+## 2.0.10 - 2020-07-13
+
+- correctly detect dump location from ddd (#216)
+
+## 2.0.9 - 2020-07-13
+
+- use application contract instead of concrete class (#243)
+
+## 2.0.8 - 2020-07-12
+
+- do not render solution title tag for empty titles
+
+## 2.0.7 - 2020-06-07
+
+- Fix `DefaultDbNameSolutionProvider` (#277)
+
+## 2.0.6 - 2020-06-01
 
 - remove ability to fix variable names
+
+## 2.0.5 - 2020-05-29
+
+- blacklist certain variable names when fixing variable names
+
+## 2.0.4 - 2020-05-18
+
+- handle exceptions in case the request doesn't have a user (#274)
+
+## 2.0.3 - 2020-04-07
+
+- support Laravel 8
+
+## 2.0.2 - 2020-03-18
+
+- fix execute solution route not defined (#265)
+
+## 2.0.0 - 2020-02-02
+
+- adds support for Laravel 7
+- drop support for Laravel 6 and below
+- git information won't be collected by default anymore (if you need this set `collect_git_information` to `true` in the `flare` config file)
+- `MissingPackageSolutionProvider` was added to the `ignored_solution_providers` because it potentially could be slow.
 
 ## 1.16.0 - 2020-01-21
 

@@ -7,7 +7,8 @@ use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Routing\Controller as BaseController;
 
-class Controller extends BaseController {
+class Controller extends BaseController
+{
 	use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 	// json返回数据
 	public function resJson($code = 200, $msg = '', $result = '') {

@@ -28,7 +28,6 @@ class MockFileSessionStorage extends MockArraySessionStorage
 
     /**
      * @param string $savePath Path of directory to save session files
-     * @param string $name     Session name
      */
     public function __construct(string $savePath = null, string $name = 'MOCKSESSID', MetadataBag $metaBag = null)
     {
@@ -68,7 +67,7 @@ class MockFileSessionStorage extends MockArraySessionStorage
     /**
      * {@inheritdoc}
      */
-    public function regenerate($destroy = false, $lifetime = null)
+    public function regenerate(bool $destroy = false, int $lifetime = null)
     {
         if (!$this->started) {
             $this->start();
@@ -103,7 +102,10 @@ class MockFileSessionStorage extends MockArraySessionStorage
 
         try {
             if ($data) {
-                file_put_contents($this->getFilePath(), serialize($data));
+                $path = $this->getFilePath();
+                $tmp = $path.bin2hex(random_bytes(6));
+                file_put_contents($tmp, serialize($data));
+                rename($tmp, $path);
             } else {
                 $this->destroy();
             }
@@ -123,8 +125,11 @@ class MockFileSessionStorage extends MockArraySessionStorage
      */
     private function destroy(): void
     {
-        if (is_file($this->getFilePath())) {
+        set_error_handler(static function () {});
+        try {
             unlink($this->getFilePath());
+        } finally {
+            restore_error_handler();
         }
     }
 
@@ -141,8 +146,14 @@ class MockFileSessionStorage extends MockArraySessionStorage
      */
     private function read(): void
     {
-        $filePath = $this->getFilePath();
-        $this->data = is_readable($filePath) && is_file($filePath) ? unserialize(file_get_contents($filePath)) : [];
+        set_error_handler(static function () {});
+        try {
+            $data = file_get_contents($this->getFilePath());
+        } finally {
+            restore_error_handler();
+        }
+
+        $this->data = $data ? unserialize($data) : [];
 
         $this->loadSession();
     }

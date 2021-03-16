@@ -171,7 +171,7 @@ class NotificationSender
      * Queue the given notification instances.
      *
      * @param  mixed  $notifiables
-     * @param  array[\Illuminate\Notifications\Channels\Notification]  $notification
+     * @param  \Illuminate\Notifications\Notification  $notification
      * @return void
      */
     protected function queueNotification($notifiables, $notification)
@@ -192,11 +192,20 @@ class NotificationSender
                     $notification->locale = $this->locale;
                 }
 
+                $queue = $notification->queue;
+
+                if (method_exists($notification, 'viaQueues')) {
+                    $queue = $notification->viaQueues()[$channel] ?? null;
+                }
+
                 $this->bus->dispatch(
                     (new SendQueuedNotifications($notifiable, $notification, [$channel]))
                             ->onConnection($notification->connection)
-                            ->onQueue($notification->queue)
-                            ->delay($notification->delay)
+                            ->onQueue($queue)
+                            ->delay(is_array($notification->delay) ?
+                                    ($notification->delay[$channel] ?? null)
+                                    : $notification->delay
+                            )
                             ->through(
                                 array_merge(
                                     method_exists($notification, 'middleware') ? $notification->middleware() : [],

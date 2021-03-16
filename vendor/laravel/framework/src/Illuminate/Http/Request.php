@@ -212,7 +212,7 @@ class Request extends SymfonyRequest implements Arrayable, ArrayAccess
     }
 
     /**
-     * Determine if the current request URL and query string matches a pattern.
+     * Determine if the current request URL and query string match a pattern.
      *
      * @param  mixed  ...$patterns
      * @return bool
@@ -241,7 +241,7 @@ class Request extends SymfonyRequest implements Arrayable, ArrayAccess
     }
 
     /**
-     * Determine if the request is the result of an PJAX call.
+     * Determine if the request is the result of a PJAX call.
      *
      * @return bool
      */
@@ -251,14 +251,14 @@ class Request extends SymfonyRequest implements Arrayable, ArrayAccess
     }
 
     /**
-     * Determine if the request is the result of an prefetch call.
+     * Determine if the request is the result of a prefetch call.
      *
      * @return bool
      */
     public function prefetch()
     {
-        return strcasecmp($this->server->get('HTTP_X_MOZ'), 'prefetch') === 0 ||
-               strcasecmp($this->headers->get('Purpose'), 'prefetch') === 0;
+        return strcasecmp($this->server->get('HTTP_X_MOZ') ?? '', 'prefetch') === 0 ||
+               strcasecmp($this->headers->get('Purpose') ?? '', 'prefetch') === 0;
     }
 
     /**
@@ -336,7 +336,7 @@ class Request extends SymfonyRequest implements Arrayable, ArrayAccess
      * @param  mixed  $default
      * @return mixed
      */
-    public function get($key, $default = null)
+    public function get(string $key, $default = null)
     {
         return parent::get($key, $default);
     }
@@ -423,10 +423,6 @@ class Request extends SymfonyRequest implements Arrayable, ArrayAccess
      */
     public static function createFromBase(SymfonyRequest $request)
     {
-        if ($request instanceof static) {
-            return $request;
-        }
-
         $newRequest = (new static)->duplicate(
             $request->query->all(), $request->request->all(), $request->attributes->all(),
             $request->cookies->all(), $request->files->all(), $request->server->all()

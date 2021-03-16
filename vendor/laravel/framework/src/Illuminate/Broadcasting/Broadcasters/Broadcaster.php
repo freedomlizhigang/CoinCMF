@@ -262,7 +262,7 @@ abstract class Broadcaster implements BroadcasterContract
      * Normalize the given callback into a callable.
      *
      * @param  mixed  $callback
-     * @return \Closure|callable
+     * @return callable
      */
     protected function normalizeChannelHandlerToCallable($callback)
     {
@@ -317,7 +317,7 @@ abstract class Broadcaster implements BroadcasterContract
     }
 
     /**
-     * Check if channel name from request match a pattern from registered channels.
+     * Check if the channel name from the request matches a pattern from registered channels.
      *
      * @param  string  $channel
      * @param  string  $pattern

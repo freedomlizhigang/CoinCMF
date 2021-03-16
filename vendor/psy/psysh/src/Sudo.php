@@ -3,7 +3,7 @@
 /*
  * This file is part of Psy Shell.
  *
- * (c) 2012-2018 Justin Hileman
+ * (c) 2012-2020 Justin Hileman
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -64,7 +64,7 @@ class Sudo
      */
     public static function callMethod($object, $method, $args = null)
     {
-        $args   = \func_get_args();
+        $args = \func_get_args();
         $object = \array_shift($args);
         $method = \array_shift($args);
 
@@ -122,8 +122,8 @@ class Sudo
      */
     public static function callStatic($class, $method, $args = null)
     {
-        $args   = \func_get_args();
-        $class  = \array_shift($args);
+        $args = \func_get_args();
+        $class = \array_shift($args);
         $method = \array_shift($args);
 
         $refl = new \ReflectionClass($class);

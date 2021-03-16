@@ -2,7 +2,9 @@
 
 namespace Illuminate\Broadcasting;
 
+use Ably\AblyRest;
 use Closure;
+use Illuminate\Broadcasting\Broadcasters\AblyBroadcaster;
 use Illuminate\Broadcasting\Broadcasters\LogBroadcaster;
 use Illuminate\Broadcasting\Broadcasters\NullBroadcaster;
 use Illuminate\Broadcasting\Broadcasters\PusherBroadcaster;
@@ -10,6 +12,7 @@ use Illuminate\Broadcasting\Broadcasters\RedisBroadcaster;
 use Illuminate\Contracts\Broadcasting\Factory as FactoryContract;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcastNow;
 use Illuminate\Contracts\Bus\Dispatcher as BusDispatcherContract;
+use Illuminate\Contracts\Foundation\CachesRoutes;
 use InvalidArgumentException;
 use Psr\Log\LoggerInterface;
 use Pusher\Pusher;
@@ -22,7 +25,7 @@ class BroadcastManager implements FactoryContract
     /**
      * The application instance.
      *
-     * @var \Illuminate\Contracts\Foundation\Application
+     * @var \Illuminate\Contracts\Container\Container
      */
     protected $app;
 
@@ -43,7 +46,7 @@ class BroadcastManager implements FactoryContract
     /**
      * Create a new manager instance.
      *
-     * @param  \Illuminate\Contracts\Foundation\Application  $app
+     * @param  \Illuminate\Contracts\Container\Container  $app
      * @return void
      */
     public function __construct($app)
@@ -59,7 +62,7 @@ class BroadcastManager implements FactoryContract
      */
     public function routes(array $attributes = null)
     {
-        if ($this->app->routesAreCached()) {
+        if ($this->app instanceof CachesRoutes && $this->app->routesAreCached()) {
             return;
         }
 
@@ -69,7 +72,7 @@ class BroadcastManager implements FactoryContract
             $router->match(
                 ['get', 'post'], '/broadcasting/auth',
                 '\\'.BroadcastController::class.'@authenticate'
-            );
+            )->withoutMiddleware([\Illuminate\Foundation\Http\Middleware\VerifyCsrfToken::class]);
         });
     }
 
@@ -94,7 +97,7 @@ class BroadcastManager implements FactoryContract
      * Begin broadcasting an event.
      *
      * @param  mixed|null  $event
-     * @return \Illuminate\Broadcasting\PendingBroadcast|void
+     * @return \Illuminate\Broadcasting\PendingBroadcast
      */
     public function event($event = null)
     {
@@ -225,6 +228,17 @@ class BroadcastManager implements FactoryContract
      * @param  array  $config
      * @return \Illuminate\Contracts\Broadcasting\Broadcaster
      */
+    protected function createAblyDriver(array $config)
+    {
+        return new AblyBroadcaster(new AblyRest($config));
+    }
+
+    /**
+     * Create an instance of the driver.
+     *
+     * @param  array  $config
+     * @return \Illuminate\Contracts\Broadcasting\Broadcaster
+     */
     protected function createRedisDriver(array $config)
     {
         return new RedisBroadcaster(
@@ -291,6 +305,19 @@ class BroadcastManager implements FactoryContract
     public function setDefaultDriver($name)
     {
         $this->app['config']['broadcasting.default'] = $name;
+    }
+
+    /**
+     * Disconnect the given disk and remove from local cache.
+     *
+     * @param  string|null  $name
+     * @return void
+     */
+    public function purge($name = null)
+    {
+        $name = $name ?? $this->getDefaultDriver();
+
+        unset($this->drivers[$name]);
     }
 
     /**
