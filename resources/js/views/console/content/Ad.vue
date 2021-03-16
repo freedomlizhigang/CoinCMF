@@ -15,7 +15,7 @@
     <Table border ref="adlist" :columns="list" :data="tablelist" :loading="dataloading" @on-selection-change="changeData">
         <template slot-scope="{ row }" slot="title">
             <div class="clearfix" style="padding:10px;">
-                <img :src="row.thumb" width="200" height="auto" alt="" class="f-l" style="padding:10px;background:#eee;margin-right:10px;">
+                <img :src="row.thumb" width="120" height="auto" alt="" class="f-l" style="padding:10px;background:#eee;margin-right:10px;">
                 <a :href="row.url" target="_blank" style="font-size:16px;line-height:2;display:block;">[{{ row.ad_pos.name }}] {{ row.title }}</a>
                 <p>{{ row.starttime }} - {{ row.endtime }}</p>
             </div>

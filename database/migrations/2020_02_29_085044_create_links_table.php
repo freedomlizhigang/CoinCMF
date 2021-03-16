@@ -5,7 +5,7 @@
  * @Date: 2020-02-29 08:50:44
  * @Description: 友情链接
  * @LastEditors: 李志刚
- * @LastEditTime: 2021-03-15 10:05:14
+ * @LastEditTime: 2021-03-16 10:13:44
  * @FilePath: /CoinCMF/database/migrations/2020_02_29_085044_create_links_table.php
  */
 
@@ -23,6 +23,7 @@ class CreateLinksTable extends Migration
         Schema::create('links', function (Blueprint $table) {
             $table->engine = 'InnoDB';
             $table->bigIncrements('id');
+            $table->integer('linktype_id')->default(0)->comment('分类ID');
             $table->string('title')->default('')->comment('标题');
             $table->string('thumb')->default('')->nullable()->comment('图片');
             $table->string('url')->default('')->comment('链接');

@@ -5,14 +5,13 @@
  * @Date: 2018-07-25 11:39:58
  * @Description: 广告管理
  * @LastEditors: 李志刚
- * @LastEditTime: 2021-02-27 15:54:45
+ * @LastEditTime: 2021-03-16 09:12:32
  * @FilePath: /CoinCMF/app/Http/Controllers/Console/Content/AdController.php
  */
 
 namespace App\Http\Controllers\Console\Content;
 
 use App\Models\Content\Ad;
-use App\Models\Content\Adpos;
 use Illuminate\Http\Request;
 use Validator;
 use App\Http\Controllers\Console\ResponseController;
@@ -44,7 +43,7 @@ class AdController extends ResponseController
                 if ($status != '') {
                     $q->where('status', $status);
                 }
-            })->where('is_del', 0)->limit($size)->offset(($page - 1) * $size)->orderBy('id', 'desc')->get();
+            })->where('del_flag', 0)->limit($size)->offset(($page - 1) * $size)->orderBy('id', 'desc')->get();
             $count = Ad::where(function ($q) use ($key) {
                 if ($key != '') {
                     $q->where('title', 'like', '%$key%');
@@ -57,7 +56,7 @@ class AdController extends ResponseController
                 if ($status != '') {
                     $q->where('status', $status);
                 }
-            })->where('is_del', 0)->count();
+            })->where('del_flag', 0)->count();
             $res = ['list' => $list, 'count' => $count];
             return $this->resData(200, '获取数据成功...', $res);
         } catch (\Throwable $e) {
@@ -182,7 +181,7 @@ class AdController extends ResponseController
                 return $this->resData(400, $validator->errors()->all()[0] . '...');
             }
             $id = $request->input('ad_id',[]);
-            Ad::whereIn('id', $id)->update(['is_del' => 1]);
+            Ad::whereIn('id', $id)->update(['del_flag' => 1]);
             return $this->resData(200, '删除成功！');
         } catch (\Throwable $e) {
             return $this->resData(500, '删除失败，请稍后再试...');

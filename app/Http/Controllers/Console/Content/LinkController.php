@@ -5,7 +5,7 @@
  * @Date: 2020-02-29 08:53:47
  * @Description: 友情链接管理
  * @LastEditors: 李志刚
- * @LastEditTime: 2021-02-27 16:16:43
+ * @LastEditTime: 2021-03-16 09:12:58
  * @FilePath: /CoinCMF/app/Http/Controllers/Console/Content/LinkController.php
  */
 
@@ -31,12 +31,12 @@ class LinkController extends ResponseController
                         if ($key != '') {
                             $q->where('title', 'like', '%'.$key.'%');
                         }
-                    })->where('is_del',0)->limit($size)->offset(($page - 1) * $size)->orderBy('sort', 'desc')->orderBy('id', 'desc')->get();
+                    })->where('del_flag',0)->limit($size)->offset(($page - 1) * $size)->orderBy('sort', 'desc')->orderBy('id', 'desc')->get();
             $count = Link::where(function ($q) use ($key) {
                         if ($key != '') {
                             $q->where('title', 'like', '%$key%');
                         }
-                    })->where('is_del', 0)->count();
+                    })->where('del_flag', 0)->count();
             $res = ['list' => $list, 'count' => $count];
             return $this->resData(200, '获取数据成功...', $res);
         } catch (\Throwable $e) {
@@ -142,7 +142,7 @@ class LinkController extends ResponseController
                 return $this->resData(400, $validator->errors()->all()[0] . '...');
             }
             $id = $request->input('link_id',[]);
-            Link::whereIn('id', $id)->update(['is_del'=>1]);
+            Link::whereIn('id', $id)->update(['del_flag'=>1]);
             return $this->resData(200, '删除完成！');
         } catch (\Throwable $e) {
             return $this->resData(500, '删除失败，请稍后再试');

@@ -32,6 +32,14 @@ Route::group(['prefix'=>'c-api','namespace' => 'Console','middleware'=>['c-api',
         Route::post('/remove', 'LinkController@postRemove');
         Route::post('/sort', 'LinkController@postSort');
     });
+    // 友情链接分类管理
+    Route::group(['prefix' => 'linktype', 'namespace' => 'Content'], function () {
+        Route::get('/list', 'LinkTypeController@getList');
+        Route::post('/create', 'LinkTypeController@postCreate');
+        Route::post('/detail', 'LinkTypeController@postDetail');
+        Route::post('/edit', 'LinkTypeController@postEdit');
+        Route::post('/remove', 'LinkTypeController@postRemove');
+    });
     // 广告管理
     Route::group(['prefix' => 'ad', 'namespace' => 'Content'], function () {
         Route::get('/list', 'AdController@getList');

@@ -20,7 +20,7 @@ import CateList from '.././views/console/content/CateList.vue'
 import AdPos from '.././views/console/content/AdPos.vue'
 import Ad from '.././views/console/content/Ad.vue'
 import Link from '.././views/console/content/Link.vue'
-
+import LinkType from '.././views/console/content/LinkType.vue'
 
 const console_routers = [
   // 登录
@@ -41,6 +41,12 @@ const console_routers = [
         path: 'link/list',
         name: 'link-list',
         component: Link,
+        meta: { requiresAuth: true }
+      },
+      {
+        path: 'linktype/list',
+        name: 'linktype-list',
+        component: LinkType,
         meta: { requiresAuth: true }
       },
       // 广告页面

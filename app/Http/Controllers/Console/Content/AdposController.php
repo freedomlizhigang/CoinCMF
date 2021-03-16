@@ -5,7 +5,7 @@
  * @Date: 2018-07-25 11:39:58
  * @Description: 广告位管理
  * @LastEditors: 李志刚
- * @LastEditTime: 2021-02-27 15:59:23
+ * @LastEditTime: 2021-03-16 09:56:46
  * @FilePath: /CoinCMF/app/Http/Controllers/Console/Content/AdposController.php
  */
 
@@ -33,12 +33,12 @@ class AdposController extends ResponseController
                 if ($key != '') {
                     $q->where('name', 'like', '%' . $key . '%');
                 }
-            })->where('is_del', 0)->limit($size)->offset(($page - 1) * $size)->orderBy('id', 'desc')->get();
+            })->where('del_flag', 0)->limit($size)->offset(($page - 1) * $size)->orderBy('id', 'desc')->get();
             $count = AdPos::where(function ($q) use ($key) {
                 if ($key != '') {
                     $q->where('name', 'like', '%$key%');
                 }
-            })->where('is_del', 0)->count();
+            })->where('del_flag', 0)->count();
             $res = ['list' => $list, 'count' => $count];
             return $this->resData(200, '获取数据成功...', $res);
         } catch (\Throwable $e) {
@@ -137,7 +137,7 @@ class AdposController extends ResponseController
             $id = $request->input('adpos_id',[]);
         	// 先查广告位下有没有广告，没有直接删除
             if (is_null(Ad::whereIn('pos_id',$id)->first())) {
-                Adpos::whereIn('id',$id)->delete();
+                Adpos::whereIn('id',$id)->update(['del_flag'=>1]);
                 return $this->resData(200, '删除完成！');
             }
             else

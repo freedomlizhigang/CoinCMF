@@ -5,7 +5,7 @@
  * @Date: 2020-02-29 08:53:37
  * @Description: 友情链接模型
  * @LastEditors: 李志刚
- * @LastEditTime: 2020-09-21 15:03:47
+ * @LastEditTime: 2021-03-16 10:14:14
  * @FilePath: /CoinCMF/app/Models/Content/Link.php
  */
 
@@ -40,4 +40,9 @@ class Link extends Model
      * @var bool
      */
     public $timestamps = true;
+    // 关联
+    public function linktype()
+    {
+        return $this->belongsTo(LinkType::class, 'linktype_id', 'id');
+    }
 }

@@ -15,9 +15,11 @@ import article from './content/article.js'
 import adpos from './content/adpos.js'
 import ad from './content/ad.js'
 import link from './content/link.js'
+import linktype from './content/linktype.js'
 
 const console_api = {
   link,
+  linktype,
   ad,
   adpos,
   cate,

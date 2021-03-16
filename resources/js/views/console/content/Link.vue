@@ -15,7 +15,7 @@
     <Table border ref="linklist" :columns="list" :data="tablelist" :loading="dataloading" @on-selection-change="changeData">
         <template slot-scope="{ row }" slot="title">
             <div class="clearfix">
-                <img :src="row.thumb" width="200" height="auto" alt="" class="f-l">
+                <img :src="row.thumb" width="120" height="auto" alt="" class="f-l">
                 <a :href="row.url" target="_blank">{{ row.title }}</a>
             </div>
         </template>
