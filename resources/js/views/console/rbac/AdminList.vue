@@ -28,15 +28,15 @@
       <Spin size="large" fix v-if="loading"></Spin>
       <Form :label-width="80" :model="adminInfo" ref="adminCreateValidate" :rules="adminCreateValidate" action="javascript:void(0)">
         <FormItem label="部门">
-            <CheckboxGroup v-model="adminInfo.department_ids" @on-change="departmentCheck">
-                <Checkbox v-for="item in departmentList" :key="item.id" :label="item.id">{{ item.name }}</Checkbox>
-            </CheckboxGroup>
-        </FormItem>
-        <FormItem label="角色">
-            <CheckboxGroup v-model="adminInfo.role_ids" @on-change="roleCheck">
-                <Checkbox v-for="item in roleList" :key="item.id" :label="item.id">{{ item.name }}</Checkbox>
-            </CheckboxGroup>
-        </FormItem>
+            <Select v-model="adminInfo.department_ids" multiple style="width:260px">
+                <Option v-for="item in departmentList" :value="item.value" :key="item.value">{{ item.label }}</Option>
+            </Select>
+          </FormItem>
+          <FormItem label="角色">
+            <Select v-model="adminInfo.role_ids" multiple style="width:260px">
+                <Option v-for="item in roleList" :value="item.id" :key="item.id">{{ item.name }}</Option>
+            </Select>
+          </FormItem>
         <FormItem label="用户名" prop="name">
             <Input v-model="adminInfo.name" placeholder="输入用户名..."></Input>
         </FormItem>
@@ -66,14 +66,14 @@
       <Spin size="large" fix v-if="loading"></Spin>
       <Form :label-width="80" :model="adminInfo" ref="adminEditValidate" :rules="adminEditValidate" action="javascript:void(0)">
           <FormItem label="部门">
-            <CheckboxGroup v-model="adminInfo.department_ids" @on-change="departmentCheck">
-                <Checkbox v-for="item in departmentList" :key="item.id" :label="item.id">{{ item.name }}</Checkbox>
-            </CheckboxGroup>
-        </FormItem>
+            <Select v-model="adminInfo.department_ids" multiple style="width:260px">
+                <Option v-for="item in departmentList" :value="item.value" :key="item.value">{{ item.label }}</Option>
+            </Select>
+          </FormItem>
           <FormItem label="角色">
-              <CheckboxGroup v-model="adminInfo.role_ids" @on-change="roleCheck">
-                  <Checkbox v-for="item in roleList" :key="item.id" :label="item.id">{{ item.name }}</Checkbox>
-              </CheckboxGroup>
+            <Select v-model="adminInfo.role_ids" multiple style="width:260px">
+                <Option v-for="item in roleList" :value="item.id" :key="item.id">{{ item.name }}</Option>
+            </Select>
           </FormItem>
           <FormItem label="用户名" prop="name">
               <Input v-model="adminInfo.name" disabled placeholder="输入用户名..."></Input>
@@ -284,8 +284,6 @@ export default {
           { type: 'string', min: 6, max: 15, message: '密码 6 - 15 位长度', trigger: 'blur' }
         ]
       },
-      role_ids: [],
-      department_ids: [],
       selectData:[],
     }
   },
@@ -344,19 +342,12 @@ export default {
         password_confirmation: ''
       };
     },
-    // 选中角色时
-    roleCheck(data) {
-      this.role_ids = data;
-    },
-    departmentCheck(data) {
-      this.department_ids = data;
-    },
     // 添加
     createAdmin(name) {
       this.$refs[name].validate((valid) => {
         if (valid) {
           this.loading = true;
-          this.$api.admin.create({ department_ids: this.department_ids, role_ids: this.role_ids, name: this.adminInfo.name, realname: this.adminInfo.realname, phone: this.adminInfo.phone, email: this.adminInfo.email, password: this.adminInfo.password, password_confirmation: this.adminInfo.password_confirmation }).then(res => {
+          this.$api.admin.create({ department_ids: this.adminInfo.department_ids, role_ids: this.adminInfo.role_ids, name: this.adminInfo.name, realname: this.adminInfo.realname, phone: this.adminInfo.phone, email: this.adminInfo.email, password: this.adminInfo.password, password_confirmation: this.adminInfo.password_confirmation }).then(res => {
             if (res.code == 200) {
               this.adminInfo.name = '';
               this.showCreateStatus = !this.showCreateStatus;
@@ -398,7 +389,7 @@ export default {
       this.$refs[name].validate((valid) => {
         if (valid) {
           this.loading = true;
-          this.$api.admin.editinfo({ admin_id: this.admin_id, department_ids: this.department_ids, role_ids: this.role_ids, realname: this.adminInfo.realname, phone: this.adminInfo.phone, email: this.adminInfo.email }).then(res => {
+          this.$api.admin.editinfo({ admin_id: this.admin_id, department_ids: this.adminInfo.department_ids, role_ids: this.adminInfo.role_ids, realname: this.adminInfo.realname, phone: this.adminInfo.phone, email: this.adminInfo.email }).then(res => {
             if (res.code == 200) {
               this.$Message.success(res.message);
               this.showEditInfoStatus = !this.showEditInfoStatus;

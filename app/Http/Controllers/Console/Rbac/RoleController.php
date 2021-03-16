@@ -5,7 +5,7 @@
  * @Date: 2019-01-03 20:14:16
  * @Description: 角色管理
  * @LastEditors: 李志刚
- * @LastEditTime: 2021-03-15 17:54:53
+ * @LastEditTime: 2021-03-16 08:17:46
  * @FilePath: /CoinCMF/app/Http/Controllers/Console/Rbac/RoleController.php
  */
 
@@ -295,7 +295,20 @@ class RoleController extends ResponseController
     public function postRemoveAdmin(Request $req)
     {
         try {
-            RoleAdmin::where('admin_id', $req->input('admin_id'))->delete();
+            $validator = Validator::make($req->input(), [
+                'role_id' => 'required|integer',
+                'admin_id' => 'required|integer',
+            ]);
+            $attrs = array(
+                'role_id' => '角色',
+                'admin_id' => '管理员',
+            );
+            $validator->setAttributeNames($attrs);
+            if ($validator->fails()) {
+                // 如果有错误，提示第一条
+                return $this->resData(400, $validator->errors()->all()[0] . '...');
+            }
+            RoleAdmin::where('role_id', $req->input('role_id'))->where('admin_id', $req->input('admin_id'))->delete();
             return $this->resData(200, '操作成功...');
         } catch (\Throwable $e) {
             return $this->resData(500, '操作失败，请稍后再试！', []);

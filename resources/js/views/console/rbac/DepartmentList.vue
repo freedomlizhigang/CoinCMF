@@ -56,7 +56,7 @@
       </Form>
     </Drawer>
     <!-- 用户弹出 -->
-    <Drawer :closable="false" :mask-closable="false" :scrollable="true" title="修改权限" width="640" v-model="showAdminStatus">
+    <Drawer :closable="false" :scrollable="true" title="修改权限" width="640" v-model="showAdminStatus">
       <Spin size="large" fix v-if="loading"></Spin>
       <Table border :columns="adminTableList" ref="adminList" :data="adminlist" :loading="dataloading"></Table>
       <div class="drawer-footer">
@@ -320,6 +320,7 @@ export default {
     },
     showAdmin: function(id){
       this.showAdminStatus = !this.showAdminStatus;
+      this.department_id = id;
       this.$api.department.adminlist({department_id:id}).then(res => {
         this.dataloading = false;
         this.loading = false;
@@ -337,7 +338,7 @@ export default {
         title: '警告',
         content: '<p>此操作不可恢复，三思而后行...</p>',
         onOk: () => {
-          this.$api.department.removeadmin({ admin_id: id }).then(res => {
+          this.$api.department.removeadmin({ admin_id: id,department_id: this.department_id }).then(res => {
             if (res.code == 200) {
               this.$Message.success(res.message);
               this.adminlist.splice(index, 1);

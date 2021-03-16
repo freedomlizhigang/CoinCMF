@@ -5,7 +5,7 @@
  * @Date: 2019-01-03 20:14:16
  * @Description: 部门管理
  * @LastEditors: 李志刚
- * @LastEditTime: 2021-03-15 18:01:33
+ * @LastEditTime: 2021-03-16 08:39:16
  * @FilePath: /CoinCMF/app/Http/Controllers/Console/Rbac/DepartmentController.php
  */
 
@@ -27,9 +27,25 @@ class DepartmentController extends ResponseController
     public function getList()
     {
         try {
-            // 所有菜单
-            $all = Department::select('id', 'name')->where('status',1)->where('del_flag', 0)->orderBy('id', 'asc')->get();
-            return $this->resData(200, '获取成功...', $all);
+            $all = Department::select('id', 'name','parentid')->where('status', 1)->where('del_flag', 0)->orderBy('id', 'asc')->get();
+            $res = [];
+            $f_department = $all->where('parentid', 0)->all();
+            // 只查三级
+            foreach ($f_department as $v) {
+                // 一级
+                $res[] = ['label' => $v->name, 'value' => $v->id];
+                // 二级
+                $s_department = $all->where('parentid', $v->id)->all();
+                foreach ($s_department as $s) {
+                    $res[] = ['label' => '|- ' . $s->name, 'value' => $s->id];
+                    // 三级的
+                    $t_department = $all->where('parentid', $s->id)->all();
+                    foreach ($t_department as $t) {
+                        $res[] = ['label' => '||- ' . $t->name, 'value' => $t->id];
+                    }
+                }
+            }
+            return $this->resData(200, '获取成功...', $res);
         } catch (\Throwable $e) {
             return $this->resData(500, '获取失败，请稍后再试...');
         }
@@ -247,7 +263,20 @@ class DepartmentController extends ResponseController
     public function postRemoveAdmin(Request $req)
     {
         try {
-            DepartmentAdmin::where('admin_id', $req->input('admin_id'))->delete();
+            $validator = Validator::make($req->input(), [
+                'department_id' => 'required|integer',
+                'admin_id' => 'required|integer',
+            ]);
+            $attrs = array(
+                'department_id' => '部门ID',
+                'admin_id' => '管理员',
+            );
+            $validator->setAttributeNames($attrs);
+            if ($validator->fails()) {
+                // 如果有错误，提示第一条
+                return $this->resData(400, $validator->errors()->all()[0] . '...');
+            }
+            DepartmentAdmin::where('department_id', $req->input('department_id'))->where('admin_id', $req->input('admin_id'))->delete();
             return $this->resData(200, '操作成功...');
         } catch (\Throwable $e) {
             return $this->resData(500, '操作失败，请稍后再试！', []);
