@@ -5,8 +5,8 @@
  * @Date: 2020-02-21 10:41:38
  * @Description: 角色表迁移文件
  * @LastEditors: 李志刚
- * @LastEditTime: 2020-09-19 22:23:15
- * @FilePath: /CoinCMF/database/migrations/2020_02_21_104138_create_role_table.php
+ * @LastEditTime: 2021-03-16 11:58:20
+ * @FilePath: /CoinCMF/database/migrations/rbac/2020_02_21_104138_create_role_table.php
  */
 
 use Illuminate\Database\Migrations\Migration;
