@@ -1,32 +1,28 @@
 const mix = require('laravel-mix');
 
 /*
-|--------------------------------------------------------------------------
-| Mix Asset Management
-|--------------------------------------------------------------------------
-|
-| Mix provides a clean, fluent API for defining some Webpack build steps
-| for your Laravel application. By default, we are compiling the Sass
-| file for the application as well as bundling up all the JS files.
-|
+ |--------------------------------------------------------------------------
+ | Mix Asset Management
+ |--------------------------------------------------------------------------
+ |
+ | Mix provides a clean, fluent API for defining some Webpack build steps
+ | for your Laravel applications. By default, we are compiling the CSS
+ | file for the application as well as bundling up all the JS files.
+ |
  */
 
-mix.js('resources/js/app.js', 'public/console/js')
+mix.js('resources/js/app.js', 'public/console/js').vue({ version: 2 })
 	.styles([
 		'resources/sass/reset.css'
 	], 'public/console/css/app.css');
 
-const BrowserSyncPlugin = require('browser-sync-webpack-plugin');
+mix.browserSync('www.coincmf.com');
 
 mix.webpackConfig({
-    plugins: [
-        new BrowserSyncPlugin({
-				files: [
-					'app/**/*',
-					'public/**/*',
-					'resources/views/**/*',
-					'routes/**/*'
-				]
-        })
-    ]
-});
+	resolve: {
+		// 1.不需要node polyfilss
+		alias: {
+			crypto: false
+		},
+	},
+})
