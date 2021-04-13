@@ -170,11 +170,6 @@ export default {
             var self = this;
             self.cate_id = cate_id;
             // 更新编辑器
-            this.$api.cate.select().then(res => {
-                if (res.code == 200) {
-                    self.cateSelect = res.result;
-                }
-            });
             this.$api.cate.detail({ 'category_id': cate_id }).then(res => {
                 if (res.code == 200) {
                     this.formItemEdit = res.result;
@@ -184,6 +179,11 @@ export default {
                     this.linkshow = this.formItemEdit.link_flag
                     // 更新编辑器
                     this.$refs['editContent'].tinymce_value = res.result.content
+                }
+            });
+            this.$api.cate.select().then(res => {
+                if (res.code == 200) {
+                    self.cateSelect = res.result;
                 }
             });
             return;
