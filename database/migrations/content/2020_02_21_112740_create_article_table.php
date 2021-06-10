@@ -5,8 +5,8 @@
  * @Date: 2020-02-21 11:27:40
  * @Description: 文章表迁移文件
  * @LastEditors: 李志刚
- * @LastEditTime: 2020-09-19 22:24:56
- * @FilePath: /CoinCMF/database/migrations/2020_02_21_112740_create_article_table.php
+ * @LastEditTime: 2021-06-10 16:16:42
+ * @FilePath: /CoinCMF/database/migrations/content/2020_02_21_112740_create_article_table.php
  */
 
 use Illuminate\Database\Migrations\Migration;
@@ -36,7 +36,7 @@ class CreateArticleTable extends Migration
             $table->char('url',200)->index('url')->comment('链接 URL');
             $table->integer('sort')->default(0)->comment('排序');
             $table->integer('hits')->default(99)->comment('点击量');
-            $table->dateTime('publish_at')->nullable()->comment('发布时间');
+            $table->dateTime('publish_at')->useCurrent()->comment('发布时间');
             $table->boolean('del_flag')->default(0)->comment('1删除，0正常');
             $table->timestamps();
         });

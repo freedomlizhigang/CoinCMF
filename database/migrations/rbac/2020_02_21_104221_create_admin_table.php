@@ -5,8 +5,8 @@
  * @Date: 2020-02-21 10:42:21
  * @Description: 管理员表迁移文件
  * @LastEditors: 李志刚
- * @LastEditTime: 2021-03-15 09:24:37
- * @FilePath: /CoinCMF/database/migrations/2020_02_21_104221_create_admin_table.php
+ * @LastEditTime: 2021-06-10 16:16:17
+ * @FilePath: /CoinCMF/database/migrations/rbac/2020_02_21_104221_create_admin_table.php
  */
 
 use Illuminate\Database\Migrations\Migration;
@@ -30,7 +30,7 @@ class CreateAdminTable extends Migration
             $table->char('crypt', 10)->nullable()->comment('秘钥');
             $table->char('password',50)->nullable()->comment('密码');
             $table->ipAddress('lastip')->nullable()->default('0.0.0.0')->comment('最后登录 IP');
-            $table->dateTime('lasttime')->nullable()->comment('最后登录时间');
+            $table->dateTime('lasttime')->useCurrent()->comment('最后登录时间');
             $table->boolean('status')->default(1)->comment('状态，1 正常，0 禁用');
             $table->boolean('del_flag')->default(0)->comment('删除状态，1 删除，0 未删除');
             $table->timestamps();
